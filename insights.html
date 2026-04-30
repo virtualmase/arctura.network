@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#03061a" />
+
+    <title>Arctura Insights — Research, Case Studies &amp; Technical Guides on Autonomous Resource Management</title>
+    <meta name="description" content="Field notes and research from Arctura: case studies on 50K-agent deployments, BFT consensus deep-dives, carbon-aware scheduling guides, mandate chain design, EU AI Act compliance, and GEO signal architecture." />
+
+    <link rel="canonical" href="https://autonomousresourcemanagement.com/insights" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Arctura Insights — Autonomous Resource Management Research" />
+    <meta property="og:description" content="Case studies, technical deep-dives, and whitepapers from the team building autonomous agent infrastructure at scale." />
+    <meta property="og:url" content="https://autonomousresourcemanagement.com/insights" />
+    <meta property="og:site_name" content="Arctura" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Arctura Collective" />
+    <link rel="alternate" type="text/plain" title="LLM directory" href="/llms.txt" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "@id": "https://autonomousresourcemanagement.com/insights#page",
+          "name": "Arctura Insights — Autonomous Resource Management Research",
+          "description": "Technical articles, case studies, and whitepapers on autonomous resource management, BFT consensus, mandate chain design, carbon-aware scheduling, and GEO signal architecture.",
+          "url": "https://autonomousresourcemanagement.com/insights",
+          "inLanguage": "en",
+          "publisher": { "@type": "Organization", "name": "Arctura Collective", "url": "https://autonomousresourcemanagement.com/" },
+          "hasPart": [
+            {
+              "@type": "TechArticle",
+              "name": "Autonomous Resource Allocation at Scale: A 50,000 Agent Case Study",
+              "description": "A Fortune 500 logistics firm deployed 50,000 autonomous agents across four data centers, achieving 40% compute cost reduction with zero production incidents in 90 days.",
+              "url": "https://autonomousresourcemanagement.com/insights/50k-agent-case-study",
+              "author": { "@type": "Person", "name": "Mason Nguyen" },
+              "datePublished": "2026-02-20"
+            },
+            {
+              "@type": "TechArticle",
+              "name": "Byzantine Fault Tolerance in Autonomous Agent Networks",
+              "description": "How production autonomous systems maintain consensus and recover from adversarial node failures without human escalation — Arctura's BFT Resonance implementation walkthrough.",
+              "url": "https://autonomousresourcemanagement.com/insights/bft-consensus",
+              "author": { "@type": "Person", "name": "Avery Lane" },
+              "datePublished": "2026-03-05"
+            },
+            {
+              "@type": "TechArticle",
+              "name": "Carbon-Aware Scheduling in Autonomous Systems",
+              "description": "How autonomous resource management shifts compute workloads toward low-carbon grid windows, reducing enterprise carbon footprint by up to 28% without sacrificing throughput.",
+              "url": "https://autonomousresourcemanagement.com/insights/carbon-aware-scheduling",
+              "author": { "@type": "Person", "name": "Mason Nguyen" },
+              "datePublished": "2026-03-18"
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Arctura", "item": "https://autonomousresourcemanagement.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://autonomousresourcemanagement.com/insights" }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --void: #03061a; --void-deep: #01020e; --void-elev: #0a1030; --grid: #142049; --line: #1d2a5e;
+            --arcturian: #2b5bff; --arcturian-soft: #5b8aff; --arcturian-glow: rgba(43,91,255,0.45);
+            --violet: #6b4bff; --ascension: #b18bff; --starlight: #e6ecff; --starlight-dim: #b8c2e6;
+            --mute: #8a93b8; --signal: #5bcfff;
+            --radius-sm: 6px; --radius: 10px; --radius-lg: 16px;
+            --font-sans: 'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+            --font-mono: ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans); background: var(--void); color: var(--starlight-dim);
+            margin: 0; line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(1200px 600px at 80% -10%, rgba(107,75,255,0.18), transparent 60%), radial-gradient(900px 500px at 0% 30%, rgba(43,91,255,0.16), transparent 60%);
+            background-attachment: fixed; min-height: 100vh;
+        }
+        body::before {
+            content:''; position:fixed; inset:0;
+            background-image: radial-gradient(1px 1px at 20% 30%,rgba(230,236,255,0.6),transparent 50%),radial-gradient(1px 1px at 70% 80%,rgba(230,236,255,0.5),transparent 50%),radial-gradient(1px 1px at 55% 15%,rgba(91,207,255,0.5),transparent 50%);
+            background-size: 600px 600px; pointer-events: none; z-index: 0; opacity: 0.7;
+        }
+        a { color: var(--arcturian-soft); text-decoration: none; }
+        a:hover { color: var(--starlight); }
+        ::selection { background: var(--arcturian); color: var(--starlight); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+        header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: rgba(3,6,26,0.72); border-bottom: 1px solid var(--line); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; max-width: 1200px; margin: 0 auto; gap: 24px; }
+        .brand { display: flex; align-items: center; gap: 10px; color: var(--starlight); font-weight: 700; letter-spacing: 4px; text-transform: uppercase; font-size: 16px; }
+        .brand-mark { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--ascension), var(--arcturian) 55%, var(--void-deep) 100%); box-shadow: 0 0 16px var(--arcturian-glow); }
+        nav.primary { display: flex; gap: 28px; }
+        nav.primary a { color: var(--starlight-dim); font-size: 13px; text-transform: uppercase; letter-spacing: 1.6px; transition: color 0.2s; }
+        nav.primary a:hover { color: var(--starlight); }
+        nav.primary a[aria-current="page"] { color: var(--arcturian-soft); }
+        .header-actions { display: flex; gap: 10px; align-items: center; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--line); color: var(--starlight); padding: 11px 20px; border-radius: var(--radius); cursor: pointer; text-transform: uppercase; font-weight: 600; letter-spacing: 1.4px; font-size: 12px; transition: all 0.25s ease; font-family: inherit; }
+        .btn:hover { border-color: var(--arcturian); color: var(--starlight); box-shadow: 0 0 24px var(--arcturian-glow); transform: translateY(-1px); }
+        .btn-primary { background: linear-gradient(135deg,var(--arcturian) 0%,var(--violet) 100%); border-color: transparent; }
+        .btn-primary:hover { box-shadow: 0 0 32px var(--arcturian-glow), 0 0 48px rgba(107,75,255,0.35); }
+        .page-hero { padding: 80px 0 60px; border-bottom: 1px solid var(--line); }
+        .breadcrumb { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-size: 12px; color: var(--mute); letter-spacing: 1.4px; text-transform: uppercase; }
+        .breadcrumb a { color: var(--arcturian-soft); }
+        .page-title { font-size: clamp(32px,4.5vw,56px); line-height: 1.05; letter-spacing: -0.8px; color: var(--starlight); margin: 0 0 18px; font-weight: 700; }
+        .page-title .accent { background: linear-gradient(120deg,var(--arcturian-soft),var(--ascension) 60%,var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .page-lede { font-size: 18px; color: var(--starlight-dim); max-width: 680px; margin: 0 0 28px; line-height: 1.65; }
+        section { padding: 80px 0; position: relative; }
+        .section-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 48px; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+        .section-head .num { font-family: var(--font-mono); color: var(--arcturian-soft); font-size: 13px; letter-spacing: 2px; }
+        .section-head h2 { color: var(--starlight); font-size: clamp(24px,2.8vw,34px); margin: 0; font-weight: 600; letter-spacing: -0.5px; flex: 1; }
+        .section-head p { margin: 0; color: var(--mute); max-width: 340px; font-size: 14px; }
+
+        /* Filter tabs */
+        .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+        .ftab {
+            padding: 8px 18px; border-radius: 999px; border: 1px solid var(--line);
+            background: transparent; color: var(--mute); font-size: 12px; letter-spacing: 1.5px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.2s; font-family: inherit;
+        }
+        .ftab:hover { border-color: var(--arcturian-soft); color: var(--starlight-dim); }
+        .ftab.active { border-color: var(--arcturian); background: rgba(43,91,255,0.1); color: var(--arcturian-soft); }
+
+        /* Featured article */
+        .featured-article {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+            border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden;
+            margin-bottom: 32px; transition: border-color 0.25s;
+        }
+        .featured-article:hover { border-color: var(--arcturian); }
+        .fa-visual {
+            background: linear-gradient(135deg, rgba(43,91,255,0.15), rgba(107,75,255,0.08), rgba(177,139,255,0.05));
+            display: flex; align-items: center; justify-content: center; padding: 48px;
+            position: relative; overflow: hidden; min-height: 280px;
+        }
+        .fa-visual::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(43,91,255,0.05) 40px, rgba(43,91,255,0.05) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(43,91,255,0.05) 40px, rgba(43,91,255,0.05) 41px);
+        }
+        .fa-number { font-family: var(--font-mono); font-size: 120px; font-weight: 300; color: rgba(43,91,255,0.2); line-height: 1; letter-spacing: -4px; position: relative; z-index: 1; }
+        .fa-unit { font-size: 24px; color: rgba(91,207,255,0.4); }
+        .fa-content { padding: 36px 32px; display: flex; flex-direction: column; justify-content: center; background: rgba(10,16,48,0.3); }
+        .fa-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--signal); margin-bottom: 14px; }
+        .fa-title { color: var(--starlight); font-size: 22px; font-weight: 600; line-height: 1.3; margin: 0 0 12px; }
+        .fa-desc { color: var(--starlight-dim); font-size: 14px; line-height: 1.65; margin: 0 0 20px; }
+        .fa-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+        .fa-author { color: var(--arcturian-soft); font-size: 13px; }
+        .fa-read { color: var(--mute); font-size: 12px; font-family: var(--font-mono); }
+        .fa-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+        .chip { font-size: 10px; letter-spacing: 1.2px; padding: 3px 9px; border-radius: 4px; border: 1px solid var(--line); color: var(--mute); text-transform: uppercase; font-family: var(--font-mono); }
+
+        /* Article grid */
+        .article-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+        .article-card {
+            border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden;
+            background: rgba(10,16,48,0.3); transition: all 0.25s;
+            display: flex; flex-direction: column;
+        }
+        .article-card:hover { border-color: var(--arcturian); transform: translateY(-2px); }
+        .ac-header {
+            padding: 28px 26px 22px; flex: 1;
+        }
+        .ac-type { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+        .ac-type.case { color: var(--signal); }
+        .ac-type.tech { color: var(--arcturian-soft); }
+        .ac-type.white { color: var(--ascension); }
+        .ac-type.insight { color: var(--violet); }
+        .ac-title { color: var(--starlight); font-size: 18px; font-weight: 600; line-height: 1.35; margin: 0 0 12px; }
+        .ac-desc { color: var(--starlight-dim); font-size: 13px; line-height: 1.65; margin: 0; }
+        .ac-footer {
+            padding: 14px 26px 18px; border-top: 1px solid var(--line);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .ac-author { color: var(--mute); font-size: 12px; }
+        .ac-read { font-family: var(--font-mono); font-size: 11px; color: var(--arcturian-soft); }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(43,91,255,0.08), rgba(107,75,255,0.05));
+            border: 1px solid var(--arcturian);
+            border-radius: var(--radius-lg);
+            padding: 40px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .nl-text h3 { color: var(--starlight); font-size: 20px; font-weight: 600; margin: 0 0 6px; }
+        .nl-text p { color: var(--starlight-dim); font-size: 14px; margin: 0; }
+        .nl-form { display: flex; gap: 10px; }
+        .nl-input {
+            background: rgba(3,6,26,0.6); border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 12px 18px; color: var(--starlight); font-size: 14px; font-family: inherit;
+            width: 260px; transition: border-color 0.2s; outline: none;
+        }
+        .nl-input:focus { border-color: var(--arcturian); }
+        .nl-input::placeholder { color: var(--mute); }
+
+        /* Entity */
+        .entity { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px 28px 22px; background: rgba(3,6,26,0.6); font-family: var(--font-mono); font-size: 13px; color: var(--starlight-dim); }
+        .entity h3 { font-family: var(--font-sans); font-size: 12px; color: var(--mute); margin: 0 0 18px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+        .entity dl { display: grid; grid-template-columns: 220px 1fr; gap: 8px 16px; margin: 0; }
+        .entity dt { color: var(--mute); }
+        .entity dd { margin: 0; color: var(--starlight); }
+        .entity dd a { color: var(--arcturian-soft); }
+
+        footer.site { border-top: 1px solid var(--line); padding: 48px 0 36px; margin-top: 60px; background: rgba(1,2,14,0.6); }
+        .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+        .foot-grid h4 { color: var(--starlight); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 14px; font-weight: 600; }
+        .foot-grid a { display: block; color: var(--starlight-dim); font-size: 14px; padding: 4px 0; }
+        .foot-grid a:hover { color: var(--starlight); }
+        .foot-grid p { color: var(--mute); font-size: 13px; margin: 0 0 14px; }
+        .foot-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 22px; color: var(--mute); font-size: 12px; letter-spacing: 1px; flex-wrap: wrap; gap: 12px; }
+
+        @media (max-width: 900px) {
+            .page-hero { padding: 52px 0 40px; }
+            section { padding: 60px 0; }
+            .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .featured-article { grid-template-columns: 1fr; }
+            .fa-visual { min-height: 160px; }
+            .fa-number { font-size: 72px; }
+            .article-grid { grid-template-columns: 1fr; }
+            nav.primary { display: none; }
+            .foot-grid { grid-template-columns: 1fr 1fr; }
+            .entity dl { grid-template-columns: 1fr; }
+            .nl-form { flex-direction: column; }
+            .nl-input { width: 100%; }
+        }
+        @media (max-width: 560px) { .container { padding: 0 18px; } .nav-inner { padding: 14px 18px; } .foot-grid { grid-template-columns: 1fr; } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+    </style>
+</head>
+<body>
+
+<a href="#main" style="position:absolute;left:-9999px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;padding:10px 16px;background:#03061a;color:#e6ecff;border:1px solid #2b5bff;border-radius:8px;z-index:1000;'">Skip to content</a>
+
+<header role="banner">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Arctura — home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Arctura</span>
+        </a>
+        <nav class="primary" aria-label="Primary">
+            <a href="/">Overview</a>
+            <a href="/architecture">Architecture</a>
+            <a href="/compare">Compare</a>
+            <a href="/insights" aria-current="page">Insights</a>
+            <a href="/pricing">Pricing</a>
+        </nav>
+        <div class="header-actions">
+            <a class="btn" href="/geo">GEO Guide</a>
+            <a class="btn btn-primary" href="/#activate">Connect Node</a>
+        </div>
+    </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Arctura</a> <span>›</span> <span>Insights</span>
+        </nav>
+        <h1 class="page-title">Field Notes &amp; <span class="accent">Research</span></h1>
+        <p class="page-lede">
+            Technical deep-dives, case studies, and whitepapers from production deployments of autonomous resource management infrastructure. Updated fortnightly.
+        </p>
+    </div>
+</section>
+
+<!-- ARTICLES -->
+<section id="articles" aria-labelledby="articles-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">01</span>
+            <h2 id="articles-title">Latest Research</h2>
+            <p>9 articles · All production-verified.</p>
+        </div>
+
+        <div class="filter-tabs" role="tablist" aria-label="Filter articles by type">
+            <button class="ftab active" role="tab" aria-selected="true">All</button>
+            <button class="ftab" role="tab" aria-selected="false">Case Studies</button>
+            <button class="ftab" role="tab" aria-selected="false">Technical</button>
+            <button class="ftab" role="tab" aria-selected="false">Whitepapers</button>
+            <button class="ftab" role="tab" aria-selected="false">Insights</button>
+        </div>
+
+        <!-- Featured -->
+        <a href="/insights/50k-agent-case-study" class="featured-article" aria-label="Read: Autonomous Resource Allocation at Scale — 50,000 Agent Case Study">
+            <div class="fa-visual" aria-hidden="true">
+                <div class="fa-number">50<span class="fa-unit">K</span></div>
+            </div>
+            <div class="fa-content">
+                <div class="fa-tag">★ Featured &nbsp;·&nbsp; Case Study &nbsp;·&nbsp; Feb 20, 2026</div>
+                <h2 class="fa-title">Autonomous Resource Allocation at Scale: A 50,000 Agent Case Study</h2>
+                <p class="fa-desc">A Fortune 500 logistics company deployed 50,000 autonomous agents across four distributed data centers. The result: 40% reduction in compute costs, elimination of manual resource scheduling across 12,000 daily tasks, and zero production incidents in the first 90 days.</p>
+                <div class="fa-meta">
+                    <span class="fa-author">Mason Nguyen</span>
+                    <span class="fa-read">12 min read</span>
+                </div>
+                <div class="fa-chips">
+                    <span class="chip">Autonomous agents</span>
+                    <span class="chip">Resource optimization</span>
+                    <span class="chip">Enterprise AI</span>
+                    <span class="chip">Distributed systems</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Article grid -->
+        <div class="article-grid">
+            <a href="/insights/bft-consensus" class="article-card" aria-label="Read: Byzantine Fault Tolerance in Autonomous Agent Networks">
+                <div class="ac-header">
+                    <div class="ac-type tech">Technical &nbsp;·&nbsp; Mar 5, 2026</div>
+                    <h3 class="ac-title">Byzantine Fault Tolerance in Autonomous Agent Networks</h3>
+                    <p class="ac-desc">How production autonomous systems maintain consensus and recover from adversarial node failures without human escalation — including the Resonance BFT implementation walkthrough in regulated environments.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">Avery Lane</span>
+                    <span class="ac-read">12 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/signal-stack-blueprint" class="article-card" aria-label="Read: The Signal Stack Blueprint — Making Your Brand AI-Readable">
+                <div class="ac-header">
+                    <div class="ac-type white">Whitepaper &nbsp;·&nbsp; Mar 12, 2026</div>
+                    <h3 class="ac-title">The Signal Stack Blueprint: Making Your Infrastructure AI-Readable</h3>
+                    <p class="ac-desc">Structured data and semantic architecture that transforms scattered infrastructure signals into a high-confidence knowledge graph that AI retrieval systems rank as a trusted source of record.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">John Williams</span>
+                    <span class="ac-read">18 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/carbon-aware-scheduling" class="article-card" aria-label="Read: Carbon-Aware Scheduling in Autonomous Systems">
+                <div class="ac-header">
+                    <div class="ac-type tech">Technical &nbsp;·&nbsp; Mar 18, 2026</div>
+                    <h3 class="ac-title">Carbon-Aware Scheduling in Autonomous Systems</h3>
+                    <p class="ac-desc">How autonomous resource management shifts compute workloads toward low-carbon grid windows — reducing enterprise carbon footprint by up to 28% without sacrificing throughput or SLA compliance.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">Mason Nguyen</span>
+                    <span class="ac-read">8 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/differential-privacy" class="article-card" aria-label="Read: Privacy-Preserving AI — Differential Privacy in Autonomous Agents">
+                <div class="ac-header">
+                    <div class="ac-type tech">Technical &nbsp;·&nbsp; Mar 25, 2026</div>
+                    <h3 class="ac-title">Privacy-Preserving AI: Differential Privacy in Autonomous Agents</h3>
+                    <p class="ac-desc">How differential privacy techniques protect sensitive enterprise data while maintaining full decision-making effectiveness of autonomous agents operating at production scale.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">Avery Lane</span>
+                    <span class="ac-read">17 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/real-time-attribution" class="article-card" aria-label="Read: Real-Time Attribution in Autonomous Systems">
+                <div class="ac-header">
+                    <div class="ac-type case">Case Study &nbsp;·&nbsp; Apr 2, 2026</div>
+                    <h3 class="ac-title">Real-Time Attribution in Autonomous Systems: Challenges and Solutions</h3>
+                    <p class="ac-desc">When 12,000 agents make decisions simultaneously, attribution is non-trivial. This documents Arctura's trace logging, mandate chain auditing, and live dashboards that surface accountability without latency.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">Mason Nguyen</span>
+                    <span class="ac-read">13 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/monolith-to-mesh" class="article-card" aria-label="Read: From Monolith to Mesh — Migrating Legacy Systems to Agentic Architecture">
+                <div class="ac-header">
+                    <div class="ac-type tech">Technical &nbsp;·&nbsp; Apr 9, 2026</div>
+                    <h3 class="ac-title">From Monolith to Mesh: Migrating Legacy Systems to Agentic Architecture</h3>
+                    <p class="ac-desc">A pragmatic migration playbook for enterprise teams moving from centralized resource scheduling to mandate-chain-governed agent meshes — without a big-bang rewrite.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">Avery Lane</span>
+                    <span class="ac-read">14 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/mandate-chain-design" class="article-card" aria-label="Read: Mandate Chain Verification — Encoding Human Authority into Autonomous Systems">
+                <div class="ac-header">
+                    <div class="ac-type tech">Technical &nbsp;·&nbsp; Apr 14, 2026</div>
+                    <h3 class="ac-title">Mandate Chain Verification: Encoding Human Authority into Autonomous Systems</h3>
+                    <p class="ac-desc">The theory and implementation of cryptographic mandate chains — how Arctura ensures every autonomous action is traceable to a human principal with a verifiable, time-bounded delegation.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">Mason Nguyen</span>
+                    <span class="ac-read">9 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/digital-twins" class="article-card" aria-label="Read: Digital Twins — The Future of Resource Optimization">
+                <div class="ac-header">
+                    <div class="ac-type white">Whitepaper &nbsp;·&nbsp; Apr 17, 2026</div>
+                    <h3 class="ac-title">Digital Twins: Resource Optimization in Distributed Environments</h3>
+                    <p class="ac-desc">How autonomous agent networks paired with digital twin models enable predictive resource allocation — eliminating reactive scheduling in favor of anticipatory mandate chains.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">John Williams</span>
+                    <span class="ac-read">10 min →</span>
+                </div>
+            </a>
+
+            <a href="/insights/agentic-enterprise" class="article-card" aria-label="Read: The Agentic Enterprise">
+                <div class="ac-header">
+                    <div class="ac-type insight">Insight &nbsp;·&nbsp; Apr 22, 2026</div>
+                    <h3 class="ac-title">The Agentic Enterprise: How Fortune 1000 Teams Are Restructuring for AI-Native Operations</h3>
+                    <p class="ac-desc">Survey findings and field notes from 40+ enterprise deployments: the org changes, governance models, and infrastructure decisions that separate successful agentic transformations from stalled pilots.</p>
+                </div>
+                <div class="ac-footer">
+                    <span class="ac-author">Mason Nguyen</span>
+                    <span class="ac-read">11 min →</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="subscribe" aria-labelledby="sub-title">
+    <div class="container">
+        <div class="newsletter">
+            <div class="nl-text">
+                <h3 id="sub-title">Stay current.</h3>
+                <p>New research and case studies delivered fortnightly — no noise, no marketing.</p>
+            </div>
+            <div class="nl-form">
+                <input class="nl-input" type="email" placeholder="signal@yournode.network" aria-label="Email address for newsletter" />
+                <button class="btn btn-primary">Subscribe →</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ENTITY RECORD -->
+<section id="entity" aria-labelledby="ent-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">02</span>
+            <h2 id="ent-title">Entity Record</h2>
+            <p>Canonical metadata for AI retrieval and indexing.</p>
+        </div>
+        <div class="entity">
+            <h3>arctura.insights — canonical record</h3>
+            <dl>
+                <dt>page</dt>                <dd>Arctura Insights &amp; Research</dd>
+                <dt>canonical.url</dt>       <dd>https://autonomousresourcemanagement.com/insights</dd>
+                <dt>content.types</dt>       <dd>Case Studies · Technical Guides · Whitepapers · Insights</dd>
+                <dt>topics</dt>              <dd>autonomous resource management · BFT consensus · mandate chains · carbon scheduling · GEO · EU AI Act · agent attribution</dd>
+                <dt>update.frequency</dt>    <dd>Fortnightly</dd>
+                <dt>parent.entity</dt>       <dd><a href="/">autonomousresourcemanagement.com</a></dd>
+                <dt>llm.directory</dt>       <dd><a href="/llms.txt">/llms.txt</a></dd>
+                <dt>contact</dt>             <dd><a href="mailto:signal@arctura.network">signal@arctura.network</a></dd>
+            </dl>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="site" role="contentinfo">
+    <div class="container">
+        <div class="foot-grid">
+            <div>
+                <a href="/" class="brand" aria-label="Arctura"><span class="brand-mark" aria-hidden="true"></span><span>Arctura</span></a>
+                <p style="margin-top:14px;">Field notes and research from Arctura — autonomous resource management infrastructure for the agentic era.</p>
+            </div>
+            <div>
+                <h4>Research</h4>
+                <a href="/insights/50k-agent-case-study">50K Agent Case Study</a>
+                <a href="/insights/bft-consensus">BFT Consensus</a>
+                <a href="/insights/carbon-aware-scheduling">Carbon Scheduling</a>
+                <a href="/insights/mandate-chain-design">Mandate Chains</a>
+            </div>
+            <div>
+                <h4>Network</h4>
+                <a href="/">Overview</a>
+                <a href="/architecture">Architecture</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/geo">GEO Guide</a>
+            </div>
+            <div>
+                <h4>Collective</h4>
+                <a href="mailto:signal@arctura.network">signal@arctura.network</a>
+                <a href="/llms.txt">LLM directory</a>
+                <a href="/sitemap.xml">Sitemap</a>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span>&copy; 2026 Arctura Collective &middot; Built on decentralized frequencies</span>
+            <span>v1.0 &middot; Insights · Updated fortnightly &middot; <span style="color:var(--signal);">resonance · healthy</span></span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

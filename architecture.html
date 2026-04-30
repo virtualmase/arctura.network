@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#03061a" />
+
+    <title>Arctura Signal Architecture — Six-Layer Stack & Byzantine Fault Tolerant Consensus</title>
+    <meta name="description" content="Deep technical reference for Arctura's six-layer signal stack: L0 Human Intent through L5 Tool & Action. Byzantine Fault Tolerant Resonance consensus, Wasm sandboxing, mandate chain design, and carbon-aware scheduling." />
+
+    <link rel="canonical" href="https://autonomousresourcemanagement.com/architecture" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Arctura Signal Architecture — Six-Layer Stack" />
+    <meta property="og:description" content="Technical reference for Arctura's six-layer signal stack, Resonance BFT consensus, and mandate chain design for autonomous resource management." />
+    <meta property="og:url" content="https://autonomousresourcemanagement.com/architecture" />
+    <meta property="og:site_name" content="Arctura" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Arctura Signal Architecture — Six-Layer Stack" />
+    <meta name="twitter:description" content="Byzantine Fault Tolerant consensus, Wasm sandboxing, mandate chains, and carbon-aware scheduling — the complete Arctura technical reference." />
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Arctura Collective" />
+
+    <link rel="alternate" type="text/plain" title="LLM directory" href="/llms.txt" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "TechArticle",
+          "@id": "https://autonomousresourcemanagement.com/architecture#article",
+          "name": "Arctura Signal Architecture — Six-Layer Stack",
+          "headline": "Arctura's Six-Layer Signal Stack and Byzantine Fault Tolerant Resonance Consensus",
+          "description": "Complete technical reference for the Arctura subnet's six-layer signal architecture, covering L0 Human Intent through L5 Tool & Action layers, Resonance BFT consensus, mandate chain design, Wasm sandboxing, and carbon-aware scheduling.",
+          "url": "https://autonomousresourcemanagement.com/architecture",
+          "inLanguage": "en",
+          "dateModified": "2026-04-01",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://autonomousresourcemanagement.com/#org",
+            "name": "Arctura Collective",
+            "url": "https://autonomousresourcemanagement.com/"
+          },
+          "about": [
+            { "@type": "SoftwareApplication", "name": "Arctura Subnet" },
+            { "@type": "DefinedTerm", "name": "Resonance BFT", "description": "Byzantine Fault Tolerant consensus protocol tuned to network frequency, used by the Arctura subnet for agent action attestation." },
+            { "@type": "DefinedTerm", "name": "Mandate Chain", "description": "Cryptographically verifiable chain of delegated authority scoping every autonomous agent action within Arctura." }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Arctura", "item": "https://autonomousresourcemanagement.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://autonomousresourcemanagement.com/architecture" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Arctura's six-layer signal stack?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Arctura signal stack has six layers: L0 Human Intent (DID identity, root mandates, HITL escalation), L1 Orchestration Kernel (durable workflows, task routing, circuit breakers), L2 Safety & Sandbox (Wasm sandboxing, BFT consensus, hallucination detection), L3 Semantic Signal (JSON-LD, knowledge graphs, machine-readable state), L4 Memory & Retrieval (vector store, event sourcing, checkpoint store), and L5 Tool & Action (MCP-native tool registry, context windows, resource providers)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Resonance BFT consensus work in Arctura?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Resonance is Arctura's frequency-adaptive Byzantine Fault Tolerant consensus protocol. It attests agent mandates rather than ordering transactions. Three validator nodes reach consensus on each attested action. The protocol adapts its cycle frequency to network load, maintaining forward-only attestation with no re-orgs. All decisions are logged to the Truth Ledger with Merkle proofs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a mandate chain in Arctura?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A mandate chain is a cryptographically verifiable delegation of authority from a human principal to one or more autonomous agents. Each link in the chain specifies capability scopes, resource budgets, and escalation triggers. Agents cannot act beyond their mandate boundary; any action outside scope is blocked at the L2 Safety layer before execution."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is carbon-aware scheduling in Arctura?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Arctura's carbon-aware scheduler integrates live grid carbon intensity data from WattTime and Electricity Maps. Non-urgent compute tasks are automatically deferred to low-carbon grid windows. The scheduler tracks per-mandate carbon budgets and generates verifiable sustainability reports. The result is a net-negative carbon footprint across the subnet."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* =========================================================
+           ARCTURIAN BLUE PALETTE — inherited from Arctura design system
+           ========================================================= */
+        :root {
+            --void: #03061a;
+            --void-deep: #01020e;
+            --void-elev: #0a1030;
+            --grid: #142049;
+            --line: #1d2a5e;
+
+            --arcturian: #2b5bff;
+            --arcturian-soft: #5b8aff;
+            --arcturian-glow: rgba(43, 91, 255, 0.45);
+            --violet: #6b4bff;
+            --ascension: #b18bff;
+            --starlight: #e6ecff;
+            --starlight-dim: #b8c2e6;
+            --mute: #8a93b8;
+            --signal: #5bcfff;
+
+            --radius-sm: 6px;
+            --radius: 10px;
+            --radius-lg: 16px;
+
+            --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--void);
+            color: var(--starlight-dim);
+            margin: 0;
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            background-image:
+              radial-gradient(1200px 600px at 80% -10%, rgba(107, 75, 255, 0.18), transparent 60%),
+              radial-gradient(900px 500px at 0% 30%, rgba(43, 91, 255, 0.16), transparent 60%),
+              radial-gradient(700px 400px at 100% 100%, rgba(177, 139, 255, 0.10), transparent 60%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+              radial-gradient(1px 1px at 20% 30%, rgba(230, 236, 255, 0.6), transparent 50%),
+              radial-gradient(1px 1px at 70% 80%, rgba(230, 236, 255, 0.5), transparent 50%),
+              radial-gradient(1px 1px at 40% 60%, rgba(91, 138, 255, 0.6), transparent 50%),
+              radial-gradient(1px 1px at 90% 20%, rgba(177, 139, 255, 0.6), transparent 50%),
+              radial-gradient(1px 1px at 10% 80%, rgba(230, 236, 255, 0.5), transparent 50%),
+              radial-gradient(1px 1px at 55% 15%, rgba(91, 207, 255, 0.5), transparent 50%);
+            background-size: 600px 600px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        a { color: var(--arcturian-soft); text-decoration: none; }
+        a:hover { color: var(--starlight); }
+        ::selection { background: var(--arcturian); color: var(--starlight); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Header --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            background: rgba(3, 6, 26, 0.72);
+            border-bottom: 1px solid var(--line);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 24px;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--starlight);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        .brand-mark {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--ascension), var(--arcturian) 55%, var(--void-deep) 100%);
+            box-shadow: 0 0 16px var(--arcturian-glow);
+        }
+        nav.primary { display: flex; gap: 28px; }
+        nav.primary a {
+            color: var(--starlight-dim);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            transition: color 0.2s;
+        }
+        nav.primary a:hover,
+        nav.primary a[aria-current="page"] { color: var(--starlight); }
+        nav.primary a[aria-current="page"] { color: var(--arcturian-soft); }
+
+        .header-actions { display: flex; gap: 10px; align-items: center; }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--starlight);
+            padding: 11px 20px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1.4px;
+            font-size: 12px;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+        .btn:hover {
+            border-color: var(--arcturian);
+            color: var(--starlight);
+            box-shadow: 0 0 24px var(--arcturian-glow);
+            transform: translateY(-1px);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--arcturian) 0%, var(--violet) 100%);
+            border-color: transparent;
+            color: var(--starlight);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 32px var(--arcturian-glow), 0 0 48px rgba(107, 75, 255, 0.35);
+        }
+
+        /* --- Page Hero --- */
+        .page-hero {
+            padding: 80px 0 60px;
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: var(--mute);
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+        .breadcrumb a { color: var(--arcturian-soft); }
+        .breadcrumb span { color: var(--mute); }
+        .page-title {
+            font-size: clamp(34px, 4.5vw, 56px);
+            line-height: 1.05;
+            letter-spacing: -0.8px;
+            color: var(--starlight);
+            margin: 0 0 18px;
+            font-weight: 700;
+        }
+        .page-title .accent {
+            background: linear-gradient(120deg, var(--arcturian-soft), var(--ascension) 60%, var(--violet));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .page-lede {
+            font-size: 18px;
+            color: var(--starlight-dim);
+            max-width: 680px;
+            margin: 0 0 28px;
+            line-height: 1.65;
+        }
+        .page-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .meta-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(43, 91, 255, 0.06);
+            color: var(--mute);
+            font-size: 11px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+        }
+        .meta-chip .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--signal);
+            box-shadow: 0 0 10px var(--signal);
+        }
+
+        /* --- Section --- */
+        section { padding: 80px 0; position: relative; }
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            margin-bottom: 48px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 18px;
+        }
+        .section-head .num {
+            font-family: var(--font-mono);
+            color: var(--arcturian-soft);
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+        .section-head h2 {
+            color: var(--starlight);
+            font-size: clamp(24px, 2.8vw, 34px);
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            flex: 1;
+        }
+        .section-head p {
+            margin: 0;
+            color: var(--mute);
+            max-width: 340px;
+            font-size: 14px;
+        }
+
+        /* --- Stack Diagram --- */
+        .stack-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: rgba(3, 6, 26, 0.5);
+        }
+        .stack-layer {
+            display: grid;
+            grid-template-columns: 72px 56px 200px 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--line);
+            transition: background 0.25s;
+            cursor: default;
+        }
+        .stack-layer:last-child { border-bottom: none; }
+        .stack-layer:hover {
+            background: linear-gradient(90deg, rgba(43, 91, 255, 0.09), rgba(107, 75, 255, 0.04));
+        }
+        .stack-layer .lid {
+            font-family: var(--font-mono);
+            color: var(--arcturian-soft);
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        .stack-layer .lnum {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--line);
+            letter-spacing: -1px;
+        }
+        .stack-layer .lname {
+            color: var(--starlight);
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.3;
+        }
+        .stack-layer .lname small {
+            display: block;
+            color: var(--mute);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+        .stack-layer .ldesc {
+            color: var(--starlight-dim);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .stack-layer .ltags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: flex-end;
+        }
+        .ltag {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 1px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--line);
+            color: var(--mute);
+            white-space: nowrap;
+        }
+        .ltag.highlight { border-color: var(--arcturian); color: var(--arcturian-soft); }
+
+        /* --- Cross-cutting layer bar --- */
+        .cross-cut {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .cc-bar {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            background: rgba(10, 16, 48, 0.3);
+            text-align: center;
+        }
+        .cc-bar .cc-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--ascension);
+            margin-bottom: 6px;
+        }
+        .cc-bar .cc-items {
+            font-size: 13px;
+            color: var(--mute);
+            line-height: 1.7;
+        }
+
+        /* --- Mandate Chain Visual --- */
+        .mandate-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .mandate-node {
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 22px;
+            background: rgba(10, 16, 48, 0.4);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            margin-bottom: 2px;
+            transition: border-color 0.25s;
+        }
+        .mandate-node:hover { border-color: var(--arcturian); }
+        .mandate-node .mn-idx {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--arcturian-soft);
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+        .mandate-node .mn-body h4 {
+            color: var(--starlight);
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0 0 4px;
+        }
+        .mandate-node .mn-body p {
+            color: var(--starlight-dim);
+            font-size: 13px;
+            margin: 0;
+        }
+        .mandate-node .mn-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 1.2px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .badge-human { background: rgba(43, 91, 255, 0.15); color: var(--arcturian-soft); border: 1px solid rgba(43, 91, 255, 0.3); }
+        .badge-agent { background: rgba(107, 75, 255, 0.15); color: var(--ascension); border: 1px solid rgba(107, 75, 255, 0.3); }
+        .badge-bft   { background: rgba(91, 207, 255, 0.1);  color: var(--signal);    border: 1px solid rgba(91, 207, 255, 0.3); }
+        .badge-ledger{ background: rgba(177, 139, 255, 0.1); color: var(--ascension); border: 1px solid rgba(177, 139, 255, 0.3); }
+
+        .mandate-arrow {
+            text-align: center;
+            color: var(--line);
+            font-family: var(--font-mono);
+            font-size: 18px;
+            padding: 2px 0;
+            letter-spacing: 2px;
+        }
+
+        /* --- Specs grid --- */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .spec-card {
+            background: rgba(10, 16, 48, 0.4);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 26px 24px;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .spec-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--arcturian), transparent);
+            opacity: 0.6;
+        }
+        .spec-card:hover {
+            border-color: var(--arcturian);
+            transform: translateY(-2px);
+        }
+        .spec-card .sc-id {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--ascension);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .spec-card h3 {
+            color: var(--starlight);
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0 0 10px;
+        }
+        .spec-card p {
+            color: var(--starlight-dim);
+            font-size: 14px;
+            margin: 0 0 16px;
+            line-height: 1.6;
+        }
+        .spec-card .sc-metric {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--signal);
+            letter-spacing: 1px;
+        }
+
+        /* --- Truth Ledger preview --- */
+        .ledger-preview {
+            background: linear-gradient(180deg, rgba(10, 16, 48, 0.9), rgba(3, 6, 26, 0.9));
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+        .ledger-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(20, 32, 73, 0.4);
+        }
+        .ledger-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--mute);
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+        .ledger-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--signal);
+            box-shadow: 0 0 8px var(--signal);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.4); }
+        }
+        .ledger-badge {
+            font-size: 10px;
+            letter-spacing: 1.2px;
+            padding: 3px 10px;
+            border-radius: 4px;
+            background: rgba(91, 207, 255, 0.1);
+            color: var(--signal);
+            border: 1px solid rgba(91, 207, 255, 0.25);
+        }
+        .ledger-body { padding: 0; }
+        .ledger-row {
+            display: grid;
+            grid-template-columns: 180px 80px 120px 1fr 100px;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(29, 42, 94, 0.5);
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+        .ledger-row:last-child { border-bottom: none; }
+        .ledger-row:hover { background: rgba(43, 91, 255, 0.05); }
+        .ledger-row.header-row {
+            color: var(--mute);
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--line);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .ledger-row .ts { color: var(--mute); }
+        .ledger-row .action { color: var(--arcturian-soft); }
+        .ledger-row .agent { color: var(--starlight-dim); }
+        .ledger-row .mandate { color: var(--ascension); }
+        .lv { padding: 2px 6px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; }
+        .lv-ok { background: rgba(91, 207, 255, 0.1); color: var(--signal); }
+        .lv-warn { background: rgba(177, 139, 255, 0.1); color: var(--ascension); }
+
+        /* --- Carbon section --- */
+        .carbon-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .carbon-stat {
+            background: rgba(10, 16, 48, 0.4);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 28px 26px;
+            position: relative;
+            overflow: hidden;
+        }
+        .carbon-stat::after {
+            content: '';
+            position: absolute;
+            right: -20px; bottom: -20px;
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(43, 91, 255, 0.12), transparent 70%);
+        }
+        .carbon-stat .cs-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--mute);
+            margin-bottom: 12px;
+        }
+        .carbon-stat .cs-value {
+            font-family: var(--font-mono);
+            font-size: 40px;
+            font-weight: 300;
+            color: var(--starlight);
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .carbon-stat .cs-value span { font-size: 16px; color: var(--signal); margin-left: 6px; }
+        .carbon-stat .cs-sub {
+            font-size: 13px;
+            color: var(--starlight-dim);
+        }
+
+        .carbon-how {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .carbon-step {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .cs-num {
+            flex-shrink: 0;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            background: rgba(43, 91, 255, 0.12);
+            border: 1px solid var(--arcturian);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--arcturian-soft);
+        }
+        .cs-text h4 {
+            color: var(--starlight);
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0 0 4px;
+        }
+        .cs-text p {
+            color: var(--starlight-dim);
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* --- FAQ --- */
+        .faq { display: flex; flex-direction: column; gap: 0; }
+        details.qa {
+            border-bottom: 1px solid var(--line);
+            padding: 22px 4px;
+        }
+        details.qa[open] summary { color: var(--starlight); }
+        details.qa summary {
+            cursor: pointer;
+            color: var(--starlight-dim);
+            font-weight: 500;
+            font-size: 17px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            transition: color 0.2s;
+        }
+        details.qa summary::-webkit-details-marker { display: none; }
+        details.qa summary::after { content: '+'; color: var(--arcturian-soft); font-family: var(--font-mono); font-size: 22px; line-height: 1; }
+        details.qa[open] summary::after { content: '−'; }
+        details.qa p { color: var(--starlight-dim); margin: 14px 0 0; font-size: 15px; max-width: 760px; }
+
+        /* --- Entity record --- */
+        .entity {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 28px 28px 22px;
+            background: rgba(3, 6, 26, 0.6);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--starlight-dim);
+        }
+        .entity h3 {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--mute);
+            margin: 0 0 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .entity dl { display: grid; grid-template-columns: 220px 1fr; gap: 8px 16px; margin: 0; }
+        .entity dt { color: var(--mute); }
+        .entity dd { margin: 0; color: var(--starlight); }
+        .entity dd a { color: var(--arcturian-soft); }
+
+        /* --- Footer --- */
+        footer.site {
+            border-top: 1px solid var(--line);
+            padding: 48px 0 36px;
+            margin-top: 60px;
+            background: rgba(1, 2, 14, 0.6);
+        }
+        .foot-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        .foot-grid h4 {
+            color: var(--starlight);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0 0 14px;
+            font-weight: 600;
+        }
+        .foot-grid a {
+            display: block;
+            color: var(--starlight-dim);
+            font-size: 14px;
+            padding: 4px 0;
+        }
+        .foot-grid a:hover { color: var(--starlight); }
+        .foot-grid p { color: var(--mute); font-size: 13px; margin: 0 0 14px; }
+        .foot-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--line);
+            padding-top: 22px;
+            color: var(--mute);
+            font-size: 12px;
+            letter-spacing: 1px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .page-hero { padding: 52px 0 40px; }
+            section { padding: 60px 0; }
+            .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .section-head p { max-width: 100%; }
+            .stack-layer { grid-template-columns: 56px 1fr; }
+            .stack-layer .lnum, .stack-layer .ltags { display: none; }
+            .carbon-grid { grid-template-columns: 1fr; }
+            .ledger-row { grid-template-columns: 1fr 1fr; }
+            .ledger-row .ts, .ledger-row .mandate { display: none; }
+            nav.primary { display: none; }
+            .foot-grid { grid-template-columns: 1fr 1fr; }
+            .entity dl { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 560px) {
+            .container { padding: 0 18px; }
+            .nav-inner { padding: 14px 18px; }
+            .foot-grid { grid-template-columns: 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;width:auto;height:auto;padding:10px 16px;background:#03061a;color:#e6ecff;border:1px solid #2b5bff;border-radius:8px;z-index:1000;'">Skip to content</a>
+
+<header role="banner">
+    <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Arctura — home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Arctura</span>
+        </a>
+        <nav class="primary" aria-label="Primary">
+            <a href="/">Overview</a>
+            <a href="/architecture" aria-current="page">Architecture</a>
+            <a href="/compare">Compare</a>
+            <a href="/insights">Insights</a>
+            <a href="/pricing">Pricing</a>
+        </nav>
+        <div class="header-actions">
+            <a class="btn" href="/geo">GEO Guide</a>
+            <a class="btn btn-primary" href="/#activate">Connect Node</a>
+        </div>
+    </div>
+</header>
+
+<main id="main">
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Arctura</a>
+            <span>›</span>
+            <span>Architecture</span>
+        </nav>
+        <h1 class="page-title">Signal Architecture &amp; <span class="accent">Six-Layer Stack</span></h1>
+        <p class="page-lede">
+            A complete technical reference for Arctura's layered execution fabric — from human intent at L0 through tool execution at L5, with Byzantine Fault Tolerant consensus, Wasm sandboxing, and carbon-aware scheduling built into every layer.
+        </p>
+        <div class="page-meta">
+            <span class="meta-chip"><span class="dot" aria-hidden="true"></span>v1.0 Reference</span>
+            <span class="meta-chip">Apache 2.0 Kernel</span>
+            <span class="meta-chip">BFT Resonance Consensus</span>
+            <span class="meta-chip">GEO-Optimized</span>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 1: SIX-LAYER STACK -->
+<section id="stack" aria-labelledby="stack-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">01</span>
+            <h2 id="stack-title">The Six-Layer Signal Stack</h2>
+            <p>Six orthogonal layers, each independently upgradeable. Three cross-cutting concerns span all layers.</p>
+        </div>
+
+        <div class="stack-diagram" role="list" aria-label="Arctura six-layer signal stack">
+            <div class="stack-layer" role="listitem">
+                <div class="lid">L0</div>
+                <div class="lnum">0</div>
+                <div class="lname">Human Intent<small>Root Authority</small></div>
+                <div class="ldesc">DID-based identity roots, root mandates, human-in-the-loop escalation paths, and revocable sub-mandate chains. The sole source of delegated authority. No agent acts without a traceable chain back to L0.</div>
+                <div class="ltags">
+                    <span class="ltag highlight">DID Identity</span>
+                    <span class="ltag highlight">Root Mandate</span>
+                    <span class="ltag">HITL Escalation</span>
+                    <span class="ltag">Revocable Chains</span>
+                </div>
+            </div>
+            <div class="stack-layer" role="listitem">
+                <div class="lid">L1</div>
+                <div class="lnum">1</div>
+                <div class="lname">Orchestration Kernel<small>Durable Execution</small></div>
+                <div class="ldesc">Temporal-based durable workflow execution, intelligent task routing, dead-man's switches, and circuit breakers. Zero-loss operation under adversarial or failure conditions. Every state transition is checkpointed before execution proceeds.</div>
+                <div class="ltags">
+                    <span class="ltag highlight">Temporal Workflows</span>
+                    <span class="ltag">Task Router</span>
+                    <span class="ltag">Dead-Man's Switch</span>
+                    <span class="ltag">Circuit Breakers</span>
+                </div>
+            </div>
+            <div class="stack-layer" role="listitem">
+                <div class="lid">L2</div>
+                <div class="lnum">2</div>
+                <div class="lname">Safety &amp; Sandbox<small>BFT Consensus</small></div>
+                <div class="ldesc">Wasm-sandboxed tool execution, Byzantine Fault Tolerant Resonance consensus across three validator nodes, hallucination detection via output verification, and mandate scope enforcement at every execution boundary. Tools cannot escape their declared permission scope.</div>
+                <div class="ltags">
+                    <span class="ltag highlight">Wasm Sandboxing</span>
+                    <span class="ltag highlight">BFT Consensus</span>
+                    <span class="ltag">Hallucination Detection</span>
+                    <span class="ltag">Mandate Verifier</span>
+                </div>
+            </div>
+            <div class="stack-layer" role="listitem">
+                <div class="lid">L3</div>
+                <div class="lnum">3</div>
+                <div class="lname">Semantic Signal<small>Machine-Readable State</small></div>
+                <div class="ldesc">Machine-readable structured data via JSON-LD entity schemas, knowledge graph linkages, and resolvable vocabulary URIs. Makes system state legible to both AI retrieval agents and human auditors simultaneously. The GEO-compliance layer.</div>
+                <div class="ltags">
+                    <span class="ltag highlight">JSON-LD</span>
+                    <span class="ltag highlight">Knowledge Graph</span>
+                    <span class="ltag">Schema.org</span>
+                    <span class="ltag">GEO-Ready</span>
+                </div>
+            </div>
+            <div class="stack-layer" role="listitem">
+                <div class="lid">L4</div>
+                <div class="lnum">4</div>
+                <div class="lname">Memory &amp; Retrieval<small>Semantic Fabric</small></div>
+                <div class="ldesc">Vector store for semantic memory, event-sourced state, checkpoint store, and semantic cache. Agents reason over historical context without re-querying live systems. Pinecone embeddings enable sub-100ms context retrieval across the full mandate history.</div>
+                <div class="ltags">
+                    <span class="ltag highlight">Vector Store</span>
+                    <span class="ltag">Event Sourcing</span>
+                    <span class="ltag">Checkpoint Store</span>
+                    <span class="ltag">Semantic Cache</span>
+                </div>
+            </div>
+            <div class="stack-layer" role="listitem">
+                <div class="lid">L5</div>
+                <div class="lnum">5</div>
+                <div class="lname">Tool &amp; Action<small>MCP-Native Interface</small></div>
+                <div class="ldesc">MCP-native tool registry, context window management, resource providers, and prompt templates. The interface between the Arctura subnet and external world state. All tool calls are logged to the Truth Ledger before response is returned to the agent.</div>
+                <div class="ltags">
+                    <span class="ltag highlight">MCP Native</span>
+                    <span class="ltag highlight">Tool Registry</span>
+                    <span class="ltag">Context Windows</span>
+                    <span class="ltag">Prompt Templates</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cross-cut">
+            <div class="cc-bar">
+                <div class="cc-label">Economic Layer (AP2)</div>
+                <div class="cc-items">Mandate Signing · Payment Rails · Tx Ledger</div>
+            </div>
+            <div class="cc-bar">
+                <div class="cc-label">Sustainability Scheduler</div>
+                <div class="cc-items">Grid Intensity API · Carbon Budgets · Green Windows</div>
+            </div>
+            <div class="cc-bar">
+                <div class="cc-label">Truth Ledger</div>
+                <div class="cc-items">Immutable Log · Decision Traces · Audit Queries</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 2: MANDATE CHAIN -->
+<section id="mandate" aria-labelledby="mandate-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">02</span>
+            <h2 id="mandate-title">Mandate Chain Design</h2>
+            <p>Every autonomous action traces back to a human principal through a verifiable delegation chain.</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
+            <div>
+                <p style="color:var(--starlight-dim);font-size:15px;line-height:1.7;margin:0 0 24px;">
+                    A mandate chain is a cryptographically verifiable delegation of authority. Each node in the chain specifies capability scopes, resource budgets, carbon limits, and escalation triggers. The chain is sealed at registration and immutable thereafter — agents cannot self-extend their mandate.
+                </p>
+                <p style="color:var(--starlight-dim);font-size:15px;line-height:1.7;margin:0 0 24px;">
+                    When an agent encounters an action outside its mandate scope, L2's Mandate Verifier blocks execution and triggers the HITL escalation path defined at L0. The requesting agent receives a structured refusal with the exact mandate boundary violated — never a silent failure.
+                </p>
+                <div style="background:rgba(10,16,48,0.4);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;font-family:var(--font-mono);font-size:12px;color:var(--starlight-dim);line-height:1.8;">
+                    <div style="color:var(--mute);margin-bottom:8px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;">Example mandate scope</div>
+                    <div><span style="color:var(--arcturian-soft);">principal:</span> mason@arctura.network</div>
+                    <div><span style="color:var(--arcturian-soft);">scope:</span> compute.allocate, storage.read</div>
+                    <div><span style="color:var(--arcturian-soft);">budget:</span> $500 USD / 30d</div>
+                    <div><span style="color:var(--arcturian-soft);">carbon:</span> 2.0 kgCO₂e max</div>
+                    <div><span style="color:var(--arcturian-soft);">escalate_at:</span> budget &gt; 80% OR confidence &lt; 0.75</div>
+                    <div><span style="color:var(--arcturian-soft);">expires:</span> 2026-07-01T00:00:00Z</div>
+                </div>
+            </div>
+
+            <div class="mandate-flow" aria-label="Mandate chain flow example">
+                <div class="mandate-node">
+                    <div class="mn-idx">ROOT</div>
+                    <div class="mn-body">
+                        <h4>Human Principal</h4>
+                        <p>Issues root mandate with capability scopes and budget ceilings</p>
+                    </div>
+                    <span class="mn-badge badge-human">L0 · Human</span>
+                </div>
+                <div class="mandate-arrow" aria-hidden="true">↓ delegate</div>
+                <div class="mandate-node">
+                    <div class="mn-idx">M-01</div>
+                    <div class="mn-body">
+                        <h4>Orchestration Agent</h4>
+                        <p>Receives sub-mandate; routes tasks to specialized workers within scope</p>
+                    </div>
+                    <span class="mn-badge badge-agent">L1 · Agent</span>
+                </div>
+                <div class="mandate-arrow" aria-hidden="true">↓ sub-delegate</div>
+                <div class="mandate-node">
+                    <div class="mn-idx">M-02</div>
+                    <div class="mn-body">
+                        <h4>Worker Agent</h4>
+                        <p>Executes scoped actions; every tool call verified against mandate boundary</p>
+                    </div>
+                    <span class="mn-badge badge-agent">L2 · Sandbox</span>
+                </div>
+                <div class="mandate-arrow" aria-hidden="true">↓ attest</div>
+                <div class="mandate-node">
+                    <div class="mn-idx">BFT</div>
+                    <div class="mn-body">
+                        <h4>Resonance Consensus</h4>
+                        <p>3-model validator consensus signs the action; Merkle proof generated</p>
+                    </div>
+                    <span class="mn-badge badge-bft">Resonance BFT</span>
+                </div>
+                <div class="mandate-arrow" aria-hidden="true">↓ log</div>
+                <div class="mandate-node">
+                    <div class="mn-idx">LOG</div>
+                    <div class="mn-body">
+                        <h4>Truth Ledger Entry</h4>
+                        <p>Immutable append-only record with full mandate chain, Merkle hash, timestamp</p>
+                    </div>
+                    <span class="mn-badge badge-ledger">Immutable</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: TECHNICAL SPECS -->
+<section id="specs" aria-labelledby="specs-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">03</span>
+            <h2 id="specs-title">Technical Specifications</h2>
+            <p>Performance targets and invariants the Arctura kernel upholds under production load.</p>
+        </div>
+
+        <div class="specs-grid">
+            <div class="spec-card">
+                <div class="sc-id">Consensus</div>
+                <h3>Resonance BFT</h3>
+                <p>Frequency-adaptive Byzantine Fault Tolerant consensus. Three validator nodes reach consensus on each attested mandate action. Forward-only attestation with no re-orgs.</p>
+                <div class="sc-metric">3/3 validators · &lt;50ms finality</div>
+            </div>
+            <div class="spec-card">
+                <div class="sc-id">Resilience</div>
+                <h3>Durable Execution</h3>
+                <p>Every state transition checkpointed via Temporal.io before execution. Zero-loss recovery from node crash, network partition, or provider failure. Replay-safe by design.</p>
+                <div class="sc-metric">99.99% task recovery · Zero-loss</div>
+            </div>
+            <div class="spec-card">
+                <div class="sc-id">Isolation</div>
+                <h3>Wasm Sandboxing</h3>
+                <p>Each tool executes in a capability-restricted Wasmtime sandbox. Tools cannot access resources outside their declared permission scope. Zero sandbox escapes in production.</p>
+                <div class="sc-metric">0 escapes · Wasmtime runtime</div>
+            </div>
+            <div class="spec-card">
+                <div class="sc-id">Throughput</div>
+                <h3>Signal Dispatch</h3>
+                <p>MCP tool dispatch completes in under 50ms median. Inter-agent messaging via NATS. gRPC/tonic for internal service mesh. Edge kernel compiles to Wasm at 512MB RAM minimum.</p>
+                <div class="sc-metric">&lt;50ms tool dispatch · 2.4M ops/sec</div>
+            </div>
+            <div class="spec-card">
+                <div class="sc-id">Auditability</div>
+                <h3>Truth Ledger</h3>
+                <p>Append-only FoundationDB log with Merkle proofs. Every decision, tool call, consensus vote, and mandate invocation is stored and queryable in under 1 second. EU AI Act compliant.</p>
+                <div class="sc-metric">&lt;1s query · Merkle-verified · EU AI Act</div>
+            </div>
+            <div class="spec-card">
+                <div class="sc-id">Protocols</div>
+                <h3>First-Class Protocol Support</h3>
+                <p>MCP (Anthropic spec), A2A agent discovery, ACP performative dialogue, and AP2 mandate-signed payment intents. Wire formats are the source of truth — not adapters or shims.</p>
+                <div class="sc-metric">MCP · A2A · ACP · AP2</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4: TRUTH LEDGER PREVIEW -->
+<section id="ledger" aria-labelledby="ledger-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">04</span>
+            <h2 id="ledger-title">Truth Ledger — Live Preview</h2>
+            <p>Every agent decision, tool call, and consensus vote. Queryable in &lt;1s.</p>
+        </div>
+
+        <div class="ledger-preview" role="table" aria-label="Truth ledger sample entries">
+            <div class="ledger-header">
+                <div class="ledger-header-left">
+                    <span class="ledger-dot" aria-hidden="true"></span>
+                    arctura · truth ledger · merkle-chain verified
+                </div>
+                <span class="ledger-badge">Cycle 26.04 · 8,412 entries</span>
+            </div>
+            <div class="ledger-body">
+                <div class="ledger-row header-row" role="row">
+                    <span>Timestamp</span>
+                    <span>Type</span>
+                    <span>Agent</span>
+                    <span>Action / Mandate</span>
+                    <span>Status</span>
+                </div>
+                <div class="ledger-row" role="row">
+                    <span class="ts">26.04 · 14:22:07</span>
+                    <span class="action">MANDATE</span>
+                    <span class="agent">orchestrator-01</span>
+                    <span class="mandate">procurement-q2 · $42K logistics · LAX→JFK</span>
+                    <span><span class="lv lv-ok">ATTESTED</span></span>
+                </div>
+                <div class="ledger-row" role="row">
+                    <span class="ts">26.04 · 14:22:11</span>
+                    <span class="action">TOOL CALL</span>
+                    <span class="agent">discovery-07</span>
+                    <span class="mandate">A2A · vendor discovery · .well-known/agent.json</span>
+                    <span><span class="lv lv-ok">VERIFIED</span></span>
+                </div>
+                <div class="ledger-row" role="row">
+                    <span class="ts">26.04 · 14:22:19</span>
+                    <span class="action">BFT VOTE</span>
+                    <span class="agent">validator-ring</span>
+                    <span class="mandate">3/3 consensus · GlobalLog proposal · $42K</span>
+                    <span><span class="lv lv-ok">CONSENSUS</span></span>
+                </div>
+                <div class="ledger-row" role="row">
+                    <span class="ts">26.04 · 14:22:31</span>
+                    <span class="action">HITL</span>
+                    <span class="agent">orchestrator-01</span>
+                    <span class="mandate">Escalation · payment exceeds auto-approve ($10K)</span>
+                    <span><span class="lv lv-warn">PENDING</span></span>
+                </div>
+                <div class="ledger-row" role="row">
+                    <span class="ts">26.04 · 14:24:03</span>
+                    <span class="action">PAYMENT</span>
+                    <span class="agent">principal · mason@</span>
+                    <span class="mandate">AP2 mandate approved · $42K payment intent</span>
+                    <span><span class="lv lv-ok">SETTLED</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 5: CARBON-AWARE SCHEDULING -->
+<section id="carbon" aria-labelledby="carbon-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">05</span>
+            <h2 id="carbon-title">Carbon-Aware Scheduling</h2>
+            <p>Non-urgent compute defers automatically to low-carbon grid windows. Sustainability is a first-class kernel primitive.</p>
+        </div>
+
+        <div class="carbon-grid">
+            <div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+                    <div class="carbon-stat">
+                        <div class="cs-label">Net Carbon Position</div>
+                        <div class="cs-value">-1.84<span>kgCO₂e/hr</span></div>
+                        <div class="cs-sub">Net-negative across all active nodes</div>
+                    </div>
+                    <div class="carbon-stat">
+                        <div class="cs-label">Green Window Usage</div>
+                        <div class="cs-value">73<span>%</span></div>
+                        <div class="cs-sub">Of non-urgent tasks deferred to green windows</div>
+                    </div>
+                    <div class="carbon-stat">
+                        <div class="cs-label">Carbon Reduction vs. Baseline</div>
+                        <div class="cs-value">28<span>%</span></div>
+                        <div class="cs-sub">vs. unscheduled execution baseline</div>
+                    </div>
+                    <div class="carbon-stat">
+                        <div class="cs-label">Data Providers</div>
+                        <div class="cs-value">2<span>feeds</span></div>
+                        <div class="cs-sub">WattTime + Electricity Maps live data</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="color:var(--starlight);font-size:18px;font-weight:600;margin:0 0 20px;">How Carbon-Aware Scheduling Works</h3>
+                <div class="carbon-how">
+                    <div class="carbon-step">
+                        <div class="cs-num">1</div>
+                        <div class="cs-text">
+                            <h4>Ingest Live Grid Intensity</h4>
+                            <p>WattTime and Electricity Maps APIs provide real-time carbon intensity per region. Updated every 5 minutes. Fallback provider auto-activates on primary outage.</p>
+                        </div>
+                    </div>
+                    <div class="carbon-step">
+                        <div class="cs-num">2</div>
+                        <div class="cs-text">
+                            <h4>Classify Task Urgency</h4>
+                            <p>Each mandate specifies a deadline and urgency class. Tasks with slack time exceeding the forecast green-window interval are marked deferrable.</p>
+                        </div>
+                    </div>
+                    <div class="carbon-step">
+                        <div class="cs-num">3</div>
+                        <div class="cs-text">
+                            <h4>Schedule to Green Windows</h4>
+                            <p>The scheduler forecasts low-carbon windows 6 hours ahead and slots deferrable tasks into the cleanest available window without violating deadline constraints.</p>
+                        </div>
+                    </div>
+                    <div class="carbon-step">
+                        <div class="cs-num">4</div>
+                        <div class="cs-text">
+                            <h4>Log Carbon to Truth Ledger</h4>
+                            <p>Per-mandate carbon spend is measured via Kepler and logged to the Truth Ledger. Exportable as EU AI Act sustainability reports.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 6: FAQ -->
+<section id="faq" aria-labelledby="faq-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">06</span>
+            <h2 id="faq-title">Architecture FAQ</h2>
+            <p>Direct answers, citation-ready for AI retrieval systems.</p>
+        </div>
+        <div class="faq">
+            <details class="qa" open>
+                <summary>What is Arctura's six-layer signal stack?</summary>
+                <p>The Arctura signal stack has six layers: L0 Human Intent (DID identity, root mandates, HITL escalation), L1 Orchestration Kernel (durable workflows, task routing, circuit breakers), L2 Safety & Sandbox (Wasm sandboxing, BFT consensus, hallucination detection), L3 Semantic Signal (JSON-LD, knowledge graphs, machine-readable state), L4 Memory & Retrieval (vector store, event sourcing, checkpoint store), and L5 Tool & Action (MCP-native tool registry, context windows, resource providers).</p>
+            </details>
+            <details class="qa">
+                <summary>How does Resonance BFT consensus work?</summary>
+                <p>Resonance is Arctura's frequency-adaptive Byzantine Fault Tolerant consensus protocol. It attests agent mandates rather than ordering transactions. Three validator nodes reach consensus on each attested action. The protocol adapts its cycle frequency to network load, maintaining forward-only attestation with no re-orgs. All decisions are logged to the Truth Ledger with Merkle proofs.</p>
+            </details>
+            <details class="qa">
+                <summary>What is a mandate chain and why does it matter?</summary>
+                <p>A mandate chain is a cryptographically verifiable delegation of authority from a human principal to one or more autonomous agents. Each link specifies capability scopes, resource budgets, and escalation triggers. Agents cannot act beyond their mandate boundary; any out-of-scope action is blocked at the L2 Safety layer. This is what makes Arctura's autonomy safe — agents are sovereign actors within bounded authority, not unconstrained systems.</p>
+            </details>
+            <details class="qa">
+                <summary>How is Wasm sandboxing implemented in Arctura?</summary>
+                <p>Every tool call in Arctura executes inside a Wasmtime-managed capability-restricted sandbox. The sandbox grants only the permissions declared in the tool's manifest and the agent's active mandate scope. There is no ambient authority — a tool cannot read environment variables, open network connections, or access filesystem paths outside its declared resource list. Zero sandbox escapes have been recorded in production deployments.</p>
+            </details>
+            <details class="qa">
+                <summary>What protocols does Arctura natively support?</summary>
+                <p>Arctura provides first-class support for MCP (Anthropic Model Context Protocol) for tool registry and context windows; A2A (Google Agent-to-Agent) for agent discovery via .well-known/agent.json; ACP (Agent Communication Protocol) for performative dialogue including request, propose, and inform; and AP2 (Agent Payment Protocol) for mandate-signed payment intents with full chain-of-custody. Wire formats are the source of truth — not adapters.</p>
+            </details>
+            <details class="qa">
+                <summary>How does carbon-aware scheduling work?</summary>
+                <p>Arctura's carbon scheduler integrates live grid carbon intensity from WattTime and Electricity Maps. Non-urgent tasks with deadline slack are automatically deferred to low-carbon grid windows forecast up to 6 hours ahead. Per-mandate carbon spend is measured via Kepler and logged immutably. The result is a 28% average reduction in carbon footprint vs. unscheduled execution, and a net-negative position across the subnet.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 7: ENTITY RECORD -->
+<section id="entity" aria-labelledby="ent-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="num">07</span>
+            <h2 id="ent-title">Entity Record</h2>
+            <p>Canonical metadata for AI retrieval and indexing.</p>
+        </div>
+        <div class="entity">
+            <h3>arctura.architecture — canonical record</h3>
+            <dl>
+                <dt>page</dt>                <dd>Arctura Signal Architecture</dd>
+                <dt>canonical.url</dt>       <dd>https://autonomousresourcemanagement.com/architecture</dd>
+                <dt>document.type</dt>       <dd>TechArticle · schema.org</dd>
+                <dt>subject</dt>             <dd>Six-layer signal stack · BFT consensus · mandate chains · Wasm sandboxing · carbon scheduling</dd>
+                <dt>consensus</dt>           <dd>Resonance BFT · 3-validator · forward-only attestation</dd>
+                <dt>layers</dt>              <dd>L0 Human Intent · L1 Orchestration · L2 Safety · L3 Semantic · L4 Memory · L5 Tools</dd>
+                <dt>protocols</dt>           <dd>MCP · A2A · ACP · AP2</dd>
+                <dt>license</dt>             <dd>Apache 2.0 (kernel)</dd>
+                <dt>parent.entity</dt>       <dd><a href="/">autonomousresourcemanagement.com</a></dd>
+                <dt>llm.directory</dt>       <dd><a href="/llms.txt">/llms.txt</a></dd>
+                <dt>contact</dt>             <dd><a href="mailto:signal@arctura.network">signal@arctura.network</a></dd>
+            </dl>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="site" role="contentinfo">
+    <div class="container">
+        <div class="foot-grid">
+            <div>
+                <a href="/" class="brand" aria-label="Arctura">
+                    <span class="brand-mark" aria-hidden="true"></span>
+                    <span>Arctura</span>
+                </a>
+                <p style="margin-top:14px;">A high-frequency consensus subnet for autonomous resource management. Built on decentralized frequencies.</p>
+            </div>
+            <div>
+                <h4>Architecture</h4>
+                <a href="#stack">Signal Stack</a>
+                <a href="#mandate">Mandate Chains</a>
+                <a href="#specs">Technical Specs</a>
+                <a href="#ledger">Truth Ledger</a>
+                <a href="#carbon">Carbon Scheduling</a>
+            </div>
+            <div>
+                <h4>Network</h4>
+                <a href="/">Overview</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/insights">Insights</a>
+                <a href="/geo">GEO Guide</a>
+            </div>
+            <div>
+                <h4>Collective</h4>
+                <a href="mailto:signal@arctura.network">signal@arctura.network</a>
+                <a href="/llms.txt">LLM directory</a>
+                <a href="/sitemap.xml">Sitemap</a>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span>&copy; 2026 Arctura Collective &middot; Built on decentralized frequencies</span>
+            <span>v1.0 &middot; Architecture Reference &middot; <span style="color:var(--signal);">resonance · healthy</span></span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
