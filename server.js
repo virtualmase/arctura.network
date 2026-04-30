@@ -2,17 +2,22 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Serve all static files from the root directory
+// Serve all static files from the current directory
 app.use(express.static(path.join(__dirname)));
 
-// Route / to index.html
+// Home page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Route /faq to faq.html
+// FAQ page
 app.get('/faq', (req, res) => {
   res.sendFile(path.join(__dirname, 'faq.html'));
+});
+
+// Fallback — serve index.html for any unmatched route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
