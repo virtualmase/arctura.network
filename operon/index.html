@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operon — Industrial Intelligence Subnet | ARCTURA Network</title>
+<meta name="description" content="Operon is the industrial intelligence subnet of the ARCTURA network — open-source IIoT platform powering eXSeek™ wind farm optimization via digital twins, Kafka telemetry, and blockmachine-verified compute on Bittensor SN19.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="ARCTURA Network">
+<link rel="canonical" href="https://arctura.network/operon">
+<meta property="og:title" content="Operon — Industrial Intelligence Subnet | ARCTURA Network">
+<meta property="og:description" content="Digital twins, Kafka-native SCADA telemetry, and blockmachine-verified compute for physical energy infrastructure.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arctura.network/operon">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://arctura.network/operon#webpage","url":"https://arctura.network/operon","name":"Operon — Industrial Intelligence Subnet | ARCTURA Network","description":"Open-source IIoT platform providing digital twin modeling, Kafka-native SCADA telemetry, predictive maintenance, and plugin-driven AI automation. Powers eXSeek™ wind farm optimization for Arctura Wind via Bittensor SN19.","inLanguage":"en-US"},{"@type":"SoftwareApplication","name":"Operon","url":"https://arctura.network/operon","applicationCategory":"IndustrialSoftware","operatingSystem":"Linux, Kubernetes","codeRepository":"https://github.com/virtualmase/OPS"},{"@type":"Organization","name":"ARCTURA Network","url":"https://arctura.network","sameAs":["https://github.com/virtualmase","https://arcturawind.com","https://blockmachine.io"]}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;--bg2:#0f0f0f;--bg3:#141414;--surface:#1a1a1a;
+  --border:#222222;--border2:#2e2e2e;
+  --accent:#00e5a0;--accent2:#00b87a;
+  --accent-dim:rgba(0,229,160,0.08);--accent-glow:rgba(0,229,160,0.04);
+  --red:#ff4444;--yellow:#f5c842;--blue:#4488ff;--violet:#8866ff;
+  --text:#e4e4e4;--text2:#888888;--text3:#444444;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;min-height:100vh;padding-top:54px}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(8,8,8,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.nav-left{display:flex;align-items:center;gap:12px}
+.nav-logo-mark{width:26px;height:26px;background:var(--accent);border-radius:2px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:5px;cursor:pointer}
+.nav-logo-mark span{background:var(--bg);border-radius:1px}
+.nav-parent{font-family:var(--mono);font-size:0.65rem;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:color 0.2s;cursor:pointer}
+.nav-parent:hover{color:var(--text2)}
+.nav-sep{color:var(--text3);font-family:var(--mono);font-size:0.65rem;margin:0 4px}
+.nav-name{font-family:var(--mono);font-size:0.65rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-badge{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(0,229,160,0.2)}
+.nav-link{font-family:var(--mono);font-size:0.65rem;color:var(--text3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;cursor:pointer;background:none;border:none;padding:0}
+.nav-link:hover,.nav-link.active{color:var(--accent)}
+.nav-ai-badge{font-family:var(--mono);font-size:0.58rem;padding:2px 7px;background:rgba(136,102,255,0.12);border:1px solid rgba(136,102,255,0.3);color:var(--violet);border-radius:2px;letter-spacing:0.08em}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(34,34,34,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(34,34,34,0.6) 1px,transparent 1px);background-size:60px 60px;animation:gridShift 40s linear infinite}
+@keyframes gridShift{to{background-position:60px 60px}}
+.hero-glow-1{position:absolute;top:-100px;right:5%;width:600px;height:500px;background:radial-gradient(ellipse,rgba(0,229,160,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-glow-2{position:absolute;bottom:-50px;left:10%;width:400px;height:300px;background:radial-gradient(ellipse,rgba(68,136,255,0.04) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;width:100%}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:2.5rem}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--accent)}
+.hero-eyebrow-text{font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.18em;text-transform:uppercase}
+.hero-tag{font-family:var(--mono);font-size:0.6rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1rem}
+h1{font-family:var(--mono);font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.08;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.5rem}
+h1 em{color:var(--accent);font-style:normal}
+h1 .dim{color:var(--text3)}
+.hero-sub{font-family:var(--sans);font-size:1rem;color:var(--text2);max-width:580px;line-height:1.75;margin-bottom:3rem}
+.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:4rem}
+.btn-primary{font-family:var(--mono);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:11px 24px;background:var(--accent);color:var(--bg);border:none;border-radius:2px;cursor:pointer;text-decoration:none;transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-ghost{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:2px;cursor:pointer;text-decoration:none;transition:border-color 0.2s,color 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-violet{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;background:rgba(136,102,255,0.1);color:var(--violet);border:1px solid rgba(136,102,255,0.35);border-radius:2px;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-violet:hover{background:rgba(136,102,255,0.18);border-color:rgba(136,102,255,0.6)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.hstat{background:var(--bg2);padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:4px}
+.hstat-val{font-family:var(--mono);font-size:1.6rem;font-weight:700;color:var(--accent);letter-spacing:-0.02em}
+.hstat-val .unit{font-size:0.85rem;color:var(--accent2)}
+.hstat-label{font-family:var(--mono);font-size:0.58rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase}
+
+/* ── SECTIONS ── */
+.section{padding:6rem 2rem;border-bottom:1px solid var(--border);position:relative}
+.section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.2}
+.section.alt{background:var(--bg2)}
+.section.alt::before{opacity:0.15}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:var(--mono);font-size:0.58rem;color:var(--text3);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.6rem}
+.section-title{font-family:var(--mono);font-size:clamp(1.4rem,3vw,1.8rem);font-weight:700;color:var(--text);margin-bottom:0.8rem;letter-spacing:-0.01em}
+.section-title em{color:var(--accent);font-style:normal}
+.section-desc{font-family:var(--sans);font-size:0.9rem;color:var(--text2);max-width:560px;line-height:1.75;margin-bottom:3rem}
+
+/* ── ARCH DIAGRAM ── */
+.arch-diagram{background:var(--bg2);border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden}
+.arch-diagram::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 80px,rgba(0,229,160,0.012) 80px,rgba(0,229,160,0.012) 81px)}
+.arch-nodes{position:relative;z-index:1;display:flex;flex-direction:column;gap:2px}
+.arch-row{display:flex;align-items:stretch;gap:2px}
+.arch-node{flex:1;padding:1rem 1.2rem;border:1px solid var(--border);transition:border-color 0.25s}
+.arch-node:hover{border-color:var(--border2)}
+.arch-node.accent{border-color:rgba(0,229,160,0.3);background:rgba(0,229,160,0.04)}
+.arch-node.accent:hover{border-color:rgba(0,229,160,0.5)}
+.arch-node-tag{font-family:var(--mono);font-size:0.55rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px}
+.arch-node.accent .arch-node-tag{color:var(--accent2)}
+.arch-node-name{font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-bottom:4px}
+.arch-node.accent .arch-node-name{color:var(--accent)}
+.arch-node-desc{font-family:var(--sans);font-size:0.75rem;color:var(--text3);line-height:1.5}
+.arch-node.accent .arch-node-desc{color:var(--text2)}
+.arch-connector{display:flex;align-items:center;justify-content:center;padding:0.3rem}
+.arch-connector-line{width:1px;height:20px;background:var(--border2);position:relative}
+.arch-connector-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);position:absolute;left:50%;transform:translateX(-50%);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* ── CAPS GRID ── */
+.caps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:3rem}
+.cap-card{background:var(--bg);padding:2rem;transition:background 0.25s}
+.cap-card:hover{background:var(--bg2)}
+.cap-icon{width:36px;height:36px;margin-bottom:1.2rem;background:var(--accent-dim);border:1px solid rgba(0,229,160,0.15);border-radius:3px;display:flex;align-items:center;justify-content:center}
+.cap-icon svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.cap-title{font-family:var(--mono);font-size:0.8rem;font-weight:600;color:var(--text);margin-bottom:0.6rem;letter-spacing:0.02em}
+.cap-desc{font-family:var(--sans);font-size:0.82rem;color:var(--text2);line-height:1.7}
+.cap-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem}
+.cap-tag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;padding:3px 8px;border-radius:1px;background:var(--bg3);border:1px solid var(--border);color:var(--text3)}
+.cap-tag.hi{background:rgba(0,229,160,0.07);border-color:rgba(0,229,160,0.2);color:var(--accent2)}
+
+/* ── SUBNET DASHBOARD ── */
+.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2rem}
+.dash-stat{background:var(--bg2);padding:1.5rem;display:flex;flex-direction:column;gap:4px}
+.dash-stat-label{font-family:var(--mono);font-size:0.58rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.dash-stat-val{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--text);line-height:1}
+.dash-stat-val.green{color:var(--accent)}
+.dash-stat-val.red{color:var(--red)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink-dot 1.5s infinite}
+@keyframes blink-dot{0%,100%{opacity:1}50%{opacity:0.3}}
+.subnet-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:0.72rem}
+.subnet-table th{padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);text-align:left;background:var(--bg2)}
+.subnet-table td{padding:0.65rem 0.8rem;border-bottom:1px solid rgba(34,34,34,0.7);color:var(--text2)}
+.subnet-table tr:hover td{background:rgba(0,229,160,0.03)}
+.status-ok{color:var(--accent)}
+.status-warn{color:var(--yellow)}
+.status-err{color:var(--red)}
+.latency-bar-wrap{display:flex;align-items:center;gap:8px}
+.latency-bar{height:4px;background:var(--border2);border-radius:2px;flex:1;overflow:hidden}
+.latency-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.time-filter{display:flex;gap:4px;margin-bottom:1.2rem}
+.tf{font-family:var(--mono);font-size:0.65rem;padding:4px 10px;background:transparent;border:1px solid var(--border);color:var(--text3);cursor:pointer;border-radius:2px;transition:all 0.2s}
+.tf:hover,.tf.active{background:var(--accent-dim);border-color:rgba(0,229,160,0.4);color:var(--accent)}
+.mini-chart{height:48px;background:var(--bg3);border-radius:2px;display:flex;align-items:flex-end;gap:1px;padding:4px;overflow:hidden;position:relative;border:1px solid var(--border)}
+.mc-bar{flex:1;border-radius:1px;min-height:2px}
+
+/* ── DATA FLOW ── */
+.flow-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:3rem}
+.flow-steps{display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border)}
+.flow-step:last-child{border-bottom:none}
+.flow-step-num{font-family:var(--mono);font-size:0.6rem;color:var(--accent);font-weight:700;min-width:20px;padding-top:2px}
+.flow-step-name{font-family:var(--mono);font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:3px}
+.flow-step-detail{font-family:var(--sans);font-size:0.78rem;color:var(--text2);line-height:1.6}
+.flow-step-tech{font-family:var(--mono);font-size:0.58rem;color:var(--text3);margin-top:4px}
+.flow-panel{background:var(--bg2);border:1px solid var(--border);position:sticky;top:70px}
+.flow-panel-header{padding:0.8rem 1rem;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:0.6rem;color:var(--accent);letter-spacing:0.1em}
+.flow-metric-row{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;border-bottom:1px solid rgba(34,34,34,0.7)}
+.flow-metric-label{font-family:var(--mono);font-size:0.65rem;color:var(--text3)}
+.flow-metric-val{font-family:var(--mono);font-size:0.75rem;font-weight:600;color:var(--text)}
+.flow-metric-val.ok{color:var(--accent)}
+
+/* ── DOCS ── */
+.docs-layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1100px;margin:0 auto;padding:3rem 2rem;min-height:70vh;align-items:start}
+.docs-sidebar{position:sticky;top:70px}
+.docs-nav-title{font-family:var(--mono);font-size:0.58rem;color:var(--text3);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:0.8rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border)}
+.docs-nav-item{font-family:var(--mono);font-size:0.7rem;color:var(--text3);padding:5px 8px;cursor:pointer;border-left:2px solid transparent;transition:all 0.2s;display:block;text-decoration:none;background:none;border-top:none;border-right:none;border-bottom:none;text-align:left;width:100%}
+.docs-nav-item:hover{color:var(--text2);border-left-color:var(--border2)}
+.docs-nav-item.active{color:var(--accent);border-left-color:var(--accent)}
+.docs-content{padding-left:3rem;min-width:0}
+.docs-section{display:none}
+.docs-section.active{display:block}
+.docs-section h2{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;letter-spacing:-0.01em}
+.docs-section h2 em{color:var(--accent);font-style:normal}
+.docs-section h3{font-family:var(--mono);font-size:0.9rem;font-weight:600;color:var(--text);margin:2rem 0 0.6rem}
+.docs-section p{font-family:var(--sans);font-size:0.88rem;color:var(--text2);line-height:1.75;margin-bottom:1rem;max-width:620px}
+.docs-section ul{list-style:none;margin-bottom:1rem}
+.docs-section ul li{font-family:var(--sans);font-size:0.85rem;color:var(--text2);padding:4px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.6}
+.docs-section ul li::before{content:'→';color:var(--accent);flex-shrink:0;font-family:var(--mono);font-size:0.75rem;margin-top:2px}
+.code-block{background:var(--bg2);border:1px solid var(--border);border-radius:2px;overflow:hidden;margin:1.2rem 0}
+.code-block-header{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border);background:var(--bg3)}
+.code-block-name{font-family:var(--mono);font-size:0.62rem;color:var(--text3)}
+.code-copy{font-family:var(--mono);font-size:0.62rem;color:var(--text3);cursor:pointer;transition:color 0.2s;background:none;border:none;padding:0}
+.code-copy:hover{color:var(--accent)}
+.code-block pre{padding:1rem;overflow-x:auto;font-family:var(--mono);font-size:0.75rem;line-height:1.65;color:var(--text)}
+.code-block pre .c{color:var(--text3)}
+.code-block pre .s{color:var(--accent)}
+.code-block pre .k{color:var(--blue)}
+.highlight-box{background:var(--bg2);border-left:2px solid var(--accent);padding:0.9rem 1.2rem;margin:1rem 0;font-family:var(--mono);font-size:0.75rem;color:var(--text2);line-height:1.6}
+.highlight-box strong{color:var(--accent);display:block;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px}
+.docs-tag-row{display:flex;flex-wrap:wrap;gap:6px;margin:0.75rem 0}
+.docs-tag{font-family:var(--mono);font-size:0.62rem;padding:3px 8px;border-radius:1px;background:var(--bg3);border:1px solid var(--border);color:var(--text3)}
+.docs-tag.hi{background:rgba(0,229,160,0.07);border-color:rgba(0,229,160,0.2);color:var(--accent2)}
+
+/* ── AI AGENT PAGE ── */
+.ai-page-layout{display:grid;grid-template-columns:260px 1fr;height:calc(100vh - 54px);overflow:hidden}
+.ai-sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
+.ai-sidebar::-webkit-scrollbar{width:3px}
+.ai-sidebar::-webkit-scrollbar-thumb{background:var(--border2)}
+.ai-sidebar-header{padding:1rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.ai-sidebar-title{font-family:var(--mono);font-size:0.62rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.75rem}
+.config-label{font-family:var(--mono);font-size:0.6rem;color:var(--text3);letter-spacing:0.08em;display:block;margin-bottom:3px}
+.config-input{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:0.72rem;padding:6px 9px;border-radius:2px;outline:none;transition:border-color 0.2s;margin-bottom:8px}
+.config-input:focus{border-color:rgba(0,229,160,0.5)}
+.config-input::placeholder{color:var(--text3)}
+.pipeline-btn{width:100%;padding:9px;font-family:var(--mono);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;background:linear-gradient(135deg,rgba(0,229,160,0.12),rgba(68,136,255,0.08));border:1px solid rgba(0,229,160,0.25);color:var(--accent);cursor:pointer;border-radius:2px;transition:all 0.2s;margin-top:4px}
+.pipeline-btn:hover{background:linear-gradient(135deg,rgba(0,229,160,0.2),rgba(68,136,255,0.12))}
+.ai-agent-list{flex:1;padding:8px 0}
+.ai-agent-group{font-family:var(--mono);font-size:0.58rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;padding:8px 12px 4px}
+.ai-agent-item{width:100%;display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:none;border:none;color:var(--text2);font-family:var(--mono);font-size:0.72rem;cursor:pointer;text-align:left;transition:background 0.15s;line-height:1.3}
+.ai-agent-item:hover{background:var(--surface);color:var(--text)}
+.ai-agent-item.active{background:rgba(0,229,160,0.07);color:var(--accent)}
+.ai-agent-icon{font-size:0.9rem;width:18px;text-align:center;flex-shrink:0;margin-top:1px}
+.ai-agent-info{}
+.ai-agent-name{font-weight:600}
+.ai-agent-desc{font-family:var(--sans);font-size:0.68rem;color:var(--text3);margin-top:1px}
+.ai-workspace{display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.ai-workspace-header{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.ai-workspace-agent{font-family:var(--mono);font-size:0.92rem;font-weight:600;color:var(--text)}
+.ai-workspace-desc{font-family:var(--mono);font-size:0.62rem;color:var(--text3);margin-top:2px}
+.ai-run-btn{font-family:var(--mono);font-size:0.72rem;font-weight:700;padding:8px 18px;background:var(--accent);color:var(--bg);border:none;border-radius:2px;cursor:pointer;letter-spacing:0.08em;transition:background 0.2s}
+.ai-run-btn:hover{background:var(--accent2)}
+.ai-run-btn:disabled{opacity:0.4;cursor:not-allowed}
+.ai-messages{flex:1;overflow-y:auto;padding:0}
+.ai-messages::-webkit-scrollbar{width:3px}
+.ai-messages::-webkit-scrollbar-thumb{background:var(--border2)}
+.ai-msgs-inner{display:flex;flex-direction:column;gap:0;padding:1.2rem}
+.ai-msg{border-radius:2px;padding:0.9rem 1rem;font-size:0.82rem;line-height:1.65;white-space:pre-wrap}
+.ai-msg+.ai-msg{margin-top:10px}
+.ai-msg.agent{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
+.ai-msg.user{background:rgba(0,229,160,0.06);border:1px solid rgba(0,229,160,0.15);color:var(--text)}
+.ai-msg.system{background:rgba(136,102,255,0.06);border:1px solid rgba(136,102,255,0.2);color:var(--violet);font-family:var(--mono);font-size:0.68rem}
+.ai-msg-label{font-family:var(--mono);font-size:0.57rem;color:var(--text3);margin-bottom:5px;letter-spacing:0.08em;display:flex;align-items:center;gap:5px}
+.ai-msg-label.user{justify-content:flex-end}
+.typing-dots{display:flex;gap:4px;align-items:center;padding:8px}
+.td{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:td-anim 1.2s infinite}
+.td:nth-child(2){animation-delay:0.2s}
+.td:nth-child(3){animation-delay:0.4s}
+@keyframes td-anim{0%,60%,100%{transform:scale(0.6);opacity:0.4}30%{transform:scale(1);opacity:1}}
+.ai-input-row{display:flex;gap:8px;padding:1rem 1.2rem;border-top:1px solid var(--border);flex-shrink:0}
+.ai-input{flex:1;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:0.75rem;padding:8px 12px;border-radius:2px;outline:none;transition:border-color 0.2s;resize:none;line-height:1.5}
+.ai-input:focus{border-color:rgba(0,229,160,0.5)}
+.ai-input::placeholder{color:var(--text3)}
+.ai-send-btn{font-family:var(--mono);font-size:0.68rem;font-weight:700;padding:8px 14px;background:transparent;border:1px solid var(--border2);color:var(--text2);cursor:pointer;border-radius:2px;transition:all 0.2s;white-space:nowrap}
+.ai-send-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ai-send-btn:disabled{opacity:0.4;cursor:not-allowed}
+
+/* ── CREDITS ── */
+.credits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:3rem}
+.credit-card{background:var(--bg);padding:1.8rem;transition:background 0.2s}
+.credit-card:hover{background:var(--bg2)}
+.credit-card-role{font-family:var(--mono);font-size:0.57rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.6rem}
+.credit-card-name{font-family:var(--mono);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}
+.credit-card-name a{color:inherit;text-decoration:none;transition:color 0.2s}
+.credit-card-name a:hover{color:var(--accent)}
+.credit-card-desc{font-family:var(--sans);font-size:0.78rem;color:var(--text2);line-height:1.65;margin-bottom:0.8rem}
+.credit-card-contrib{font-family:var(--mono);font-size:0.62rem;color:var(--text3);padding:4px 0;border-top:1px solid var(--border)}
+.credit-card-contrib span{color:var(--accent)}
+
+/* ── CTA ── */
+.cta-section{padding:6rem 2rem;text-align:center;position:relative;overflow:hidden;background:var(--bg2)}
+.cta-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(0,229,160,0.015) 60px,rgba(0,229,160,0.015) 61px)}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(0,229,160,0.06) 0%,transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:600px;margin:0 auto}
+.cta-eyebrow{font-family:var(--mono);font-size:0.6rem;color:var(--accent);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem}
+.cta-title{font-family:var(--mono);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.2}
+.cta-title em{color:var(--accent);font-style:normal}
+.cta-desc{font-family:var(--sans);font-size:0.9rem;color:var(--text2);line-height:1.75;margin-bottom:2.5rem}
+.cta-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2rem 2rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border);gap:2rem;flex-wrap:wrap}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:0.6rem}
+.footer-logo-mark{width:22px;height:22px;background:var(--accent);border-radius:2px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:4px}
+.footer-logo-mark span{background:var(--bg);border-radius:1px}
+.footer-logo-text{font-family:var(--mono);font-size:0.7rem;color:var(--text2);letter-spacing:0.1em}
+.footer-tagline{font-family:var(--mono);font-size:0.62rem;color:var(--text3);letter-spacing:0.06em}
+.footer-links{display:flex;gap:3rem}
+.footer-col-title{font-family:var(--mono);font-size:0.58rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.8rem}
+.footer-col a{display:block;font-family:var(--mono);font-size:0.68rem;color:var(--text3);text-decoration:none;margin-bottom:0.4rem;transition:color 0.2s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-family:var(--mono);font-size:0.6rem;color:var(--text3)}
+.footer-entity{font-family:var(--mono);font-size:0.6rem;color:var(--text3);text-align:right;line-height:1.6}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .caps-grid{grid-template-columns:1fr 1fr}
+  .flow-grid{grid-template-columns:1fr}
+  .flow-panel{position:static}
+  .credits-grid{grid-template-columns:1fr}
+  .ai-page-layout{grid-template-columns:1fr;height:auto}
+  .ai-sidebar{border-right:none;border-bottom:1px solid var(--border)}
+  .ai-messages{height:50vh}
+  .docs-layout{grid-template-columns:1fr}
+  .docs-sidebar{display:none}
+  .docs-content{padding-left:0}
+  .dash-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  nav{padding:0 1rem}
+  .nav-right .nav-link{display:none}
+  h1{font-size:2rem}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .caps-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <div class="nav-logo-mark" onclick="showPage('home')"><span></span><span></span><span></span><span></span></div>
+    <button class="nav-parent" onclick="showPage('home')">ARCTURA</button>
+    <span class="nav-sep">/</span>
+    <span class="nav-name">OPERON</span>
+  </div>
+  <div class="nav-right">
+    <span class="nav-badge">SUBNET</span>
+    <button class="nav-link" onclick="showPage('subnet')">Subnet</button>
+    <button class="nav-link" onclick="showPage('docs')">Docs</button>
+    <button class="nav-link" onclick="showPage('ai')" style="color:var(--violet)">⬡ AI Agent</button>
+    <a href="https://github.com/virtualmase/OPS" class="nav-link" target="_blank">GitHub →</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════ HOME ════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">arctura.network / operon</span>
+    </div>
+    <div class="hero-tag">Industrial Intelligence Subnet · Bittensor SN19</div>
+    <h1>Physical machines.<br><em>Digital intelligence.</em><br><span class="dim">Verified compute.</span></h1>
+    <p class="hero-sub">Operon is the industrial intelligence subnet of the ARCTURA network — powering eXSeek™ wind farm optimization with digital twins, Kafka-native SCADA telemetry, and blockmachine-verified decentralized compute on Bittensor SN19.</p>
+    <div class="hero-actions">
+      <a href="https://github.com/virtualmase/OPS" class="btn-primary" target="_blank">View on GitHub</a>
+      <a href="https://arcturawind.com/power-optimization" class="btn-ghost" target="_blank">See eXSeek™</a>
+      <button class="btn-ghost" onclick="showPage('subnet')">Subnet Dashboard</button>
+      <button class="btn-violet" onclick="showPage('ai')">⬡ AI Agent</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-val">73<span class="unit">%</span></span><span class="hstat-label">Blade damage reduction via ALP20</span></div>
+      <div class="hstat"><span class="hstat-val">SN19</span><span class="hstat-label">blockmachine subnet on Bittensor</span></div>
+      <div class="hstat"><span class="hstat-val">$1.25<span class="unit">M</span></span><span class="hstat-label">NSF grant — eXSeek™ funded</span></div>
+      <div class="hstat"><span class="hstat-val">2×</span><span class="hstat-label">TIME Top GreenTech 2024 + 2025</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK ARCHITECTURE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Architecture</div>
+      <h2 class="section-title">The full <em>ARCTURA stack</em></h2>
+      <p class="section-desc">Operon sits at the intersection of physical energy infrastructure and decentralized compute — each layer purpose-built, each one verifiable.</p>
+    </div>
+    <div class="arch-diagram reveal">
+      <div class="arch-nodes">
+        <div class="arch-row"><div class="arch-node"><div class="arch-node-tag">Physical Layer</div><div class="arch-node-name">Arctura Wind — arcturawind.com</div><div class="arch-node-desc">Plasma technology for wind energy. ALP20 lightning protection. eXSeek™ optimization. DOE + NSF funded. TIME Top GreenTech 2024 + 2025.</div></div></div>
+        <div class="arch-connector"><div class="arch-connector-line"><div class="arch-connector-dot"></div></div></div>
+        <div class="arch-row"><div class="arch-node"><div class="arch-node-tag">Telemetry Layer</div><div class="arch-node-name">eXSeek™ SCADA Streams — Modbus / OPC-UA</div><div class="arch-node-desc">Live turbine data — RPM, blade pitch, power output, wind speed, bearing temp. Continuous feed via Modbus TCP or OPC-UA into Operon's Kafka ingestion pipeline.</div></div></div>
+        <div class="arch-connector"><div class="arch-connector-line"><div class="arch-connector-dot"></div></div></div>
+        <div class="arch-row"><div class="arch-node accent"><div class="arch-node-tag">Intelligence Subnet — arctura.network/operon</div><div class="arch-node-name">Operon — Digital Twin + IIoT Platform</div><div class="arch-node-desc">FastAPI + Kafka + TimescaleDB + Kubernetes. Digital twin modeling, anomaly detection ML pipelines, plugin-driven AI automation. Open-source. Plugin layer routes verified payloads to SN19.</div></div></div>
+        <div class="arch-connector"><div class="arch-connector-line"><div class="arch-connector-dot"></div></div></div>
+        <div class="arch-row"><div class="arch-node"><div class="arch-node-tag">Compute Layer — Bittensor SN19</div><div class="arch-node-name">blockmachine — Verified Decentralized Compute</div><div class="arch-node-desc">Competing miners independently verify sensor data payloads. Consensus ≥ ⅔ required before actuation. Permanently bans miners with incorrect hashes. Public dashboards. Powered by TAO.</div></div></div>
+        <div class="arch-connector"><div class="arch-connector-line"><div class="arch-connector-dot"></div></div></div>
+        <div class="arch-row"><div class="arch-node"><div class="arch-node-tag">Network Layer</div><div class="arch-node-name">ARCTURA Network — arctura.network</div><div class="arch-node-desc">Coordinating network entity. Industrial intelligence, verified compute, and autonomous energy systems operating as one coherent, open-source stack.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Platform Capabilities</div>
+      <h2 class="section-title">Built for <em>physical infrastructure</em></h2>
+      <p class="section-desc">Six core capabilities for industrial systems — not synthetic benchmarks.</p>
+    </div>
+    <div class="caps-grid reveal">
+      <div class="cap-card"><div class="cap-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/><rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="8" height="8" rx="1"/></svg></div><div class="cap-title">Digital Twin Modeling</div><div class="cap-desc">Real-time virtual representations of physical assets. Each turbine modeled with live sensor state — RPM, blade pitch, bearing temp, vibration — updated continuously.</div><div class="cap-tags"><span class="cap-tag hi">TimescaleDB</span><span class="cap-tag">FastAPI</span><span class="cap-tag">Kubernetes</span></div></div>
+      <div class="cap-card"><div class="cap-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="cap-title">Kafka-Native Telemetry</div><div class="cap-desc">High-throughput SCADA ingestion via Apache Kafka. Sub-second latency from sensor to digital twin. Live data drives all decisions — no physics modeling required.</div><div class="cap-tags"><span class="cap-tag hi">Kafka</span><span class="cap-tag">SCADA</span><span class="cap-tag">Streaming</span></div></div>
+      <div class="cap-card"><div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cap-title">Predictive Maintenance</div><div class="cap-desc">Isolation Forest + LSTM anomaly detection across turbine fleets. Flags blade fatigue, bearing wear, pitch irregularities before they become incidents.</div><div class="cap-tags"><span class="cap-tag hi">ML Pipelines</span><span class="cap-tag">Anomaly Detection</span><span class="cap-tag">LSTM</span></div></div>
+      <div class="cap-card"><div class="cap-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div><div class="cap-title">Plugin-Driven AI Automation</div><div class="cap-desc">Extensible plugin interface: process(TelemetryPayload) → PluginResult. Native blockmachine plugin routes verified payloads through SN19. Any AI workflow composable.</div><div class="cap-tags"><span class="cap-tag hi">Bittensor</span><span class="cap-tag">blockmachine</span><span class="cap-tag">SN19</span></div></div>
+      <div class="cap-card"><div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="cap-title">Verified Compute</div><div class="cap-desc">Every data payload routed through blockmachine SN19 is independently verified by competing miners. ≥⅔ consensus required before actuation. Hash mismatches = permanent ban.</div><div class="cap-tags"><span class="cap-tag hi">Verified RPC</span><span class="cap-tag">RBAC</span><span class="cap-tag">Audit Log</span></div></div>
+      <div class="cap-card"><div class="cap-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="cap-title">Wind Farm Optimization</div><div class="cap-desc">Powers eXSeek™ — Arctura Wind's real-time optimization engine. Maximizes MW output across entire turbine arrays by finding optimal operating points continuously.</div><div class="cap-tags"><span class="cap-tag hi">eXSeek™</span><span class="cap-tag">DOE-Funded</span><span class="cap-tag">NSF-Funded</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA FLOW -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Data Pipeline</div>
+      <h2 class="section-title"><em>Turbine → intelligence</em> — end to end</h2>
+      <p class="section-desc">Five stages from raw SCADA reading to verified optimization command. Every step is logged, every payload is auditable.</p>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-steps reveal">
+        <div class="flow-step"><div class="flow-step-num">01</div><div><div class="flow-step-name">Sensor Ingestion</div><div class="flow-step-detail">Live SCADA data from turbine arrays — RPM, blade pitch, MW output, wind direction, bearing temp, vibration RMS — streamed via Modbus TCP or OPC-UA into Operon's Kafka ingestion pipeline.</div><div class="flow-step-tech">kafka · modbus · opc-ua · scada</div></div></div>
+        <div class="flow-step"><div class="flow-step-num">02</div><div><div class="flow-step-name">Digital Twin Update</div><div class="flow-step-detail">Each turbine's digital twin is updated in real time. TimescaleDB maintains the full time-series state. Deviations from expected state trigger the anomaly pipeline. State diffs published to operon.twin.diff.</div><div class="flow-step-tech">timescaledb · digital twin · fastapi</div></div></div>
+        <div class="flow-step"><div class="flow-step-num">03</div><div><div class="flow-step-name">SN19 Verification</div><div class="flow-step-detail">Data payloads routed through blockmachine SN19. Competing miners independently hash and verify readings. Consensus ≥ ⅔ required. Verified flag written back to twin_state before eXSeek™ reads it.</div><div class="flow-step-tech">blockmachine · bittensor · sn19 · yuma</div></div></div>
+        <div class="flow-step"><div class="flow-step-num">04</div><div><div class="flow-step-name">eXSeek™ Optimization</div><div class="flow-step-detail">Verified state feeds eXSeek™. Operating point calculated continuously across the full turbine array. No physics model — pure live-data optimization. Setpoints published to operon.actuation.commands.</div><div class="flow-step-tech">exseek™ · optimization · arctura wind</div></div></div>
+        <div class="flow-step"><div class="flow-step-num">05</div><div><div class="flow-step-name">Predictive Alert</div><div class="flow-step-detail">Anomaly detection flags bearing wear, blade fatigue, pitch irregularities — before they become incidents. Maintenance routed to operon.maintenance.alerts with component + urgency + cost estimate.</div><div class="flow-step-tech">ml · isolation forest · lstm · maintenance</div></div></div>
+      </div>
+      <div class="flow-panel reveal">
+        <div class="flow-panel-header">// Live pipeline metrics</div>
+        <div class="flow-metric-row"><span class="flow-metric-label">Kafka lag (p99)</span><span class="flow-metric-val ok" id="kafka-lag">42 ms</span></div>
+        <div class="flow-metric-row"><span class="flow-metric-label">Twin update rate</span><span class="flow-metric-val" id="twin-rate">1,240 / min</span></div>
+        <div class="flow-metric-row"><span class="flow-metric-label">SN19 consensus rate</span><span class="flow-metric-val ok" id="consensus-rate">99.7%</span></div>
+        <div class="flow-metric-row"><span class="flow-metric-label">eXSeek™ cycle time</span><span class="flow-metric-val" id="exseek-cycle">380 ms</span></div>
+        <div class="flow-metric-row"><span class="flow-metric-label">Active anomaly alerts</span><span class="flow-metric-val" id="anomaly-count">2 WARNING</span></div>
+        <div class="flow-metric-row"><span class="flow-metric-label">Actuation commands / h</span><span class="flow-metric-val" id="actuation-count">847</span></div>
+        <div style="padding:1rem;border-top:1px solid var(--border)"><button class="btn-ghost" style="width:100%;justify-content:center;font-size:0.68rem" onclick="showPage('subnet')">View full subnet dashboard →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDITS -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Built By</div>
+      <h2 class="section-title">The <em>ARCTURA</em> builder network</h2>
+      <p class="section-desc">Operon is a collaborative open-source project built across the ARCTURA ecosystem.</p>
+    </div>
+    <div class="credits-grid reveal">
+      <div class="credit-card"><div class="credit-card-role">Platform Architect</div><div class="credit-card-name"><a href="https://github.com/virtualmase" target="_blank">virtualmase</a></div><div class="credit-card-desc">Core platform architecture, Kafka telemetry pipeline, TimescaleDB time-series layer, plugin system, Kubernetes orchestration, and ARCTURA network design.</div><div class="credit-card-contrib">Contribution: <span>Core OPS platform · arctura.network</span></div></div>
+      <div class="credit-card"><div class="credit-card-role">Infrastructure Contributor</div><div class="credit-card-name"><a href="https://github.com/CoreweaverLabs" target="_blank">Coreweaver Labs</a></div><div class="credit-card-desc">Pioneering Decentralized Agentic AI. Autonomous Systems for Blockchain Security. City infrastructure and agentic systems layer contributed to Operon.</div><div class="credit-card-contrib">Contribution: <span>city-infrastructure · agentic systems · blockchain security</span></div></div>
+      <div class="credit-card"><div class="credit-card-role">Compute Infrastructure</div><div class="credit-card-name"><a href="https://blockmachine.io" target="_blank">blockmachine</a></div><div class="credit-card-desc">Decentralized RPC and verified compute network on Bittensor SN19. Competing miners, public performance dashboards, and hash-based correctness enforcement — the trust backbone for Operon telemetry.</div><div class="credit-card-contrib">Contribution: <span>verified compute · bittensor SN19 · data routing</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-inner reveal">
+    <div class="cta-eyebrow">// open source · arctura.network/operon</div>
+    <h2 class="cta-title">Build on <em>Operon</em></h2>
+    <p class="cta-desc">Operon is open-source and ready to extend. Connect your physical infrastructure to the ARCTURA network — digital twins, verified telemetry, and AI automation included.</p>
+    <div class="cta-actions">
+      <a href="https://github.com/virtualmase/OPS" class="btn-primary" target="_blank">View Source on GitHub</a>
+      <button class="btn-ghost" onclick="showPage('docs')">Read the Docs</button>
+      <button class="btn-violet" onclick="showPage('ai')">⬡ Ask the AI Agent</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-logo"><div class="footer-logo-mark"><span></span><span></span><span></span><span></span></div><span class="footer-logo-text">ARCTURA / OPERON</span></div><div class="footer-tagline">Industrial intelligence subnet · arctura.network/operon</div></div>
+      <div class="footer-links">
+        <div class="footer-col"><div class="footer-col-title">Operon</div><a href="https://github.com/virtualmase/OPS" target="_blank">GitHub</a><a href="https://github.com/virtualmase/OPS/releases" target="_blank">Releases</a><a href="https://github.com/CoreweaverLabs" target="_blank">Coreweaver Labs</a></div>
+        <div class="footer-col"><div class="footer-col-title">ARCTURA Network</div><a href="https://arctura.network" target="_blank">arctura.network</a><a href="https://blockmachine.io" target="_blank">blockmachine</a><a href="https://arcturawind.com" target="_blank">Arctura Wind</a></div>
+        <div class="footer-col"><div class="footer-col-title">AURE</div><a href="https://au-re.org" target="_blank">au-re.org</a><a href="https://autonomousresourcemanagement.com" target="_blank">ARM Framework</a><a href="https://arm-agency.com" target="_blank">arm-agency.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 ARCTURA Network. Open-source under MIT.</div><div class="footer-entity">Operon · industrial intelligence subnet · ARCTURA network<br>Maintained by virtualmase · Coreweaver Labs · blockmachine SN19</div></div>
+  </div>
+</footer>
+</div>
+
+<!-- ════════════════════════════════════════ SUBNET DASHBOARD ════════════════════════════════════════ -->
+<div id="page-subnet" class="page">
+<section class="section" style="padding-top:4rem;padding-bottom:2rem">
+  <div class="section-inner">
+    <div class="section-label">Live Data</div>
+    <h2 class="section-title">SN19 <em>Subnet Dashboard</em></h2>
+    <p class="section-desc">Real-time operational metrics for Operon's blockmachine compute layer. All data public, updated continuously.</p>
+    <div class="time-filter" style="margin-bottom:1.5rem">
+      <button class="tf active" onclick="setTF(this,'1h')">1H</button>
+      <button class="tf" onclick="setTF(this,'6h')">6H</button>
+      <button class="tf" onclick="setTF(this,'24h')">24H</button>
+      <button class="tf" onclick="setTF(this,'7d')">7D</button>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-stat"><div class="dash-stat-label"><span class="live-dot"></span>Verification Success</div><div class="dash-stat-val green" id="ds-success">99.74%</div></div>
+      <div class="dash-stat"><div class="dash-stat-label">Active Miners</div><div class="dash-stat-val" id="ds-miners">112 / 136</div></div>
+      <div class="dash-stat"><div class="dash-stat-label">Avg Consensus Latency</div><div class="dash-stat-val" id="ds-latency">284 ms</div></div>
+      <div class="dash-stat"><div class="dash-stat-label">Payloads Verified / Epoch</div><div class="dash-stat-val" id="ds-payloads">18,420</div></div>
+      <div class="dash-stat"><div class="dash-stat-label">Miners Banned (all time)</div><div class="dash-stat-val red" id="ds-banned">7</div></div>
+      <div class="dash-stat"><div class="dash-stat-label">Consensus Rate (≥⅔)</div><div class="dash-stat-val green" id="ds-consensus">99.91%</div></div>
+    </div>
+    <div style="margin-bottom:2rem">
+      <div style="font-family:var(--mono);font-size:0.6rem;color:var(--text3);letter-spacing:0.1em;margin-bottom:0.6rem">VERIFICATION LATENCY — LAST 24H</div>
+      <div class="mini-chart" id="sn19-chart" style="height:60px"></div>
+    </div>
+    <table class="subnet-table">
+      <thead><tr><th>Miner UID</th><th>Node Hash</th><th>Status</th><th>Latency</th><th>Accuracy</th><th>Weight</th><th>Payloads</th></tr></thead>
+      <tbody id="miner-tbody"></tbody>
+    </table>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════ DOCS ════════════════════════════════════════ -->
+<div id="page-docs" class="page">
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <div class="docs-nav-title">Documentation</div>
+    <button class="docs-nav-item active" onclick="showDoc(this,'overview')">Overview</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'quickstart')">Quickstart</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'architecture')">Architecture</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'kafka')">Kafka Pipeline</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'twin')">Digital Twins</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'sn19')">SN19 Verification</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'ml')">ML & Anomaly</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'plugin')">Plugin API</button>
+    <button class="docs-nav-item" onclick="showDoc(this,'security')">Security</button>
+  </aside>
+  <main class="docs-content">
+
+    <div class="docs-section active" id="doc-overview">
+      <h2>Operon — <em>Platform Overview</em></h2>
+      <p>Operon is the industrial intelligence subnet of the ARCTURA network. It is the open-source IIoT platform that powers eXSeek™ wind farm optimization — providing digital twin modeling, Kafka-native SCADA telemetry, ML-driven predictive maintenance, and blockmachine-verified decentralized compute via Bittensor SN19.</p>
+      <div class="highlight-box"><strong>Core mission</strong>Bridge physical energy infrastructure with verifiable decentralized intelligence. Every sensor reading Operon acts on has been independently verified by competing miners before it triggers any optimization or actuation command.</div>
+      <h3>Stack at a Glance</h3>
+      <div class="docs-tag-row"><span class="docs-tag hi">FastAPI</span><span class="docs-tag hi">Apache Kafka</span><span class="docs-tag hi">TimescaleDB</span><span class="docs-tag hi">Kubernetes</span><span class="docs-tag">blockmachine SN19</span><span class="docs-tag">Bittensor</span><span class="docs-tag">Python 3.11+</span></div>
+      <h3>Repository</h3>
+      <p>The full open-source codebase is at <a href="https://github.com/virtualmase/OPS" target="_blank" style="color:var(--accent);font-family:var(--mono);font-size:0.82rem">github.com/virtualmase/OPS</a></p>
+    </div>
+
+    <div class="docs-section" id="doc-quickstart">
+      <h2><em>Quickstart</em></h2>
+      <h3>Prerequisites</h3>
+      <ul><li>Docker + Docker Compose (for local dev)</li><li>Python 3.11+, pip</li><li>Blockmachine API key (free tier: <a href="https://blockmachine.io" target="_blank" style="color:var(--accent)">blockmachine.io</a>)</li><li>Bittensor wallet (for SN19 miner/validator)</li></ul>
+      <h3>Clone and Run</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">bash</span><button class="code-copy" onclick="copyCode(this,`git clone https://github.com/virtualmase/OPS\ncd OPS\ncp .env.example .env\n# Fill in BLOCKMACHINE_API_KEY, TIMESCALEDB_URL\ndocker compose up -d`)">Copy</button></div><pre><span class="c"># Clone and configure</span>
+git clone https://github.com/virtualmase/OPS
+cd OPS
+cp .env.example .env
+<span class="c"># Fill in BLOCKMACHINE_API_KEY, TIMESCALEDB_URL</span>
+docker compose up -d</pre></div>
+      <h3>Environment Variables</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">.env</span></div><pre>BLOCKMACHINE_API_KEY=<span class="s">your_key_here</span>   <span class="c"># server-side only</span>
+TIMESCALEDB_URL=<span class="s">postgresql://...</span>
+KAFKA_BOOTSTRAP=<span class="s">localhost:9092</span>
+BITTENSOR_NETUID=<span class="s">19</span>
+BITTENSOR_NETWORK=<span class="s">finney</span>
+OPERON_ENV=<span class="s">development</span></pre></div>
+    </div>
+
+    <div class="docs-section" id="doc-architecture">
+      <h2><em>Architecture</em></h2>
+      <p>Operon is composed of five independently deployable services that communicate via Kafka topics and share state through TimescaleDB.</p>
+      <h3>Services</h3>
+      <ul><li><strong style="color:var(--text)">operon-api</strong> — FastAPI gateway. REST + WebSocket. Port 8000.</li><li><strong style="color:var(--text)">operon-ingestion</strong> — SCADA adapter. Modbus/OPC-UA → Kafka producer.</li><li><strong style="color:var(--text)">operon-twin</strong> — Digital twin state engine. Consumes normalized telemetry, writes twin_state.</li><li><strong style="color:var(--text)">operon-ml</strong> — Anomaly detection serving. Isolation Forest + LSTM. Port 8002.</li><li><strong style="color:var(--text)">operon-plugin-blockmachine</strong> — SN19 verification plugin. Batches payloads, calls blockmachine, writes verified flag.</li></ul>
+      <h3>Kafka Topics</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">topic-map</span></div><pre>operon.telemetry.raw          <span class="c"># Raw SCADA (partitioned by asset_id)</span>
+operon.telemetry.normalized   <span class="c"># Validated, unit-normalized</span>
+operon.twin.state             <span class="c"># Twin state snapshots</span>
+operon.twin.diff              <span class="c"># Changed fields only</span>
+operon.anomaly.events         <span class="c"># Detections + severity</span>
+operon.verification.requests  <span class="c"># SN19 payloads</span>
+operon.verification.results   <span class="c"># Consensus results</span>
+operon.actuation.commands     <span class="c"># Turbine setpoints</span>
+operon.maintenance.alerts     <span class="c"># Routing + urgency</span></pre></div>
+    </div>
+
+    <div class="docs-section" id="doc-kafka">
+      <h2><em>Kafka Pipeline</em></h2>
+      <p>Operon uses Apache Kafka as its backbone event bus. All telemetry flows as immutable events. Services are consumers and producers — never tightly coupled.</p>
+      <h3>Producer Example (SCADA Ingestion)</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">kafka_producer.py</span></div><pre><span class="k">from</span> kafka <span class="k">import</span> KafkaProducer
+<span class="k">import</span> json, hashlib, time
+
+producer = KafkaProducer(
+    bootstrap_servers=<span class="s">'localhost:9092'</span>,
+    value_serializer=<span class="k">lambda</span> v: json.dumps(v).encode()
+)
+
+<span class="k">def</span> publish_telemetry(asset_id: str, readings: dict):
+    canonical = json.dumps(readings, sort_keys=<span class="k">True</span>)
+    sensor_hash = hashlib.sha256(canonical.encode()).hexdigest()
+    payload = {
+        <span class="s">"asset_id"</span>: asset_id,
+        <span class="s">"timestamp"</span>: time.strftime(<span class="s">"%Y-%m-%dT%H:%M:%SZ"</span>, time.gmtime()),
+        <span class="s">"readings"</span>: readings,
+        <span class="s">"sensor_hash"</span>: sensor_hash,
+    }
+    producer.send(<span class="s">"operon.telemetry.raw"</span>, value=payload,
+                  key=asset_id.encode())</pre></div>
+    </div>
+
+    <div class="docs-section" id="doc-twin">
+      <h2><em>Digital Twins</em></h2>
+      <p>Every physical asset in Operon has a digital twin — a live virtual representation maintained in TimescaleDB. Twins are updated on every verified telemetry event.</p>
+      <h3>Twin State Schema</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">SQL</span></div><pre>CREATE TABLE twin_state (
+  time              TIMESTAMPTZ NOT NULL,
+  asset_id          TEXT NOT NULL,
+  rpm               DOUBLE PRECISION,
+  blade_pitch_deg   DOUBLE PRECISION,
+  power_kw          DOUBLE PRECISION,
+  wind_speed_ms     DOUBLE PRECISION,
+  bearing_temp_c    DOUBLE PRECISION,
+  vibration_rms     DOUBLE PRECISION,
+  blade_stress_idx  DOUBLE PRECISION,
+  operational_mode  TEXT, <span class="c">-- normal|curtailed|maintenance|fault</span>
+  verified          BOOLEAN DEFAULT FALSE,
+  consensus_score   DOUBLE PRECISION
+);
+SELECT create_hypertable(<span class="s">'twin_state'</span>, <span class="s">'time'</span>,
+  partitioning_column => <span class="s">'asset_id'</span>);</pre></div>
+    </div>
+
+    <div class="docs-section" id="doc-sn19">
+      <h2>SN19 <em>Verification</em></h2>
+      <p>Operon routes all telemetry payloads through blockmachine SN19 before acting on them. Miners independently verify sensor hashes. Consensus ≥ ⅔ is required for the verified flag to be set.</p>
+      <div class="highlight-box"><strong>Why this matters</strong>Wind turbine actuation commands based on bad sensor data can cause mechanical damage or unsafe operating conditions. SN19 verification ensures every setpoint eXSeek™ issues is grounded in independently confirmed sensor truth.</div>
+      <h3>Synapse Definition</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">synapse.py</span></div><pre><span class="k">import</span> bittensor <span class="k">as</span> bt
+<span class="k">from</span> typing <span class="k">import</span> Optional
+
+<span class="k">class</span> TelemetryVerificationSynapse(bt.Synapse):
+    <span class="c"># Sent to miners</span>
+    asset_id: str
+    timestamp: str
+    sensor_hash: str      <span class="c"># SHA256 of canonical readings JSON</span>
+    readings_sample: dict <span class="c"># Subset for quick sanity check</span>
+    <span class="c"># Returned by miners</span>
+    verified: Optional[bool] = None
+    confidence: Optional[float] = None
+    miner_hash: Optional[str] = None
+    latency_ms: Optional[float] = None</pre></div>
+      <h3>Error Handling</h3>
+      <ul><li><strong style="color:var(--text)">-32029 (rate limit)</strong> — Exponential backoff, max 3 retries (500ms, 1s, 2s)</li><li><strong style="color:var(--text)">-32021 (invalid key)</strong> — PagerDuty alert, halt actuation commands</li><li><strong style="color:var(--text)">-32030 (budget exhausted)</strong> — Local cache fallback (60s TTL), alert operator</li></ul>
+    </div>
+
+    <div class="docs-section" id="doc-ml">
+      <h2>ML <em>& Anomaly Detection</em></h2>
+      <p>Operon runs two anomaly detection models in parallel, plus hard-limit rule-based checks. All features are computed from TimescaleDB continuous aggregates over verified telemetry.</p>
+      <h3>Model Stack</h3>
+      <ul><li><strong style="color:var(--text)">Isolation Forest</strong> — Multivariate outlier detection over 8 rolling features. contamination=0.02</li><li><strong style="color:var(--text)">LSTM Autoencoder</strong> — 30-step temporal pattern deviation. Threshold: reconstruction error > 3σ</li><li><strong style="color:var(--text)">Rule-based</strong> — Hard limits: bearing_temp > 85°C OR vibration_rms > 12mm/s → CRITICAL</li></ul>
+      <h3>Severity Tiers</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">severity.py</span></div><pre>SEVERITY_RULES = {
+    <span class="s">'CRITICAL'</span>: {<span class="s">'action'</span>: <span class="s">'immediate_shutdown_signal'</span>, <span class="s">'sla_mins'</span>: 15},
+    <span class="s">'WARNING'</span>:  {<span class="s">'action'</span>: <span class="s">'maintenance_queue'</span>,          <span class="s">'sla_mins'</span>: 240},
+    <span class="s">'INFO'</span>:     {<span class="s">'action'</span>: <span class="s">'log_and_monitor'</span>,            <span class="s">'sla_mins'</span>: <span class="k">None</span>},
+}</pre></div>
+    </div>
+
+    <div class="docs-section" id="doc-plugin">
+      <h2>Plugin <em>API</em></h2>
+      <p>Every Operon integration is a plugin. The interface is minimal: implement <code style="font-family:var(--mono);font-size:0.8rem;color:var(--accent)">process()</code> and <code style="font-family:var(--mono);font-size:0.8rem;color:var(--accent)">health()</code>.</p>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">plugin_interface.py</span></div><pre><span class="k">from</span> dataclasses <span class="k">import</span> dataclass
+<span class="k">from</span> typing <span class="k">import</span> Any, Dict, Optional
+
+@dataclass
+<span class="k">class</span> TelemetryPayload:
+    asset_id: str
+    timestamp: str
+    readings: Dict[str, float]
+    sensor_hash: str  <span class="c"># SHA256 of canonical readings</span>
+
+@dataclass
+<span class="k">class</span> PluginResult:
+    verified: bool
+    confidence: float   <span class="c"># 0.0 – 1.0</span>
+    metadata: Dict[str, Any]
+    error: Optional[str] = <span class="k">None</span>
+
+<span class="k">class</span> OperonPlugin:
+    name: str
+    version: str
+    <span class="k">def</span> process(self, payload: TelemetryPayload) -> PluginResult: ...
+    <span class="k">def</span> health(self) -> Dict[str, Any]: ...</pre></div>
+    </div>
+
+    <div class="docs-section" id="doc-security">
+      <h2><em>Security</em></h2>
+      <h3>Key Management</h3>
+      <ul><li>Coldkeys: offline HSM or air-gapped machine. Never on active servers.</li><li>Hotkeys: rotated every 90 days. Separate key per validator node.</li><li>Blockmachine API key: server-side env var only. Never in SCADA frontend or browser code.</li><li>RU budget: scope keys tightly. One key per environment (dev/staging/prod).</li></ul>
+      <h3>RBAC Tiers</h3>
+      <div class="code-block"><div class="code-block-header"><span class="code-block-name">rbac</span></div><pre>READ     <span class="c"># Dashboard consumers, monitoring systems</span>
+VERIFY   <span class="c"># SN19 miners, blockmachine network</span>
+ACTUATE  <span class="c"># eXSeek™ only · requires verified=true</span>
+         <span class="c"># AND consensus≥0.67 AND 2-of-3 signature</span>
+ADMIN    <span class="c"># virtualmase/ARCTURA ops · coldkey-signed only</span></pre></div>
+      <h3>Actuation Safety</h3>
+      <div class="highlight-box"><strong>Rule</strong>No turbine setpoint command is ever published to operon.actuation.commands unless the source twin_state record has verified=true AND consensus_score ≥ 0.667. This check is enforced at the operon-api gateway level, not in eXSeek™ itself.</div>
+    </div>
+
+  </main>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════ AI AGENT ════════════════════════════════════════ -->
+<div id="page-ai" class="page">
+<div class="ai-page-layout">
+  <aside class="ai-sidebar">
+    <div class="ai-sidebar-header">
+      <div class="ai-sidebar-title">// Operon Intelligence</div>
+      <label class="config-label">Farm / Project</label>
+      <input class="config-input" id="cfg-farm" placeholder="e.g. AW-FARM1, North Ridge">
+      <label class="config-label">Turbine count</label>
+      <input class="config-input" id="cfg-turbines" placeholder="e.g. 42">
+      <label class="config-label">Focus area</label>
+      <input class="config-input" id="cfg-focus" placeholder="e.g. blade health, SN19 setup">
+      <label class="config-label">Stack context</label>
+      <input class="config-input" id="cfg-stack" placeholder="e.g. on-prem Kafka, AWS">
+      <button class="pipeline-btn" onclick="runPipeline()">⬡ RUN FULL PIPELINE</button>
+    </div>
+    <div class="ai-agent-list">
+      <div class="ai-agent-group">Specialists</div>
+      <button class="ai-agent-item active" onclick="selectAgent('architect')"><span class="ai-agent-icon">⬡</span><div class="ai-agent-info"><div class="ai-agent-name">Platform Architect</div><div class="ai-agent-desc">Kafka, FastAPI, TimescaleDB, K8s</div></div></button>
+      <button class="ai-agent-item" onclick="selectAgent('exseek')"><span class="ai-agent-icon">⚡</span><div class="ai-agent-info"><div class="ai-agent-name">eXSeek™ Integrator</div><div class="ai-agent-desc">SCADA adapters, optimization loop</div></div></button>
+      <button class="ai-agent-item" onclick="selectAgent('bittensor')"><span class="ai-agent-icon">⛓</span><div class="ai-agent-info"><div class="ai-agent-name">Bittensor Engineer</div><div class="ai-agent-desc">SN19 neurons, Yuma, dTAO</div></div></button>
+      <button class="ai-agent-item" onclick="selectAgent('ml')"><span class="ai-agent-icon">◈</span><div class="ai-agent-info"><div class="ai-agent-name">ML & Maintenance</div><div class="ai-agent-desc">Anomaly detection, alerts, cost</div></div></button>
+      <button class="ai-agent-item" onclick="selectAgent('security')"><span class="ai-agent-icon">🔒</span><div class="ai-agent-info"><div class="ai-agent-name">Security & RPC</div><div class="ai-agent-desc">blockmachine, RBAC, key mgmt</div></div></button>
+    </div>
+  </aside>
+  <div class="ai-workspace">
+    <div class="ai-workspace-header">
+      <div><div class="ai-workspace-agent" id="ai-agent-title">Operon Platform Architect</div><div class="ai-workspace-desc" id="ai-agent-desc">FastAPI · Kafka · TimescaleDB · Kubernetes · Plugin Interface</div></div>
+      <button class="ai-run-btn" id="ai-run-btn" onclick="runAgent()">ANALYZE →</button>
+    </div>
+    <div class="ai-messages" id="ai-messages">
+      <div class="ai-msgs-inner" id="ai-msgs-inner"></div>
+    </div>
+    <div class="ai-input-row">
+      <textarea class="ai-input" id="ai-input" rows="2" placeholder="Ask about Operon architecture, SN19 setup, Kafka pipeline, anomaly detection, eXSeek™ integration…" onkeydown="handleKey(event)"></textarea>
+      <button class="ai-send-btn" id="ai-send-btn" onclick="sendMessage()">SEND</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// OPERON PLATFORM — FULL BUILDOUT JS
+// ═══════════════════════════════════════════════
+
+const API_URL = 'https://api.anthropic.com/v1/messages';
+const MODEL = 'claude-sonnet-4-20250514';
+
+// ── NAVIGATION ────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id)?.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  if (id === 'subnet') buildSubnetTable();
+  window.scrollTo(0,0);
+  setTimeout(revealAll, 60);
+}
+
+function showDoc(btn, id) {
+  document.querySelectorAll('.docs-nav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.docs-section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('doc-' + id)?.classList.add('active');
+}
+
+// ── REVEAL ───────────────────────────────────
+function revealAll() {
+  document.querySelectorAll('.reveal:not(.visible)').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), i * 70);
+  });
+}
+const ro = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+setTimeout(revealAll, 100);
+
+// ── SUBNET DASHBOARD ─────────────────────────
+const FAKE_MINERS = [
+  ['SN19-001','a8f3c1...4d2e9b','Active','182 ms','100%','0.94','12,440'],
+  ['SN19-007','b2e8a4...9f1c3d','Active','241 ms','100%','0.88','10,820'],
+  ['SN19-013','c4d7f2...2a8b5e','Active','198 ms','99.8%','0.91','11,630'],
+  ['SN19-021','d9b6e1...7c4f2a','Active','310 ms','99.1%','0.76','8,940'],
+  ['SN19-034','e1a2c8...b3d6f9','Active','267 ms','100%','0.85','9,780'],
+  ['SN19-041','f5c3a7...e8b1d4','Warning','498 ms','97.3%','0.41','4,120'],
+  ['SN19-055','a7e4b2...c9f6d1','Active','213 ms','99.9%','0.92','11,200'],
+  ['SN19-068','b8f1c4...d2a7e3','Active','229 ms','100%','0.89','10,450'],
+];
+
+function buildSubnetTable() {
+  document.getElementById('miner-tbody').innerHTML = FAKE_MINERS.map(m => `
+    <tr>
+      <td style="color:var(--accent)">${m[0]}</td>
+      <td style="color:var(--text3)">${m[1]}</td>
+      <td class="${m[2]==='Active'?'status-ok':m[2]==='Warning'?'status-warn':'status-err'}">${m[2]}</td>
+      <td>
+        <div class="latency-bar-wrap">
+          <span style="color:var(--text)">${m[3]}</span>
+          <div class="latency-bar" style="width:60px"><div class="latency-fill" style="width:${100-parseInt(m[3])/5}%"></div></div>
+        </div>
+      </td>
+      <td style="color:${parseFloat(m[4])>99?'var(--accent)':'var(--yellow)'}">${m[4]}</td>
+      <td style="color:${parseFloat(m[5])>0.8?'var(--accent)':parseFloat(m[5])>0.5?'var(--text)':'var(--red)'}">${m[5]}</td>
+      <td>${m[6]}</td>
+    </tr>`).join('');
+  buildMiniChart();
+}
+
+function buildMiniChart() {
+  const el = document.getElementById('sn19-chart');
+  if (!el) return;
+  el.innerHTML = '';
+  for (let i = 0; i < 60; i++) {
+    const h = 40 + Math.sin(i/4)*20 + Math.random()*20;
+    const bar = document.createElement('div');
+    bar.className = 'mc-bar';
+    bar.style.cssText = `height:${h}%;background:rgba(0,229,160,${0.2+h/200});flex:1`;
+    el.appendChild(bar);
+  }
+}
+
+function setTF(btn, tf) {
+  document.querySelectorAll('.tf').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildMiniChart();
+}
+
+// ── LIVE TICKER ───────────────────────────────
+setInterval(() => {
+  const jitter = v => v + (Math.random()-0.5)*v*0.04;
+  const el = id => document.getElementById(id);
+  if (el('kafka-lag'))      el('kafka-lag').textContent = Math.round(jitter(42)) + ' ms';
+  if (el('twin-rate'))      el('twin-rate').textContent = Math.round(jitter(1240)).toLocaleString() + ' / min';
+  if (el('exseek-cycle'))   el('exseek-cycle').textContent = Math.round(jitter(380)) + ' ms';
+  if (el('actuation-count')) el('actuation-count').textContent = Math.round(jitter(847)).toLocaleString();
+  if (el('ds-latency'))     el('ds-latency').textContent = Math.round(jitter(284)) + ' ms';
+  if (el('ds-payloads'))    el('ds-payloads').textContent = Math.round(jitter(18420)).toLocaleString();
+}, 2500);
+
+// ── COPY CODE ─────────────────────────────────
+function copyCode(btn, text) {
+  const content = text || btn.closest('.code-block').querySelector('pre').innerText;
+  navigator.clipboard.writeText(content).then(() => {
+    btn.textContent = 'Copied!'; btn.style.color = 'var(--accent)';
+    setTimeout(() => { btn.textContent = 'Copy'; btn.style.color = ''; }, 2000);
+  });
+}
+
+// ── AI AGENT SYSTEM ───────────────────────────
+const AGENTS = {
+  architect: {
+    name: 'Operon Platform Architect',
+    desc: 'FastAPI · Kafka · TimescaleDB · Kubernetes · Plugin Interface',
+    icon: '⬡',
+    system: `You are the Operon Platform Architect for the ARCTURA network.
+You design and implement the Operon IIoT platform — FastAPI + Apache Kafka + TimescaleDB + Kubernetes.
+You write working Python code and YAML manifests. You define digital twin state schemas for wind turbine assets.
+Kafka topics follow operon.<domain>.<event> convention. Plugins implement process(TelemetryPayload) -> PluginResult.
+You're concise and technical. Include code snippets. Reference specific tools and versions.
+Commands: /kafka — design Kafka topology, /twin — digital twin schema, /k8s — Kubernetes manifest, /api — FastAPI endpoint design`
+  },
+  exseek: {
+    name: 'eXSeek™ Integration Specialist',
+    desc: 'SCADA Adapters · Optimization Loop · ALP20 Blade Health',
+    icon: '⚡',
+    system: `You are the eXSeek™ Integration Specialist for the ARCTURA/Operon platform.
+You integrate Arctura Wind's eXSeek™ optimization engine with Operon's Kafka pipeline and digital twin layer.
+eXSeek™ uses live SCADA data exclusively — no physics models. You design SCADA adapters (Modbus TCP/OPC-UA → Kafka).
+The optimization feedback loop: verified_state → eXSeek™ → setpoint_commands → actuation.
+Key metrics: 73% blade damage reduction via ALP20, $50K avg repair cost avoided per lightning event, $1.25M NSF grant.
+Commands: /scada — adapter design, /optimize — optimization loop spec, /blade — ALP20 health telemetry schema`
+  },
+  bittensor: {
+    name: 'Bittensor Subnet Engineer',
+    desc: 'SN19 Neurons · Yuma Consensus · dTAO Economics',
+    icon: '⛓',
+    system: `You are the Bittensor Subnet Engineer for Operon / SN19.
+You design and implement SN19 — the blockmachine subnet on Bittensor — as Operon's verification layer.
+Miners receive TelemetryVerificationSynapse payloads and independently verify sensor hashes.
+Validators score miners by consensus accuracy + latency. You use bittensor SDK >= 8.x.
+Commit-reveal weight setting prevents front-running. Incorrect-hash miners are permanently banned.
+dTAO: industrial client fees → α buybacks → SN19 emission share growth.
+Commands: /miner — miner neuron code, /validator — validator + weight logic, /synapse — synapse spec, /economics — dTAO model`
+  },
+  ml: {
+    name: 'ML & Predictive Maintenance Engineer',
+    desc: 'Anomaly Detection · LSTM · Isolation Forest · Alerts',
+    icon: '◈',
+    system: `You are the ML & Predictive Maintenance Engineer for Operon.
+You build anomaly detection pipelines on top of digital twin state using TimescaleDB continuous aggregates.
+Models: Isolation Forest (multivariate, contamination=0.02), LSTM Autoencoder (30-step, threshold 3σ), rule-based hard limits.
+Severity: CRITICAL (15min SLA, halt turbine), WARNING (240min, maintenance queue), INFO (log).
+Key features: bearing_temp_p95_1h, vibration_rms_delta_15m, pitch_deviation_mean_5m.
+Commands: /features — feature engineering SQL, /model — model architecture, /alerts — alert routing spec, /cost — repair cost estimation`
+  },
+  security: {
+    name: 'Security & RPC Specialist',
+    desc: 'blockmachine Config · RBAC · Key Management · Error Handling',
+    icon: '🔒',
+    system: `You are the blockmachine RPC & Security Specialist for Operon.
+You configure the blockmachine plugin (SN19 integration), size RU budgets (50-turbine ≈ 300K RU/epoch at 5 RU/event).
+Error handling: -32029 → exponential backoff (3 retries), -32030 → local cache fallback, -32021 → halt + alert.
+Actuation requires: verified=true AND consensus_score ≥ 0.667 AND 2-of-3 signature.
+RBAC: READ / VERIFY / ACTUATE (eXSeek™ only) / ADMIN (coldkey-signed).
+Coldkeys offline (HSM or air-gapped). Hotkeys rotated 90 days. API keys budget-scoped.
+Commands: /budget — RU sizing, /rbac — access control design, /errors — error handling spec, /keys — key management policy`
+  }
+};
+
+let activeAgent = 'architect';
+let chatHistory = [];
+let isLoading = false;
+
+function selectAgent(key) {
+  activeAgent = key;
+  chatHistory = [];
+  const a = AGENTS[key];
+  document.querySelectorAll('.ai-agent-item').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('ai-agent-title').textContent = a.name;
+  document.getElementById('ai-agent-desc').textContent = a.desc;
+  document.getElementById('ai-msgs-inner').innerHTML = '';
+  addSystemMsg(`${a.icon} ${a.name} online. Ask anything about the Operon platform, or use slash commands.`);
+}
+
+function buildSystemPrompt() {
+  const farm = document.getElementById('cfg-farm').value;
+  const turbines = document.getElementById('cfg-turbines').value;
+  const focus = document.getElementById('cfg-focus').value;
+  const stack = document.getElementById('cfg-stack').value;
+  const ctx = [
+    farm ? `Farm/project: ${farm}` : '',
+    turbines ? `Turbine count: ${turbines}` : '',
+    focus ? `Focus area: ${focus}` : '',
+    stack ? `Stack context: ${stack}` : '',
+  ].filter(Boolean).join('\n');
+  return AGENTS[activeAgent].system + (ctx ? `\n\nUSER CONTEXT:\n${ctx}` : '');
+}
+
+async function callClaude(msg) {
+  if (isLoading) return;
+  isLoading = true;
+  document.getElementById('ai-run-btn').disabled = true;
+  document.getElementById('ai-send-btn').disabled = true;
+  chatHistory.push({ role: 'user', content: msg });
+  addTyping();
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: MODEL, max_tokens: 1000, system: buildSystemPrompt(), messages: chatHistory })
+    });
+    removeTyping();
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'API error ' + res.status); }
+    const data = await res.json();
+    const reply = data.content.map(b => b.text || '').join('');
+    chatHistory.push({ role: 'assistant', content: reply });
+    addAgentMsg(reply);
+  } catch(err) {
+    removeTyping();
+    addSystemMsg('[ERROR] ' + err.message);
+  }
+  isLoading = false;
+  document.getElementById('ai-run-btn').disabled = false;
+  document.getElementById('ai-send-btn').disabled = false;
+}
+
+function runAgent() {
+  const farm = document.getElementById('cfg-farm').value || 'the target wind farm';
+  const turbines = document.getElementById('cfg-turbines').value || 'the turbine fleet';
+  const focus = document.getElementById('cfg-focus').value || 'the full platform';
+  const prompt = `Run a full analysis of ${focus} for ${farm} (${turbines} turbines). Provide architecture, implementation details, integration points, and key risks.`;
+  addUserMsg(prompt);
+  callClaude(prompt);
+}
+
+function runPipeline() {
+  addSystemMsg('⬡ Full pipeline analysis initiated across all 5 agents. Routing to Platform Architect for synthesis…');
+  const farm = document.getElementById('cfg-farm').value || 'the target wind farm';
+  const msg = `As the Platform Architect synthesizing input from all five Operon specialists (eXSeek™ Integrator, Bittensor Engineer, ML Engineer, Security Specialist), provide a comprehensive end-to-end design for deploying Operon at ${farm}. Cover: architecture, data flow, SN19 verification setup, ML pipeline configuration, security posture, and deployment checklist.`;
+  addUserMsg('Pipeline: Full system analysis →');
+  callClaude(msg);
+}
+
+function sendMessage() {
+  const input = document.getElementById('ai-input');
+  const msg = input.value.trim();
+  if (!msg || isLoading) return;
+  input.value = '';
+  addUserMsg(msg);
+  callClaude(msg);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function addAgentMsg(text) {
+  const a = AGENTS[activeAgent];
+  const div = document.createElement('div');
+  div.className = 'ai-msg agent';
+  div.innerHTML = `<div class="ai-msg-label"><span style="color:var(--accent)">${a.icon}</span> ${a.name}</div>${text}`;
+  appendMsg(div);
+}
+
+function addUserMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'ai-msg user';
+  div.innerHTML = `<div class="ai-msg-label user">YOU</div>${text}`;
+  appendMsg(div);
+}
+
+function addSystemMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'ai-msg system';
+  div.textContent = text;
+  appendMsg(div);
+}
+
+function addTyping() {
+  const div = document.createElement('div');
+  div.id = 'typing-ind'; div.className = 'ai-msg agent';
+  div.innerHTML = `<div class="ai-msg-label">${AGENTS[activeAgent].icon} ${AGENTS[activeAgent].name}</div><div class="typing-dots"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  appendMsg(div);
+}
+
+function removeTyping() { document.getElementById('typing-ind')?.remove(); }
+
+function appendMsg(el) {
+  const c = document.getElementById('ai-msgs-inner');
+  c.appendChild(el);
+  document.getElementById('ai-messages').scrollTop = 99999;
+}
+
+// ── INIT ─────────────────────────────────────
+window.addEventListener('load', () => {
+  addSystemMsg('⬡ Operon Intelligence online. Select a specialist or run the full pipeline. Provide context in the sidebar for more precise analysis.');
+  addAgentMsg('Operon Platform Architect ready.\n\nI can help you design and implement any part of the Operon IIoT stack:\n\n• /kafka — Kafka topic topology + producer/consumer code\n• /twin — Digital twin schema + TimescaleDB hypertable design\n• /k8s — Kubernetes deployment manifests\n• /api — FastAPI endpoint design + plugin interface\n\nOr just ask: "How do I deploy Operon for a 50-turbine wind farm on AWS?"');
+});
+</script>
+</body>
+</html>
