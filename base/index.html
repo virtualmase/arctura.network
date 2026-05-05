@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Arctura × Base — First Base Subnet on Bittensor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<meta name="base:app_id" content="69f930d142d4fe010f1c28d2" />
+<style>
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --void:   #00020a;
+  --deep:   #000814;
+  --shell:  #010d26;
+  --lift:   #051433;
+  --rim:    #0a2060;
+  --rule:   rgba(10,32,96,0.6);
+
+  --base:   #0052ff;
+  --base2:  #4d8aff;
+  --base3:  #99c0ff;
+  --base-g: rgba(0,82,255,0.18);
+  --base-gg:rgba(0,82,255,0.06);
+
+  --tao:    #9b8cff;
+  --tao2:   #c4baff;
+  --tao-g:  rgba(155,140,255,0.14);
+
+  --gold:   #d4a843;
+  --gold2:  #f0cc7a;
+
+  --signal: #00e5a0;
+  --sig-g:  rgba(0,229,160,0.12);
+
+  --tx:     #e8eeff;
+  --t2:     #8fa8d8;
+  --t3:     #4a5f8a;
+  --t4:     #1e2e50;
+
+  --serif:  'Instrument Serif', Georgia, serif;
+  --mono:   'IBM Plex Mono', monospace;
+  --sans:   'Instrument Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+
+body {
+  font-family: var(--sans);
+  background: var(--void);
+  color: var(--t2);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── STAR FIELD ─────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% 20%, var(--base-g), transparent 60%),
+    radial-gradient(ellipse 700px 600px at 85% 70%, var(--tao-g), transparent 55%),
+    radial-gradient(ellipse 500px 300px at 50% 100%, rgba(0,229,160,.06), transparent 60%);
+}
+
+/* ── GRAIN ──────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  opacity: .5;
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.page { position: relative; z-index: 1; }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+.wrap-narrow { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+/* ── COUNCIL HEADER ─────────────────────────────────────── */
+.council-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(0,2,10,0.88);
+  backdrop-filter: blur(24px) saturate(1.8);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 54px;
+}
+.council-id {
+  display: flex; align-items: center; gap: 14px;
+}
+.council-sigil {
+  width: 30px; height: 30px;
+  border: 1px solid rgba(0,82,255,0.4);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--base-g), var(--tao-g));
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.council-sigil::after {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--base);
+  box-shadow: 0 0 12px var(--base), 0 0 24px var(--base-g);
+  animation: pulse-core 2.5s ease-in-out infinite;
+}
+@keyframes pulse-core { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+.council-label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--t3);
+}
+.council-label strong { color: var(--base2); font-weight: 400; }
+
+.council-right {
+  display: flex; align-items: center; gap: 20px;
+}
+.council-net {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px; color: var(--t4);
+}
+.net-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--signal); box-shadow: 0 0 6px var(--signal);
+  animation: pulse-core 2s infinite;
+}
+.council-classify {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(212,168,67,.25);
+  padding: 3px 9px; border-radius: 3px;
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero {
+  padding: 140px 0 80px;
+  text-align: center;
+  position: relative;
+}
+.hero-above {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--base2); margin-bottom: 32px;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+}
+.hero-above::before, .hero-above::after {
+  content: ''; flex: 1; max-width: 80px;
+  height: 1px; background: linear-gradient(90deg, transparent, var(--base));
+}
+.hero-above::after { background: linear-gradient(270deg, transparent, var(--base)); }
+
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--t3); margin-bottom: 16px;
+}
+
+h1.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(46px, 7vw, 82px);
+  font-weight: 400; line-height: 1.08;
+  color: var(--tx);
+  margin-bottom: 12px;
+}
+h1.hero-title .base-word {
+  font-style: italic; color: var(--base2);
+  position: relative;
+}
+h1.hero-title .base-word::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--base), var(--tao));
+  border-radius: 1px;
+}
+h1.hero-title .tao-word { color: var(--tao2); font-style: italic; }
+
+.hero-sub {
+  font-size: 17px; color: var(--t3);
+  max-width: 580px; margin: 24px auto 48px;
+  line-height: 1.75;
+}
+
+.hero-url {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 13px;
+  color: var(--base3);
+  border: 1px solid rgba(0,82,255,.25);
+  background: rgba(0,82,255,.04);
+  border-radius: 8px; padding: 8px 18px;
+  margin-bottom: 48px;
+  letter-spacing: .5px;
+}
+.hero-url .url-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 6px var(--signal); animation: pulse-core 2s infinite; }
+
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  background: var(--base); color: #fff;
+  padding: 12px 22px; border-radius: 8px; text-decoration: none;
+  box-shadow: 0 0 24px rgba(0,82,255,.4);
+  transition: all .2s;
+}
+.cta-primary:hover { background: var(--base2); box-shadow: 0 0 36px rgba(0,82,255,.6); transform: translateY(-1px); }
+.cta-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--t2); border: 1px solid var(--rim);
+  padding: 11px 22px; border-radius: 8px; text-decoration: none;
+  transition: all .2s;
+}
+.cta-secondary:hover { border-color: var(--base); color: var(--base2); }
+
+/* ── SIGNAL BANNER ──────────────────────────────────────── */
+.signal-banner {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 20px 0; margin-bottom: 100px;
+  overflow: hidden; position: relative;
+  background: linear-gradient(90deg, var(--deep), var(--shell), var(--deep));
+}
+.signal-scroll {
+  display: flex; gap: 48px;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap; width: max-content;
+}
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.signal-item {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; color: var(--t3);
+}
+.signal-item .si-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--base); box-shadow: 0 0 6px var(--base); }
+.signal-item.gold { color: var(--gold); }
+.signal-item.gold .si-dot { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.signal-item.sig { color: var(--signal); }
+.signal-item.sig .si-dot { background: var(--signal); box-shadow: 0 0 6px var(--signal); }
+
+/* ── SECTION HEADERS ────────────────────────────────────── */
+.sect {
+  padding: 80px 0;
+}
+.sect-label {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--base2); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.sect-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--rim), transparent);
+}
+.sect-title {
+  font-family: var(--serif); font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400; color: var(--tx); line-height: 1.15;
+  margin-bottom: 16px;
+}
+.sect-title em { font-style: italic; color: var(--base2); }
+.sect-desc {
+  font-size: 15px; color: var(--t3);
+  max-width: 600px; line-height: 1.8; margin-bottom: 48px;
+}
+
+/* ── WHY PANEL ──────────────────────────────────────────── */
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 16px; overflow: hidden;
+  margin-bottom: 32px;
+}
+.why-col {
+  padding: 36px 32px;
+}
+.why-col:first-child {
+  border-right: 1px solid var(--rule);
+  background: var(--base-gg);
+}
+.why-col-head {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.why-chain-dot {
+  width: 22px; height: 22px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600;
+}
+.base-chip { background: var(--base); color: #fff; }
+.tao-chip  { background: var(--tao); color: #fff; }
+.why-col-head span { color: var(--t3); }
+
+.why-list { display: flex; flex-direction: column; gap: 14px; }
+.why-item {
+  display: flex; gap: 12px;
+  font-size: 14px; line-height: 1.6;
+}
+.why-item::before {
+  content: '→'; flex-shrink: 0;
+  font-family: var(--mono); font-size: 11px; color: var(--base2);
+  margin-top: 3px;
+}
+.why-item.tao-item::before { color: var(--tao2); }
+
+/* ── THE BRIDGE BOX ─────────────────────────────────────── */
+.bridge-box {
+  background: linear-gradient(135deg, rgba(0,82,255,.06), rgba(155,140,255,.06));
+  border: 1px solid rgba(0,82,255,.2);
+  border-radius: 14px; padding: 32px 36px;
+  display: flex; align-items: center; gap: 32px;
+  margin: 40px 0;
+}
+.bridge-chain {
+  flex: 1; text-align: center;
+}
+.bridge-logo {
+  font-family: var(--mono); font-size: 20px; font-weight: 500;
+  margin-bottom: 4px;
+}
+.bridge-logo.b { color: var(--base2); }
+.bridge-logo.t { color: var(--tao2); }
+.bridge-name {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--t4);
+}
+.bridge-arrow {
+  font-family: var(--mono); font-size: 22px; color: var(--signal);
+  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.bridge-arrow .ba-label {
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--t4);
+}
+.bridge-stats {
+  display: flex; gap: 24px; justify-content: center; margin-top: 8px;
+}
+.bs {
+  text-align: center;
+}
+.bs-val {
+  font-family: var(--serif); font-size: 22px; color: var(--tx); font-style: italic;
+}
+.bs-label {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--t4);
+}
+
+/* ── ARCHITECTURE ───────────────────────────────────────── */
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px; margin-bottom: 48px;
+}
+.arch-card {
+  background: var(--shell);
+  border: 1px solid var(--rule);
+  border-radius: 12px; padding: 24px 22px;
+  transition: border-color .2s, background .2s;
+}
+.arch-card:hover { border-color: rgba(0,82,255,.4); background: var(--lift); }
+.arch-layer {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--base2); margin-bottom: 8px;
+}
+.arch-title { font-size: 15px; font-weight: 500; color: var(--tx); margin-bottom: 8px; }
+.arch-body { font-size: 13px; color: var(--t3); line-height: 1.65; }
+.arch-tag {
+  display: inline-block; margin-top: 12px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px;
+}
+.at-base { background: rgba(0,82,255,.12); color: var(--base2); }
+.at-tao  { background: rgba(155,140,255,.1); color: var(--tao2); }
+.at-both { background: rgba(0,229,160,.08); color: var(--signal); }
+
+/* ── TIMELINE ────────────────────────────────────────────── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 6px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--base), var(--tao), var(--signal));
+}
+.tl-phase {
+  position: relative; margin-bottom: 48px;
+}
+.tl-phase:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -28px; top: 5px;
+  width: 13px; height: 13px; border-radius: 50%;
+  border: 2px solid var(--base);
+  background: var(--void);
+  box-shadow: 0 0 10px var(--base-g);
+}
+.tl-dot.active {
+  background: var(--base);
+  box-shadow: 0 0 16px var(--base);
+  animation: pulse-core 2s infinite;
+}
+.tl-dot.tao   { border-color: var(--tao); box-shadow: 0 0 10px var(--tao-g); }
+.tl-dot.sig   { border-color: var(--signal); box-shadow: 0 0 10px var(--sig-g); }
+
+.tl-head {
+  display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px;
+}
+.tl-phase-id {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--t4);
+}
+.tl-phase-name {
+  font-family: var(--serif); font-size: 22px; color: var(--tx); font-weight: 400;
+}
+.tl-phase-when {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1px; color: var(--gold); margin-left: auto;
+}
+.tl-desc { font-size: 14px; color: var(--t3); margin-bottom: 16px; line-height: 1.7; }
+
+.tl-tasks { display: flex; flex-direction: column; gap: 8px; }
+.tl-task {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--shell); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 13px;
+}
+.tl-task-icon {
+  font-family: var(--mono); font-size: 10px; flex-shrink: 0;
+  margin-top: 2px;
+}
+.tl-task-icon.base-c { color: var(--base2); }
+.tl-task-icon.tao-c  { color: var(--tao2); }
+.tl-task-icon.sig-c  { color: var(--signal); }
+.tl-task-icon.gold-c { color: var(--gold2); }
+.tl-task-body { color: var(--t2); line-height: 1.5; }
+.tl-task-body strong { color: var(--tx); font-weight: 500; }
+
+/* ── FUNDING ─────────────────────────────────────────────── */
+.funding-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px; margin-bottom: 32px;
+}
+.fund-card {
+  background: var(--shell);
+  border: 1px solid var(--rule);
+  border-radius: 14px; padding: 28px 26px;
+  position: relative; overflow: hidden;
+  transition: border-color .2s;
+}
+.fund-card:hover { border-color: rgba(0,82,255,.4); }
+.fund-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.fund-card.weekly::before { background: linear-gradient(90deg, var(--base), var(--base2)); }
+.fund-card.grants::before { background: linear-gradient(90deg, var(--tao), var(--tao2)); }
+.fund-card.retro::before  { background: linear-gradient(90deg, var(--signal), #00b87a); }
+.fund-card.batches::before { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+
+.fund-badge {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 4px; display: inline-block; margin-bottom: 14px;
+}
+.fund-card.weekly .fund-badge  { background: rgba(0,82,255,.12); color: var(--base2); }
+.fund-card.grants .fund-badge  { background: rgba(155,140,255,.1); color: var(--tao2); }
+.fund-card.retro .fund-badge   { background: rgba(0,229,160,.08); color: var(--signal); }
+.fund-card.batches .fund-badge { background: rgba(212,168,67,.1); color: var(--gold2); }
+
+.fund-amount {
+  font-family: var(--serif); font-size: 32px; font-style: italic;
+  color: var(--tx); margin-bottom: 6px;
+}
+.fund-name { font-size: 16px; font-weight: 500; color: var(--tx); margin-bottom: 8px; }
+.fund-desc { font-size: 13px; color: var(--t3); line-height: 1.65; margin-bottom: 14px; }
+.fund-req {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .5px;
+  color: var(--t4); border-top: 1px solid var(--rule);
+  padding-top: 12px; margin-top: 4px;
+}
+.fund-req strong { color: var(--t3); }
+
+/* ── OPEN SOURCE STACK ───────────────────────────────────── */
+.oss-list { display: flex; flex-direction: column; gap: 10px; }
+.oss-item {
+  display: grid;
+  grid-template-columns: 200px 1fr 120px;
+  align-items: center; gap: 16px;
+  background: var(--shell); border: 1px solid var(--rule);
+  border-radius: 10px; padding: 14px 18px;
+  transition: border-color .2s;
+}
+.oss-item:hover { border-color: rgba(0,82,255,.3); }
+.oss-repo {
+  font-family: var(--mono); font-size: 12px; color: var(--base2);
+}
+.oss-desc { font-size: 13px; color: var(--t3); }
+.oss-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 4px; text-align: center;
+}
+.oss-tag.new { background: rgba(0,229,160,.1); color: var(--signal); }
+.oss-tag.ext { background: rgba(0,82,255,.1); color: var(--base2); }
+.oss-tag.mod { background: rgba(155,140,255,.1); color: var(--tao2); }
+
+/* ── CODE BLOCK ─────────────────────────────────────────── */
+.code-block {
+  background: rgba(0,2,10,.8);
+  border: 1px solid var(--rule);
+  border-radius: 12px; overflow: hidden;
+  margin: 24px 0;
+}
+.code-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+}
+.code-lang { color: var(--t4); }
+.code-file { color: var(--base2); }
+pre.code-body {
+  padding: 18px 20px;
+  font-family: var(--mono); font-size: 12.5px;
+  color: var(--signal); line-height: 1.7;
+  overflow-x: auto; white-space: pre;
+}
+pre.code-body .cm { color: var(--t4); }
+pre.code-body .kw { color: var(--base2); }
+pre.code-body .st { color: var(--tao2); }
+pre.code-body .fn { color: var(--gold2); }
+
+/* ── COUNCIL MANDATE ─────────────────────────────────────── */
+.mandate-box {
+  background: linear-gradient(135deg, rgba(0,82,255,.05), rgba(155,140,255,.04));
+  border: 1px solid rgba(0,82,255,.2);
+  border-radius: 16px; padding: 40px 44px;
+  text-align: center; position: relative; overflow: hidden;
+  margin: 60px 0;
+}
+.mandate-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--base), var(--tao), transparent);
+}
+.mandate-stamp {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--t4); margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.mandate-stamp::before, .mandate-stamp::after {
+  content: ''; width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--base));
+}
+.mandate-stamp::after { background: linear-gradient(270deg, transparent, var(--base)); }
+.mandate-title {
+  font-family: var(--serif); font-size: clamp(22px, 3vw, 32px);
+  color: var(--tx); font-weight: 400; margin-bottom: 18px;
+  line-height: 1.2;
+}
+.mandate-title em { color: var(--base2); font-style: italic; }
+.mandate-body {
+  font-size: 15px; color: var(--t3); max-width: 580px; margin: 0 auto 32px;
+  line-height: 1.8;
+}
+.mandate-sig {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--t4); margin-top: 24px;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 32px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--t4);
+}
+footer a { color: var(--base2); text-decoration: none; }
+footer a:hover { color: var(--base3); }
+
+/* ── DIVIDER ─────────────────────────────────────────────── */
+.divider {
+  border: none; border-top: 1px solid var(--rule);
+  margin: 80px 0 0;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .why-grid, .arch-grid, .funding-grid { grid-template-columns: 1fr; }
+  .why-col:first-child { border-right: none; border-bottom: 1px solid var(--rule); }
+  .oss-item { grid-template-columns: 1fr; gap: 8px; }
+  .bridge-box { flex-direction: column; gap: 16px; }
+  .council-right { display: none; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COUNCIL BAR -->
+<nav class="council-bar">
+  <div class="council-id">
+    <div class="council-sigil"></div>
+    <div class="council-label"><strong>Arcturian Council</strong> · Transmission 001</div>
+  </div>
+  <div class="council-right">
+    <div class="council-net"><div class="net-dot"></div>base.arctura.network · live</div>
+    <div class="council-classify">Open Source</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-above">Arcturian Council · Strategic Mandate</div>
+    <div class="hero-eyebrow">Mission Briefing · Classification: Public</div>
+    <h1 class="hero-title">
+      The First<br/>
+      <span class="base-word">Base</span> Subnet<br/>
+      on <span class="tao-word">Bittensor</span>
+    </h1>
+    <p class="hero-sub">
+      Arctura launches <strong style="color:var(--tx)">base.arctura.network</strong> — the first open-source Bittensor subnet purpose-built to bridge Base blockchain intelligence into the decentralized AI network. Funded by Base. Owned by no one.
+    </p>
+    <div class="hero-url">
+      <div class="url-dot"></div>
+      base.arctura.network &nbsp;·&nbsp; github.com/virtualmase/arctura-base-subnet
+    </div>
+    <div class="hero-ctas">
+      <a href="https://github.com/virtualmase/arctura-base-subnet" class="cta-primary" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub Repository
+      </a>
+      <a href="https://paragraph.com/@grants.base.eth/calling-based-builders" class="cta-secondary" target="_blank">Apply for Base Grant →</a>
+      <a href="https://basebatches.xyz" class="cta-secondary" target="_blank">Base Batches →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNAL BANNER -->
+<div class="signal-banner">
+  <div class="signal-scroll">
+    <div class="signal-item"><div class="si-dot"></div>First Base subnet on Bittensor</div>
+    <div class="signal-item gold"><div class="si-dot"></div>Apache-2.0 Open Source</div>
+    <div class="signal-item sig"><div class="si-dot"></div>Base Builder Grants eligible · 1–5 ETH</div>
+    <div class="signal-item"><div class="si-dot"></div>Base Batches · Cohort candidate</div>
+    <div class="signal-item gold"><div class="si-dot"></div>OP Retro Funding · Public goods</div>
+    <div class="signal-item sig"><div class="si-dot"></div>Resonance BFT · Attestation-native</div>
+    <div class="signal-item"><div class="si-dot"></div>base.arctura.network</div>
+    <div class="signal-item gold"><div class="si-dot"></div>Finney Mainnet · Bittensor</div>
+    <!-- duplicate for seamless loop -->
+    <div class="signal-item"><div class="si-dot"></div>First Base subnet on Bittensor</div>
+    <div class="signal-item gold"><div class="si-dot"></div>Apache-2.0 Open Source</div>
+    <div class="signal-item sig"><div class="si-dot"></div>Base Builder Grants eligible · 1–5 ETH</div>
+    <div class="signal-item"><div class="si-dot"></div>Base Batches · Cohort candidate</div>
+    <div class="signal-item gold"><div class="si-dot"></div>OP Retro Funding · Public goods</div>
+    <div class="signal-item sig"><div class="si-dot"></div>Resonance BFT · Attestation-native</div>
+    <div class="signal-item"><div class="si-dot"></div>base.arctura.network</div>
+    <div class="signal-item gold"><div class="si-dot"></div>Finney Mainnet · Bittensor</div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-label">Strategic rationale</div>
+    <h2 class="sect-title">Why <em>Base</em> × <em>Bittensor</em></h2>
+    <p class="sect-desc">Two networks with complementary primitives, no bridge between them — until now. The Arctura Base subnet is that bridge, and it's the only one.</p>
+
+    <div class="why-grid">
+      <div class="why-col">
+        <div class="why-col-head">
+          <div class="why-chain-dot base-chip">B</div>
+          <span>What Base brings</span>
+        </div>
+        <div class="why-list">
+          <div class="why-item">Coinbase's L2 — deepest onchain consumer surface in crypto. 10M+ daily active addresses.</div>
+          <div class="why-item">AgentKit, CDP SDK, MCP server — native AI agent tooling already deployed and open source.</div>
+          <div class="why-item">Active funding ecosystem: weekly rewards, 1–5 ETH builder grants, OP Retro, Base Batches.</div>
+          <div class="why-item">Smart wallet infrastructure — users interact without managing seed phrases. Onboarding friction eliminated.</div>
+          <div class="why-item">OnchainKit, Paymaster (gasless transactions), and verified identity via Coinbase verification.</div>
+        </div>
+      </div>
+      <div class="why-col">
+        <div class="why-col-head">
+          <div class="why-chain-dot tao-chip">τ</div>
+          <span>What Bittensor brings</span>
+        </div>
+        <div class="why-list">
+          <div class="why-item tao-item">Decentralized AI incentive layer. TAO emissions reward miners who perform verifiable AI work.</div>
+          <div class="why-item tao-item">Subnet model — any team can define a custom incentive mechanism and own its emission slice.</div>
+          <div class="why-item tao-item">Yuma Consensus — validator-set agreement means no single party controls reward distribution.</div>
+          <div class="why-item tao-item">128-subnet limit enforces scarcity. Being first in a category (Base intelligence) is a durable advantage.</div>
+          <div class="why-item tao-item">4-month immunity period post-registration — protected runway to build validator adoption.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge-box">
+      <div class="bridge-chain">
+        <div class="bridge-logo b">Base</div>
+        <div class="bridge-name">Coinbase L2</div>
+      </div>
+      <div class="bridge-arrow">
+        <span>⟷</span>
+        <div class="ba-label">Arctura Base Subnet</div>
+        <div class="bridge-stats">
+          <div class="bs"><div class="bs-val">First</div><div class="bs-label">of its kind</div></div>
+          <div class="bs"><div class="bs-val">Open</div><div class="bs-label">source</div></div>
+          <div class="bs"><div class="bs-val">Funded</div><div class="bs-label">by Base</div></div>
+        </div>
+      </div>
+      <div class="bridge-chain">
+        <div class="bridge-logo t">τ TAO</div>
+        <div class="bridge-name">Bittensor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- WHAT IT DOES -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-label">Architecture</div>
+    <h2 class="sect-title">What the <em>Base Subnet</em> does</h2>
+    <p class="sect-desc">Miners read, process, and attest to Base chain state. Validators score attestation quality using Resonance BFT. TAO flows to miners who prove their work.</p>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-layer">L0 → L1 · Intent</div>
+        <div class="arch-title">Base Chain Mandates</div>
+        <div class="arch-body">Validators issue mandates referencing Base block ranges, contract addresses, or onchain events. Miners fetch and process this data as attested mandates.</div>
+        <span class="arch-tag at-base">Base RPC</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-layer">L2 · Sandbox</div>
+        <div class="arch-title">Deterministic Execution</div>
+        <div class="arch-body">Every miner executes in a deterministic sandbox — same Base state in, same output out. Makes attestation proofs reproducible and verifiable by any third party.</div>
+        <span class="arch-tag at-tao">Bittensor Axon</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-layer">L3 · Cognitive Mesh</div>
+        <div class="arch-title">Base AI Agent Layer</div>
+        <div class="arch-body">Miners optionally plug in Base's AgentKit — enabling autonomous onchain actions as part of mandate execution. First-class support for CDP SDK and smart wallets.</div>
+        <span class="arch-tag at-base">AgentKit · CDP</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-layer">L4 · Memory Fabric</div>
+        <div class="arch-title">Onchain State Index</div>
+        <div class="arch-body">Miners maintain a local index of Base contract state, transaction history, and event logs. This off-chain memory is referenced in mandate responses and attested to on Bittensor.</div>
+        <span class="arch-tag at-both">Cross-chain</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-layer">L5 · Action Surface</div>
+        <div class="arch-title">MCP + Onchain Bindings</div>
+        <div class="arch-body">Axon endpoints expose Base chain reads as MCP tool bindings — making subnet miners callable by any MCP-compatible AI agent or framework as a live data source.</div>
+        <span class="arch-tag at-both">MCP · A2A · ACP</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-layer">P3 · Attestation</div>
+        <div class="arch-title">Merkle-Anchored Proofs</div>
+        <div class="arch-body">Every Base state claim returned by a miner is Merkle-anchored. Validators verify the proof before assigning weight. Bad data = zero weight = no TAO.</div>
+        <span class="arch-tag at-tao">Resonance BFT</span>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-head">
+        <span class="code-lang">python</span>
+        <span class="code-file">arctura_base/protocol.py</span>
+      </div>
+      <pre class="code-body"><span class="cm"># The Base Subnet Synapse — what validators ask, what miners prove</span>
+<span class="kw">class</span> <span class="fn">BaseSubnetSynapse</span>(bt.Synapse):
+    <span class="cm"># Mandate: what Base data to fetch and attest</span>
+    base_block_range: <span class="fn">tuple</span>[int, int] = (0, 0)
+    contract_address: <span class="fn">Optional</span>[str] = None
+    query_type: str = <span class="st">""</span>  <span class="cm"># "balance" | "events" | "state" | "agent_action"</span>
+    mandate_payload: dict = {}
+
+    <span class="cm"># Attestation: Merkle-anchored proof of Base chain state</span>
+    base_state_hash: <span class="fn">Optional</span>[str] = None
+    merkle_proof: <span class="fn">Optional</span>[list] = None
+    block_hash_anchor: <span class="fn">Optional</span>[str] = None  <span class="cm"># anchored to Base block hash</span>
+    execution_trace: <span class="fn">Optional</span>[dict] = None
+    confidence: float = 0.0</pre>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- LAUNCH PLAN -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-label">Activation sequence</div>
+    <h2 class="sect-title">Launch <em>timeline</em></h2>
+    <p class="sect-desc">Eight weeks from first commit to mainnet registration. Four phases, clear deliverables, funded at each gate.</p>
+
+    <div class="timeline">
+
+      <div class="tl-phase">
+        <div class="tl-dot active"></div>
+        <div class="tl-head">
+          <span class="tl-phase-id">Phase 0</span>
+          <span class="tl-phase-name">Foundation Signal</span>
+          <span class="tl-phase-when">Weeks 1–2</span>
+        </div>
+        <div class="tl-desc">Establish the open-source repo, brand presence at base.arctura.network, and apply to the Base Weekly Rewards program to start earning from day one.</div>
+        <div class="tl-tasks">
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body">Create <strong>github.com/virtualmase/arctura-base-subnet</strong> — Apache-2.0, README, project board. Make it visibly active from week 1.</div></div>
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body">Configure <strong>base.arctura.network</strong> subdomain pointing to GitHub Pages landing page with the mission brief and funding links.</div></div>
+          <div class="tl-task"><span class="tl-task-icon gold-c">◈</span><div class="tl-task-body"><strong>Apply to Base Weekly Rewards</strong> via builderscore.xyz — 2 ETH/week pool, no minimum project size. Document all builds publicly on X.</div></div>
+          <div class="tl-task"><span class="tl-task-icon tao-c">τ</span><div class="tl-task-body">Acquire TAO: check live burn cost (<code>btcli subnet burn_cost --subtensor.network finney</code>), target 100+ TAO in owner coldkey. Budget validator + miner recycle fees.</div></div>
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body">Set up three Bittensor wallets: owner, validator, miner. Store coldkeys offline. Fund hotkeys for registration fees.</div></div>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <span class="tl-phase-id">Phase 1</span>
+          <span class="tl-phase-name">Protocol Build</span>
+          <span class="tl-phase-when">Weeks 3–4</span>
+        </div>
+        <div class="tl-desc">Build the core protocol: BaseSubnetSynapse, miner that reads Base RPC, validator with Resonance BFT scoring. Run everything locally. Ship working code publicly.</div>
+        <div class="tl-tasks">
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body">Write <strong>arctura_base/protocol.py</strong> — BaseSubnetSynapse with block range queries, contract address mandates, and Merkle-anchored attestations.</div></div>
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body">Write <strong>neurons/miner.py</strong> — connects to Base RPC (Coinbase's public endpoint), fetches state, hashes it, returns attestation proof.</div></div>
+          <div class="tl-task"><span class="tl-task-icon tao-c">τ</span><div class="tl-task-body">Write <strong>neurons/validator.py</strong> — issues Base mandates to miners, verifies Merkle proofs against live Base block hashes, sets weights via Yuma Consensus.</div></div>
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body">Integrate <strong>Coinbase CDP SDK / AgentKit</strong> as optional miner enhancement — miners can execute onchain actions, not just read state. First MCP-over-Bittensor implementation.</div></div>
+          <div class="tl-task"><span class="tl-task-icon gold-c">◈</span><div class="tl-task-body"><strong>Prepare Base Builder Grant application</strong> — the shipped protocol.py and miner.py stubs qualify as a working prototype. Submit to paragraph.com/@grants.base.eth. Target: 1–5 ETH.</div></div>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-dot tao"></div>
+        <div class="tl-head">
+          <span class="tl-phase-id">Phase 2</span>
+          <span class="tl-phase-name">Testnet Validation</span>
+          <span class="tl-phase-when">Weeks 5–6</span>
+        </div>
+        <div class="tl-desc">Register on Bittensor testnet, run 48 hours of validation, recruit the first external validator. Meanwhile apply to Base Batches with the running testnet as evidence.</div>
+        <div class="tl-tasks">
+          <div class="tl-task"><span class="tl-task-icon tao-c">τ</span><div class="tl-task-body">Register on Bittensor testnet: <code>btcli subnet create --wallet.name owner --subtensor.network test</code>. Free testnet TAO via Discord faucet.</div></div>
+          <div class="tl-task"><span class="tl-task-icon tao-c">τ</span><div class="tl-task-body">Run miner and validator on testnet for 48+ hours. Confirm: validator sets non-zero weights, miner attestations pass Merkle verification against real Base block hashes.</div></div>
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body"><strong>Apply to Base Batches</strong> (basebatches.xyz) — present the running testnet subnet as the MVP. Frame: first Base intelligence subnet on Bittensor. Buildathon → Incubator → Coinbase Ventures pitch.</div></div>
+          <div class="tl-task"><span class="tl-task-icon gold-c">◈</span><div class="tl-task-body"><strong>Apply for OP Retro Funding</strong> via Atlas — the open-source subnet code, docs, and training Q&A dataset qualify as public goods for the Base ecosystem.</div></div>
+          <div class="tl-task"><span class="tl-task-icon sig-c">◉</span><div class="tl-task-body">Recruit first external Bittensor validator. Post in #subnet-owners Discord. Share incentive paper: Base state attestation, Resonance BFT scoring model, projected APY.</div></div>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-dot sig"></div>
+        <div class="tl-head">
+          <span class="tl-phase-id">Phase 3</span>
+          <span class="tl-phase-name">Mainnet · Emission On</span>
+          <span class="tl-phase-when">Weeks 7–8</span>
+        </div>
+        <div class="tl-desc">Register on Finney mainnet, burn TAO, start emission clock. Simultaneously launch base.arctura.network publicly with the subnet agent, creator.bid tokenization, and Base community announcement.</div>
+        <div class="tl-tasks">
+          <div class="tl-task"><span class="tl-task-icon tao-c">τ</span><div class="tl-task-body">Execute go/no-go checklist. Register: <code>btcli subnet create --wallet.name owner --subtensor.network finney</code>. Record netuid. Register validator + miner within the same session.</div></div>
+          <div class="tl-task"><span class="tl-task-icon sig-c">◉</span><div class="tl-task-body">Start neurons on mainnet immediately. Monitor: <code>btcli subnet metagraph --netuid N --subtensor.network finney</code>. Confirm non-zero weights before block 50,400 (7 days).</div></div>
+          <div class="tl-task"><span class="tl-task-icon base-c">▶</span><div class="tl-task-body">Announce on Base Discord, Builder Rewards Program, and X: <em>"First Base subnet on Bittensor is live — netuid [N], open source, Base-funded."</em> Tag @buildonbase.</div></div>
+          <div class="tl-task"><span class="tl-task-icon gold-c">◈</span><div class="tl-task-body">Tokenize on creator.bid — mint $ARCTURA-BASE Agent Key on Base. The agent posts Base × Bittensor intelligence to X. 2% fee on Agent Key trades funds ongoing development.</div></div>
+          <div class="tl-task"><span class="tl-task-icon sig-c">◉</span><div class="tl-task-body">Submit final Base Builder Grant application with: live netuid, taostats.io link, GitHub metrics, validator count. Retroactive for shipped, running mainnet subnet.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- FUNDING -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-label">Capital strategy</div>
+    <h2 class="sect-title">How <em>Base funds</em> the subnet</h2>
+    <p class="sect-desc">Four Base funding programs, stacked sequentially. The subnet qualifies for all four. Each grant unlocks the next phase.</p>
+
+    <div class="funding-grid">
+      <div class="fund-card weekly">
+        <div class="fund-badge">Active Now</div>
+        <div class="fund-amount">2 ETH/wk</div>
+        <div class="fund-name">Weekly Builder Rewards</div>
+        <div class="fund-desc">Distribute weekly to active builders building on Base. No minimum project size — prototypes count. Apply via builderscore.xyz and post progress publicly on X.</div>
+        <div class="fund-req"><strong>Requirement:</strong> Build on Base, share publicly. Start immediately — week 1 of the build.</div>
+      </div>
+      <div class="fund-card grants">
+        <div class="fund-badge">Phase 1 → 2</div>
+        <div class="fund-amount">1–5 ETH</div>
+        <div class="fund-name">Base Builder Grants</div>
+        <div class="fund-desc">Retroactive grants for shipped projects. The working subnet miner + validator code qualifies as a shipped prototype. Apply once protocol.py and testnet are live.</div>
+        <div class="fund-req"><strong>Requirement:</strong> Deployed on Base or Base testnet. Submit to paragraph.com/@grants.base.eth.</div>
+      </div>
+      <div class="fund-card retro">
+        <div class="fund-badge">Ongoing</div>
+        <div class="fund-amount">Variable</div>
+        <div class="fund-name">OP Retro Funding</div>
+        <div class="fund-desc">Rewards open-source public goods. The subnet code, docs, training Q&A dataset, and subnet agent all qualify. Track contributions on Atlas, submit retroactively.</div>
+        <div class="fund-req"><strong>Requirement:</strong> Open source, public benefit. Apache-2.0 license already in place.</div>
+      </div>
+      <div class="fund-card batches">
+        <div class="fund-badge">Phase 2 → 3</div>
+        <div class="fund-amount">Significant</div>
+        <div class="fund-name">Base Batches</div>
+        <div class="fund-desc">The founder track: Buildathon → 4-week Incubator → Coinbase Ventures pitch day. A live Bittensor subnet is an exceptional Buildathon submission. Mentorship from Base core team + VC intros.</div>
+        <div class="fund-req"><strong>Requirement:</strong> MVP deployed, market validated. Apply at basebatches.xyz with testnet netuid as proof.</div>
+      </div>
+    </div>
+
+    <div class="mandate-box" style="margin:0;background:linear-gradient(135deg,rgba(0,82,255,.04),rgba(0,229,160,.03));border-color:rgba(0,82,255,.15);">
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);margin-bottom:16px;">Total addressable funding</div>
+      <div style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap;">
+        <div style="text-align:center;"><div style="font-family:var(--serif);font-size:28px;color:var(--base2);font-style:italic;">2 ETH</div><div style="font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-top:4px;">weekly · ongoing</div></div>
+        <div style="text-align:center;"><div style="font-family:var(--serif);font-size:28px;color:var(--tao2);font-style:italic;">1–5 ETH</div><div style="font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-top:4px;">builder grant</div></div>
+        <div style="text-align:center;"><div style="font-family:var(--serif);font-size:28px;color:var(--signal);font-style:italic;">+ OP</div><div style="font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-top:4px;">retro funding</div></div>
+        <div style="text-align:center;"><div style="font-family:var(--serif);font-size:28px;color:var(--gold2);font-style:italic;">VC</div><div style="font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-top:4px;">coinbase ventures</div></div>
+        <div style="text-align:center;"><div style="font-family:var(--serif);font-size:28px;color:var(--tao);font-style:italic;">TAO</div><div style="font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-top:4px;">subnet emissions</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- OPEN SOURCE -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-label">Open source stack</div>
+    <h2 class="sect-title">What gets <em>shipped</em></h2>
+    <p class="sect-desc">Every file, every doc, every training scenario — public, Apache-2.0, forkable. The subnet the Base community can point to and say "we funded this."</p>
+
+    <div class="oss-list">
+      <div class="oss-item">
+        <div class="oss-repo">arctura_base/protocol.py</div>
+        <div class="oss-desc">BaseSubnetSynapse — mandate + attestation schema with Base block hash anchoring</div>
+        <div class="oss-tag new">New</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">neurons/miner.py</div>
+        <div class="oss-desc">Base RPC reader — fetches state, builds Merkle proofs, optional AgentKit integration</div>
+        <div class="oss-tag new">New</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">neurons/validator.py</div>
+        <div class="oss-desc">Resonance BFT scoring — issues Base mandates, verifies against live block hashes, sets weights</div>
+        <div class="oss-tag new">New</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">arctura_base/base_rpc.py</div>
+        <div class="oss-desc">Base chain client — wraps Coinbase public RPC and CDP SDK for miner execution</div>
+        <div class="oss-tag new">New</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">arctura_base/agentkit.py</div>
+        <div class="oss-desc">AgentKit adapter — exposes Base onchain actions as mandate types for miners</div>
+        <div class="oss-tag new">New</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">agent/arctura-base-agent.html</div>
+        <div class="oss-desc">Streaming AI agent — Claude-powered, pre-loaded with Base × Bittensor knowledge</div>
+        <div class="oss-tag ext">Extended</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">docs/BASE_INTEGRATION.md</div>
+        <div class="oss-desc">Complete guide: Base RPC setup, AgentKit integration, MCP bindings, smart wallet support</div>
+        <div class="oss-tag new">New</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">docs/FUNDING_GUIDE.md</div>
+        <div class="oss-desc">Step-by-step for all four Base funding programs — written for builders, not bureaucrats</div>
+        <div class="oss-tag new">New</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">training/base_qa_scenarios.json</div>
+        <div class="oss-desc">12+ Q&A training scenarios for the Base subnet agent — for creator.bid and custom runtimes</div>
+        <div class="oss-tag ext">Extended</div>
+      </div>
+      <div class="oss-item">
+        <div class="oss-repo">arctura-subnet-launch/ (existing)</div>
+        <div class="oss-desc">Parent Arctura subnet kit — wallets, Resonance BFT, incentive design, launch phases</div>
+        <div class="oss-tag mod">Inherits</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNCIL MANDATE -->
+<div class="wrap">
+  <div class="mandate-box">
+    <div class="mandate-stamp">Arcturian Council · Mandate 001</div>
+    <h2 class="mandate-title">
+      Be the first.<br/>
+      <em>Build the bridge.</em><br/>
+      Open source it all.
+    </h2>
+    <p class="mandate-body">
+      There are 128 subnet slots on Bittensor. There are zero Base subnets.
+      The Arcturian Council mandates that Arctura fills that slot first —
+      as a public good, Apache-licensed, funded by the same ecosystem it bridges to.
+      <br/><br/>
+      Every validator that joins earns TAO.
+      Every miner that proves Base chain state earns TAO.
+      Every builder who forks the code inherits the architecture.
+      Base funds the build. Bittensor sustains it.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://github.com/virtualmase/arctura-base-subnet" class="cta-primary" target="_blank">Fork the Repo</a>
+      <a href="https://www.builderscore.xyz/" class="cta-secondary" target="_blank">Join Builder Rewards →</a>
+      <a href="https://paragraph.com/@grants.base.eth/calling-based-builders" class="cta-secondary" target="_blank">Apply for Grant →</a>
+    </div>
+    <div class="mandate-sig">
+      Transmitted by the Arcturian Council · base.arctura.network · Apache-2.0
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="https://arctura.network">arctura.network</a>
+    &nbsp;·&nbsp;
+    <a href="https://base.arctura.network">base.arctura.network</a>
+    &nbsp;·&nbsp; Apache-2.0
+  </div>
+  <div>
+    <a href="https://docs.base.org/get-started/get-funded" target="_blank">Base Funding →</a>
+    &nbsp;&nbsp;
+    <a href="https://github.com/virtualmase/arctura-base-subnet" target="_blank">GitHub →</a>
+    &nbsp;&nbsp;
+    <a href="https://taostats.io/subnets" target="_blank">TAO Stats →</a>
+  </div>
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>
