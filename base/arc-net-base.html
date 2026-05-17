@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arctura — Base Subnet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #060810;
+      --surface:   #0c1020;
+      --border:    #1a2240;
+      --accent:    #3b82f6;
+      --accent2:   #06b6d4;
+      --glow:      rgba(59,130,246,.18);
+      --glow2:     rgba(6,182,212,.12);
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --mono:      "DM Mono", monospace;
+      --sans:      "Syne", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CUSTOM CURSOR ─────────────────────────────────────────── */
+    #cursor {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent2);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      transition: transform .1s, background .2s;
+      mix-blend-mode: screen;
+    }
+    #cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 9998;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(59,130,246,.4);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      transition: transform .22s cubic-bezier(.23,1,.32,1), opacity .2s;
+    }
+    body:hover #cursor { opacity: 1; }
+
+    /* ─── BACKGROUND NOISE & GRID ───────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 15% 40%, var(--glow), transparent),
+        radial-gradient(ellipse 50% 40% at 85% 70%, var(--glow2), transparent);
+      pointer-events: none;
+    }
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black, transparent);
+      opacity: .3;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────────── */
+    .container {
+      position: relative; z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ─── NAV ────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(6,8,16,.7);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 28px; height: 28px;
+      position: relative;
+    }
+    .logo-mark svg { width: 100%; height: 100%; }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent2); }
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(59,130,246,.4);
+      padding: 8px 18px;
+      text-decoration: none;
+      transition: background .2s, color .2s, box-shadow .2s;
+    }
+    .nav-cta:hover {
+      background: rgba(59,130,246,.12);
+      box-shadow: 0 0 20px var(--glow);
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      padding: 180px 0 120px;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent2);
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.02em;
+      margin-bottom: 32px;
+    }
+    .hero h1 .line1 { display: block; color: var(--text); }
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-family: var(--mono);
+      font-size: .9rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 52px;
+    }
+    .hero-sub span { color: var(--accent); }
+    .hero-actions {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: box-shadow .25s, transform .2s;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 32px rgba(59,130,246,.5);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 14px 28px;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent2);
+      color: var(--accent2);
+    }
+    .hero-stats {
+      display: flex; gap: 48px; margin-top: 72px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .stat { display: flex; flex-direction: column; gap: 6px; }
+    .stat-val {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, var(--text), var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── SCROLL TICKER ──────────────────────────────────────────── */
+    .ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      background: rgba(12,16,32,.6);
+      position: relative; z-index: 1;
+    }
+    .ticker-track {
+      display: flex; gap: 60px;
+      white-space: nowrap;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-item {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ticker-item span { color: var(--accent2); }
+    .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── HOW IT WORKS ───────────────────────────────────────────── */
+    section { padding: 100px 0; position: relative; z-index: 1; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: var(--border);
+      max-width: 120px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-family: var(--mono);
+      font-size: .85rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .arch-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .arch-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--glow), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .arch-card:hover { border-color: rgba(59,130,246,.4); }
+    .arch-card:hover::before { opacity: 1; }
+    .arch-num {
+      font-family: var(--mono);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .arch-icon {
+      width: 44px; height: 44px;
+      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+    }
+    .arch-icon svg { width: 22px; height: 22px; }
+    .arch-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .arch-card p {
+      font-family: var(--mono);
+      font-size: .75rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* ─── FLOW DIAGRAM ───────────────────────────────────────────── */
+    .flow-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .flow-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+    }
+    .flow-diagram {
+      position: relative;
+    }
+    .flow-node {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 2px;
+      transition: border-color .2s;
+      cursor: default;
+    }
+    .flow-node:hover { border-color: rgba(59,130,246,.4); }
+    .flow-node-icon {
+      width: 36px; height: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .flow-node-icon svg { width: 16px; height: 16px; }
+    .flow-node-info { flex: 1; }
+    .flow-node-title {
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .flow-node-desc {
+      font-family: var(--mono);
+      font-size: .67rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .flow-arrow {
+      display: flex; justify-content: center; align-items: center;
+      height: 24px; color: var(--accent);
+      font-size: .8rem;
+    }
+    .flow-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid;
+    }
+    .flow-badge.miner { color: var(--accent); border-color: rgba(59,130,246,.4); }
+    .flow-badge.validator { color: var(--accent2); border-color: rgba(6,182,212,.4); }
+    .flow-badge.reward { color: #a78bfa; border-color: rgba(167,139,250,.4); }
+
+    /* ─── CODE BLOCK ─────────────────────────────────────────────── */
+    .code-panel {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .code-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .code-dots span:nth-child(1) { background: #ff5f57; }
+    .code-dots span:nth-child(2) { background: #febc2e; }
+    .code-dots span:nth-child(3) { background: #28c840; }
+    .code-file {
+      font-family: var(--mono);
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+    }
+    .code-body {
+      padding: 24px 18px;
+      font-family: var(--mono);
+      font-size: .72rem;
+      line-height: 1.8;
+      color: var(--muted);
+      overflow-x: auto;
+    }
+    .code-body .kw { color: #818cf8; }
+    .code-body .fn { color: var(--accent2); }
+    .code-body .str { color: #86efac; }
+    .code-body .cm { color: #374151; }
+    .code-body .hi { color: var(--text); }
+
+    /* ─── ROLES ──────────────────────────────────────────────────── */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 64px;
+    }
+    .role-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .role-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .role-card.miners::after { background: linear-gradient(90deg, var(--accent), transparent); }
+    .role-card.validators::after { background: linear-gradient(90deg, var(--accent2), transparent); }
+    .role-tag {
+      font-family: var(--mono);
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .role-tag.m { color: var(--accent); }
+    .role-tag.v { color: var(--accent2); }
+    .role-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .role-card p {
+      font-family: var(--mono);
+      font-size: .75rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .role-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .role-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-family: var(--mono);
+      font-size: .72rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .role-list li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .role-card.validators .role-list li::before { color: var(--accent2); }
+
+    /* ─── STACK ───────────────────────────────────────────────────── */
+    .stack-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .stack-item {
+      border: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color .2s, background .2s;
+    }
+    .stack-item:hover {
+      border-color: rgba(59,130,246,.35);
+      background: rgba(59,130,246,.04);
+    }
+    .stack-tag {
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .stack-name {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .stack-desc {
+      font-family: var(--mono);
+      font-size: .68rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .stack-pct {
+      font-family: var(--mono);
+      font-size: .65rem;
+      color: var(--muted);
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .pct-bar {
+      height: 2px;
+      background: var(--border);
+      margin-top: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pct-fill {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      animation: grow 1.4s ease-out forwards;
+      transform-origin: left;
+    }
+    @keyframes grow { from { width: 0; } }
+
+    /* ─── CTA ─────────────────────────────────────────────────────── */
+    .cta-section {
+      padding: 120px 0;
+      text-align: center;
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .cta-section h2 {
+      font-size: clamp(2rem,5vw,3.4rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .cta-section p {
+      font-family: var(--mono);
+      font-size: .85rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+    .cta-actions {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-left {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .footer-left strong { color: var(--text); }
+    .footer-links {
+      display: flex; gap: 24px; list-style: none;
+    }
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--accent2); }
+
+    /* ─── PULSE ANIMATION ─────────────────────────────────────────── */
+    .pulse-ring {
+      position: absolute; right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 320px; height: 320px;
+      pointer-events: none;
+    }
+    .pulse-ring circle {
+      animation: pulseOut 3s ease-out infinite;
+      transform-origin: center;
+    }
+    .pulse-ring circle:nth-child(2) { animation-delay: 1s; }
+    .pulse-ring circle:nth-child(3) { animation-delay: 2s; }
+    @keyframes pulseOut {
+      0% { r: 20; opacity: .8; }
+      100% { r: 140; opacity: 0; }
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .arch-grid { grid-template-columns: 1fr 1fr; }
+      .flow-inner { grid-template-columns: 1fr; }
+      .roles-grid { grid-template-columns: 1fr; }
+      .stack-row { grid-template-columns: 1fr 1fr; }
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 140px 0 80px; }
+      .hero-stats { flex-wrap: wrap; gap: 28px; }
+      .arch-grid { grid-template-columns: 1fr; }
+      .stack-row { grid-template-columns: 1fr; }
+      .container { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="grid-bg"></div>
+
+<!-- ─── NAV ──────────────────────────────────────────────────────── -->
+<nav>
+  <a href="https://arctura.network" class="nav-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+        <polygon points="14,8 20,11 20,17 14,20 8,17 8,11" stroke="#06b6d4" stroke-width="1" fill="none"/>
+        <circle cx="14" cy="14" r="2.5" fill="#3b82f6"/>
+      </svg>
+    </div>
+    ARCTURA
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">Architecture</a></li>
+    <li><a href="#roles">Participate</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#deploy">Deploy</a></li>
+  </ul>
+  <a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" class="nav-cta">GitHub →</a>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow fade-up">Bittensor Subnet · arctura.network/base</div>
+    <h1 class="fade-up">
+      <span class="line1">Base</span>
+      <span class="line2">Subnet</span>
+    </h1>
+    <p class="hero-sub fade-up">
+      Arctura is a decentralized AI subnet built on <span>Bittensor</span>,
+      incentivizing miners and validators through on-chain emissions.
+      The base subnet defines the foundational incentive mechanism for the network.
+    </p>
+    <div class="hero-actions fade-up">
+      <a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        View Repository
+      </a>
+      <a href="#how-it-works" class="btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        How it Works
+      </a>
+    </div>
+    <div class="hero-stats fade-up">
+      <div class="stat">
+        <span class="stat-val">93.2%</span>
+        <span class="stat-label">Python</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">TAO</span>
+        <span class="stat-label">Network Token</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">α</span>
+        <span class="stat-label">Subnet Alpha</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">Open</span>
+        <span class="stat-label">Source</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─────────────────────────────────────────────────────── -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item"><div class="ticker-dot"></div> Arctura Base Subnet <span>// Bittensor</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Miners &amp; Validators <span>// Incentivized</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Yuma Consensus <span>// On-Chain</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> TAO Emissions <span>// Dynamic</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Decentralized AI <span>// Production</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Open Registration <span>// Permissionless</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><div class="ticker-dot"></div> Arctura Base Subnet <span>// Bittensor</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Miners &amp; Validators <span>// Incentivized</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Yuma Consensus <span>// On-Chain</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> TAO Emissions <span>// Dynamic</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Decentralized AI <span>// Production</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div> Open Registration <span>// Permissionless</span></div>
+  </div>
+</div>
+
+<!-- ─── HOW IT WORKS ──────────────────────────────────────────────── -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-label fade-up">01 · Architecture</div>
+    <h2 class="section-title fade-up">Incentive Mechanism</h2>
+    <p class="section-sub fade-up">
+      The base subnet defines the rules by which miners produce work and validators
+      score that work — distributing TAO emissions as rewards.
+    </p>
+    <div class="arch-grid">
+      <div class="arch-card fade-up">
+        <div class="arch-num">01</div>
+        <div class="arch-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <h3>Miners Produce</h3>
+        <p>Miners receive challenges from validators and produce AI-graded outputs. Work is measured, ranked, and weighted continuously across the metagraph.</p>
+      </div>
+      <div class="arch-card fade-up">
+        <div class="arch-num">02</div>
+        <div class="arch-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+          </svg>
+        </div>
+        <h3>Validators Score</h3>
+        <p>Validators query miners with deterministic challenges, evaluate outputs against the incentive mechanism, and set weights on-chain via Yuma consensus.</p>
+      </div>
+      <div class="arch-card fade-up">
+        <div class="arch-num">03</div>
+        <div class="arch-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3>Emissions Flow</h3>
+        <p>TAO emissions are distributed to miners based on performance rank and to validators based on stake. Alpha tokens are minted per subnet-specific mechanics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FLOW ───────────────────────────────────────────────────────── -->
+<section class="flow-section" id="deploy">
+  <div class="container">
+    <div class="flow-inner">
+      <div>
+        <div class="section-label fade-up">02 · Flow</div>
+        <h2 class="section-title fade-up">Deploy & Participate</h2>
+        <p class="section-sub fade-up">
+          Clone the base subnet repo, install dependencies via the Makefile, configure
+          your wallet, and register on Bittensor. The scaffold handles the rest.
+        </p>
+        <br/><br/>
+        <div class="code-panel fade-up">
+          <div class="code-header">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <div class="code-file">install.sh</div>
+          </div>
+          <div class="code-body">
+<span class="cm"># Clone the base subnet</span>
+<span class="kw">git</span> <span class="fn">clone</span> <span class="str">https://github.com/bittensaur/</span>
+<span class="str">    arctura-base-subnet</span>
+<span class="hi">cd</span> arctura-base-subnet
+
+<span class="cm"># Install dependencies</span>
+<span class="kw">make</span> <span class="fn">install</span>
+
+<span class="cm"># Run as miner</span>
+<span class="kw">python</span> <span class="fn">neurons/miner.py</span>
+  --netuid &lt;netuid&gt;
+  --wallet.name <span class="str">default</span>
+  --wallet.hotkey <span class="str">default</span>
+
+<span class="cm"># Run as validator</span>
+<span class="kw">python</span> <span class="fn">neurons/validator.py</span>
+  --netuid &lt;netuid&gt;
+  --wallet.name <span class="str">default</span>
+          </div>
+        </div>
+      </div>
+      <div class="flow-diagram fade-up">
+        <div class="flow-node">
+          <div class="flow-node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <div class="flow-node-info">
+            <div class="flow-node-title">Miner Node <span class="flow-badge miner">neuron</span></div>
+            <div class="flow-node-desc">Registers hotkey · Serves axon · Awaits forward pass</div>
+          </div>
+        </div>
+        <div class="flow-arrow">↕</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5">
+              <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/>
+            </svg>
+          </div>
+          <div class="flow-node-info">
+            <div class="flow-node-title">Validator <span class="flow-badge validator">neuron</span></div>
+            <div class="flow-node-desc">Queries miners · Scores outputs · Sets weights on-chain</div>
+          </div>
+        </div>
+        <div class="flow-arrow">↕</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5">
+              <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+            </svg>
+          </div>
+          <div class="flow-node-info">
+            <div class="flow-node-title">Bittensor Chain <span class="flow-badge reward">TAO</span></div>
+            <div class="flow-node-desc">Yuma consensus · Metagraph sync · Emission distribution</div>
+          </div>
+        </div>
+        <div class="flow-arrow">↕</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div class="flow-node-info">
+            <div class="flow-node-title">Rewards <span class="flow-badge reward">α token</span></div>
+            <div class="flow-node-desc">Miner dividends · Validator stake · Subnet alpha accrual</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ROLES ──────────────────────────────────────────────────────── -->
+<section id="roles">
+  <div class="container">
+    <div class="section-label fade-up">03 · Participation</div>
+    <h2 class="section-title fade-up">Two Ways to Earn</h2>
+    <p class="section-sub fade-up">Register on the subnet as a miner, validator, or both. Each role plays a critical part in securing and advancing the network.</p>
+    <div class="roles-grid">
+      <div class="role-card miners fade-up">
+        <div class="role-tag m">// Miners</div>
+        <h3>Produce Work</h3>
+        <p>Miners run the compute that powers the subnet's intelligence layer. They respond to validator challenges and compete for emissions based on output quality.</p>
+        <ul class="role-list">
+          <li>Register a hotkey and stake TAO to join</li>
+          <li>Serve an axon endpoint for validator queries</li>
+          <li>Implement the forward() function with your model</li>
+          <li>Earn TAO proportional to your performance rank</li>
+          <li>Get scored each epoch; weights update on-chain</li>
+        </ul>
+      </div>
+      <div class="role-card validators fade-up">
+        <div class="role-tag v">// Validators</div>
+        <h3>Score & Secure</h3>
+        <p>Validators are the quality gatekeepers of the subnet. They issue challenges, evaluate miner responses, and commit weights that drive fair emission distribution.</p>
+        <ul class="role-list">
+          <li>Stake TAO as a validator bond to gain influence</li>
+          <li>Query miners with deterministic challenges</li>
+          <li>Score outputs using the incentive mechanism</li>
+          <li>Set weights on the metagraph each tempo</li>
+          <li>Earn dividends on stake from subnet emissions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STACK ──────────────────────────────────────────────────────── -->
+<section id="stack">
+  <div class="container">
+    <div class="section-label fade-up">04 · Stack</div>
+    <h2 class="section-title fade-up">Built On</h2>
+    <p class="section-sub fade-up">The base subnet is production-grade Python, following Bittensor's canonical neuron scaffold with a custom incentive mechanism layer.</p>
+    <div class="stack-row">
+      <div class="stack-item fade-up">
+        <div class="stack-tag">Core</div>
+        <div class="stack-name">Python</div>
+        <div class="stack-desc">Neuron logic, incentive mechanism, miner and validator implementations.</div>
+        <div class="stack-pct">
+          93.2%
+          <div class="pct-bar"><div class="pct-fill" style="width:93.2%"></div></div>
+        </div>
+      </div>
+      <div class="stack-item fade-up">
+        <div class="stack-tag">Runtime</div>
+        <div class="stack-name">Bittensor SDK</div>
+        <div class="stack-desc">bt.metagraph, bt.wallet, bt.synapse — the Bittensor Python library.</div>
+        <div class="stack-pct">
+          Protocol Layer
+          <div class="pct-bar"><div class="pct-fill" style="width:78%"></div></div>
+        </div>
+      </div>
+      <div class="stack-item fade-up">
+        <div class="stack-tag">Ops</div>
+        <div class="stack-name">Shell / Make</div>
+        <div class="stack-desc">Installation, environment setup, and process management scripts.</div>
+        <div class="stack-pct">
+          6.8%
+          <div class="pct-bar"><div class="pct-fill" style="width:6.8%"></div></div>
+        </div>
+      </div>
+      <div class="stack-item fade-up">
+        <div class="stack-tag">Network</div>
+        <div class="stack-name">Finney / TAO</div>
+        <div class="stack-desc">Bittensor mainnet. Subnet registration, emissions, and Yuma consensus.</div>
+        <div class="stack-pct">
+          On-Chain
+          <div class="pct-bar"><div class="pct-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="section-label fade-up" style="justify-content:center">arctura.network/base</div>
+      <h2 class="fade-up">Ready to Join<br/>the Subnet?</h2>
+      <p class="fade-up">The base subnet is launching. Clone the repo, configure your wallet, and register as a miner or validator. Emissions go live on mainnet registration.</p>
+      <div class="cta-actions fade-up">
+        <a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          Clone Repository
+        </a>
+        <a href="https://docs.learnbittensor.org/subnets/create-a-subnet" target="_blank" class="btn-ghost">
+          Bittensor Docs →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>ARCTURA</strong> · Base Subnet<br/>
+        arctura.network/base · Built on Bittensor
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank">GitHub</a></li>
+        <li><a href="https://docs.learnbittensor.org" target="_blank">Bittensor Docs</a></li>
+        <li><a href="https://taostats.io/subnets" target="_blank">Taostats</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * .12;
+    ry += (my - ry) * .12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      ring.style.opacity = '0.4';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity = '1';
+    });
+  });
+
+  // Intersection observer for fade-up
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 80}ms`;
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
