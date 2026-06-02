@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Tier? · Arctura Network</title>
+<meta name="description" content="Five questions. Sixty seconds. Find the Arctura operator tier that matches where you actually are right now.">
+<meta property="og:title" content="Which Tier Are You? · Arctura Network">
+<meta property="og:description" content="Five questions. Find your depth in the Arctura Network.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://arctura.network/which-tier">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Azeret+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #03040a;
+  --void-2: #080b14;
+  --void-3: #0d1020;
+  --signal: #00d4c8;
+  --signal-dim: rgba(0,212,200,.1);
+  --signal-mid: rgba(0,212,200,.32);
+  --gold: #c9a86c;
+  --gold-dim: rgba(201,168,108,.12);
+  --gold-mid: rgba(201,168,108,.32);
+  --warm: #e8c48a;
+  --violet: #a78bfa;
+  --violet-dim: rgba(167,139,250,.1);
+  --violet-mid: rgba(167,139,250,.3);
+  --star: #dce3f0;
+  --muted: #5a6280;
+  --border: rgba(220,227,240,.07);
+  --border-hover: rgba(220,227,240,.16);
+
+  /* Tier result colors */
+  --node-c: var(--signal);
+  --node-dim: var(--signal-dim);
+  --node-mid: var(--signal-mid);
+  --hub-c: var(--gold);
+  --hub-dim: var(--gold-dim);
+  --hub-mid: var(--gold-mid);
+  --sovereign-c: var(--violet);
+  --sovereign-dim: var(--violet-dim);
+  --sovereign-mid: var(--violet-mid);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--void);
+  color: var(--star);
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+.cur-ring { position: fixed; width: 28px; height: 28px; border: 1.5px solid var(--signal); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s, border-color .3s; }
+.cur-dot  { position: fixed; width: 4px;  height: 4px;  background: var(--signal); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: background .3s; }
+
+/* STAR CANVAS */
+#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* GRAIN */
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 500;
+  opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* LAYOUT */
+.app {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 48px 24px;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 40px;
+  background: rgba(3,4,10,.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--signal); text-decoration: none;
+}
+.nav-back {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  border: 1px solid var(--border); padding: 6px 14px;
+  transition: all .2s;
+}
+.nav-back:hover { color: var(--star); border-color: var(--border-hover); }
+
+/* SCREENS */
+.screen { display: none; width: 100%; max-width: 680px; animation: fadeIn .5s ease both; }
+.screen.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* INTRO SCREEN */
+.intro-eye {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .28em; color: var(--signal); text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 32px;
+}
+.intro-eye::before { content: ''; width: 24px; height: 1px; background: var(--signal); display: block; }
+
+.intro h1 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(38px, 7vw, 64px); line-height: 1.0;
+  letter-spacing: -.025em; margin-bottom: 24px;
+}
+.intro h1 em { font-style: normal; color: var(--signal); }
+
+.intro-sub {
+  font-size: 17px; font-style: italic; color: rgba(220,227,240,.65);
+  max-width: 480px; margin-bottom: 40px; line-height: 1.7;
+}
+
+.intro-meta {
+  display: flex; gap: 32px; margin-bottom: 48px; flex-wrap: wrap;
+}
+.intro-meta-item { display: flex; flex-direction: column; gap: 4px; }
+.intro-meta-label {
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .2em; color: var(--muted); text-transform: uppercase;
+}
+.intro-meta-value {
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; color: var(--star);
+}
+
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--signal); color: var(--void);
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  padding: 16px 36px; border: none; cursor: pointer;
+  transition: opacity .2s; position: relative; overflow: hidden;
+}
+.btn-start:hover { opacity: .88; }
+
+/* PROGRESS BAR */
+.progress-wrap {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 48px;
+}
+.progress-bar {
+  flex: 1; height: 1px; background: var(--border);
+  position: relative; overflow: hidden;
+}
+.progress-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: var(--signal);
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 0 6px var(--signal);
+}
+.progress-label {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  color: var(--muted); letter-spacing: .12em; white-space: nowrap;
+}
+
+/* QUESTION */
+.q-eyebrow {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .22em; color: var(--signal); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.q-text {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: clamp(22px, 4vw, 32px); line-height: 1.2;
+  letter-spacing: -.01em; margin-bottom: 40px;
+}
+
+/* OPTIONS */
+.options { display: flex; flex-direction: column; gap: 12px; }
+
+.option {
+  padding: 22px 28px;
+  background: var(--void-2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color .2s, background .2s, transform .15s;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 16px;
+  position: relative; overflow: hidden;
+}
+.option::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--signal);
+  transform: scaleY(0); transform-origin: center;
+  transition: transform .25s;
+}
+.option:hover {
+  border-color: var(--signal-mid);
+  background: rgba(8,11,20,.9);
+}
+.option:hover::before { transform: scaleY(1); }
+.option.selected {
+  border-color: var(--signal-mid);
+  background: rgba(0,212,200,.06);
+}
+.option.selected::before { transform: scaleY(1); }
+
+.option-text {
+  font-size: 15px; color: var(--star); line-height: 1.5; font-weight: 300;
+}
+.option-sub {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  color: var(--muted); margin-top: 4px; letter-spacing: .04em;
+}
+.option-check {
+  width: 20px; height: 20px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: border-color .2s, background .2s;
+  font-size: 10px;
+}
+.option.selected .option-check {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--void);
+}
+
+.q-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 40px;
+}
+.btn-next {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  padding: 14px 32px;
+  background: var(--signal); color: var(--void);
+  border: none; cursor: pointer;
+  transition: opacity .2s;
+  opacity: .4;
+}
+.btn-next.ready { opacity: 1; }
+.btn-next.ready:hover { opacity: .88; }
+
+.btn-prev {
+  font-family: 'Azeret Mono', monospace; font-size: 11px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  background: none; border: none; cursor: pointer;
+  transition: color .2s;
+}
+.btn-prev:hover { color: var(--star); }
+
+/* EMAIL GATE */
+.gate-title {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(28px, 5vw, 44px); letter-spacing: -.02em;
+  line-height: 1.1; margin-bottom: 16px;
+}
+.gate-sub {
+  font-size: 15px; font-style: italic; color: rgba(220,227,240,.6);
+  margin-bottom: 40px; max-width: 420px;
+}
+.email-form { display: flex; flex-direction: column; gap: 16px; max-width: 440px; }
+.email-input {
+  background: var(--void-2);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  font-family: 'Azeret Mono', monospace; font-size: 13px;
+  color: var(--star); outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+.email-input::placeholder { color: var(--muted); }
+.email-input:focus { border-color: var(--signal-mid); }
+.email-input.error { border-color: rgba(255,80,80,.5); }
+
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.btn-reveal {
+  background: var(--signal); color: var(--void);
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  padding: 16px 32px; border: none; cursor: pointer;
+  transition: opacity .2s; align-self: flex-start;
+}
+.btn-reveal:hover { opacity: .88; }
+
+.gate-notice {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  color: var(--muted); letter-spacing: .06em; margin-top: 8px;
+}
+
+/* RESULT SCREEN */
+.result-loading {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 24px; padding: 80px 0; text-align: center;
+}
+.result-loading.hidden { display: none; }
+.loader-ring {
+  width: 56px; height: 56px;
+  border: 1.5px solid var(--border);
+  border-top-color: var(--signal);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text {
+  font-family: 'Azeret Mono', monospace; font-size: 11px;
+  letter-spacing: .2em; color: var(--muted); text-transform: uppercase;
+}
+
+.result-card { display: none; }
+.result-card.visible { display: block; animation: fadeIn .6s .3s both; }
+
+.result-signal-bar {
+  height: 2px;
+  margin-bottom: 48px;
+  box-shadow: 0 0 12px var(--result-c);
+}
+
+.result-tier-label {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .28em; text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--result-c);
+}
+.result-tier-name {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(40px, 8vw, 80px); line-height: .95;
+  letter-spacing: -.03em; margin-bottom: 8px;
+  color: var(--result-c);
+}
+.result-tier-sub {
+  font-family: 'Syne', sans-serif; font-weight: 600;
+  font-size: 16px; color: var(--muted); margin-bottom: 32px;
+}
+.result-desc {
+  font-size: 17px; line-height: 1.75; font-style: italic;
+  color: rgba(220,227,240,.75); max-width: 560px;
+  margin-bottom: 48px;
+  padding-left: 24px;
+  border-left: 2px solid var(--result-c);
+}
+
+.result-features {
+  margin-bottom: 48px;
+}
+.result-features-label {
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .25em; color: var(--muted); text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.feature-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 14px; color: rgba(220,227,240,.8);
+}
+.feature-list li::before {
+  content: '→'; font-family: 'Azeret Mono', monospace; font-size: 11px;
+  color: var(--result-c); flex-shrink: 0; margin-top: 2px;
+}
+
+.result-score {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px;
+}
+.score-pill {
+  padding: 8px 16px;
+  background: var(--void-2);
+  border: 1px solid var(--border);
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .1em; color: var(--muted);
+}
+.score-pill.strong {
+  border-color: var(--result-c);
+  color: var(--result-c);
+}
+
+.result-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--result-c); color: var(--void);
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  padding: 18px 40px; text-decoration: none;
+  transition: opacity .2s; margin-right: 16px; margin-bottom: 12px;
+  display: inline-block;
+}
+.result-cta:hover { opacity: .88; }
+
+.result-secondary {
+  display: inline-block;
+  font-family: 'Azeret Mono', monospace; font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  border: 1px solid var(--border); padding: 10px 20px;
+  margin-bottom: 12px; transition: all .2s;
+}
+.result-secondary:hover { color: var(--star); border-color: var(--border-hover); }
+
+.result-retake {
+  display: block; margin-top: 40px;
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .15em; color: var(--muted);
+  text-transform: uppercase; cursor: pointer;
+  border: none; background: none; transition: color .2s;
+}
+.result-retake:hover { color: var(--signal); }
+
+/* SIGNAL LINES BG */
+.signal-lines {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .04;
+  background-image:
+    linear-gradient(90deg, var(--signal) 1px, transparent 1px),
+    linear-gradient(0deg, var(--signal) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* MISC */
+.divider { width: 100%; height: 1px; background: var(--border); margin: 48px 0; }
+
+@media (max-width: 600px) {
+  nav { padding: 14px 20px; }
+  .app { padding: 80px 20px 48px; }
+  .name-row { grid-template-columns: 1fr; }
+  .intro h1 { font-size: 36px; }
+  .option { padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur-ring" id="curRing"></div>
+<div class="cur-dot"  id="curDot"></div>
+<canvas id="stars"></canvas>
+<div class="signal-lines"></div>
+
+<nav>
+  <a href="https://arctura.network" class="nav-brand">Arctura · Network</a>
+  <a href="https://arctura.network" class="nav-back">← Back to Network</a>
+</nav>
+
+<div class="app">
+
+  <!-- INTRO SCREEN -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-eye">Tier Calibration · 5 Transmissions</div>
+    <h1 class="intro">Find your <em>depth</em><br>in the network.</h1>
+    <p class="intro-sub">The tier isn't a rank — it's a depth-reading. These five questions locate where you actually operate right now, not where you want to be. Honest answers give accurate results.</p>
+    <div class="intro-meta">
+      <div class="intro-meta-item">
+        <span class="intro-meta-label">Questions</span>
+        <span class="intro-meta-value">Five</span>
+      </div>
+      <div class="intro-meta-item">
+        <span class="intro-meta-label">Time</span>
+        <span class="intro-meta-value">~60 seconds</span>
+      </div>
+      <div class="intro-meta-item">
+        <span class="intro-meta-label">Output</span>
+        <span class="intro-meta-value">Your Tier + CTA</span>
+      </div>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">Begin Calibration →</button>
+  </div>
+
+  <!-- QUESTION SCREENS -->
+  <div class="screen" id="screen-quiz">
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:20%"></div>
+      </div>
+      <span class="progress-label" id="progressLabel">01 / 05</span>
+    </div>
+
+    <div id="questionArea"></div>
+  </div>
+
+  <!-- EMAIL GATE -->
+  <div class="screen" id="screen-gate">
+    <div class="q-eyebrow">Almost There · Reveal Your Tier</div>
+    <h2 class="gate-title">Your result is<br>ready.</h2>
+    <p class="gate-sub">Drop your signal below. We'll send your tier result plus the first steps to enter the network — no noise, no churn.</p>
+    <div class="email-form">
+      <div class="name-row">
+        <input type="text"  class="email-input" id="gateFirst" placeholder="First name">
+        <input type="text"  class="email-input" id="gateLast"  placeholder="Last name">
+      </div>
+      <input type="email" class="email-input" id="gateEmail" placeholder="Signal address (email)">
+      <button class="btn-reveal" onclick="revealResult()">Reveal My Tier →</button>
+      <p class="gate-notice">No spam. One Signal Report per week + your onboarding sequence.</p>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="screen" id="screen-result">
+    <div class="result-loading" id="resultLoading">
+      <div class="loader-ring"></div>
+      <span class="loader-text">Reading your signal…</span>
+    </div>
+    <div class="result-card" id="resultCard"></div>
+  </div>
+
+</div>
+
+<script>
+// ─── CURSOR ───────────────────────────────────────────
+const ring = document.getElementById('curRing');
+const dot  = document.getElementById('curDot');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx+'px'; dot.style.top = my+'px';
+});
+(function loop() {
+  rx += (mx-rx)*.12; ry += (my-ry)*.12;
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(loop);
+})();
+
+// ─── STARS ────────────────────────────────────────────
+const canvas = document.getElementById('stars');
+const ctx    = canvas.getContext('2d');
+let W, H, stars = [];
+function initStars() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  stars = [];
+  for (let i = 0; i < 150; i++) stars.push({
+    x: Math.random()*W, y: Math.random()*H,
+    r: Math.random()*1.1+.2, a: Math.random(),
+    s: Math.random()*.003+.0005
+  });
+}
+function drawStars() {
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s => {
+    s.a += s.s; if(s.a>1||s.a<0) s.s*=-1;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(220,227,240,${s.a*.5})`; ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+window.addEventListener('resize', initStars);
+initStars(); drawStars();
+
+// ─── QUIZ DATA ────────────────────────────────────────
+const questions = [
+  {
+    id: 1,
+    text: "Where are you right now in your work?",
+    sub: "Be honest — the result is only useful if it's accurate.",
+    options: [
+      { text: "I'm still figuring out what I'm building. The signal resonates but I don't have a practice or platform yet.", sub: "Exploring, learning, orienting.", tier: 'node' },
+      { text: "I have an active practice, clients, or a platform. I'm delivering work and looking for better infrastructure.", sub: "Operating, delivering, building.", tier: 'hub' },
+      { text: "I run something at scale — a team, a methodology, or a network. I need architecture, not orientation.", sub: "Scaling, structuring, extending.", tier: 'sovereign' }
+    ]
+  },
+  {
+    id: 2,
+    text: "What's your primary operating mode right now?",
+    options: [
+      { text: "Absorb and learn. I'm in a receiving mode — taking in frameworks, sitting with ideas, building fluency.", sub: "Reception is my current signal.", tier: 'node' },
+      { text: "Build and deliver. I'm in an active creation mode — making things, serving clients, shipping work.", sub: "Creation is my current signal.", tier: 'hub' },
+      { text: "Architect and extend. I'm in a systems mode — designing structures that others can operate inside.", sub: "Architecture is my current signal.", tier: 'sovereign' }
+    ]
+  },
+  {
+    id: 3,
+    text: "How do you relate to AI agents in your work?",
+    options: [
+      { text: "I'm curious about them. I use AI tools occasionally but haven't integrated agents in any structured way.", sub: "Adjacent, interested, not yet operating.", tier: 'node' },
+      { text: "I use AI agents actively — in my workflow, with clients, or in production. I understand how they work.", sub: "Integrated, fluent, active.", tier: 'hub' },
+      { text: "I think about AI agents as first-class participants. I design architectures for them. I've deployed agents with mandate chains.", sub: "Designing agent infrastructure.", tier: 'sovereign' }
+    ]
+  },
+  {
+    id: 4,
+    text: "What do you want from the Arctura Network?",
+    options: [
+      { text: "A framework to understand myself and my work better. Access to a community that thinks at this level. A starting point.", sub: "Personal use, community, orientation.", tier: 'node' },
+      { text: "A licensed methodology I can use with clients. Revenue structure. Council access. Something to extend my practice.", sub: "Client use, revenue, co-creation.", tier: 'hub' },
+      { text: "White-label rights. My own node. A direct integration with Coreweaver Labs infrastructure. Architecture to build on.", sub: "White-label, own network, principal status.", tier: 'sovereign' }
+    ]
+  },
+  {
+    id: 5,
+    text: "What does your first week inside the network look like?",
+    options: [
+      { text: "I read the Signal Archives, go through Node Point Culture, get a feel for the community. Absorb before acting.", sub: "Slow entry, deep observation.", tier: 'node' },
+      { text: "I connect with other operators, start applying the ARM framework to an active client, show up for council.", sub: "Fast application, direct contribution.", tier: 'hub' },
+      { text: "I set up my agent mesh slot, read the unreleased methodology, propose a co-creation. I'm operational from day one.", sub: "Operational immediately.", tier: 'sovereign' }
+    ]
+  }
+];
+
+// ─── TIER CONFIG ──────────────────────────────────────
+const tiers = {
+  node: {
+    label: 'Entry · Node',
+    name: 'Signal Carrier',
+    color: '#00d4c8',
+    cssVar: '--node-c',
+    desc: "You're in the right place at the right time. The signal is clear, the readiness is real, and the network is built for exactly this entry point. Signal Carrier tier gives you the ARM Framework to learn and internalize, full community access, agent mesh read access, and the pathway to Hub as your depth develops. Your first action: Node Point Culture. Your first credential: on Base.",
+    features: [
+      'ARM Framework license — personal use',
+      'Weekly Signal Report — curated network intelligence',
+      'Full Arctura community access + Discord',
+      'Agent mesh read access',
+      'Arctura Academy — all 6 tracks',
+      'On-chain credential on Base upon each completion',
+      'Recognition pathway to Co-Builder (Hub) tier'
+    ],
+    cta_text: 'Enter as Signal Carrier',
+    cta_url: 'https://arctura.network#tiers',
+    secondary_text: 'Start with Node Point Culture →',
+    secondary_url: 'https://arctura.org/academy/node-point-culture'
+  },
+  hub: {
+    label: 'Operator · Hub',
+    name: 'Co-Builder',
+    color: '#c9a86c',
+    cssVar: '--hub-c',
+    desc: "You're not here to receive — you're here to shape. Co-Builder tier gives you expanded ARM Framework rights for client use, referral revenue share, monthly council seat, and access to emerging ARM methodologies before general release. Your practice extends inside the network's infrastructure. The agent mesh is available for co-creation. Your signal contributes to the whole.",
+    features: [
+      'Full ARM Framework + expanded client-use rights',
+      'Referral revenue share — direct, not chain-based',
+      'Monthly council call seat + voting participation',
+      'Agent mesh co-creation access',
+      'Co-creation on emerging ARM methodologies pre-release',
+      'Priority Signal Report with operator data layer',
+      'Arctura Academy — all tracks + priority review',
+      'On-chain credential + Hub tier recognition on Base'
+    ],
+    cta_text: 'Enter as Co-Builder',
+    cta_url: 'https://arctura.network#tiers',
+    secondary_text: 'See full tier comparison →',
+    secondary_url: 'https://arctura.network#compare'
+  },
+  sovereign: {
+    label: 'Principal · Sovereign',
+    name: 'Network Architect',
+    color: '#a78bfa',
+    cssVar: '--sovereign-c',
+    desc: "You're not looking for validation — you're looking for architecture. Network Architect tier gives you white-label ARM rights, a dedicated agent mesh slot with custom configuration, principal operator status, council voting rights, and direct Coreweaver Labs integration support. Run your own ARM-powered network inside the collective's infrastructure. The methodology is yours to extend.",
+    features: [
+      'White-label ARM methodology — your brand, your network',
+      'Dedicated agent mesh slot with custom configuration',
+      'Network referral revenue share — extended',
+      'Principal operator status + council voting rights',
+      'Access to unreleased ARM methodology beta tracks',
+      'Direct Coreweaver Labs integration support',
+      'All Academy tracks + Sovereign-tier capstone review',
+      'On-chain principal credential on Base'
+    ],
+    cta_text: 'Apply as Network Architect',
+    cta_url: 'https://arctura.network#enter',
+    secondary_text: 'See full tier comparison →',
+    secondary_url: 'https://arctura.network#compare'
+  }
+};
+
+// ─── STATE ────────────────────────────────────────────
+let currentQ = 0;
+let answers  = [];
+let selected = null;
+
+// ─── QUIZ FLOW ────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-'+id);
+  el.classList.add('active');
+  // re-trigger animation
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = '';
+}
+
+function startQuiz() {
+  currentQ = 0; answers = []; selected = null;
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  selected = null;
+
+  // progress
+  const pct = ((currentQ+1)/questions.length)*100;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent =
+    String(currentQ+1).padStart(2,'0')+' / '+String(questions.length).padStart(2,'0');
+
+  const area = document.getElementById('questionArea');
+  area.innerHTML = `
+    <div class="q-eyebrow">Question · ${String(currentQ+1).padStart(2,'0')}</div>
+    <div class="q-text">${q.text}</div>
+    <div class="options">
+      ${q.options.map((o,i) => `
+        <div class="option" data-index="${i}" onclick="selectOption(${i})">
+          <div>
+            <div class="option-text">${o.text}</div>
+            ${o.sub ? `<div class="option-sub">${o.sub}</div>` : ''}
+          </div>
+          <div class="option-check" id="check-${i}"></div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="q-nav">
+      ${currentQ > 0
+        ? `<button class="btn-prev" onclick="prevQuestion()">← Previous</button>`
+        : `<span></span>`}
+      <button class="btn-next" id="btnNext" onclick="nextQuestion()">
+        ${currentQ < questions.length-1 ? 'Next →' : 'Continue →'}
+      </button>
+    </div>
+  `;
+}
+
+function selectOption(i) {
+  selected = i;
+  document.querySelectorAll('.option').forEach((o,idx) => {
+    o.classList.toggle('selected', idx === i);
+    const chk = document.getElementById('check-'+idx);
+    if (chk) chk.textContent = idx === i ? '✓' : '';
+  });
+  document.getElementById('btnNext').classList.add('ready');
+}
+
+function nextQuestion() {
+  if (selected === null) return;
+  answers.push(questions[currentQ].options[selected].tier);
+  if (currentQ < questions.length-1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showScreen('gate');
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    answers.pop();
+    currentQ--;
+    renderQuestion();
+    // restore prior selection if exists
+    if (answers.length >= currentQ+1) {
+      const prev = questions[currentQ].options.findIndex(o => o.tier === answers[currentQ]);
+      if (prev >= 0) selectOption(prev);
+    }
+  }
+}
+
+// ─── EMAIL GATE ───────────────────────────────────────
+function revealResult() {
+  const email = document.getElementById('gateEmail').value.trim();
+  const first = document.getElementById('gateFirst').value.trim();
+
+  if (!email || !email.includes('@')) {
+    document.getElementById('gateEmail').classList.add('error');
+    return;
+  }
+  document.getElementById('gateEmail').classList.remove('error');
+
+  // In production: POST to your email platform here
+  // fetch('/api/subscribe', { method:'POST', body: JSON.stringify({email, first, tier: calcTier()}) })
+
+  showScreen('result');
+  const tier = calcTier();
+
+  setTimeout(() => {
+    document.getElementById('resultLoading').classList.add('hidden');
+    renderResult(tier, first);
+  }, 1800);
+}
+
+// ─── SCORE ────────────────────────────────────────────
+function calcTier() {
+  const counts = { node: 0, hub: 0, sovereign: 0 };
+  answers.forEach(a => counts[a]++);
+  return Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
+}
+
+// ─── RENDER RESULT ─────────────────────────────────────
+function renderResult(tierKey, firstName) {
+  const t = tiers[tierKey];
+  const counts = { node: 0, hub: 0, sovereign: 0 };
+  answers.forEach(a => counts[a]++);
+
+  const pillars = [
+    { label: 'Signal Carrier', key: 'node', pct: Math.round(counts.node/5*100) },
+    { label: 'Co-Builder', key: 'hub', pct: Math.round(counts.hub/5*100) },
+    { label: 'Network Architect', key: 'sovereign', pct: Math.round(counts.sovereign/5*100) }
+  ];
+
+  const card = document.getElementById('resultCard');
+  card.innerHTML = `
+    <div class="result-signal-bar" style="background:${t.color}"></div>
+
+    <div class="result-tier-label">${t.label}</div>
+    <div class="result-tier-name" style="color:${t.color}">${t.name}</div>
+    <div class="result-tier-sub">${firstName ? firstName+', your' : 'Your'} signal reads here.</div>
+
+    <div class="result-desc">${t.desc}</div>
+
+    <div class="result-features">
+      <div class="result-features-label">What this tier includes</div>
+      <ul class="feature-list">
+        ${t.features.map(f => `<li>${f}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="result-score">
+      ${pillars.map(p => `
+        <div class="score-pill ${p.key === tierKey ? 'strong' : ''}" style="${p.key===tierKey ? 'border-color:'+t.color+';color:'+t.color : ''}">
+          ${p.label} · ${p.pct}%
+        </div>
+      `).join('')}
+    </div>
+
+    <a href="${t.cta_url}" class="result-cta" style="background:${t.color}">${t.cta_text} →</a>
+    <a href="${t.secondary_url}" class="result-secondary">${t.secondary_text}</a>
+
+    <button class="result-retake" onclick="startQuiz()">↺ Retake calibration</button>
+  `;
+
+  card.classList.add('visible');
+
+  // Update cursor color to match tier
+  document.querySelector('.cur-ring').style.borderColor = t.color;
+  document.querySelector('.cur-dot').style.background = t.color;
+}
+</script>
+</body>
+</html>
