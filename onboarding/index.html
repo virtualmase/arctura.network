@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onboarding Block — arctura.network Injection</title>
+<meta name="description" content="Deploy note: Inject the section below between Transmission 03 (archetypes) and Transmission 04 (tiers) on arctura.network. Uses existing design tokens.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ─── DEPLOY NOTE ─────────────────────────────────────
+   Inject the .onboarding-injection block below into
+   arctura.network between Transmission 03 and Transmission 04.
+   All tokens match the existing network page variables.
+   ─────────────────────────────────────────────────── */
+
+/* Preview wrapper — remove before deploy */
+:root {
+  --void:#03040a; --void-2:#080b14; --void-3:#0d101c;
+  --signal:#00d4c8; --signal-dim:rgba(0,212,200,.1); --signal-mid:rgba(0,212,200,.3);
+  --gold:#c9a86c; --gold-dim:rgba(201,168,108,.12); --gold-mid:rgba(201,168,108,.3);
+  --warm:#e8c48a; --star:#dce3f0; --muted:#6b7591; --border:rgba(220,227,240,.08);
+}
+body { background: var(--void); color: var(--star); font-family: 'Fraunces', serif; font-weight: 300; margin: 0; padding: 64px 48px; }
+
+/* ─── INJECTABLE CSS — add to arctura.network stylesheet ─ */
+.onboarding-injection {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 96px 0;
+}
+
+/* SECTION LABEL */
+.ob-label {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .3em; color: var(--signal); text-transform: uppercase;
+  display: flex; align-items: center; gap: 16px; margin-bottom: 64px;
+}
+.ob-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ACADEMY INTEGRATION */
+.ob-academy {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; margin-bottom: 64px;
+}
+@media(max-width:768px){ .ob-academy{ grid-template-columns:1fr; } }
+
+.ob-academy-hero {
+  grid-column: 1 / -1;
+  padding: 48px 40px;
+  background: var(--void-2);
+  border: 1px solid var(--signal-mid);
+  position: relative; overflow: hidden;
+  margin-bottom: 2px;
+}
+.ob-academy-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--signal), transparent);
+}
+.ob-academy-hero::after {
+  content: 'FIRST TRANSMISSION';
+  position: absolute; top: 24px; right: 32px;
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .25em; color: var(--signal); opacity: .4;
+}
+.ob-academy-eyebrow {
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .25em; color: var(--signal); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.ob-academy-hero h3 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(22px, 3.5vw, 32px); letter-spacing: -.015em;
+  margin-bottom: 12px; line-height: 1.15;
+}
+.ob-academy-hero p {
+  font-size: 15px; color: rgba(220,227,240,.7); max-width: 520px;
+  font-style: italic; margin-bottom: 28px; line-height: 1.65;
+}
+.ob-academy-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--signal); color: var(--void);
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+  padding: 13px 28px; text-decoration: none;
+  transition: opacity .2s;
+}
+.ob-academy-cta:hover { opacity: .88; }
+
+.ob-track-card {
+  padding: 28px 32px;
+  background: var(--void-2);
+  border: 1px solid var(--border);
+  text-decoration: none; color: inherit;
+  transition: border-color .25s;
+  display: block;
+  position: relative; overflow: hidden;
+}
+.ob-track-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--signal);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .3s;
+}
+.ob-track-card:hover { border-color: var(--signal-mid); }
+.ob-track-card:hover::before { transform: scaleY(1); }
+.ob-track-label {
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .2em; color: var(--signal); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.ob-track-title {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 15px; margin-bottom: 4px;
+}
+.ob-track-meta {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  color: var(--muted); letter-spacing: .06em;
+}
+
+/* WEEK 1 BLUEPRINT */
+.ob-week {
+  margin-bottom: 64px;
+}
+.ob-week-title {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(22px, 3vw, 32px); letter-spacing: -.015em;
+  margin-bottom: 8px;
+}
+.ob-week-sub {
+  font-size: 15px; color: rgba(220,227,240,.6); font-style: italic;
+  margin-bottom: 40px;
+}
+.ob-steps { display: flex; flex-direction: column; gap: 2px; }
+
+.ob-step {
+  display: grid; grid-template-columns: 64px 1fr auto;
+  align-items: center; gap: 24px;
+  padding: 24px 28px;
+  background: var(--void-2); border: 1px solid var(--border);
+  transition: border-color .2s;
+}
+.ob-step:hover { border-color: var(--signal-mid); }
+.ob-step-day {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .15em; color: var(--signal); text-align: center;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.ob-step-day span { font-size: 8px; color: var(--muted); letter-spacing: .2em; }
+.ob-step-body {}
+.ob-step-title {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 15px; margin-bottom: 4px;
+}
+.ob-step-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.ob-step-badge {
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .12em; color: var(--gold);
+  border: 1px solid var(--gold-mid); padding: 4px 10px;
+  white-space: nowrap; align-self: flex-start;
+}
+
+@media(max-width:600px){
+  .ob-step { grid-template-columns: 48px 1fr; }
+  .ob-step-badge { display: none; }
+}
+
+/* SIGNAL REPORT PREVIEW */
+.ob-report {
+  border: 1px solid var(--border);
+  background: var(--void-2);
+  position: relative; overflow: hidden;
+}
+.ob-report-bar {
+  height: 2px; background: linear-gradient(90deg, var(--signal), var(--gold));
+}
+.ob-report-inner { padding: 36px 40px; }
+.ob-report-eyebrow {
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .25em; color: var(--signal); text-transform: uppercase;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.ob-report-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 6px var(--signal);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.ob-report-title {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 20px; margin-bottom: 12px;
+}
+.ob-report-body {
+  font-size: 14px; color: var(--muted); line-height: 1.7;
+  max-width: 560px; margin-bottom: 20px;
+}
+.ob-report-tags {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;
+}
+.ob-report-tag {
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .1em; color: var(--signal);
+  border: 1px solid var(--signal-mid); padding: 4px 10px;
+}
+.ob-report-cta {
+  font-family: 'Azeret Mono', monospace; font-size: 10px;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  border-bottom: 1px solid var(--border); padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.ob-report-cta:hover { color: var(--signal); border-color: var(--signal-mid); }
+.ob-report-note {
+  position: absolute; top: 20px; right: 28px;
+  font-family: 'Azeret Mono', monospace; font-size: 9px;
+  letter-spacing: .15em; color: var(--muted); opacity: .5;
+}
+
+/* DIVIDER */
+.ob-divider { width: 100%; height: 1px; background: var(--border); margin: 64px 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     INJECT THIS BLOCK INTO arctura.network
+     Between Transmission 03 (archetypes) and Transmission 04 (tiers)
+     ═══════════════════════════════════════════════════════ -->
+
+<section class="onboarding-injection" aria-label="Onboarding pathway">
+  <div class="ob-divider"></div>
+
+  <!-- SECTION LABEL -->
+  <div class="ob-label">Your First 7 Days · Onboarding Pathway</div>
+
+  <!-- ACADEMY INTEGRATION -->
+  <div class="ob-academy">
+
+    <!-- HERO CARD — NODE POINT CULTURE -->
+    <div class="ob-academy-hero">
+      <div class="ob-academy-eyebrow">Required · All Tiers · First Transmission</div>
+      <h3>Your first action inside<br>the network is here.</h3>
+      <p>Node Point Culture is required for every operator at every tier. It's not orientation — it's the operating system beneath the ARM framework. Eight modules. Your council credential on Base at the end.</p>
+      <a href="https://arctura.org/academy/node-point-culture" class="ob-academy-cta">
+        Begin Node Point Culture →
+      </a>
+    </div>
+
+    <!-- TRACK CARDS -->
+    <a href="https://arctura.org/academy/ai-agent-design" class="ob-track-card">
+      <div class="ob-track-label">Core Track · After Onboarding</div>
+      <div class="ob-track-title">AI Agent Design</div>
+      <div class="ob-track-meta">12 modules · 6 weeks · Credential on Base</div>
+    </a>
+
+    <a href="https://arctura.org/academy/base-network-ops" class="ob-track-card">
+      <div class="ob-track-label">Infrastructure Track</div>
+      <div class="ob-track-title">Base Network Ops</div>
+      <div class="ob-track-meta">10 modules · 5 weeks · Chain 8453</div>
+    </a>
+
+    <a href="https://arctura.org/academy/signal-ops" class="ob-track-card">
+      <div class="ob-track-label">Signal Track</div>
+      <div class="ob-track-title">Signal Ops</div>
+      <div class="ob-track-meta">10 modules · 5 weeks · GEO + ARM</div>
+    </a>
+
+    <a href="https://arctura.org/academy" class="ob-track-card">
+      <div class="ob-track-label">All Tracks</div>
+      <div class="ob-track-title">View Full Academy →</div>
+      <div class="ob-track-meta">6 tracks · 58 modules · arctura.org/academy</div>
+    </a>
+
+  </div>
+
+  <!-- WEEK 1 BLUEPRINT -->
+  <div class="ob-week">
+    <h3 class="ob-week-title">Week one. Step by step.</h3>
+    <p class="ob-week-sub">Every new operator follows this sequence. No ambiguity about what to do first.</p>
+    <div class="ob-steps">
+
+      <div class="ob-step">
+        <div class="ob-step-day">DAY<span>ONE</span></div>
+        <div class="ob-step-body">
+          <div class="ob-step-title">Begin Node Point Culture</div>
+          <div class="ob-step-desc">Start the foundational track at arctura.org/academy/node-point-culture. Module 1 takes 2 hours. The 5 Arcturian Council Protocol tests are the core.</div>
+        </div>
+        <div class="ob-step-badge">Required · All Tiers</div>
+      </div>
+
+      <div class="ob-step">
+        <div class="ob-step-day">DAY<span>TWO</span></div>
+        <div class="ob-step-body">
+          <div class="ob-step-title">Join the Discord + introduce yourself</div>
+          <div class="ob-step-desc">AURE-Council, the network's AI intelligence agent, will orient you. Post your introduction in #node-activation. One sentence on what you're building.</div>
+        </div>
+        <div class="ob-step-badge">Community</div>
+      </div>
+
+      <div class="ob-step">
+        <div class="ob-step-day">DAY<span>FOUR</span></div>
+        <div class="ob-step-body">
+          <div class="ob-step-title">Read your first Signal Report</div>
+          <div class="ob-step-desc">Your welcome email includes Signal Report access. The Report is weekly ARM intelligence — read it as a practitioner, not a subscriber. What applies to your work right now?</div>
+        </div>
+        <div class="ob-step-badge">Signal</div>
+      </div>
+
+      <div class="ob-step">
+        <div class="ob-step-day">DAY<span>SIX</span></div>
+        <div class="ob-step-body">
+          <div class="ob-step-title">Choose your next Academy track</div>
+          <div class="ob-step-desc">Node Point Culture gives you the foundation. Now pick the technical track most aligned with your work: AI Agent Design, Base Network Ops, Signal Ops, Decentralized Identity, or Treasury Governance.</div>
+        </div>
+        <div class="ob-step-badge">Academy</div>
+      </div>
+
+      <div class="ob-step">
+        <div class="ob-step-day">DAY<span>SEVEN</span></div>
+        <div class="ob-step-body">
+          <div class="ob-step-title">Complete Module 8 — receive your Base credential</div>
+          <div class="ob-step-desc">Node Point Culture ends with your Node Activation Statement and council review. Upon approval, a soulbound token is issued to your wallet on Base. You're in the mesh.</div>
+        </div>
+        <div class="ob-step-badge">On-Chain · Base</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIGNAL REPORT PREVIEW -->
+  <div class="ob-report">
+    <div class="ob-report-bar"></div>
+    <div class="ob-report-inner">
+      <div class="ob-report-note">SAMPLE · SIGNAL REPORT #048</div>
+      <div class="ob-report-eyebrow">
+        <div class="ob-report-dot"></div>
+        Weekly · ARM Intelligence Feed · Signal Report
+      </div>
+      <div class="ob-report-title">Signal Report #048 — Academy Launch + Council Dispatch</div>
+      <div class="ob-report-body">
+        This week: the Academy cluster launched across 6 transmission tracks. The AURE-16 swarm completed the build in one session sweep. Council voted on the operator portal architecture — Base44 approach approved with Supabase fallback. GEO crawler score holds at 100/100 after llms.txt deployment. Signal Carrier enrollment opens June 2.
+      </div>
+      <div class="ob-report-tags">
+        <span class="ob-report-tag">GEO Intelligence</span>
+        <span class="ob-report-tag">Academy Launch</span>
+        <span class="ob-report-tag">Base Network</span>
+        <span class="ob-report-tag">Council Dispatch</span>
+        <span class="ob-report-tag">ARM Doctrine</span>
+      </div>
+      <a href="https://arctura.org/reports" class="ob-report-cta">View full Signal Reports archive →</a>
+    </div>
+  </div>
+
+  <div class="ob-divider"></div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     END INJECTION
+     ═══════════════════════════════════════════════════════ -->
+
+</body>
+</html>
