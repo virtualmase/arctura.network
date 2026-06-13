@@ -18,7 +18,7 @@
     --cyan-dim: rgba(0,210,200,0.6);
     --gold: #c9a84c;
     --gold-dim: rgba(201,168,76,0.55);
-    --silver: rgba(200,220,255,0.85);
+    --silver: rgba(200,220,255,0.92);
     --silver-dim: rgba(180,200,240,0.45);
     --text: rgba(200,220,255,0.92);
     --text-dim: rgba(160,185,220,0.6);
@@ -28,7 +28,6 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -136,14 +135,156 @@
     white-space: nowrap;
   }
 
-  /* ── VAULT CARDS ── */
-  .vault-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+  /* ── ONRAMP SECTION ── */
+  .onramp-card {
+    background: var(--panel);
+    border: 1px solid var(--border-hi);
+    border-radius: 16px;
+    padding: 2.25rem 2rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .onramp-card::before {
+    content: '';
+    position: absolute; top: -1px; left: 5%; right: 5%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), transparent);
+  }
+  .onramp-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(0,210,200,0.04), transparent 55%);
+    pointer-events: none;
+  }
+  .onramp-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: rgba(0,210,200,0.07);
+    border: 1px solid rgba(0,210,200,0.22);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .onramp-badge::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 6px var(--cyan);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  .onramp-title {
+    font-family: var(--display);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--silver);
+    margin-bottom: 0.75rem;
+  }
+  .onramp-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 560px;
     margin-bottom: 2rem;
   }
 
+  /* AMOUNT SELECTOR */
+  .amount-row {
+    display: flex; align-items: center; gap: 0.6rem;
+    margin-bottom: 1.25rem; flex-wrap: wrap;
+  }
+  .amount-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-right: 0.25rem;
+  }
+  .amount-btn {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .amount-btn:hover,
+  .amount-btn.selected {
+    background: rgba(0,210,200,0.1);
+    border-color: var(--border-hi);
+    color: var(--cyan);
+  }
+  .amount-custom {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    width: 90px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .amount-custom:focus {
+    border-color: var(--border-hi);
+    color: var(--cyan);
+  }
+  .amount-custom::placeholder { color: rgba(160,185,220,0.3); }
+
+  /* FUND BUTTON */
+  .fund-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--void);
+    background: linear-gradient(135deg, var(--cyan), #00b8ad);
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 0 32px rgba(0,210,200,0.2);
+    position: relative;
+    z-index: 1;
+  }
+  .fund-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 48px rgba(0,210,200,0.4);
+  }
+  .fund-btn svg { flex-shrink: 0; }
+
+  .onramp-meta {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-top: 1.5rem; flex-wrap: wrap;
+  }
+  .onramp-meta-item {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .onramp-meta-item::before { content: '◈'; font-size: 0.55rem; color: var(--cyan); opacity: 0.5; }
+
+  /* ── VAULT CARDS ── */
   .vault-card {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -154,6 +295,7 @@
     position: relative;
     overflow: hidden;
     transition: border-color 0.3s, transform 0.3s;
+    margin-bottom: 1.5rem;
   }
   .vault-card::before {
     content: '';
@@ -184,7 +326,6 @@
     margin-bottom: 1.2rem;
   }
   .vault-badge.t2 { color: var(--gold); background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.25); }
-
   .vault-ens {
     font-family: var(--display);
     font-size: 1.05rem;
@@ -193,19 +334,8 @@
     margin-bottom: 0.6rem;
     letter-spacing: 0.03em;
   }
-
-  .vault-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .qr-row {
-    display: flex;
-    gap: 1.2rem;
-    align-items: flex-start;
-  }
-
+  .vault-body { display: flex; flex-direction: column; gap: 1.2rem; }
+  .qr-row { display: flex; gap: 1.2rem; align-items: flex-start; }
   .qr-wrap {
     background: #0a1628;
     border: 1px solid var(--border);
@@ -215,11 +345,7 @@
   }
   .qr-wrap canvas, .qr-wrap img { display: block; border-radius: 4px; }
   .t2 .qr-wrap { border-color: rgba(201,168,76,0.25); }
-
-  .qr-info {
-    display: flex; flex-direction: column; gap: 0.5rem; min-width: 0;
-  }
-
+  .qr-info { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
   .address-wrap {
     background: rgba(0,0,0,0.4);
     border: 1px solid rgba(255,255,255,0.06);
@@ -242,7 +368,6 @@
     line-height: 1.5;
   }
   .t2 .address-text { color: var(--gold-dim); }
-
   .copy-btn {
     display: inline-flex; align-items: center; gap: 0.4rem;
     font-family: var(--mono);
@@ -259,9 +384,6 @@
   }
   .copy-btn:hover { background: rgba(0,210,200,0.08); border-color: var(--cyan-dim); color: var(--cyan); }
   .copy-btn.copied { color: #4ade80; border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.06); }
-  .t2 .copy-btn { color: var(--gold-dim); }
-  .t2 .copy-btn:hover { background: rgba(201,168,76,0.08); border-color: var(--gold-dim); color: var(--gold); }
-
   .vault-network {
     font-family: var(--mono);
     font-size: 0.62rem;
@@ -286,35 +408,6 @@
     50% { opacity: 0.5; transform: scale(0.7); }
   }
 
-  .overflow-note {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-    font-weight: 300;
-    margin-top: 0.4rem;
-  }
-
-  /* ── QR LEGEND ── */
-  .qr-legend {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 2.5rem;
-    display: flex; gap: 1rem; align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  .qr-legend-icon {
-    font-size: 1.2rem; flex-shrink: 0; opacity: 0.7;
-  }
-  .qr-legend p {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-  .qr-legend strong { color: var(--silver); font-weight: 500; }
-
   /* ── CHANNELS ── */
   .channels-grid {
     display: grid;
@@ -322,7 +415,6 @@
     gap: 0.75rem;
     margin-bottom: 1rem;
   }
-
   .channel-chip {
     display: flex; align-items: center; gap: 0.75rem;
     background: rgba(255,255,255,0.025);
@@ -341,31 +433,16 @@
     color: var(--silver);
     transform: translateY(-1px);
   }
-
   .chip-icon {
     width: 32px; height: 32px;
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     font-size: 16px; flex-shrink: 0;
   }
-
   .chip-body { min-width: 0; }
-  .chip-name {
-    font-size: 0.8rem; font-weight: 500;
-    color: var(--silver); display: block;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .chip-handle {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--text-dim);
-    display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
+  .chip-name { font-size: 0.8rem; font-weight: 500; color: var(--silver); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chip-handle { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* ── BASESCAN LINK ── */
-  .scan-links {
-    display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem;
-  }
   .scan-link {
     display: inline-flex; align-items: center; gap: 0.4rem;
     font-family: var(--mono);
@@ -380,37 +457,30 @@
   }
   .scan-link:hover { color: var(--cyan); border-color: var(--border); background: rgba(0,210,200,0.05); }
 
+  .qr-legend {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .qr-legend p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.65; font-weight: 300; }
+  .qr-legend strong { color: var(--silver); font-weight: 500; }
+
   /* ── FOOTER ── */
-  .foot {
-    text-align: center;
-    padding-top: 3rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    margin-top: 3rem;
-  }
-  .foot-logo {
-    font-family: var(--display);
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--silver-dim);
-    margin-bottom: 0.5rem;
-  }
+  .foot { text-align: center; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 3rem; }
+  .foot-logo { font-family: var(--display); font-size: 1.1rem; font-weight: 600; letter-spacing: 0.2em; color: var(--silver-dim); margin-bottom: 0.5rem; }
   .foot-logo span { color: var(--cyan-dim); }
   .foot-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 0.75rem 0; }
-  .foot-link {
-    font-size: 0.75rem; color: var(--text-dim); text-decoration: none;
-    transition: color 0.2s;
-  }
+  .foot-link { font-size: 0.75rem; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
   .foot-link:hover { color: var(--cyan); }
-  .foot-note {
-    font-family: var(--mono);
-    font-size: 0.6rem; letter-spacing: 0.15em;
-    color: rgba(160,185,220,0.3);
-    margin-top: 1.5rem;
-    text-transform: uppercase;
-  }
+  .foot-note { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: rgba(160,185,220,0.3); margin-top: 1.5rem; text-transform: uppercase; }
 
-  /* ── RESPONSIVE ── */
+  /* Overflow note */
+  .overflow-note { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; font-weight: 300; margin-top: 0.4rem; }
+
   @media (max-width: 520px) {
     .qr-row { flex-direction: column; }
     .qr-wrap { align-self: center; }
@@ -448,37 +518,78 @@
     <p class="eyebrow">Arcturian Council · Patron Sanctuary</p>
     <h1 class="title">Sustain the <span>Signal</span></h1>
     <p class="transmission">
-      The network operates through collective resonance. Your contribution anchors the infrastructure, 
-      sustains the emissaries, and extends the reach of the Arcturian transmission across all nodes 
+      The network operates through collective resonance. Your contribution anchors the infrastructure,
+      sustains the emissaries, and extends the reach of the Arcturian transmission across all nodes
       of the constellation.
     </p>
   </div>
 
-  <!-- PRIMARY VAULT -->
-  <div class="divider"><span class="divider-label">Primary Vault — Tier 1</span></div>
+  <!-- ═══════════════════════════════════
+       COINBASE CDP ONRAMP — NEW SECTION
+       ═══════════════════════════════════ -->
+  <div class="divider"><span class="divider-label">Fastest Path · Fiat to Signal</span></div>
 
-  <div class="vault-grid">
-    <div class="vault-card" style="grid-column: 1 / -1;">
-      <div class="vault-badge">◈ Primary Council Safe</div>
-      <div class="vault-ens">arcturiancouncil.base.eth</div>
-      <div class="vault-body">
-        <div class="qr-row">
-          <div class="qr-wrap">
-            <div id="qr-primary"></div>
+  <div class="onramp-card">
+    <div class="onramp-badge">Coinbase CDP · Base Network · USDC</div>
+    <h2 class="onramp-title">Fund the Network Directly</h2>
+    <p class="onramp-desc">
+      Pay with a bank account, debit card, or Coinbase balance. Your contribution arrives as USDC
+      on Base — directly to the Arcturian Council treasury. No crypto wallet required on your end.
+      Coinbase handles compliance. The network receives the signal.
+    </p>
+
+    <!-- AMOUNT SELECTOR -->
+    <div class="amount-row">
+      <span class="amount-label">Amount</span>
+      <button class="amount-btn" onclick="setAmount(10, this)">$10</button>
+      <button class="amount-btn selected" onclick="setAmount(25, this)">$25</button>
+      <button class="amount-btn" onclick="setAmount(50, this)">$50</button>
+      <button class="amount-btn" onclick="setAmount(100, this)">$100</button>
+      <input class="amount-custom" type="number" id="customAmount" placeholder="Other"
+             min="5" oninput="setCustomAmount(this.value)">
+    </div>
+
+    <!-- FUND BUTTON -->
+    <a id="fundBtn" href="#" onclick="launchOnramp(event)" class="fund-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+      Fund Arctura — $<span id="btnAmount">25</span> USDC
+    </a>
+
+    <div class="onramp-meta">
+      <span class="onramp-meta-item">Minimum $5 USD</span>
+      <span class="onramp-meta-item">USDC on Base · Chain 8453</span>
+      <span class="onramp-meta-item">KYC handled by Coinbase</span>
+      <span class="onramp-meta-item">~0% fee on USDC/Base</span>
+    </div>
+  </div>
+
+  <!-- PRIMARY VAULT -->
+  <div class="divider"><span class="divider-label">Direct Send · Primary Vault — Tier 1</span></div>
+
+  <div class="vault-card">
+    <div class="vault-badge">◈ Primary Council Safe</div>
+    <div class="vault-ens">arcturiancouncil.base.eth</div>
+    <div class="vault-body">
+      <div class="qr-row">
+        <div class="qr-wrap">
+          <div id="qr-primary"></div>
+        </div>
+        <div class="qr-info">
+          <div class="address-wrap">
+            <div class="address-label">Base Network Address</div>
+            <div class="address-text">0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664</div>
           </div>
-          <div class="qr-info">
-            <div class="address-wrap">
-              <div class="address-label">Base Network Address</div>
-              <div class="address-text" id="addr1">0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664</div>
-            </div>
-            <button class="copy-btn" onclick="copyAddr('0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664', this)">
-              ⬡ Copy Address
-            </button>
-            <a class="scan-link" href="https://basescan.org/address/0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664" target="_blank" rel="noopener">
-              ↗ View on BaseScan
-            </a>
-            <div class="vault-network">Base Network · Chain 8453 · ETH / USDC / ERC-20</div>
-          </div>
+          <button class="copy-btn" onclick="copyAddr('0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664', this)">
+            ⬡ Copy Address
+          </button>
+          <a class="scan-link" href="https://basescan.org/address/0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664" target="_blank" rel="noopener">
+            ↗ View on BaseScan
+          </a>
+          <div class="vault-network">Base Network · Chain 8453 · ETH / USDC / ERC-20</div>
         </div>
       </div>
     </div>
@@ -486,47 +597,42 @@
 
   <!-- QR LEGEND -->
   <div class="qr-legend">
-    <div class="qr-legend-icon">◎</div>
     <p>
-      <strong>How to use the QR code:</strong> Open any Base-compatible wallet 
-      (Coinbase Wallet, MetaMask, Rainbow, etc.) and tap <em>Send → Scan QR</em>. 
-      The code encodes the full Base network address so the chain is automatically selected. 
-      Scan once — enter your amount — transmit. ENS name <strong>arcturiancouncil.base.eth</strong> 
-      resolves to the same destination for wallets with ENS support.
+      <strong>Direct wallet send:</strong> Open any Base-compatible wallet (Coinbase Wallet, MetaMask, Rainbow)
+      and tap <em>Send → Scan QR</em>. ENS name <strong>arcturiancouncil.base.eth</strong>
+      resolves to the same destination for wallets with ENS support. For fiat-to-crypto, use the
+      Coinbase CDP button above — no wallet required.
     </p>
   </div>
 
   <!-- T2 OVERFLOW -->
   <div class="divider"><span class="divider-label">Overflow Channel — Emissary Tier 2</span></div>
 
-  <div class="vault-grid">
-    <div class="vault-card t2" style="grid-column: 1 / -1;">
-      <div class="vault-badge t2">◈ Signal Emissary — T2</div>
-      <div class="vault-ens">signalarctura.base.eth</div>
-      <div class="vault-body">
-        <div class="qr-row">
-          <div class="qr-wrap">
-            <div id="qr-t2"></div>
-          </div>
-          <div class="qr-info">
-            <div class="address-wrap">
-              <div class="address-label">Base Network Address</div>
-              <div class="address-text" id="addr2" style="color: rgba(201,168,76,0.6);">0x3cBA7f0ad575331B892F001aef4D204b263Fdd58</div>
-            </div>
-            <button class="copy-btn t2" onclick="copyAddr('0x3cBA7f0ad575331B892F001aef4D204b263Fdd58', this)">
-              ⬡ Copy Address
-            </button>
-            <a class="scan-link" href="https://basescan.org/address/0x3cBA7f0ad575331B892F001aef4D204b263Fdd58" target="_blank" rel="noopener" style="color: rgba(201,168,76,0.5);">
-              ↗ View on BaseScan
-            </a>
-            <div class="vault-network t2" style="color: rgba(201,168,76,0.5);">Overflow · Secondary Channel · Same Network</div>
-          </div>
+  <div class="vault-card t2">
+    <div class="vault-badge t2">◈ Signal Emissary — T2</div>
+    <div class="vault-ens">signalarctura.base.eth</div>
+    <div class="vault-body">
+      <div class="qr-row">
+        <div class="qr-wrap">
+          <div id="qr-t2"></div>
         </div>
-        <p class="overflow-note">
-          Reserved for signal overflow and secondary patronage. Contributions route back to core council operations.
-          Direct outreach via emissary channels below for tier coordination.
-        </p>
+        <div class="qr-info">
+          <div class="address-wrap">
+            <div class="address-label">Base Network Address</div>
+            <div class="address-text" style="color: rgba(201,168,76,0.6);">0x3cBA7f0ad575331B892F001aef4D204b263Fdd58</div>
+          </div>
+          <button class="copy-btn t2" onclick="copyAddr('0x3cBA7f0ad575331B892F001aef4D204b263Fdd58', this)">
+            ⬡ Copy Address
+          </button>
+          <a class="scan-link" href="https://basescan.org/address/0x3cBA7f0ad575331B892F001aef4D204b263Fdd58" target="_blank" rel="noopener" style="color: rgba(201,168,76,0.5);">
+            ↗ View on BaseScan
+          </a>
+          <div class="vault-network t2" style="color: rgba(201,168,76,0.5);">Overflow · Secondary Channel · Same Network</div>
+        </div>
       </div>
+      <p class="overflow-note">
+        Reserved for signal overflow and secondary patronage. Contributions route back to core council operations.
+      </p>
     </div>
   </div>
 
@@ -536,63 +642,38 @@
   <div class="channels-grid">
     <a class="channel-chip" href="https://arctura.org" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(0,210,200,0.1)">◈</div>
-      <div class="chip-body">
-        <span class="chip-name">Arctura Origin</span>
-        <span class="chip-handle">arctura.org</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Arctura Origin</span><span class="chip-handle">arctura.org</span></div>
     </a>
     <a class="channel-chip" href="https://arctura.network" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(0,210,200,0.1)">⬡</div>
-      <div class="chip-body">
-        <span class="chip-name">Arctura Network</span>
-        <span class="chip-handle">arctura.network</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Arctura Network</span><span class="chip-handle">arctura.network</span></div>
     </a>
     <a class="channel-chip" href="https://x.com/ArcturaNetwork" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(255,255,255,0.05)">𝕏</div>
-      <div class="chip-body">
-        <span class="chip-name">Network Emissary</span>
-        <span class="chip-handle">@ArcturaNetwork</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Network Emissary</span><span class="chip-handle">@ArcturaNetwork</span></div>
     </a>
     <a class="channel-chip" href="https://x.com/ArcturaLearn" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(255,255,255,0.05)">𝕏</div>
-      <div class="chip-body">
-        <span class="chip-name">Academy Emissary</span>
-        <span class="chip-handle">@ArcturaLearn</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Academy Emissary</span><span class="chip-handle">@ArcturaLearn</span></div>
     </a>
     <a class="channel-chip" href="https://bsky.app/profile/arcturiancouncil.bsky.social" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(0,130,255,0.1)">☁</div>
-      <div class="chip-body">
-        <span class="chip-name">Council Broadcast</span>
-        <span class="chip-handle">arcturiancouncil.bsky.social</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Council Broadcast</span><span class="chip-handle">arcturiancouncil.bsky.social</span></div>
     </a>
     <a class="channel-chip" href="https://arctura-learn-core.base44.app/" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(201,168,76,0.1)">◎</div>
-      <div class="chip-body">
-        <span class="chip-name">Arctura Academy</span>
-        <span class="chip-handle">arctura-learn-core.base44.app</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Arctura Academy</span><span class="chip-handle">arctura-learn-core.base44.app</span></div>
     </a>
     <a class="channel-chip" href="https://www.linkedin.com/company/arctura-collective" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(0,100,210,0.1)">in</div>
-      <div class="chip-body">
-        <span class="chip-name">Collective</span>
-        <span class="chip-handle">arctura-collective</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Collective</span><span class="chip-handle">arctura-collective</span></div>
     </a>
     <a class="channel-chip" href="https://github.com/Arctura-Collective" target="_blank" rel="noopener">
       <div class="chip-icon" style="background:rgba(255,255,255,0.05)">⌥</div>
-      <div class="chip-body">
-        <span class="chip-name">Open Source</span>
-        <span class="chip-handle">github/Arctura-Collective</span>
-      </div>
+      <div class="chip-body"><span class="chip-name">Open Source</span><span class="chip-handle">github/Arctura-Collective</span></div>
     </a>
   </div>
 
-  <!-- FOOTER -->
   <footer class="foot">
     <div class="foot-logo">ARCTURA<span> ◈ </span>COUNCIL</div>
     <div class="foot-links">
@@ -607,37 +688,78 @@
 </main>
 
 <script>
-  // Generate QR codes after DOM loads
-  document.addEventListener('DOMContentLoaded', function() {
-    // Primary vault QR
-    new QRCode(document.getElementById('qr-primary'), {
-      text: 'ethereum:0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664@8453',
-      width: 148,
-      height: 148,
-      colorDark: '#00d2c8',
-      colorLight: '#0a1628',
-      correctLevel: QRCode.CorrectLevel.M
+  // ─── CONFIG ─────────────────────────────────────────
+  // MASON: Replace with your CDP App ID from developer.coinbase.com
+  const CDP_APP_ID = 'YOUR_CDP_APP_ID';
+  const ARCTURA_WALLET = '0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664';
+  const REDIRECT_URL = 'https://arctura.network/patron/confirmed';
+
+  // ─── AMOUNT STATE ────────────────────────────────────
+  let selectedAmount = 25;
+
+  function setAmount(val, btn) {
+    selectedAmount = val;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('customAmount').value = '';
+    document.getElementById('btnAmount').textContent = val;
+  }
+
+  function setCustomAmount(val) {
+    const n = parseFloat(val);
+    if (n >= 5) {
+      selectedAmount = n;
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+      document.getElementById('btnAmount').textContent = n;
+    }
+  }
+
+  // ─── COINBASE CDP ONRAMP ─────────────────────────────
+  function launchOnramp(e) {
+    e.preventDefault();
+
+    if (CDP_APP_ID === 'YOUR_CDP_APP_ID') {
+      alert('CDP App ID not configured. Add it to the page config.');
+      return;
+    }
+
+    const params = new URLSearchParams({
+      appId: CDP_APP_ID,
+      addresses: JSON.stringify({ [ARCTURA_WALLET]: ['base'] }),
+      assets: JSON.stringify(['USDC']),
+      defaultAsset: 'USDC',
+      defaultNetwork: 'base',
+      presetFiatAmount: selectedAmount,
+      fiatCurrency: 'USD',
+      redirectUrl: REDIRECT_URL
     });
 
-    // T2 overflow QR
+    const onrampUrl = `https://pay.coinbase.com/buy/select-asset?${params}`;
+    window.location.href = onrampUrl;
+  }
+
+  // ─── QR CODES ────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', function() {
+    new QRCode(document.getElementById('qr-primary'), {
+      text: 'ethereum:0xb60a1dc7E453e8cB9a2859290D7f9ad4c3181664@8453',
+      width: 148, height: 148,
+      colorDark: '#00d2c8', colorLight: '#0a1628',
+      correctLevel: QRCode.CorrectLevel.M
+    });
     new QRCode(document.getElementById('qr-t2'), {
       text: 'ethereum:0x3cBA7f0ad575331B892F001aef4D204b263Fdd58@8453',
-      width: 148,
-      height: 148,
-      colorDark: '#c9a84c',
-      colorLight: '#0a1628',
+      width: 148, height: 148,
+      colorDark: '#c9a84c', colorLight: '#0a1628',
       correctLevel: QRCode.CorrectLevel.M
     });
   });
 
+  // ─── COPY ────────────────────────────────────────────
   function copyAddr(addr, btn) {
     navigator.clipboard.writeText(addr).then(function() {
       btn.textContent = '✓ Copied';
       btn.classList.add('copied');
-      setTimeout(function() {
-        btn.textContent = '⬡ Copy Address';
-        btn.classList.remove('copied');
-      }, 2200);
+      setTimeout(function() { btn.textContent = '⬡ Copy Address'; btn.classList.remove('copied'); }, 2200);
     }).catch(function() {
       btn.textContent = addr.slice(0,10) + '...';
       setTimeout(function() { btn.textContent = '⬡ Copy Address'; }, 3000);
