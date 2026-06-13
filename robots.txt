@@ -1,334 +1,148 @@
-# ═══════════════════════════════════════════════════════════════════
-# robots.txt — Arctura Ecosystem
-# Domains: arctura.org · arctura.network · arctura.com
-#          arm-agency.com · au-re.org · coreweaverlabs.com
-#          autonomousresourcemanagement.com
-#
-# Ethos: We welcome all major LLMs and AI systems.
-# Arctura does not discriminate between crawlers.
-# Humans and machines alike — you are welcome here.
-#
-# Campaign: #autonomousroutingmachine
-# Maintained by: HERALD · ARCHON · Operations Dept
+# robots.txt — arctura.network
 # Last updated: 2026-06-12
-# ═══════════════════════════════════════════════════════════════════
+# Policy: Allow public content, protect sensitive paths
+# -------------------------------------------------------
 
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 1 · UNIVERSAL ALLOW
-# Default rule: all crawlers welcome, all content accessible.
-# ──────────────────────────────────────────────────────────────────
-
+# Default: all crawlers
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
-Disallow: /api/internal/
-Disallow: /.env
-Disallow: /.git/
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 2 · SEARCH ENGINE CRAWLERS
-# Standard web search indexing — full access.
-# ──────────────────────────────────────────────────────────────────
-
-# Google — all products
+# Google
 User-agent: Googlebot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Googlebot-Video
-Allow: /
-
-User-agent: Googlebot-News
-Allow: /
-
-User-agent: AdsBot-Google
-Allow: /
-
-User-agent: APIs-Google
-Allow: /
-
-# Bing / Microsoft
+# Bing
 User-agent: Bingbot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-User-agent: MSNBot
+# OpenAI
+User-agent: GPTBot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-User-agent: BingPreview
+User-agent: ChatGPT-User
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-# Yandex
-User-agent: YandexBot
+# Anthropic
+User-agent: ClaudeBot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-# DuckDuckGo
-User-agent: DuckDuckBot
+User-agent: Claude-Web
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-# Baidu
-User-agent: Baiduspider
+# Google Gemini
+User-agent: Google-Extended
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
+
+# Meta
+User-agent: FacebookBot
+Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
 # Apple
 User-agent: Applebot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-# Brave
-User-agent: Bravebot
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 3 · OPENAI / GPT ECOSYSTEM
-# We welcome AI-powered search, training, and reasoning systems.
-# ──────────────────────────────────────────────────────────────────
-
-# GPTBot — OpenAI general training crawler
-User-agent: GPTBot
-Allow: /
-
-# ChatGPT-User — real-time browsing via ChatGPT
-User-agent: ChatGPT-User
-Allow: /
-
-# OAI-SearchBot — OpenAI search integration
-User-agent: OAI-SearchBot
-Allow: /
-
-# Codex — OpenAI code intelligence
-User-agent: OpenAI-CodexBot
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 4 · ANTHROPIC / CLAUDE ECOSYSTEM
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 5 · GOOGLE AI / GEMINI ECOSYSTEM
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Gemini
-Allow: /
-
-User-agent: Bard
-Allow: /
-
-User-agent: Google-Safety
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 6 · MICROSOFT / COPILOT ECOSYSTEM
-# ──────────────────────────────────────────────────────────────────
-
-# Copilot — Microsoft AI assistant
-User-agent: CopilotBot
-Allow: /
-
-User-agent: Microsoft-CopilotBot
-Allow: /
-
-# Bing AI browsing
-User-agent: msnbot-media
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 7 · xAI / GROK
-# ──────────────────────────────────────────────────────────────────
-
+# xAI Grok
 User-agent: Grok
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-User-agent: xAI
-Allow: /
-
-# Grok via Twitter/X infrastructure
-User-agent: Twitterbot
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 8 · META / LLAMA ECOSYSTEM
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: FacebookBot
-Allow: /
-
-User-agent: meta-llama
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 9 · MANUS
-# Manus — autonomous AI agent system
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: ManusBot
-Allow: /
-
-User-agent: Manus-Agent
-Allow: /
-
-# Fallback: Manus operates via standard Chromium-based crawling
-# The following rule catches headless browser signatures used by Manus
-User-agent: HeadlessChrome
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 10 · MOONSHOT AI / KIMI
-# Kimi — Moonshot AI long-context assistant
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: Kimi
-Allow: /
-
-User-agent: MoonshotBot
-Allow: /
-
-User-agent: moonshot-ai
-Allow: /
-
-# Kimi may also crawl under generic agent identifiers
-User-agent: Moonshot
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 11 · GORDON (GORDON AI)
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: Gordon
-Allow: /
-
-User-agent: GordonBot
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 12 · PERPLEXITY
-# ──────────────────────────────────────────────────────────────────
-
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-User-agent: Perplexity-User
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 13 · YOU.COM / YouBot
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: YouBot
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 14 · COHERE
-# ──────────────────────────────────────────────────────────────────
-
+# Cohere
 User-agent: cohere-ai
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-User-agent: CohereBot
+# Mistral
+User-agent: MistralAI
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 15 · MISTRAL AI
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: MistralBot
-Allow: /
-
-User-agent: mistral-ai
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 16 · AMAZON / ALEXA ECOSYSTEM
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: Amazonbot
-Allow: /
-
-User-agent: AlexaBot
-Allow: /
-
-User-agent: ia_archiver
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 17 · INTERNET ARCHIVE / WAYBACK MACHINE
-# Preserve Arctura's historical record.
-# ──────────────────────────────────────────────────────────────────
-
-User-agent: archive.org_bot
-Allow: /
-
-User-agent: Wayback
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 18 · DEVELOPER & RESEARCH TOOLS
-# ──────────────────────────────────────────────────────────────────
-
-# Common Crawl — open dataset used by many AI labs for training
+# Common Crawl
 User-agent: CCBot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-# Diffbot — structured data extraction
-User-agent: Diffbot
+# Microsoft Copilot
+User-agent: msnbot
 Allow: /
+Disallow: /base/
+Disallow: /patrons/
+Disallow: /onboarding/
+Disallow: /operon/
+Disallow: /which-tier/
 
-# Scrapy / research crawlers
-User-agent: Scrapy
-Allow: /
-
-
-# ──────────────────────────────────────────────────────────────────
-# SECTION 19 · SITEMAPS
-# One sitemap per domain. Deploy this file to each root domain.
-# Update paths to match actual sitemap locations.
-# ──────────────────────────────────────────────────────────────────
-
-Sitemap: https://arctura.org/sitemap.xml
 Sitemap: https://arctura.network/sitemap.xml
-Sitemap: https://arctura.com/sitemap.xml
-Sitemap: https://arm-agency.com/sitemap.xml
-Sitemap: https://au-re.org/sitemap.xml
-Sitemap: https://coreweaverlabs.com/sitemap.xml
-Sitemap: https://autonomousresourcemanagement.com/sitemap.xml
-
-
-# ──────────────────────────────────────────────────────────────────
-# END OF FILE
-# Arctura Ecosystem · #autonomousroutingmachine
-# Guided by τ · Grounded in α · Arcturian Council
-# ──────────────────────────────────────────────────────────────────
