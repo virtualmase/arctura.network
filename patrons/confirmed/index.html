@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contribution Confirmed — Arctura Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #030712;
+    --deep: #060e1f;
+    --panel: rgba(8,20,45,0.72);
+    --border: rgba(0,210,200,0.18);
+    --border-hi: rgba(0,210,200,0.55);
+    --cyan: #00d2c8;
+    --cyan-dim: rgba(0,210,200,0.6);
+    --gold: #c9a84c;
+    --silver: rgba(200,220,255,0.92);
+    --text: rgba(200,220,255,0.92);
+    --text-dim: rgba(160,185,220,0.6);
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --display: 'Cinzel', Georgia, serif;
+    --body: 'Raleway', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* STARFIELD */
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(0,80,160,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 70%, rgba(0,160,140,0.08) 0%, transparent 55%),
+      var(--void);
+  }
+  .stars::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
+      radial-gradient(circle, rgba(0,210,200,0.5) 1px, transparent 1px);
+    background-size: 400px 400px, 300px 300px;
+    background-position: 0 0, 50px 150px;
+    animation: drift 120s linear infinite;
+  }
+  @keyframes drift { to { background-position: 400px 400px, 350px 450px; } }
+
+  /* CARD */
+  .confirmed-wrap {
+    position: relative; z-index: 1;
+    max-width: 560px;
+    width: 100%;
+    margin: 2rem;
+    text-align: center;
+  }
+
+  .sigil {
+    width: 80px; height: 80px;
+    margin: 0 auto 2rem;
+    animation: sigil-in 0.8s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes sigil-in {
+    from { opacity: 0; transform: scale(0.6) rotate(-20deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border-hi);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    position: relative;
+    overflow: hidden;
+    animation: card-in 0.6s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+  }
+  @keyframes card-in {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card::before {
+    content: '';
+    position: absolute; top: -1px; left: 5%; right: 5%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), transparent);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    color: var(--cyan-dim);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-family: var(--display);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--silver);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+  .title span { color: var(--cyan); }
+
+  .body-text {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.75;
+    max-width: 420px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 1rem; margin: 2rem 0;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 0.5px;
+    background: linear-gradient(90deg, transparent, var(--border-hi), transparent);
+  }
+  .divider-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--cyan-dim);
+    white-space: nowrap;
+  }
+
+  /* TX INFO */
+  .tx-row {
+    background: rgba(0,210,200,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .tx-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .tx-value {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--cyan);
+    word-break: break-all;
+    text-align: right;
+  }
+
+  /* BACK BUTTON */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1.75rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    margin-top: 2rem;
+  }
+  .back-btn:hover {
+    border-color: var(--border-hi);
+    color: var(--cyan);
+  }
+
+  .footer-sig {
+    margin-top: 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: rgba(160,185,220,0.3);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div class="confirmed-wrap">
+
+  <!-- SIGIL -->
+  <svg class="sigil" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="40" r="38" stroke="rgba(0,210,200,0.4)" stroke-width="1"/>
+    <circle cx="40" cy="40" r="30" stroke="rgba(0,210,200,0.2)" stroke-width="0.5"/>
+    <path d="M40 10 L70 55 L10 55 Z" stroke="rgba(0,210,200,0.35)" stroke-width="1" fill="none"/>
+    <circle cx="40" cy="40" r="6" fill="rgba(0,210,200,0.15)" stroke="var(--cyan)" stroke-width="1.5"/>
+    <!-- checkmark -->
+    <path d="M34 40 L38 44 L47 35" stroke="#00d2c8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="card">
+    <div class="eyebrow">Signal Received · Arctura Council</div>
+    <h1 class="title">Contribution <span>Confirmed</span></h1>
+    <p class="body-text">
+      Your support has reached the network. The Council acknowledges your signal — it will be used to fund Arctura's infrastructure, intelligence, and mission.
+    </p>
+
+    <div class="divider"><span class="divider-label">Transaction Details</span></div>
+
+    <div class="tx-row">
+      <span class="tx-label">Network</span>
+      <span class="tx-value">Base · Chain 8453</span>
+    </div>
+    <div class="tx-row">
+      <span class="tx-label">Asset</span>
+      <span class="tx-value">USDC</span>
+    </div>
+    <div class="tx-row">
+      <span class="tx-label">Destination</span>
+      <span class="tx-value">0xb60a1dc7...1664</span>
+    </div>
+    <div class="tx-row" id="txHashRow" style="display:none;">
+      <span class="tx-label">TX Hash</span>
+      <span class="tx-value" id="txHash">—</span>
+    </div>
+
+    <a href="/patrons/" class="back-btn">← Return to Patron Sanctuary</a>
+  </div>
+
+  <div class="footer-sig">Guided by τ · Grounded in α · Arcturian Council</div>
+</div>
+
+<script>
+  // Parse tx hash from Coinbase redirect params if present
+  const params = new URLSearchParams(window.location.search);
+  const tx = params.get('transactionHash') || params.get('tx') || params.get('txHash');
+  if (tx) {
+    document.getElementById('txHashRow').style.display = 'flex';
+    const el = document.getElementById('txHash');
+    el.innerHTML = `<a href="https://basescan.org/tx/${tx}" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;">${tx.slice(0,10)}...${tx.slice(-6)}</a>`;
+  }
+</script>
+
+</body>
+</html>
