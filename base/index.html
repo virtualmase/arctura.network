@@ -1,1060 +1,1961 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arctura — Base Subnet</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arctura Base — Bittensor Subnet for Base Chain Intelligence</title>
+<meta name="description" content="Arctura Base is a Bittensor subnet that verifies Base chain state through decentralized miner attestation. Merkle proofs, Resonance BFT, and TAO-incentivized intelligence.">
   <meta name="base:app_id" content="69f78ebb879b4ae3fa1c70b6" />
     <meta name="talentapp:project_verification" content="b7ccbe592b90279b90cea1fb75ab3508960de478b993d8a0e59471291f5f17252f9786d52a768a70178fd6b0a26754644cf6635ba8d9e5540f5257185d7a6aa0">
   <meta name="talentapp:project_verification" content="d9971e6f7092ade70d7c2fc1f3e4114fd0bdd093e52d5337357e13bbd9ac7bc72dc5f8192b63ef4f784304986bd925cece2362710c4cd860b792f6bc8a5b74e5">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg:        #060810;
-      --surface:   #0c1020;
-      --border:    #1a2240;
-      --accent:    #3b82f6;
-      --accent2:   #06b6d4;
-      --glow:      rgba(59,130,246,.18);
-      --glow2:     rgba(6,182,212,.12);
-      --text:      #e2e8f0;
-      --muted:     #64748b;
-      --mono:      "DM Mono", monospace;
-      --sans:      "Syne", sans-serif;
-    }
+  <meta property="og:title" content="Arctura Base — Base Chain Intelligence Subnet">
+<meta property="og:description" content="Miners verify Base chain data. Validators score the work. TAO rewards truth. Entering testnet hardening.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://base.arctura.network">
+  
+<link rel="canonical" href="https://base.arctura.network">
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    html { scroll-behavior: smooth; }
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ARCTURA BASE — base.arctura.network
+   Design: Arctura-core precision × Kusama scale
+   IBM Plex Tri-family · Void-black · Teal + Base Blue
+   ═══════════════════════════════════════════════════════════ */
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      min-height: 100vh;
-      overflow-x: hidden;
-      cursor: none;
-    }
+:root {
+  /* Palette */
+  --void:        #050507;
+  --deep:        #08080d;
+  --surface:     #0d0d14;
+  --surface-2:   #121219;
+  --border:      rgba(255,255,255,0.06);
+  --border-md:   rgba(255,255,255,0.11);
+  --border-hi:   rgba(255,255,255,0.20);
 
-    /* ─── CUSTOM CURSOR ─────────────────────────────────────────── */
-    #cursor {
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--accent2);
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: transform .1s, background .2s;
-      mix-blend-mode: screen;
-    }
-    #cursor-ring {
-      position: fixed; top: 0; left: 0; z-index: 9998;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: 1px solid rgba(59,130,246,.4);
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: transform .22s cubic-bezier(.23,1,.32,1), opacity .2s;
-    }
-    body:hover #cursor { opacity: 1; }
+  --text:        #e4e4ee;
+  --text-muted:  #7878a0;
+  --text-dim:    #42424e;
 
-    /* ─── BACKGROUND NOISE & GRID ───────────────────────────────── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background-image:
-        radial-gradient(ellipse 70% 50% at 15% 40%, var(--glow), transparent),
-        radial-gradient(ellipse 50% 40% at 85% 70%, var(--glow2), transparent);
-      pointer-events: none;
-    }
-    .grid-bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black, transparent);
-      opacity: .3;
-    }
+  /* Accents */
+  --teal:        #00d4c8;
+  --teal-dim:    rgba(0,212,200,0.07);
+  --teal-glow:   rgba(0,212,200,0.22);
+  --teal-2:      rgba(0,212,200,0.45);
 
-    /* ─── LAYOUT ─────────────────────────────────────────────────── */
-    .container {
-      position: relative; z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
+  --blue:        #4f8bff;
+  --blue-dim:    rgba(79,139,255,0.07);
+  --blue-glow:   rgba(79,139,255,0.20);
 
-    /* ─── NAV ────────────────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 40px;
-      background: rgba(6,8,16,.7);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-family: var(--sans);
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .logo-mark {
-      width: 28px; height: 28px;
-      position: relative;
-    }
-    .logo-mark svg { width: 100%; height: 100%; }
-    .nav-links {
-      display: flex; align-items: center; gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: .72rem;
-      letter-spacing: .08em;
-      color: var(--muted);
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--accent2); }
-    .nav-cta {
-      font-family: var(--mono);
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border: 1px solid rgba(59,130,246,.4);
-      padding: 8px 18px;
-      text-decoration: none;
-      transition: background .2s, color .2s, box-shadow .2s;
-    }
-    .nav-cta:hover {
-      background: rgba(59,130,246,.12);
-      box-shadow: 0 0 20px var(--glow);
-    }
+  --green:       #22d98a;
+  --green-dim:   rgba(34,217,138,0.08);
+  --amber:       #f0b429;
+  --amber-dim:   rgba(240,180,41,0.08);
+  --red:         #f05454;
 
-    /* ─── HERO ───────────────────────────────────────────────────── */
-    .hero {
-      padding: 180px 0 120px;
-      position: relative; z-index: 1;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--mono);
-      font-size: .7rem;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 28px;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 24px; height: 1px;
-      background: var(--accent2);
-    }
-    .hero h1 {
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 800;
-      line-height: .95;
-      letter-spacing: -.02em;
-      margin-bottom: 32px;
-    }
-    .hero h1 .line1 { display: block; color: var(--text); }
-    .hero h1 .line2 {
-      display: block;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-family: var(--mono);
-      font-size: .9rem;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 540px;
-      margin-bottom: 52px;
-    }
-    .hero-sub span { color: var(--accent); }
-    .hero-actions {
-      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent);
-      color: #fff;
-      font-family: var(--mono);
-      font-size: .75rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 14px 28px;
-      text-decoration: none;
-      transition: box-shadow .25s, transform .2s;
-    }
-    .btn-primary:hover {
-      box-shadow: 0 0 32px rgba(59,130,246,.5);
-      transform: translateY(-2px);
-    }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--mono);
-      font-size: .75rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      border: 1px solid var(--border);
-      padding: 14px 28px;
-      transition: border-color .2s, color .2s;
-    }
-    .btn-ghost:hover {
-      border-color: var(--accent2);
-      color: var(--accent2);
-    }
-    .hero-stats {
-      display: flex; gap: 48px; margin-top: 72px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-    }
-    .stat { display: flex; flex-direction: column; gap: 6px; }
-    .stat-val {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -.02em;
-      background: linear-gradient(135deg, var(--text), var(--muted));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .stat-label {
-      font-family: var(--mono);
-      font-size: .65rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+  /* Type */
+  --display:     'IBM Plex Sans', sans-serif;
+  --body:        'IBM Plex Serif', serif;
+  --mono:        'IBM Plex Mono', monospace;
 
-    /* ─── SCROLL TICKER ──────────────────────────────────────────── */
-    .ticker-wrap {
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      background: rgba(12,16,32,.6);
-      position: relative; z-index: 1;
-    }
-    .ticker-track {
-      display: flex; gap: 60px;
-      white-space: nowrap;
-      animation: ticker 28s linear infinite;
-    }
-    .ticker-item {
-      display: flex; align-items: center; gap: 10px;
-      font-family: var(--mono);
-      font-size: .68rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .ticker-item span { color: var(--accent2); }
-    .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
+  /* Radii */
+  --r: 2px;
+}
 
-    /* ─── HOW IT WORKS ───────────────────────────────────────────── */
-    section { padding: 100px 0; position: relative; z-index: 1; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-    .section-label {
-      font-family: var(--mono);
-      font-size: .65rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1; height: 1px;
-      background: var(--border);
-      max-width: 120px;
-    }
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 800;
-      letter-spacing: -.02em;
-      line-height: 1.05;
-      margin-bottom: 16px;
-    }
-    .section-sub {
-      font-family: var(--mono);
-      font-size: .85rem;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 520px;
-    }
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
 
-    .arch-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 2px;
-      margin-top: 64px;
-    }
-    .arch-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 36px 32px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color .3s;
-    }
-    .arch-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, var(--glow), transparent);
-      opacity: 0;
-      transition: opacity .3s;
-    }
-    .arch-card:hover { border-color: rgba(59,130,246,.4); }
-    .arch-card:hover::before { opacity: 1; }
-    .arch-num {
-      font-family: var(--mono);
-      font-size: .65rem;
-      letter-spacing: .2em;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-    .arch-icon {
-      width: 44px; height: 44px;
-      margin-bottom: 20px;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid var(--border);
-    }
-    .arch-icon svg { width: 22px; height: 22px; }
-    .arch-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .arch-card p {
-      font-family: var(--mono);
-      font-size: .75rem;
-      line-height: 1.75;
-      color: var(--muted);
-    }
+/* Scanline texture */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 3px
+  );
+}
 
-    /* ─── FLOW DIAGRAM ───────────────────────────────────────────── */
-    .flow-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .flow-inner {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 80px;
-      align-items: center;
-    }
-    .flow-diagram {
-      position: relative;
-    }
-    .flow-node {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 20px 24px;
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 2px;
-      transition: border-color .2s;
-      cursor: default;
-    }
-    .flow-node:hover { border-color: rgba(59,130,246,.4); }
-    .flow-node-icon {
-      width: 36px; height: 36px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .flow-node-icon svg { width: 16px; height: 16px; }
-    .flow-node-info { flex: 1; }
-    .flow-node-title {
-      font-size: .88rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .flow-node-desc {
-      font-family: var(--mono);
-      font-size: .67rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .flow-arrow {
-      display: flex; justify-content: center; align-items: center;
-      height: 24px; color: var(--accent);
-      font-size: .8rem;
-    }
-    .flow-badge {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: .6rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border: 1px solid;
-    }
-    .flow-badge.miner { color: var(--accent); border-color: rgba(59,130,246,.4); }
-    .flow-badge.validator { color: var(--accent2); border-color: rgba(6,182,212,.4); }
-    .flow-badge.reward { color: #a78bfa; border-color: rgba(167,139,250,.4); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); }
 
-    /* ─── CODE BLOCK ─────────────────────────────────────────────── */
-    .code-panel {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .code-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 18px;
-      border-bottom: 1px solid var(--border);
-    }
-    .code-dots { display: flex; gap: 6px; }
-    .code-dots span { width: 10px; height: 10px; border-radius: 50%; }
-    .code-dots span:nth-child(1) { background: #ff5f57; }
-    .code-dots span:nth-child(2) { background: #febc2e; }
-    .code-dots span:nth-child(3) { background: #28c840; }
-    .code-file {
-      font-family: var(--mono);
-      font-size: .65rem;
-      color: var(--muted);
-      letter-spacing: .08em;
-    }
-    .code-body {
-      padding: 24px 18px;
-      font-family: var(--mono);
-      font-size: .72rem;
-      line-height: 1.8;
-      color: var(--muted);
-      overflow-x: auto;
-    }
-    .code-body .kw { color: #818cf8; }
-    .code-body .fn { color: var(--accent2); }
-    .code-body .str { color: #86efac; }
-    .code-body .cm { color: #374151; }
-    .code-body .hi { color: var(--text); }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--text); }
 
-    /* ─── ROLES ──────────────────────────────────────────────────── */
-    .roles-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 64px;
-    }
-    .role-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 40px 36px;
-      position: relative;
-      overflow: hidden;
-    }
-    .role-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 2px;
-    }
-    .role-card.miners::after { background: linear-gradient(90deg, var(--accent), transparent); }
-    .role-card.validators::after { background: linear-gradient(90deg, var(--accent2), transparent); }
-    .role-tag {
-      font-family: var(--mono);
-      font-size: .62rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .role-tag.m { color: var(--accent); }
-    .role-tag.v { color: var(--accent2); }
-    .role-card h3 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-    .role-card p {
-      font-family: var(--mono);
-      font-size: .75rem;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-    .role-list {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .role-list li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-family: var(--mono);
-      font-size: .72rem;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-    .role-list li::before {
-      content: '→';
-      color: var(--accent);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .role-card.validators .role-list li::before { color: var(--accent2); }
+/* ── TOPNAV ── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  height: 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(5,5,7,0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
 
-    /* ─── STACK ───────────────────────────────────────────────────── */
-    .stack-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      margin-top: 64px;
-    }
-    .stack-item {
-      border: 1px solid var(--border);
-      padding: 28px 24px;
-      display: flex; flex-direction: column; gap: 12px;
-      transition: border-color .2s, background .2s;
-    }
-    .stack-item:hover {
-      border-color: rgba(59,130,246,.35);
-      background: rgba(59,130,246,.04);
-    }
-    .stack-tag {
-      font-family: var(--mono);
-      font-size: .6rem;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .stack-name {
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    .stack-desc {
-      font-family: var(--mono);
-      font-size: .68rem;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-    .stack-pct {
-      font-family: var(--mono);
-      font-size: .65rem;
-      color: var(--muted);
-      margin-top: auto;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .pct-bar {
-      height: 2px;
-      background: var(--border);
-      margin-top: 6px;
-      position: relative;
-      overflow: hidden;
-    }
-    .pct-fill {
-      position: absolute; left: 0; top: 0; bottom: 0;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      animation: grow 1.4s ease-out forwards;
-      transform-origin: left;
-    }
-    @keyframes grow { from { width: 0; } }
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 12px; font-weight: 600;
+  color: var(--text); text-decoration: none; letter-spacing: 0.05em;
+}
+.nav-brand-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal-glow);
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+.nav-brand-slash { color: var(--text-dim); margin: 0 2px; }
+.nav-brand em { color: var(--teal); font-style: normal; }
 
-    /* ─── CTA ─────────────────────────────────────────────────────── */
-    .cta-section {
-      padding: 120px 0;
-      text-align: center;
-    }
-    .cta-inner {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    .cta-section h2 {
-      font-size: clamp(2rem,5vw,3.4rem);
-      font-weight: 800;
-      letter-spacing: -.02em;
-      line-height: 1.05;
-      margin-bottom: 20px;
-    }
-    .cta-section p {
-      font-family: var(--mono);
-      font-size: .85rem;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 40px;
-    }
-    .cta-actions {
-      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
-    }
+.nav-mid {
+  display: flex; align-items: center; gap: 4px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+}
+.nav-mid-badge {
+  padding: 2px 8px; border-radius: var(--r);
+  background: var(--amber-dim);
+  border: 1px solid rgba(240,180,41,0.18);
+  color: var(--amber);
+  font-weight: 600;
+}
+.nav-mid-sep { color: var(--text-dim); margin: 0 4px; }
+.nav-mid-item { color: var(--text-dim); }
 
-    /* ─── FOOTER ──────────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-      position: relative; z-index: 1;
-    }
-    .footer-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
-    }
-    .footer-left {
-      font-family: var(--mono);
-      font-size: .68rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .footer-left strong { color: var(--text); }
-    .footer-links {
-      display: flex; gap: 24px; list-style: none;
-    }
-    .footer-links a {
-      font-family: var(--mono);
-      font-size: .65rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .footer-links a:hover { color: var(--accent2); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
 
-    /* ─── PULSE ANIMATION ─────────────────────────────────────────── */
-    .pulse-ring {
-      position: absolute; right: -80px; top: 50%;
-      transform: translateY(-50%);
-      width: 320px; height: 320px;
-      pointer-events: none;
-    }
-    .pulse-ring circle {
-      animation: pulseOut 3s ease-out infinite;
-      transform-origin: center;
-    }
-    .pulse-ring circle:nth-child(2) { animation-delay: 1s; }
-    .pulse-ring circle:nth-child(3) { animation-delay: 2s; }
-    @keyframes pulseOut {
-      0% { r: 20; opacity: .8; }
-      100% { r: 140; opacity: 0; }
-    }
+.btn-nav {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: var(--r);
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: opacity 0.15s;
+}
+.btn-nav:hover { opacity: 0.82; }
+.btn-nav.teal { background: var(--teal); color: #020a09; }
+.btn-nav.ghost {
+  background: transparent; color: var(--text-muted);
+  border: 1px solid var(--border-md);
+}
+.btn-nav.ghost:hover { color: var(--text); border-color: var(--border-hi); }
 
-    /* ─── ANIMATIONS ──────────────────────────────────────────────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* ── STRIP ── */
+.strip {
+  position: fixed; top: 48px; left: 0; right: 0; z-index: 890;
+  height: 26px;
+  display: flex; align-items: center;
+  padding: 0 28px; gap: 24px;
+  background: var(--deep);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.strip-item {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em;
+  color: var(--text-dim); white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.strip-item span { color: var(--text-muted); }
+.strip-item .ok { color: var(--green); }
+.strip-item .warn { color: var(--amber); }
+.strip-sep { color: var(--border-md); }
 
-    /* ─── RESPONSIVE ──────────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .arch-grid { grid-template-columns: 1fr 1fr; }
-      .flow-inner { grid-template-columns: 1fr; }
-      .roles-grid { grid-template-columns: 1fr; }
-      .stack-row { grid-template-columns: 1fr 1fr; }
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-    }
-    @media (max-width: 600px) {
-      .hero { padding: 140px 0 80px; }
-      .hero-stats { flex-wrap: wrap; gap: 28px; }
-      .arch-grid { grid-template-columns: 1fr; }
-      .stack-row { grid-template-columns: 1fr; }
-      .container { padding: 0 20px; }
-    }
-  </style>
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding-top: 74px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  z-index: 1;
+}
+
+/* Hero background grid */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(79,139,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,139,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Hero corner glow */
+.hero-glow-tl {
+  position: absolute; top: 0; left: 0;
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse at 20% 20%, rgba(0,212,200,0.06), transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.hero-glow-br {
+  position: absolute; bottom: 0; right: 0;
+  width: 500px; height: 400px;
+  background: radial-gradient(ellipse at 80% 80%, rgba(79,139,255,0.05), transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 72px 48px 72px 56px;
+  border-right: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 24px; height: 1px; background: var(--teal);
+}
+
+/* THE BIG TYPE — kusama-scale */
+.hero-h1 {
+  font-family: var(--display);
+  font-size: clamp(60px, 8vw, 100px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+.hero-h1 .word-base {
+  display: block;
+  color: var(--teal);
+}
+.hero-h1 .word-sub {
+  display: block;
+  font-size: 0.38em;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  margin-top: 14px;
+}
+
+.hero-sub {
+  font-family: var(--body); font-size: 14px; font-weight: 300;
+  color: var(--text-muted); line-height: 1.8;
+  max-width: 460px; margin-bottom: 40px;
+}
+.hero-sub strong { color: var(--text); font-weight: 400; }
+
+.hero-actions {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  margin-bottom: 52px;
+}
+
+.btn-primary {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 12px 22px; border-radius: var(--r);
+  background: var(--teal); color: #020a09;
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.84; color: #020a09; }
+
+.btn-ghost {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+  padding: 11px 20px; border-radius: var(--r);
+  background: transparent; color: var(--text-muted);
+  border: 1px solid var(--border-md); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-ghost:hover { border-color: var(--border-hi); color: var(--text); }
+
+.hero-proof {
+  display: flex; gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.proof-item {
+  flex: 1; padding: 16px 20px;
+  border-right: 1px solid var(--border);
+}
+.proof-item:last-child { border-right: none; }
+.proof-val {
+  font-family: var(--mono); font-size: 20px; font-weight: 600;
+  color: var(--teal); line-height: 1;
+  margin-bottom: 4px;
+}
+.proof-val.blue { color: var(--blue); }
+.proof-val.green { color: var(--green); }
+.proof-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-dim);
+}
+
+/* ── HERO RIGHT: ATTESTATION FLOW ── */
+.hero-right {
+  display: flex; flex-direction: column;
+  background: var(--deep);
+  position: relative; z-index: 1;
+}
+
+.flow-header {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.flow-header-title {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);
+}
+.flow-live-badge {
+  display: flex; align-items: center; gap: 5px;
+  font-family: var(--mono); font-size: 9px; color: var(--green);
+  letter-spacing: 0.06em;
+}
+.flow-live-badge::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green);
+  animation: dot-pulse 1.8s ease-in-out infinite;
+}
+
+.flow-body {
+  flex: 1; padding: 28px 24px;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 0;
+}
+
+/* Attestation flow nodes */
+.flow-node {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--r);
+  position: relative;
+  transition: border-color 0.3s;
+}
+.flow-node.active {
+  border-color: var(--teal-2);
+  background: rgba(0,212,200,0.03);
+}
+.flow-node.active-blue {
+  border-color: rgba(79,139,255,0.35);
+  background: rgba(79,139,255,0.03);
+}
+
+.flow-connector {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 3px 0; margin-left: 28px;
+}
+.flow-connector-line {
+  width: 1px; height: 16px;
+  background: linear-gradient(to bottom, var(--border-md), var(--border));
+}
+.flow-connector-arrow {
+  font-family: var(--mono); font-size: 8px; color: var(--text-dim);
+}
+
+.flow-node-icon {
+  width: 32px; height: 32px; border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+.flow-node-icon.teal { background: var(--teal-dim); border: 1px solid rgba(0,212,200,0.18); }
+.flow-node-icon.blue { background: var(--blue-dim); border: 1px solid rgba(79,139,255,0.18); }
+.flow-node-icon.green { background: var(--green-dim); border: 1px solid rgba(34,217,138,0.18); }
+.flow-node-icon.gold { background: var(--amber-dim); border: 1px solid rgba(240,180,41,0.18); }
+
+.flow-node-info { flex: 1; }
+.flow-node-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-dim); margin-bottom: 3px;
+}
+.flow-node-title {
+  font-family: var(--mono); font-size: 12px; font-weight: 600;
+  color: var(--text); margin-bottom: 4px;
+}
+.flow-node-desc {
+  font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+  line-height: 1.55;
+}
+.flow-node-hash {
+  font-family: var(--mono); font-size: 9px; color: var(--teal);
+  margin-top: 6px; letter-spacing: 0.02em;
+  animation: hash-cycle 4s ease-in-out infinite;
+}
+.flow-node-hash.blue { color: var(--blue); animation-delay: 0.5s; }
+
+@keyframes hash-cycle {
+  0%, 90%, 100% { opacity: 1; }
+  45% { opacity: 0.3; }
+}
+
+/* ── MAIN WRAP ── */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+.section { padding: 72px 0; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+
+.eyebrow {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+}
+.eyebrow::before { content: '—'; color: var(--text-dim); }
+
+.section-h2 {
+  font-family: var(--display); font-size: clamp(28px, 3vw, 38px);
+  font-weight: 700; letter-spacing: -0.02em; color: var(--text);
+  margin-bottom: 12px; line-height: 1.1;
+}
+.section-lead {
+  font-family: var(--body); font-size: 14px; font-weight: 300;
+  color: var(--text-muted); line-height: 1.8; max-width: 580px;
+  margin-bottom: 48px;
+}
+
+/* ── PROTOCOL SECTION ── */
+.protocol-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.proto-card {
+  background: var(--surface);
+  padding: 28px 24px;
+  position: relative;
+  transition: background 0.2s;
+}
+.proto-card:hover { background: var(--surface-2); }
+.proto-num {
+  font-family: var(--mono); font-size: 40px; font-weight: 700;
+  color: var(--border-md); letter-spacing: -0.04em;
+  line-height: 1; margin-bottom: 16px;
+  transition: color 0.2s;
+}
+.proto-card:hover .proto-num { color: var(--border-hi); }
+.proto-icon {
+  width: 36px; height: 36px; border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; margin-bottom: 14px;
+}
+.proto-icon.teal { background: var(--teal-dim); border: 1px solid rgba(0,212,200,0.15); }
+.proto-icon.blue { background: var(--blue-dim); border: 1px solid rgba(79,139,255,0.15); }
+.proto-icon.green { background: var(--green-dim); border: 1px solid rgba(34,217,138,0.15); }
+.proto-icon.gold { background: var(--amber-dim); border: 1px solid rgba(240,180,41,0.15); }
+.proto-title {
+  font-family: var(--mono); font-size: 12px; font-weight: 600;
+  color: var(--text); margin-bottom: 10px; letter-spacing: 0.02em;
+}
+.proto-desc {
+  font-family: var(--body); font-size: 12px; color: var(--text-muted);
+  line-height: 1.7;
+}
+.proto-tag {
+  margin-top: 14px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+  color: var(--teal); background: var(--teal-dim);
+  border: 1px solid rgba(0,212,200,0.15);
+  padding: 2px 7px; border-radius: var(--r);
+  display: inline-block;
+}
+.proto-tag.blue { color: var(--blue); background: var(--blue-dim); border-color: rgba(79,139,255,0.15); }
+.proto-tag.green { color: var(--green); background: var(--green-dim); border-color: rgba(34,217,138,0.15); }
+.proto-tag.gold { color: var(--amber); background: var(--amber-dim); border-color: rgba(240,180,41,0.15); }
+
+/* Protocol detail row */
+.protocol-detail {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  border-radius: var(--r); overflow: hidden;
+}
+.proto-detail-panel {
+  background: var(--surface); padding: 28px 32px;
+}
+.proto-detail-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-dim); margin-bottom: 18px;
+}
+.proto-detail-heading {
+  font-family: var(--display); font-size: 18px; font-weight: 600;
+  color: var(--text); margin-bottom: 14px; letter-spacing: -0.01em;
+}
+.proto-detail-body {
+  font-family: var(--body); font-size: 12px; color: var(--text-muted);
+  line-height: 1.75; margin-bottom: 20px;
+}
+
+.proto-step-list { display: flex; flex-direction: column; gap: 10px; }
+.proto-step {
+  display: flex; gap: 12px; align-items: flex-start;
+  font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+}
+.proto-step-n {
+  font-size: 9px; color: var(--teal); min-width: 20px;
+  padding-top: 1px; letter-spacing: 0.04em;
+}
+.proto-step strong { color: var(--text); font-weight: 500; }
+
+/* ── STACK SECTION ── */
+.stack-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--r); overflow: hidden;
+}
+.stack-card {
+  background: var(--surface); padding: 24px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: background 0.18s;
+}
+.stack-card:hover { background: var(--surface-2); }
+.stack-card-top {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.stack-icon {
+  font-size: 20px; width: 40px; height: 40px; border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+}
+.stack-icon.teal { background: var(--teal-dim); }
+.stack-icon.blue { background: var(--blue-dim); }
+.stack-icon.green { background: var(--green-dim); }
+.stack-icon.amber { background: var(--amber-dim); }
+.stack-icon.dim { background: rgba(255,255,255,0.04); }
+.stack-badge {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.07em;
+  padding: 2px 7px; border-radius: var(--r);
+}
+.stack-badge.live { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,217,138,0.2); }
+.stack-badge.planned { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(240,180,41,0.2); }
+.stack-badge.testnet { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(79,139,255,0.2); }
+
+.stack-name {
+  font-family: var(--mono); font-size: 13px; font-weight: 600;
+  color: var(--text);
+}
+.stack-role {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-dim);
+}
+.stack-desc {
+  font-family: var(--body); font-size: 12px; color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── BUILDER TRACKS ── */
+.tracks-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+}
+.track-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--r); padding: 28px 26px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: border-color 0.2s;
+  position: relative; overflow: hidden;
+}
+.track-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.track-card.miner::before { background: var(--teal); }
+.track-card.validator::before { background: var(--blue); }
+.track-card.contributor::before { background: var(--amber); }
+.track-card:hover { border-color: var(--border-hi); }
+
+.track-badge {
+  font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: var(--r);
+}
+.track-badge.teal { color: var(--teal); background: var(--teal-dim); border: 1px solid rgba(0,212,200,0.18); }
+.track-badge.blue { color: var(--blue); background: var(--blue-dim); border: 1px solid rgba(79,139,255,0.18); }
+.track-badge.gold { color: var(--amber); background: var(--amber-dim); border: 1px solid rgba(240,180,41,0.18); }
+
+.track-title {
+  font-family: var(--display); font-size: 22px; font-weight: 700;
+  color: var(--text); letter-spacing: -0.015em; line-height: 1.1;
+}
+.track-sub {
+  font-family: var(--body); font-size: 12px; color: var(--text-muted); line-height: 1.7;
+}
+.track-list {
+  list-style: none; display: flex; flex-direction: column; gap: 7px;
+}
+.track-list li {
+  font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+  display: flex; gap: 8px; align-items: flex-start; line-height: 1.45;
+}
+.track-list li::before { content: '→'; color: var(--text-dim); flex-shrink: 0; }
+.track-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: auto; transition: color 0.15s;
+}
+.track-cta.teal { color: var(--teal); }
+.track-cta.blue { color: var(--blue); }
+.track-cta.gold { color: var(--amber); }
+.track-cta:hover { opacity: 0.75; }
+
+/* ── RUNBOOK SECTION ── */
+.runbook-layout {
+  display: grid; grid-template-columns: 240px 1fr; gap: 0;
+  border: 1px solid var(--border); border-radius: var(--r); overflow: hidden;
+}
+.runbook-nav {
+  background: var(--deep); border-right: 1px solid var(--border);
+  padding: 8px 0;
+}
+.runbook-nav-item {
+  font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+  padding: 10px 20px; cursor: pointer; letter-spacing: 0.03em;
+  border-left: 2px solid transparent;
+  transition: all 0.15s; display: flex; align-items: center; gap: 8px;
+}
+.runbook-nav-item:hover { color: var(--text-muted); background: rgba(255,255,255,0.02); }
+.runbook-nav-item.active {
+  color: var(--teal); border-left-color: var(--teal);
+  background: var(--teal-dim);
+}
+.runbook-nav-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-dim);
+  padding: 12px 20px 6px;
+}
+
+.runbook-body { background: var(--surface); display: flex; flex-direction: column; }
+.runbook-tab { display: none; }
+.runbook-tab.active { display: flex; flex-direction: column; }
+.runbook-header {
+  border-bottom: 1px solid var(--border); padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.runbook-header-title {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);
+}
+
+/* Code blocks */
+.code-block {
+  background: var(--void); border: 1px solid var(--border);
+  border-radius: var(--r); overflow: hidden; margin: 4px 0;
+}
+.code-block-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; border-bottom: 1px solid var(--border);
+  background: var(--deep);
+}
+.code-lang {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue);
+}
+.copy-btn {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+  background: none; border: 1px solid var(--border); color: var(--text-dim);
+  padding: 2px 8px; border-radius: var(--r); cursor: pointer;
+  transition: all 0.15s;
+}
+.copy-btn:hover { color: var(--teal); border-color: rgba(0,212,200,0.3); }
+.code-block pre {
+  padding: 16px 18px; font-family: var(--mono); font-size: 12px;
+  line-height: 1.85; color: var(--text-muted); overflow-x: auto;
+}
+.code-block pre .cp { color: var(--teal); }
+.code-block pre .cf { color: var(--blue); }
+.code-block pre .cs { color: rgba(161,255,220,0.8); }
+.code-block pre .cc { color: var(--text-dim); font-style: italic; }
+.code-block pre .ct { color: var(--text); }
+
+.runbook-content { padding: 24px; flex: 1; }
+.rb-step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 22px; }
+.rb-step:last-child { margin-bottom: 0; }
+.rb-n {
+  flex-shrink: 0; width: 22px; height: 22px;
+  border: 1px solid var(--border-md); border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; color: var(--teal);
+}
+.rb-title { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+.rb-desc { font-family: var(--body); font-size: 12px; color: var(--text-muted); line-height: 1.65; margin-bottom: 10px; }
+
+/* ── STATUS TABLE ── */
+.status-table { width: 100%; border-collapse: collapse; }
+.status-table th {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-dim);
+  padding: 10px 16px; text-align: left;
+  background: var(--deep); border-bottom: 1px solid var(--border);
+}
+.status-table td {
+  font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+  padding: 11px 16px; border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.status-table td:first-child { color: var(--text); }
+.status-table tr:last-child td { border-bottom: none; }
+.status-table tr:hover td { background: rgba(255,255,255,0.015); }
+.status-dot-sm {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  margin-right: 6px; vertical-align: middle;
+}
+.status-dot-sm.green { background: var(--green); box-shadow: 0 0 5px var(--green); }
+.status-dot-sm.amber { background: var(--amber); }
+.status-dot-sm.dim { background: var(--text-dim); }
+
+/* ── LIMITATIONS ── */
+.lim-list { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+.lim-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 16px;
+  background: rgba(240,180,41,0.04);
+  border: 1px solid rgba(240,180,41,0.12);
+  border-radius: var(--r);
+}
+.lim-icon { color: var(--amber); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+.lim-text { font-family: var(--body); font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+.lim-text strong { color: var(--amber); font-weight: 400; }
+
+/* ── BIG CTA SECTION ── */
+.cta-section {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--border);
+  text-align: center; position: relative; overflow: hidden;
+  z-index: 1;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,212,200,0.04), transparent 65%);
+  pointer-events: none;
+}
+.cta-h2 {
+  font-family: var(--display);
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+  color: var(--text); margin-bottom: 18px;
+}
+.cta-h2 em { color: var(--teal); font-style: normal; }
+.cta-sub {
+  font-family: var(--body); font-size: 14px; font-weight: 300;
+  color: var(--text-muted); max-width: 480px; margin: 0 auto 36px;
+  line-height: 1.75;
+}
+.cta-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--border); padding: 28px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px; z-index: 1; position: relative;
+}
+.footer-left {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  letter-spacing: 0.04em; display: flex; align-items: center; gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-left strong { color: var(--text-muted); }
+.footer-right {
+  display: flex; gap: 16px; align-items: center;
+}
+.footer-link {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  text-decoration: none; letter-spacing: 0.04em; transition: color 0.15s;
+}
+.footer-link:hover { color: var(--teal); }
+
+/* ── DATA ROW ── */
+.data-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.data-row:last-child { border-bottom: none; }
+.data-key { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+.data-val { font-family: var(--mono); font-size: 11px; color: var(--text); font-weight: 500; }
+.data-val.ok { color: var(--teal); }
+.data-val.warn { color: var(--amber); }
+.data-val.blue { color: var(--blue); }
+
+/* ── INLINE BADGE ── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+  padding: 2px 7px; border-radius: var(--r); font-weight: 600;
+}
+.badge.green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,217,138,0.2); }
+.badge.amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(240,180,41,0.2); }
+.badge.teal  { background: var(--teal-dim);  color: var(--teal);  border: 1px solid rgba(0,212,200,0.2); }
+.badge.blue  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(79,139,255,0.2); }
+.badge.dim   { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); }
+
+/* ── SEPARATOR ── */
+.sep { display: flex; align-items: center; gap: 10px; margin: 28px 0 20px; }
+.sep-l { flex: 1; height: 1px; background: var(--border); }
+.sep-t { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; color: var(--text-dim); text-transform: uppercase; white-space: nowrap; }
+
+/* ── UTILITY ── */
+.mt8 { margin-top: 8px; }
+.mt12 { margin-top: 12px; }
+.mt16 { margin-top: 16px; }
+.mt24 { margin-top: 24px; }
+.mt32 { margin-top: 32px; }
+.mb8 { margin-bottom: 8px; }
+.mb16 { margin-bottom: 16px; }
+.mb24 { margin-bottom: 24px; }
+.mb32 { margin-bottom: 32px; }
+.gap2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ── ISSUE CARDS ── */
+.issues-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.issue-card {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: var(--r); padding: 16px 18px;
+  display: flex; gap: 12px; align-items: flex-start;
+  transition: border-color 0.15s;
+}
+.issue-card:hover { border-color: var(--border-hi); }
+.issue-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-dim); margin-bottom: 5px;
+}
+.issue-title {
+  font-family: var(--mono); font-size: 11px; color: var(--text); margin-bottom: 5px;
+}
+.issue-meta {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+}
+
+/* ── CHECKLIST ── */
+.ck-list { display: flex; flex-direction: column; gap: 6px; }
+.ck-item {
+  display: flex; gap: 10px; align-items: center;
+  padding: 10px 14px; border: 1px solid var(--border);
+  background: var(--surface); border-radius: var(--r);
+  cursor: pointer; transition: border-color 0.15s;
+  font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+  user-select: none;
+}
+.ck-item:hover { border-color: var(--border-hi); }
+.ck-box {
+  width: 16px; height: 16px; border: 1px solid var(--border-hi);
+  border-radius: 2px; flex-shrink: 0; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 9px; transition: all 0.15s;
+}
+.ck-item.done { color: var(--text-dim); }
+.ck-item.done .ck-box { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 48px 24px; border-right: none; border-bottom: 1px solid var(--border); }
+  .hero-right { min-height: 460px; }
+  .hero-h1 { font-size: clamp(48px, 11vw, 80px); }
+  .protocol-grid { grid-template-columns: 1fr 1fr; }
+  .stack-grid { grid-template-columns: 1fr 1fr; }
+  .tracks-grid { grid-template-columns: 1fr; }
+  .runbook-layout { grid-template-columns: 1fr; }
+  .runbook-nav { border-right: none; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; }
+  .runbook-nav-item { white-space: nowrap; border-left: none; border-bottom: 2px solid transparent; }
+  .runbook-nav-item.active { border-left: none; border-bottom-color: var(--teal); }
+  .protocol-detail { grid-template-columns: 1fr; }
+  .issues-grid { grid-template-columns: 1fr; }
+  .gap2 { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 18px; }
+  .topnav { padding: 0 18px; }
+  .strip { padding: 0 18px; }
+  .nav-mid { display: none; }
+  .hero-proof { flex-direction: column; gap: 0; }
+  .proof-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .proof-item:last-child { border-bottom: none; }
+  .protocol-grid { grid-template-columns: 1fr; }
+  .stack-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<div class="grid-bg"></div>
-
-<!-- ─── NAV ──────────────────────────────────────────────────────── -->
-<nav>
-  <a href="https://arctura.network" class="nav-logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 28 28" fill="none">
-        <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
-        <polygon points="14,8 20,11 20,17 14,20 8,17 8,11" stroke="#06b6d4" stroke-width="1" fill="none"/>
-        <circle cx="14" cy="14" r="2.5" fill="#3b82f6"/>
-      </svg>
-    </div>
-    ARCTURA
+<!-- ═══════════════════════════════════════════════
+     TOPNAV
+═══════════════════════════════════════════════ -->
+<nav class="topnav">
+  <a class="nav-brand" href="https://arctura.network/base" aria-label="Arctura Base">
+    <span class="nav-brand-dot" aria-hidden="true"></span>
+    ARCTURA<span class="nav-brand-slash">/</span><em>BASE</em>
   </a>
-  <ul class="nav-links">
-    <li><a href="#how-it-works">Architecture</a></li>
-    <li><a href="#roles">Participate</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#deploy">Deploy</a></li>
-  </ul>
-  <a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" class="nav-cta">GitHub →</a>
+
+  <div class="nav-mid" aria-label="Subnet status">
+    <span class="nav-mid-badge">TESTNET</span>
+    <span class="nav-mid-sep">·</span>
+    <span class="nav-mid-item">42 tests passing</span>
+    <span class="nav-mid-sep">·</span>
+    <span class="nav-mid-item">netuid pending</span>
+  </div>
+
+  <div class="nav-right">
+    <a class="btn-nav ghost" href="https://arctura.network" target="_blank">arctura.network</a>
+    <a class="btn-nav teal" href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
 </nav>
 
-<!-- ─── HERO ──────────────────────────────────────────────────────── -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-eyebrow fade-up">Bittensor Subnet · arctura.network/base</div>
-    <h1 class="fade-up">
-      <span class="line1">Base</span>
-      <span class="line2">Subnet</span>
-    </h1>
-    <p class="hero-sub fade-up">
-      Arctura is a decentralized AI subnet built on <span>Bittensor</span>,
-      incentivizing miners and validators through on-chain emissions.
-      The base subnet defines the foundational incentive mechanism for the network.
-    </p>
-    <div class="hero-actions fade-up">
-      <a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" class="btn-primary">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        View Repository
-      </a>
-      <a href="#how-it-works" class="btn-ghost">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        How it Works
-      </a>
-    </div>
-    <div class="hero-stats fade-up">
-      <div class="stat">
-        <span class="stat-val">93.2%</span>
-        <span class="stat-label">Python</span>
-      </div>
-      <div class="stat">
-        <span class="stat-val">TAO</span>
-        <span class="stat-label">Network Token</span>
-      </div>
-      <div class="stat">
-        <span class="stat-val">α</span>
-        <span class="stat-label">Subnet Alpha</span>
-      </div>
-      <div class="stat">
-        <span class="stat-val">Open</span>
-        <span class="stat-label">Source</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── TICKER ─────────────────────────────────────────────────────── -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <div class="ticker-item"><div class="ticker-dot"></div> Arctura Base Subnet <span>// Bittensor</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Miners &amp; Validators <span>// Incentivized</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Yuma Consensus <span>// On-Chain</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> TAO Emissions <span>// Dynamic</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Decentralized AI <span>// Production</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Open Registration <span>// Permissionless</span></div>
-    <!-- duplicate for seamless loop -->
-    <div class="ticker-item"><div class="ticker-dot"></div> Arctura Base Subnet <span>// Bittensor</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Miners &amp; Validators <span>// Incentivized</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Yuma Consensus <span>// On-Chain</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> TAO Emissions <span>// Dynamic</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Decentralized AI <span>// Production</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div> Open Registration <span>// Permissionless</span></div>
-  </div>
+<!-- ═══════════════════════════════════════════════
+     SYSTEM STRIP
+═══════════════════════════════════════════════ -->
+<div class="strip" aria-label="System status">
+  <div class="strip-item">PHASE <span class="warn">BUILDER / TESTNET</span></div>
+  <span class="strip-sep">·</span>
+  <div class="strip-item">TESTS <span class="ok">42 passed, 0 failed</span></div>
+  <span class="strip-sep">·</span>
+  <div class="strip-item">NETUID <span>pending mainnet</span></div>
+  <span class="strip-sep">·</span>
+  <div class="strip-item">BASE RPC <span class="ok">live</span></div>
+  <span class="strip-sep">·</span>
+  <div class="strip-item">RESONANCE BFT <span class="ok">testnet</span></div>
+  <span class="strip-sep">·</span>
+  <div class="strip-item">AGENTKIT <span>integration in progress</span></div>
+  <span class="strip-sep">·</span>
+  <div class="strip-item">CDP ONRAMP <span>staged</span></div>
 </div>
 
-<!-- ─── HOW IT WORKS ──────────────────────────────────────────────── -->
-<section id="how-it-works">
-  <div class="container">
-    <div class="section-label fade-up">01 · Architecture</div>
-    <h2 class="section-title fade-up">Incentive Mechanism</h2>
-    <p class="section-sub fade-up">
-      The base subnet defines the rules by which miners produce work and validators
-      score that work — distributing TAO emissions as rewards.
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="hero" aria-label="Arctura Base Subnet hero">
+  <div class="hero-glow-tl" aria-hidden="true"></div>
+  <div class="hero-glow-br" aria-hidden="true"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow" aria-label="Section label">BITTENSOR SUBNET · BASE CHAIN INTELLIGENCE</div>
+
+    <h1 class="hero-h1">
+      ARCTURA<br>
+      <span class="word-base">BASE</span>
+      <span class="word-sub">
+        Decentralized verification of Base chain state.<br>
+        Miners attest. Validators score. TAO rewards truth.
+      </span>
+    </h1>
+
+    <p class="hero-sub">
+      Arctura Base is a Bittensor subnet where miners read Base chain data,
+      construct Merkle proofs, and return verified attestations.
+      <strong>Resonance BFT</strong> scores the work on-chain.
+      Every correct hash earns TAO. Every missed block loses rank.
     </p>
-    <div class="arch-grid">
-      <div class="arch-card fade-up">
-        <div class="arch-num">01</div>
-        <div class="arch-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-          </svg>
-        </div>
-        <h3>Miners Produce</h3>
-        <p>Miners receive challenges from validators and produce AI-graded outputs. Work is measured, ranked, and weighted continuously across the metagraph.</p>
+
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        Clone &amp; Build
+      </a>
+      <a class="btn-ghost" href="#protocol">How It Works →</a>
+      <a class="btn-ghost" href="#runbooks">Run a Miner →</a>
+    </div>
+
+    <div class="hero-proof" role="list" aria-label="Subnet stats">
+      <div class="proof-item" role="listitem">
+        <div class="proof-val">42</div>
+        <div class="proof-label">Tests Passing</div>
       </div>
-      <div class="arch-card fade-up">
-        <div class="arch-num">02</div>
-        <div class="arch-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5">
-            <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
-          </svg>
-        </div>
-        <h3>Validators Score</h3>
-        <p>Validators query miners with deterministic challenges, evaluate outputs against the incentive mechanism, and set weights on-chain via Yuma consensus.</p>
+      <div class="proof-item" role="listitem">
+        <div class="proof-val blue">Base</div>
+        <div class="proof-label">Chain Attested</div>
       </div>
-      <div class="arch-card fade-up">
-        <div class="arch-num">03</div>
-        <div class="arch-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-          </svg>
+      <div class="proof-item" role="listitem">
+        <div class="proof-val green">BFT</div>
+        <div class="proof-label">Resonance Consensus</div>
+      </div>
+      <div class="proof-item" role="listitem">
+        <div class="proof-val" style="color:var(--amber)">τ</div>
+        <div class="proof-label">TAO Incentivized</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE ATTESTATION FLOW DIAGRAM -->
+  <div class="hero-right" role="complementary" aria-label="Live attestation flow">
+    <div class="flow-header">
+      <span class="flow-header-title">Attestation Flow — Live Protocol</span>
+      <span class="flow-live-badge">Testnet Active</span>
+    </div>
+
+    <div class="flow-body">
+
+      <div class="flow-node active">
+        <div class="flow-node-icon blue">⬡</div>
+        <div class="flow-node-info">
+          <div class="flow-node-label">01 · Trigger</div>
+          <div class="flow-node-title">Validator Query</div>
+          <div class="flow-node-desc">
+            Validator selects a Base block range and sends an attestation request
+            to all registered miners via the Bittensor dendrite.
+          </div>
+          <div class="flow-node-hash blue" id="hash-query">
+            query_id: 0x4f8b...2c91 · block_range: 21844000–21844099
+          </div>
         </div>
-        <h3>Emissions Flow</h3>
-        <p>TAO emissions are distributed to miners based on performance rank and to validators based on stake. Alpha tokens are minted per subnet-specific mechanics.</p>
+      </div>
+
+      <div class="flow-connector" aria-hidden="true">
+        <div class="flow-connector-line"></div>
+        <div class="flow-connector-arrow">▼</div>
+        <div class="flow-connector-line"></div>
+      </div>
+
+      <div class="flow-node active">
+        <div class="flow-node-icon teal">⬢</div>
+        <div class="flow-node-info">
+          <div class="flow-node-label">02 · Read</div>
+          <div class="flow-node-title">Base RPC Fetch</div>
+          <div class="flow-node-desc">
+            Each miner queries its own Base RPC endpoint for the requested blocks,
+            extracting transaction roots, state roots, and receipt hashes.
+          </div>
+          <div class="flow-node-hash" id="hash-fetch">
+            state_root: 0x3a7e...8f02 · tx_count: 147 · gas_used: 12.4M
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-connector" aria-hidden="true">
+        <div class="flow-connector-line"></div>
+        <div class="flow-connector-arrow">▼</div>
+        <div class="flow-connector-line"></div>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-node-icon green">◈</div>
+        <div class="flow-node-info">
+          <div class="flow-node-label">03 · Prove</div>
+          <div class="flow-node-title">Merkle Proof Construction</div>
+          <div class="flow-node-desc">
+            Miner constructs a Merkle proof anchoring the block data.
+            Proof is returned with the attestation response synapse.
+          </div>
+          <div class="flow-node-hash" style="color:var(--green)" id="hash-proof">
+            merkle_root: 0x9c2d...4a18 · proof_depth: 18 · verified: true
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-connector" aria-hidden="true">
+        <div class="flow-connector-line"></div>
+        <div class="flow-connector-arrow">▼</div>
+        <div class="flow-connector-line"></div>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-node-icon gold">◆</div>
+        <div class="flow-node-info">
+          <div class="flow-node-label">04 · Score</div>
+          <div class="flow-node-title">Resonance BFT Scoring</div>
+          <div class="flow-node-desc">
+            Validator cross-checks proofs against public Base data.
+            Score = hash match × latency × proof integrity. Weights set on-chain.
+          </div>
+          <div class="flow-node-hash" style="color:var(--amber)" id="hash-score">
+            score: 0.94 · latency: 186ms · weight_set: block 3847201
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROTOCOL SECTION
+═══════════════════════════════════════════════ -->
+<section class="section" id="protocol" aria-labelledby="protocol-h2">
+  <div class="wrap">
+    <div class="eyebrow">Protocol</div>
+    <h2 class="section-h2" id="protocol-h2">How the subnet works</h2>
+    <p class="section-lead">
+      Arctura Base extends Bittensor's incentive mechanism to verifiable Base chain intelligence.
+      Miners compete to produce the most accurate, fastest attestations. Validators score on correctness.
+      The metagraph distributes TAO emissions to honest work, trustlessly, every epoch.
+    </p>
+
+    <div class="protocol-grid" role="list" aria-label="Protocol steps">
+      <div class="proto-card" role="listitem">
+        <div class="proto-num">01</div>
+        <div class="proto-icon blue">⬡</div>
+        <div class="proto-title">Miners Register</div>
+        <div class="proto-desc">
+          Any participant registers a hotkey on the subnet by burning TAO.
+          Miners connect their own Base RPC endpoint — Alchemy, QuickNode, or self-hosted op-geth.
+        </div>
+        <span class="proto-tag blue">Permissionless</span>
+      </div>
+
+      <div class="proto-card" role="listitem">
+        <div class="proto-num">02</div>
+        <div class="proto-icon teal">⬢</div>
+        <div class="proto-title">Validators Query</div>
+        <div class="proto-desc">
+          Validators issue <code style="color:var(--teal);font-family:var(--mono);font-size:10px">AttestationRequest</code> synapses
+          with a target block range. Miners have a defined response window to return proofs.
+        </div>
+        <span class="proto-tag">BFT Scoring</span>
+      </div>
+
+      <div class="proto-card" role="listitem">
+        <div class="proto-num">03</div>
+        <div class="proto-icon green">◈</div>
+        <div class="proto-title">Proofs Verified</div>
+        <div class="proto-desc">
+          Validators cross-check Merkle proofs against public Base chain data.
+          Hash matches, latency, and proof integrity are weighted in the Resonance scoring function.
+        </div>
+        <span class="proto-tag green">Trustless</span>
+      </div>
+
+      <div class="proto-card" role="listitem">
+        <div class="proto-num">04</div>
+        <div class="proto-icon gold">◆</div>
+        <div class="proto-title">TAO Emitted</div>
+        <div class="proto-desc">
+          Each epoch, Yuma consensus aggregates validator weights to compute final miner rankings.
+          TAO flows to performance. Alpha tokens capture subnet network value.
+        </div>
+        <span class="proto-tag gold">τ TAO + α Alpha</span>
+      </div>
+    </div>
+
+    <div class="protocol-detail mt32">
+      <div class="proto-detail-panel">
+        <div class="proto-detail-label">Miner Role</div>
+        <div class="proto-detail-heading">What miners do</div>
+        <div class="proto-detail-body">
+          A miner is a long-running Python process connected to a live Base RPC endpoint.
+          When a validator sends an <code style="color:var(--teal);font-family:var(--mono);font-size:10px">AttestationRequest</code>,
+          the miner reads the specified block range, constructs a Merkle proof of the data, and returns
+          a signed <code style="color:var(--teal);font-family:var(--mono);font-size:10px">AttestationResponse</code> synapse.
+          Miners are ranked by accuracy first, latency second.
+        </div>
+        <div class="proto-step-list">
+          <div class="proto-step">
+            <span class="proto-step-n">→</span>
+            <span><strong>Register</strong> hotkey on subnet (burn TAO)</span>
+          </div>
+          <div class="proto-step">
+            <span class="proto-step-n">→</span>
+            <span><strong>Connect</strong> a reliable Base RPC endpoint</span>
+          </div>
+          <div class="proto-step">
+            <span class="proto-step-n">→</span>
+            <span><strong>Serve</strong> an axon for incoming validator queries</span>
+          </div>
+          <div class="proto-step">
+            <span class="proto-step-n">→</span>
+            <span><strong>Return</strong> verified Merkle proofs within the response window</span>
+          </div>
+          <div class="proto-step">
+            <span class="proto-step-n">→</span>
+            <span><strong>Earn</strong> TAO proportional to rank each epoch</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-detail-panel" style="border-left:1px solid var(--border)">
+        <div class="proto-detail-label">Validator Role</div>
+        <div class="proto-detail-heading">How Resonance BFT scores</div>
+        <div class="proto-detail-body">
+          Validators query the full miner set with identical block ranges each epoch.
+          The Resonance scoring function weights each response on three dimensions: hash correctness (0.6),
+          proof integrity (0.3), and response latency (0.1). Validators commit weights to the Bittensor
+          metagraph via Yuma consensus.
+        </div>
+        <div class="mt16">
+          <div class="data-row">
+            <span class="data-key">Hash match weight</span>
+            <span class="data-val ok">0.60</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Proof integrity weight</span>
+            <span class="data-val ok">0.30</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Response latency weight</span>
+            <span class="data-val">0.10</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Missing response penalty</span>
+            <span class="data-val warn">score = 0</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Consensus mechanism</span>
+            <span class="data-val blue">Yuma / Resonance BFT</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── FLOW ───────────────────────────────────────────────────────── -->
-<section class="flow-section" id="deploy">
-  <div class="container">
-    <div class="flow-inner">
-      <div>
-        <div class="section-label fade-up">02 · Flow</div>
-        <h2 class="section-title fade-up">Deploy & Participate</h2>
-        <p class="section-sub fade-up">
-          Clone the base subnet repo, install dependencies via the Makefile, configure
-          your wallet, and register on Bittensor. The scaffold handles the rest.
-        </p>
-        <br/><br/>
-        <div class="code-panel fade-up">
-          <div class="code-header">
-            <div class="code-dots"><span></span><span></span><span></span></div>
-            <div class="code-file">install.sh</div>
-          </div>
-          <div class="code-body">
-<span class="cm"># Clone the base subnet</span>
-<span class="kw">git</span> <span class="fn">clone</span> <span class="str">https://github.com/bittensaur/</span>
-<span class="str">    arctura-base-subnet</span>
-<span class="hi">cd</span> arctura-base-subnet
+<!-- ═══════════════════════════════════════════════
+     STACK SECTION
+═══════════════════════════════════════════════ -->
+<section class="section" id="stack" aria-labelledby="stack-h2">
+  <div class="wrap">
+    <div class="eyebrow">Infrastructure</div>
+    <h2 class="section-h2" id="stack-h2">What runs under the hood</h2>
+    <p class="section-lead">
+      Six components, each purpose-built. Bittensor handles consensus and emissions.
+      Base provides the chain data. AgentKit and CDP expand the subnet's action surface.
+    </p>
 
-<span class="cm"># Install dependencies</span>
-<span class="kw">make</span> <span class="fn">install</span>
-
-<span class="cm"># Run as miner</span>
-<span class="kw">python</span> <span class="fn">neurons/miner.py</span>
-  --netuid &lt;netuid&gt;
-  --wallet.name <span class="str">default</span>
-  --wallet.hotkey <span class="str">default</span>
-
-<span class="cm"># Run as validator</span>
-<span class="kw">python</span> <span class="fn">neurons/validator.py</span>
-  --netuid &lt;netuid&gt;
-  --wallet.name <span class="str">default</span>
-          </div>
+    <div class="stack-grid" role="list">
+      <div class="stack-card" role="listitem">
+        <div class="stack-card-top">
+          <div class="stack-icon teal">⬡</div>
+          <span class="stack-badge live">Live</span>
         </div>
-      </div>
-      <div class="flow-diagram fade-up">
-        <div class="flow-node">
-          <div class="flow-node-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5">
-              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-            </svg>
-          </div>
-          <div class="flow-node-info">
-            <div class="flow-node-title">Miner Node <span class="flow-badge miner">neuron</span></div>
-            <div class="flow-node-desc">Registers hotkey · Serves axon · Awaits forward pass</div>
-          </div>
-        </div>
-        <div class="flow-arrow">↕</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5">
-              <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/>
-            </svg>
-          </div>
-          <div class="flow-node-info">
-            <div class="flow-node-title">Validator <span class="flow-badge validator">neuron</span></div>
-            <div class="flow-node-desc">Queries miners · Scores outputs · Sets weights on-chain</div>
-          </div>
-        </div>
-        <div class="flow-arrow">↕</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5">
-              <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-            </svg>
-          </div>
-          <div class="flow-node-info">
-            <div class="flow-node-title">Bittensor Chain <span class="flow-badge reward">TAO</span></div>
-            <div class="flow-node-desc">Yuma consensus · Metagraph sync · Emission distribution</div>
-          </div>
-        </div>
-        <div class="flow-arrow">↕</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-          </div>
-          <div class="flow-node-info">
-            <div class="flow-node-title">Rewards <span class="flow-badge reward">α token</span></div>
-            <div class="flow-node-desc">Miner dividends · Validator stake · Subnet alpha accrual</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── ROLES ──────────────────────────────────────────────────────── -->
-<section id="roles">
-  <div class="container">
-    <div class="section-label fade-up">03 · Participation</div>
-    <h2 class="section-title fade-up">Two Ways to Earn</h2>
-    <p class="section-sub fade-up">Register on the subnet as a miner, validator, or both. Each role plays a critical part in securing and advancing the network.</p>
-    <div class="roles-grid">
-      <div class="role-card miners fade-up">
-        <div class="role-tag m">// Miners</div>
-        <h3>Produce Work</h3>
-        <p>Miners run the compute that powers the subnet's intelligence layer. They respond to validator challenges and compete for emissions based on output quality.</p>
-        <ul class="role-list">
-          <li>Register a hotkey and stake TAO to join</li>
-          <li>Serve an axon endpoint for validator queries</li>
-          <li>Implement the forward() function with your model</li>
-          <li>Earn TAO proportional to your performance rank</li>
-          <li>Get scored each epoch; weights update on-chain</li>
-        </ul>
-      </div>
-      <div class="role-card validators fade-up">
-        <div class="role-tag v">// Validators</div>
-        <h3>Score & Secure</h3>
-        <p>Validators are the quality gatekeepers of the subnet. They issue challenges, evaluate miner responses, and commit weights that drive fair emission distribution.</p>
-        <ul class="role-list">
-          <li>Stake TAO as a validator bond to gain influence</li>
-          <li>Query miners with deterministic challenges</li>
-          <li>Score outputs using the incentive mechanism</li>
-          <li>Set weights on the metagraph each tempo</li>
-          <li>Earn dividends on stake from subnet emissions</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── STACK ──────────────────────────────────────────────────────── -->
-<section id="stack">
-  <div class="container">
-    <div class="section-label fade-up">04 · Stack</div>
-    <h2 class="section-title fade-up">Built On</h2>
-    <p class="section-sub fade-up">The base subnet is production-grade Python, following Bittensor's canonical neuron scaffold with a custom incentive mechanism layer.</p>
-    <div class="stack-row">
-      <div class="stack-item fade-up">
-        <div class="stack-tag">Core</div>
-        <div class="stack-name">Python</div>
-        <div class="stack-desc">Neuron logic, incentive mechanism, miner and validator implementations.</div>
-        <div class="stack-pct">
-          93.2%
-          <div class="pct-bar"><div class="pct-fill" style="width:93.2%"></div></div>
-        </div>
-      </div>
-      <div class="stack-item fade-up">
-        <div class="stack-tag">Runtime</div>
+        <div class="stack-role">Consensus Layer</div>
         <div class="stack-name">Bittensor SDK</div>
-        <div class="stack-desc">bt.metagraph, bt.wallet, bt.synapse — the Bittensor Python library.</div>
-        <div class="stack-pct">
-          Protocol Layer
-          <div class="pct-bar"><div class="pct-fill" style="width:78%"></div></div>
+        <div class="stack-desc">
+          <code style="font-family:var(--mono);font-size:10px;color:var(--teal)">bt.metagraph</code>,
+          <code style="font-family:var(--mono);font-size:10px;color:var(--teal)">bt.synapse</code>, Yuma consensus.
+          The incentive and weight-setting foundation. Python 3.11+.
         </div>
       </div>
-      <div class="stack-item fade-up">
-        <div class="stack-tag">Ops</div>
-        <div class="stack-name">Shell / Make</div>
-        <div class="stack-desc">Installation, environment setup, and process management scripts.</div>
-        <div class="stack-pct">
-          6.8%
-          <div class="pct-bar"><div class="pct-fill" style="width:6.8%"></div></div>
+
+      <div class="stack-card" role="listitem">
+        <div class="stack-card-top">
+          <div class="stack-icon blue">⬢</div>
+          <span class="stack-badge live">Live</span>
+        </div>
+        <div class="stack-role">Data Source</div>
+        <div class="stack-name">Base Chain RPC</div>
+        <div class="stack-desc">
+          OP Stack L2 on Ethereum. Miners read <code style="font-family:var(--mono);font-size:10px;color:var(--blue)">eth_getBlockByNumber</code>,
+          construct Merkle trees, and return proofs. Alchemy / QuickNode / self-hosted.
         </div>
       </div>
-      <div class="stack-item fade-up">
-        <div class="stack-tag">Network</div>
-        <div class="stack-name">Finney / TAO</div>
-        <div class="stack-desc">Bittensor mainnet. Subnet registration, emissions, and Yuma consensus.</div>
-        <div class="stack-pct">
-          On-Chain
-          <div class="pct-bar"><div class="pct-fill" style="width:100%"></div></div>
+
+      <div class="stack-card" role="listitem">
+        <div class="stack-card-top">
+          <div class="stack-icon green">◈</div>
+          <span class="stack-badge live">Live</span>
+        </div>
+        <div class="stack-role">Proof Layer</div>
+        <div class="stack-name">Merkle Attestation</div>
+        <div class="stack-desc">
+          Each miner constructs a Merkle tree from the block data and returns the root + proof path.
+          Validators verify deterministically — no trusted intermediary.
+        </div>
+      </div>
+
+      <div class="stack-card" role="listitem">
+        <div class="stack-card-top">
+          <div class="stack-icon blue">🔷</div>
+          <span class="stack-badge testnet">In Progress</span>
+        </div>
+        <div class="stack-role">Agentic Actions</div>
+        <div class="stack-name">Coinbase AgentKit</div>
+        <div class="stack-desc">
+          AgentKit integration enables miners to go beyond passive verification —
+          on-chain reads, smart contract calls, and autonomous execution on Base.
+        </div>
+      </div>
+
+      <div class="stack-card" role="listitem">
+        <div class="stack-card-top">
+          <div class="stack-icon amber">◎</div>
+          <span class="stack-badge planned">Staged</span>
+        </div>
+        <div class="stack-role">Fiat On-Ramp</div>
+        <div class="stack-name">Coinbase CDP Onramp</div>
+        <div class="stack-desc">
+          CDP onramp lets participants fund their node wallet directly — card or bank account
+          to USDC on Base, no separate exchange required. Staging in Patron Sanctuary.
+        </div>
+      </div>
+
+      <div class="stack-card" role="listitem">
+        <div class="stack-card-top">
+          <div class="stack-icon dim">🛡</div>
+          <span class="stack-badge planned">Planned</span>
+        </div>
+        <div class="stack-role">Security Review</div>
+        <div class="stack-name">Ops Security Audit</div>
+        <div class="stack-desc">
+          Pre-mainnet security review covering axon endpoint exposure, key management,
+          proof tampering vectors, and validator-miner communication hardening.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── CTA ───────────────────────────────────────────────────────── -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-inner">
-      <div class="section-label fade-up" style="justify-content:center">arctura.network/base</div>
-      <h2 class="fade-up">Ready to Join<br/>the Subnet?</h2>
-      <p class="fade-up">The base subnet is launching. Clone the repo, configure your wallet, and register as a miner or validator. Emissions go live on mainnet registration.</p>
-      <div class="cta-actions fade-up">
-        <a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" class="btn-primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          Clone Repository
+<!-- ═══════════════════════════════════════════════
+     STATUS SECTION
+═══════════════════════════════════════════════ -->
+<section class="section" id="status" aria-labelledby="status-h2">
+  <div class="wrap">
+    <div class="eyebrow">Live Status</div>
+    <h2 class="section-h2" id="status-h2">Builder / testnet phase</h2>
+    <p class="section-lead">
+      Arctura Base is in active builder phase. The core protocol is proven in test.
+      The subnet is open for miners and validators to join testnet now.
+      Mainnet registration is pending.
+    </p>
+
+    <div class="gap2 mb32">
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Subnet State</div>
+        <div class="data-row"><span class="data-key">Phase</span><span class="data-val warn">Builder / Testnet</span></div>
+        <div class="data-row"><span class="data-key">Test suite</span><span class="data-val ok">42 passed · 0 failed</span></div>
+        <div class="data-row"><span class="data-key">Netuid (mainnet)</span><span class="data-val">Pending registration</span></div>
+        <div class="data-row"><span class="data-key">Netuid (testnet)</span><span class="data-val ok">Active — use --netuid 0</span></div>
+        <div class="data-row"><span class="data-key">Base RPC</span><span class="data-val ok">Live · eth_getBlockByNumber verified</span></div>
+        <div class="data-row"><span class="data-key">Resonance BFT</span><span class="data-val ok">Testnet · scoring confirmed</span></div>
+        <div class="data-row"><span class="data-key">AgentKit integration</span><span class="data-val warn">In progress</span></div>
+        <div class="data-row"><span class="data-key">CDP Onramp</span><span class="data-val warn">Staged</span></div>
+        <div class="data-row"><span class="data-key">Security audit</span><span class="data-val">Pre-mainnet · planned</span></div>
+      </div>
+
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Known Limitations</div>
+        <div class="lim-list">
+          <div class="lim-item">
+            <span class="lim-icon">⚠</span>
+            <span class="lim-text"><strong>Testnet only.</strong> No mainnet netuid yet. All testing should use <code style="font-family:var(--mono);font-size:10px">--network test --netuid 0</code> until the mainnet slot is confirmed.</span>
+          </div>
+          <div class="lim-item">
+            <span class="lim-icon">⚠</span>
+            <span class="lim-text"><strong>RPC rate limits.</strong> Public Base RPC endpoints have strict rate limits. Builders running at scale should use a dedicated Alchemy or QuickNode endpoint.</span>
+          </div>
+          <div class="lim-item">
+            <span class="lim-icon">⚠</span>
+            <span class="lim-text"><strong>AgentKit not yet merged.</strong> The AgentKit branch is in active development. Core attestation works independently of AgentKit — miners can register and score without it.</span>
+          </div>
+          <div class="lim-item">
+            <span class="lim-icon">⚠</span>
+            <span class="lim-text"><strong>Scoring parameters may change.</strong> The Resonance weight coefficients (hash: 0.6, proof: 0.3, latency: 0.1) are under review before mainnet freeze.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Good First Issues -->
+    <div class="sep"><div class="sep-l"></div><div class="sep-t">Good First Issues</div><div class="sep-l"></div></div>
+
+    <div class="issues-grid">
+      <div class="issue-card">
+        <div>
+          <div class="issue-label">Documentation · <span class="badge dim">Good First Issue</span></div>
+          <div class="issue-title">Add validator setup guide to README</div>
+          <div class="issue-meta">github.com/bittensaur/arctura-base-subnet</div>
+        </div>
+      </div>
+      <div class="issue-card">
+        <div>
+          <div class="issue-label">Testing · <span class="badge teal">Enhancement</span></div>
+          <div class="issue-title">Add proof construction edge case tests</div>
+          <div class="issue-meta">pytest tests/test_merkle.py</div>
+        </div>
+      </div>
+      <div class="issue-card">
+        <div>
+          <div class="issue-label">Integration · <span class="badge blue">In Progress</span></div>
+          <div class="issue-title">AgentKit action executor scaffolding</div>
+          <div class="issue-meta">neurons/miner.py · agentkit branch</div>
+        </div>
+      </div>
+      <div class="issue-card">
+        <div>
+          <div class="issue-label">Ops · <span class="badge amber">Performance</span></div>
+          <div class="issue-title">RPC connection pooling for high-load miners</div>
+          <div class="issue-meta">arctura/base/rpc.py</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     BUILDER TRACKS
+═══════════════════════════════════════════════ -->
+<section class="section" id="build" aria-labelledby="build-h2">
+  <div class="wrap">
+    <div class="eyebrow">Builder Tracks</div>
+    <h2 class="section-h2" id="build-h2">Three ways to contribute</h2>
+    <p class="section-lead">
+      Whether you run compute, secure the network, or extend the protocol —
+      there's an active contribution track open now.
+    </p>
+
+    <div class="tracks-grid" role="list">
+      <div class="track-card miner" role="listitem">
+        <div class="track-badge teal">⬢ Miner</div>
+        <div class="track-title">Run<br>Compute</div>
+        <div class="track-sub">
+          Register a hotkey, connect a Base RPC endpoint, and start serving attestation responses.
+          Your score is your rank. Your rank is your TAO.
+        </div>
+        <ul class="track-list" aria-label="Miner requirements">
+          <li>Python 3.11+ · Bittensor SDK ≥ 7.x</li>
+          <li>Reliable Base RPC (Alchemy / QuickNode recommended)</li>
+          <li>Registered hotkey + testnet TAO stake</li>
+          <li>Always-on server with stable network connection</li>
+          <li>Implement and serve the forward() attestation function</li>
+        </ul>
+        <a class="track-cta teal" href="#runbooks" aria-label="Start miner runbook">
+          Start Miner Runbook →
         </a>
-        <a href="https://docs.learnbittensor.org/subnets/create-a-subnet" target="_blank" class="btn-ghost">
-          Bittensor Docs →
+      </div>
+
+      <div class="track-card validator" role="listitem">
+        <div class="track-badge blue">◈ Validator</div>
+        <div class="track-title">Score<br>the Work</div>
+        <div class="track-sub">
+          Query miners, verify Merkle proofs, and set accurate weights on-chain.
+          Validators secure the subnet's data quality guarantees and earn dividends on stake.
+        </div>
+        <ul class="track-list" aria-label="Validator requirements">
+          <li>Coldkey with minimum stake (see Bittensor docs)</li>
+          <li>16+ GB RAM · stable low-latency server</li>
+          <li>Must remain online to set weights each epoch</li>
+          <li>Implement scoring logic using Resonance BFT coefficients</li>
+          <li>Commit metagraph weights via btcli or SDK</li>
+        </ul>
+        <a class="track-cta blue" href="#runbooks" aria-label="Start validator runbook">
+          Start Validator Runbook →
+        </a>
+      </div>
+
+      <div class="track-card contributor" role="listitem">
+        <div class="track-badge gold">◆ Contributor</div>
+        <div class="track-title">Extend<br>Protocol</div>
+        <div class="track-sub">
+          Fork the repo, pick an open issue, and ship a PR. AgentKit integration,
+          documentation, test coverage, and performance work all have open tracks.
+        </div>
+        <ul class="track-list" aria-label="Contributor tracks">
+          <li>Fork: github.com/bittensaur/arctura-base-subnet</li>
+          <li>AgentKit integration (active branch, highest priority)</li>
+          <li>Expand test coverage — proof edge cases, RPC fallback</li>
+          <li>Write validator setup guide (good first issue)</li>
+          <li>RPC connection pooling performance improvement</li>
+        </ul>
+        <a class="track-cta gold" href="https://github.com/bittensaur/arctura-base-subnet/issues" target="_blank" rel="noopener" aria-label="View open issues on GitHub">
+          View Open Issues →
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <strong>ARCTURA</strong> · Base Subnet<br/>
-        arctura.network/base · Built on Bittensor
-      </div>
-      <ul class="footer-links">
-        <li><a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank">GitHub</a></li>
-        <li><a href="https://docs.learnbittensor.org" target="_blank">Bittensor Docs</a></li>
-        <li><a href="https://taostats.io/subnets" target="_blank">Taostats</a></li>
-      </ul>
+<!-- ═══════════════════════════════════════════════
+     RUNBOOKS
+═══════════════════════════════════════════════ -->
+<section class="section" id="runbooks" aria-labelledby="runbooks-h2">
+  <div class="wrap">
+    <div class="eyebrow">Runbooks</div>
+    <h2 class="section-h2" id="runbooks-h2">Deploy in minutes</h2>
+    <p class="section-lead">
+      Copy-paste commands for every path. All testnet by default.
+    </p>
+
+    <div class="runbook-layout">
+      <nav class="runbook-nav" aria-label="Runbook navigation">
+        <div class="runbook-nav-label">Runbooks</div>
+        <div class="runbook-nav-item active" onclick="showTab('install', this)" role="button" tabindex="0">Install</div>
+        <div class="runbook-nav-item" onclick="showTab('miner', this)" role="button" tabindex="0">Run a Miner</div>
+        <div class="runbook-nav-item" onclick="showTab('validator', this)" role="button" tabindex="0">Run a Validator</div>
+        <div class="runbook-nav-item" onclick="showTab('rpc', this)" role="button" tabindex="0">Configure RPC</div>
+        <div class="runbook-nav-label" style="margin-top:10px;">Pre-Mainnet</div>
+        <div class="runbook-nav-item" onclick="showTab('checklist', this)" role="button" tabindex="0">Launch Checklist</div>
+      </nav>
+
+      <div class="runbook-body">
+
+        <!-- INSTALL TAB -->
+        <div class="runbook-tab active" id="tab-install" role="tabpanel">
+          <div class="runbook-header">
+            <span class="runbook-header-title">Installation</span>
+            <span class="badge teal">Start Here</span>
+          </div>
+          <div class="runbook-content">
+
+            <div class="rb-step">
+              <div class="rb-n">1</div>
+              <div>
+                <div class="rb-title">Clone the repository</div>
+                <div class="rb-desc">Pull the subnet codebase from GitHub.</div>
+                <div class="code-block mt8" id="code-clone">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-clone', this)">COPY</button>
+                  </div>
+                  <pre><span class="cp">$</span> <span class="ct">git clone</span> https://github.com/bittensaur/arctura-base-subnet
+<span class="cp">$</span> <span class="ct">cd</span> arctura-base-subnet</pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">2</div>
+              <div>
+                <div class="rb-title">Install dependencies</div>
+                <div class="rb-desc">Python 3.11+ required. A virtual environment is recommended.</div>
+                <div class="code-block mt8" id="code-install">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-install', this)">COPY</button>
+                  </div>
+                  <pre><span class="cp">$</span> python -m venv .venv <span class="cc"># optional but recommended</span>
+<span class="cp">$</span> source .venv/bin/activate
+<span class="cp">$</span> pip install -r requirements.txt</pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">3</div>
+              <div>
+                <div class="rb-title">Run the test suite</div>
+                <div class="rb-desc">All 42 tests should pass before you proceed. A failing test suite means your environment is not configured correctly.</div>
+                <div class="code-block mt8" id="code-test">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-test', this)">COPY</button>
+                  </div>
+                  <pre><span class="cp">$</span> pytest tests/ -v
+<span class="cc"># Expected: 42 passed, 0 failed</span></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">4</div>
+              <div>
+                <div class="rb-title">Create a Bittensor wallet</div>
+                <div class="rb-desc">You'll need a coldkey and hotkey to register on the subnet.</div>
+                <div class="code-block mt8" id="code-wallet">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-wallet', this)">COPY</button>
+                  </div>
+                  <pre><span class="cp">$</span> btcli wallet new_coldkey <span class="cf">--wallet.name</span> <span class="cs">arctura_base</span>
+<span class="cp">$</span> btcli wallet new_hotkey <span class="cf">--wallet.name</span> <span class="cs">arctura_base</span> <span class="cf">--wallet.hotkey</span> <span class="cs">miner</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MINER TAB -->
+        <div class="runbook-tab" id="tab-miner" role="tabpanel">
+          <div class="runbook-header">
+            <span class="runbook-header-title">Run a Miner</span>
+            <span class="badge teal">Testnet</span>
+          </div>
+          <div class="runbook-content">
+
+            <div class="rb-step">
+              <div class="rb-n">1</div>
+              <div>
+                <div class="rb-title">Set your Base RPC endpoint</div>
+                <div class="rb-desc">Create a <code style="font-family:var(--mono);font-size:10px;color:var(--teal)">.env</code> file in the project root with your RPC URL. Alchemy or QuickNode recommended for reliability.</div>
+                <div class="code-block mt8" id="code-env">
+                  <div class="code-block-header">
+                    <span class="code-lang">.env</span>
+                    <button class="copy-btn" onclick="copyCode('code-env', this)">COPY</button>
+                  </div>
+                  <pre><span class="cf">BASE_RPC_URL</span>=<span class="cs">https://base-mainnet.g.alchemy.com/v2/YOUR_KEY</span>
+<span class="cf">BASE_CHAIN_ID</span>=<span class="cs">8453</span></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">2</div>
+              <div>
+                <div class="rb-title">Start the miner on testnet</div>
+                <div class="code-block mt8" id="code-miner">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-miner', this)">COPY</button>
+                  </div>
+                  <pre><span class="cp">$</span> python -m neurons.miner \
+  <span class="cf">--netuid</span> <span class="cs">0</span> \
+  <span class="cf">--network</span> <span class="cs">test</span> \
+  <span class="cf">--wallet.name</span> <span class="cs">arctura_base</span> \
+  <span class="cf">--wallet.hotkey</span> <span class="cs">miner</span> \
+  <span class="cf">--logging.debug</span></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">3</div>
+              <div>
+                <div class="rb-title">Verify attestations are being sent</div>
+                <div class="rb-desc">Watch the debug log for <code style="font-family:var(--mono);font-size:10px;color:var(--teal)">AttestationResponse sent</code> entries. Each entry confirms a Merkle proof was returned to a validator query.</div>
+                <div class="code-block mt8" id="code-miner-check">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-miner-check', this)">COPY</button>
+                  </div>
+                  <pre><span class="cc"># Watch for proof activity in logs</span>
+<span class="cp">$</span> tail -f ~/.bittensor/logs/miner.log | grep <span class="cs">"AttestationResponse\|merkle\|proof"</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VALIDATOR TAB -->
+        <div class="runbook-tab" id="tab-validator" role="tabpanel">
+          <div class="runbook-header">
+            <span class="runbook-header-title">Run a Validator</span>
+            <span class="badge blue">Stake Required</span>
+          </div>
+          <div class="runbook-content">
+
+            <div class="rb-step">
+              <div class="rb-n">1</div>
+              <div>
+                <div class="rb-title">Requirements</div>
+                <div class="rb-desc">Validators need a funded coldkey with minimum stake. A stable server with 16+ GB RAM is recommended. Validators must remain online to set weights each epoch or their influence decays.</div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">2</div>
+              <div>
+                <div class="rb-title">Start the validator on testnet</div>
+                <div class="code-block mt8" id="code-validator">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-validator', this)">COPY</button>
+                  </div>
+                  <pre><span class="cp">$</span> python -m neurons.validator \
+  <span class="cf">--netuid</span> <span class="cs">0</span> \
+  <span class="cf">--network</span> <span class="cs">test</span> \
+  <span class="cf">--wallet.name</span> <span class="cs">arctura_base</span> \
+  <span class="cf">--wallet.hotkey</span> <span class="cs">validator</span> \
+  <span class="cf">--logging.debug</span></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">3</div>
+              <div>
+                <div class="rb-title">Verify scoring and weight-setting</div>
+                <div class="code-block mt8" id="code-validator-check">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-validator-check', this)">COPY</button>
+                  </div>
+                  <pre><span class="cc"># Watch for scoring events</span>
+<span class="cp">$</span> tail -f ~/.bittensor/logs/validator.log | grep <span class="cs">"scoring\|weights\|resonance"</span>
+
+<span class="cc"># Confirm weights are being committed on-chain</span>
+<span class="cp">$</span> btcli su check_set_weights <span class="cf">--netuid</span> <span class="cs">0</span> <span class="cf">--network</span> <span class="cs">test</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RPC TAB -->
+        <div class="runbook-tab" id="tab-rpc" role="tabpanel">
+          <div class="runbook-header">
+            <span class="runbook-header-title">Configure Base RPC</span>
+            <span class="badge teal">Required</span>
+          </div>
+          <div class="runbook-content">
+
+            <div class="rb-step">
+              <div class="rb-n">1</div>
+              <div>
+                <div class="rb-title">Managed providers (recommended)</div>
+                <div class="rb-desc">Free tiers are sufficient for testnet. For mainnet at scale, a paid plan prevents rate limiting under query load.</div>
+                <div class="mt12">
+                  <div class="data-row"><span class="data-key">Alchemy</span><span class="data-val" style="font-size:10px">base-mainnet.g.alchemy.com/v2/YOUR_KEY</span></div>
+                  <div class="data-row"><span class="data-key">QuickNode</span><span class="data-val" style="font-size:10px">api.quicknode.pro/ETH_KEY/base/</span></div>
+                  <div class="data-row"><span class="data-key">Infura</span><span class="data-val" style="font-size:10px">base-mainnet.infura.io/v3/YOUR_KEY</span></div>
+                  <div class="data-row"><span class="data-key">Base public RPC</span><span class="data-val warn" style="font-size:10px">mainnet.base.org (rate-limited — testnet only)</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">2</div>
+              <div>
+                <div class="rb-title">Self-hosted op-geth (advanced)</div>
+                <div class="rb-desc">Run your own Base node for maximum reliability and no rate limits. Requires ~2TB SSD for a full node.</div>
+                <div class="code-block mt8" id="code-geth">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-geth', this)">COPY</button>
+                  </div>
+                  <pre><span class="cc"># Run an OP Stack Base node via Docker</span>
+<span class="cp">$</span> docker run <span class="cf">-p</span> 8545:8545 \
+  ethereumoptimism/op-geth \
+  <span class="cf">--network</span> base-mainnet \
+  <span class="cf">--http</span> \
+  <span class="cf">--http.addr</span> <span class="cs">0.0.0.0</span></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="rb-step">
+              <div class="rb-n">3</div>
+              <div>
+                <div class="rb-title">Verify RPC is responding</div>
+                <div class="code-block mt8" id="code-rpc-verify">
+                  <div class="code-block-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode('code-rpc-verify', this)">COPY</button>
+                  </div>
+                  <pre><span class="cp">$</span> curl -X POST $BASE_RPC_URL \
+  <span class="cf">-H</span> <span class="cs">"Content-Type: application/json"</span> \
+  <span class="cf">--data</span> <span class="cs">'{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'</span>
+<span class="cc"># Returns: {"result":"0x14d3e00",...}</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKLIST TAB -->
+        <div class="runbook-tab" id="tab-checklist" role="tabpanel">
+          <div class="runbook-header">
+            <span class="runbook-header-title">Testnet Launch Checklist</span>
+            <span class="badge amber">Pre-Mainnet</span>
+          </div>
+          <div class="runbook-content">
+            <div class="ck-list" role="list" aria-label="Launch checklist">
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Repository cloned and dependencies installed
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Test suite passes: <code style="font-family:var(--mono);font-size:10px;color:var(--teal)">pytest tests/ -v</code> → 42 passed, 0 failed
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Base RPC endpoint configured and responding to eth_blockNumber
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Bittensor wallet created (coldkey + hotkey) via btcli
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Testnet TAO obtained (faucet or transfer to coldkey)
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Miner started on testnet (<code style="font-family:var(--mono);font-size:10px">--network test --netuid 0</code>)
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Miner log shows AttestationResponse entries — queries are being answered
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Merkle proof verification passing — no InvalidProof errors in log
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Filed an issue or opened a PR on the repository
+              </div>
+              <div class="ck-item" onclick="ck(this)" role="listitem" tabindex="0">
+                <div class="ck-box" aria-hidden="true"></div>
+                Reached out in Discord (#arctura-base-subnet) to introduce your node
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /runbook-body -->
+    </div><!-- /runbook-layout -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CTA SECTION
+═══════════════════════════════════════════════ -->
+<section class="cta-section" aria-label="Call to action">
+  <div class="wrap">
+    <p class="cta-h2">The subnet<br>is <em>open.</em></p>
+    <p class="cta-sub">
+      Arctura Base is entering testnet hardening. Every miner that runs now shapes
+      the protocol before mainnet. Clone the repo. Run the tests. Send your first proof.
+    </p>
+    <div class="cta-actions">
+      <a class="btn-primary" href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        Clone Repository
+      </a>
+      <a class="btn-ghost" href="#runbooks">Run a Miner →</a>
+      <a class="btn-ghost" href="https://arctura.network/base" target="_blank" rel="noopener">arctura.network/base →</a>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-left">
+    <span><strong>BASE.ARCTURA.NETWORK</strong> · Subnet Console · Builder Phase</span>
+    <span>·</span>
+    <span>Bittensor · Base Chain · Resonance BFT</span>
+    <span>·</span>
+    <span style="color:var(--amber)">Testnet — not yet mainnet</span>
+  </div>
+  <div class="footer-right">
+    <a class="footer-link" href="https://arctura.network/base" target="_blank" rel="noopener">arctura.network/base</a>
+    <a class="footer-link" href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">github</a>
+    <a class="footer-link" href="https://docs.learnbittensor.org" target="_blank" rel="noopener">bittensor docs</a>
+    <a class="footer-link" href="https://base.org" target="_blank" rel="noopener">base.org</a>
   </div>
 </footer>
 
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════ -->
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursor-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top  = my + 'px';
-  });
-  function animRing() {
-    rx += (mx - rx) * .12;
-    ry += (my - ry) * .12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
-      ring.style.opacity = '0.4';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-      ring.style.opacity = '1';
-    });
-  });
+/* ── TAB SWITCHING ── */
+function showTab(id, btn) {
+  document.querySelectorAll('.runbook-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.runbook-nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
 
-  // Intersection observer for fade-up
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 4) * 80}ms`;
-    obs.observe(el);
+/* ── CHECKLIST ── */
+function ck(el) {
+  el.classList.toggle('done');
+  const box = el.querySelector('.ck-box');
+  box.textContent = el.classList.contains('done') ? '✓' : '';
+  const attr = el.classList.contains('done') ? 'true' : 'false';
+  el.setAttribute('aria-checked', attr);
+}
+
+/* ── COPY CODE ── */
+function copyCode(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const text = el.querySelector('pre').innerText
+    .replace(/^(\$|>)\s*/gm, '')
+    .trim();
+  navigator.clipboard.writeText(text).catch(() => {});
+  const orig = btn.textContent;
+  btn.textContent = 'COPIED';
+  setTimeout(() => btn.textContent = orig, 1600);
+}
+
+/* ── KEYBOARD SUPPORT FOR CHECKLIST ── */
+document.querySelectorAll('.ck-item').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ck(el); }
   });
+});
+
+/* ── KEYBOARD SUPPORT FOR RUNBOOK NAV ── */
+document.querySelectorAll('.runbook-nav-item').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter') el.click();
+  });
+});
+
+/* ── ANIMATED HASH VALUES ── */
+const hashes = {
+  query:  [
+    'query_id: 0x4f8b...2c91 · block_range: 21844000–21844099',
+    'query_id: 0x7a3c...9f44 · block_range: 21855120–21855219',
+    'query_id: 0x1d8e...b302 · block_range: 21862400–21862499',
+  ],
+  fetch: [
+    'state_root: 0x3a7e...8f02 · tx_count: 147 · gas_used: 12.4M',
+    'state_root: 0x8b2c...4e19 · tx_count: 203 · gas_used: 14.1M',
+    'state_root: 0xcc5a...7d88 · tx_count: 91 · gas_used: 8.7M',
+  ],
+  proof: [
+    'merkle_root: 0x9c2d...4a18 · proof_depth: 18 · verified: true',
+    'merkle_root: 0x5f7b...2c44 · proof_depth: 17 · verified: true',
+    'merkle_root: 0xe4a1...9d30 · proof_depth: 19 · verified: true',
+  ],
+  score: [
+    'score: 0.94 · latency: 186ms · weight_set: block 3847201',
+    'score: 0.91 · latency: 221ms · weight_set: block 3847318',
+    'score: 0.97 · latency: 142ms · weight_set: block 3847440',
+  ],
+};
+let hi = 0;
+function rotateHashes() {
+  hi = (hi + 1) % 3;
+  const qEl = document.getElementById('hash-query');
+  const fEl = document.getElementById('hash-fetch');
+  const pEl = document.getElementById('hash-proof');
+  const sEl = document.getElementById('hash-score');
+  if (qEl) qEl.textContent = hashes.query[hi];
+  if (fEl) fEl.textContent = hashes.fetch[hi];
+  if (pEl) pEl.textContent = hashes.proof[hi];
+  if (sEl) sEl.textContent = hashes.score[hi];
+}
+setInterval(rotateHashes, 3800);
+
+/* ── SCROLL REVEAL ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.proto-card, .stack-card, .track-card, .issue-card').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = `opacity 0.45s ${i * 0.06}s ease, transform 0.45s ${i * 0.06}s ease`;
+  revealObs.observe(el);
+});
 </script>
 </body>
 </html>
