@@ -1,10 +1,20 @@
 # Arctura Network
 
-Arctura Network is the network and governance discovery surface for the Arctura ecosystem.
-
 Canonical: https://arctura.network/
-Service descriptor: https://arctura.network/.well-known/aureus.json
-Agent card: https://arctura.network/.well-known/agent.json
-Ecosystem registry: https://base.arctura.network/network.json
+Role: Open-source ARM subnet implementation and network discovery surface
+Updated: 2026-08-18
 
-Operational note: A2A, MCP, AP2, and autonomous settlement references describe architecture unless an endpoint is explicitly marked implemented in the agent card.
+## Verified status
+
+Arctura's validator and miner implementation has been exercised on Bittensor testnet netuid 505. Local handoff evidence records mandate issuance, miner attestation, scoring, and a successful testnet weight commit.
+
+Arctura is not currently represented as a live Bittensor Finney subnet. No mainnet netuid is published. Mainnet remains gated by a sustained evidence report and explicit operator approval.
+
+## Related properties
+
+- ARM technical reference: https://autonomousresourcemanagement.com/
+- Base Sepolia gateway: https://base.arctura.network/
+- Knowledge archive: https://arctura.org/
+- Source: https://github.com/bittensaur/arctura-base-subnet
+
+These are related properties with distinct roles, not alternate identities.

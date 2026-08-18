@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arctura Network — Autonomous Resource Management on Bittensor</title>
-<meta name="description" content="Arctura is Bittensor subnet 505, an Autonomous Resource Management (ARM) network secured by Resonance BFT consensus. Validators, an agent mesh, and a public signal layer working as one subnet.">
-<meta name="keywords" content="Arctura, Bittensor subnet 505, SN505, Autonomous Resource Management, Resonance BFT, agent mesh, Coreweaver Labs">
+<title>Arctura Network — ARM Testnet Architecture on Bittensor</title>
+<meta name="description" content="Arctura is an open-source Autonomous Resource Management subnet implementation validated on Bittensor testnet netuid 505. Mainnet launch remains gated by operational evidence.">
+<meta name="keywords" content="Arctura, Bittensor testnet, Autonomous Resource Management, validator, miner, agent systems">
 <meta name="author" content="Arctura Network · Coreweaver Labs">
 <meta name="base:app_id" content="69f78ebb879b4ae3fa1c70b6" />
 <meta name="talentapp:project_verification" content="b7ccbe592b90279b90cea1fb75ab3508960de478b993d8a0e59471291f5f17252f9786d52a768a70178fd6b0a26754644cf6635ba8d9e5540f5257185d7a6aa0">
@@ -15,14 +15,14 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://arctura.network">
-<meta property="og:title" content="Arctura Network — Autonomous Resource Management on Bittensor">
-<meta property="og:description" content="Bittensor subnet 505 — validators, an agent mesh, and Resonance BFT consensus operating as one signal layer.">
+<meta property="og:title" content="Arctura Network — ARM Testnet Architecture on Bittensor">
+<meta property="og:description" content="Open-source validator and miner implementation validated on Bittensor testnet netuid 505. Not a live Finney subnet.">
 <meta property="og:image" content="https://arctura.network/og-network.jpg">
 <meta property="og:site_name" content="Arctura Network">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Arctura Network — Autonomous Resource Management on Bittensor">
-<meta name="twitter:description" content="Bittensor subnet 505 — validators, an agent mesh, and Resonance BFT consensus operating as one signal layer.">
+<meta name="twitter:title" content="Arctura Network — ARM Testnet Architecture">
+<meta name="twitter:description" content="Open-source validator and miner implementation validated on Bittensor testnet netuid 505.">
 
 <script type="application/ld+json">
 {
@@ -32,36 +32,30 @@
       "@type": "WebPage",
       "@id": "https://arctura.network#webpage",
       "url": "https://arctura.network",
-      "name": "Arctura Network — Autonomous Resource Management on Bittensor",
-      "description": "Arctura is Bittensor subnet 505 (SN505), an Autonomous Resource Management (ARM) network secured by Resonance BFT consensus.",
+      "name": "Arctura Network — ARM Testnet Architecture on Bittensor",
+      "description": "An open-source Autonomous Resource Management subnet implementation validated on Bittensor testnet netuid 505. Mainnet launch remains gated.",
       "inLanguage": "en-US",
-      "isPartOf": { "@id": "https://arctura.org#website" },
-      "about": { "@id": "https://arctura.org#organization" }
+      "isPartOf": { "@id": "https://arctura.network#website" },
+      "about": { "@id": "https://arctura.network#organization" }
     },
     {
       "@type": "Organization",
-      "@id": "https://arctura.org#organization",
+      "@id": "https://arctura.network#organization",
       "name": "Arctura Network",
-      "url": "https://arctura.org",
-      "description": "Arctura Network operates as Bittensor subnet 505 (SN505), governed by the Council Protocol and secured by Resonance BFT consensus.",
-      "knowsAbout": ["Bittensor subnet 505", "Byzantine fault tolerant consensus", "Autonomous Resource Management", "AI agent mesh coordination", "validator and miner incentive design"],
+      "url": "https://arctura.network",
+      "description": "Arctura Network publishes an open-source ARM subnet implementation tested on Bittensor testnet netuid 505. It does not currently claim a Finney netuid.",
+      "knowsAbout": ["Bittensor testnet", "Autonomous Resource Management", "validator and miner incentive design"],
       "sameAs": [
-        "https://arctura.network",
-        "https://arctura.com",
-        "https://autonomousresourcemanagement.com",
-        "https://au-re.org",
-        "https://arm-agency.com",
         "https://github.com/bittensaur/arctura-base-subnet",
-        "https://taostats.io/subnets/505",
         "https://x.com/ArcturaNetwork"
       ]
     },
     {
       "@type": "WebSite",
-      "@id": "https://arctura.org#website",
-      "url": "https://arctura.org",
-      "name": "Arctura",
-      "publisher": { "@id": "https://arctura.org#organization" }
+      "@id": "https://arctura.network#website",
+      "url": "https://arctura.network",
+      "name": "Arctura Network",
+      "publisher": { "@id": "https://arctura.network#organization" }
     },
     {
       "@type": "FAQPage",
@@ -84,7 +78,7 @@
         {
           "@type": "Question",
           "name": "Is Arctura a Bittensor subnet?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Arctura runs as subnet 505 (SN505) on the Bittensor network, using the standard miner/validator/stake incentive structure, with an additional Resonance BFT consensus round and agent mesh layered on top." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Arctura has been validated on Bittensor testnet netuid 505. It is not currently represented as a live Finney subnet." }
         },
         {
           "@type": "Question",
@@ -94,7 +88,7 @@
         {
           "@type": "Question",
           "name": "What subnet number is Arctura on Bittensor?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Arctura is live on Bittensor as subnet 505 (SN505)." }
+          "acceptedAnswer": { "@type": "Answer", "text": "The verified implementation used Bittensor testnet netuid 505. A mainnet netuid has not been published." }
         },
         {
           "@type": "Question",
@@ -359,9 +353,9 @@
   <section class="hero">
     <canvas id="mesh" aria-hidden="true"></canvas>
     <div class="wrap hero-inner">
-      <div class="hero-kicker"><span class="pulse"></span>Live on Bittensor · Subnet 505 · Resonance BFT consensus</div>
-      <h1 class="hero-h">Autonomous <em>resource management</em>, running as a subnet.</h1>
-      <p class="hero-sub">Arctura is Bittensor subnet 505 (SN505), coordinating three things most networks keep separate: validators and miners doing the base work, an agent mesh acting on it, and Resonance BFT — Arctura's own Byzantine fault tolerant consensus round — deciding what's actually settled. A proposal doesn't take effect because one operator pushed it through. It takes effect once two-thirds of the network attests, every round, no exceptions.</p>
+      <div class="hero-kicker"><span class="pulse"></span>Bittensor testnet · Netuid 505 · Mainnet gated</div>
+      <h1 class="hero-h">Autonomous <em>resource management</em>, tested as a subnet.</h1>
+      <p class="hero-sub">Arctura is an open-source validator and miner implementation for Autonomous Resource Management. The code has produced testnet mandate, scoring, attestation, and weight-setting evidence on Bittensor testnet netuid 505. It is not a live Finney subnet; mainnet remains gated by sustained operational evidence and an explicit operator decision.</p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">Read the ARM docs</a>
         <a class="btn btn-ghost" href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">View the repo</a>
@@ -383,7 +377,7 @@
         <div class="layer accent-signal">
           <div class="layer-num">01 · Subnet</div>
           <div class="layer-name">Validators &amp; miners</div>
-          <div class="layer-desc">Bittensor subnet 505. Miners perform work, validators score it against the subnet's scoring function, and stake-weighted consensus sets emissions — the same incentive structure any Bittensor subnet runs on, unmodified.</div>
+          <div class="layer-desc">Bittensor testnet netuid 505 was used to validate miner work, validator scoring, attestation, and weight submission. A Finney netuid has not been assigned.</div>
         </div>
         <div class="layer accent-attest">
           <div class="layer-num">02 · Consensus</div>
@@ -438,7 +432,7 @@
         <div class="path-card">
           <div class="path-role">Node operator</div>
           <div class="path-title">Run a validator or miner</div>
-          <div class="path-desc">Stake TAO, register on the subnet, and start earning emissions for validated work. Validators additionally take part in Resonance BFT voting rounds once registered. Full setup, hardware requirements, and staking mechanics are documented publicly.</div>
+          <div class="path-desc">Review the open-source testnet implementation and operator runbooks. Do not register, stake, or assume emissions are available until a published mainnet launch record identifies an active Finney netuid.</div>
           <a class="path-link" href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">Node setup docs →</a>
         </div>
         <div class="path-card">
@@ -468,11 +462,11 @@
         </div>
         <div class="faq-item">
           <button class="faq-q" id="faq-q-2" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a-2">Is Arctura a Bittensor subnet?<span class="plus" aria-hidden="true">+</span></button>
-          <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p>Yes. Arctura runs as subnet 505 (SN505) on Bittensor using the standard miner, validator, and stake-weighted emissions structure. Resonance BFT and the agent mesh are layered on top of that base subnet, not a replacement for it.</p></div>
+          <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p>Arctura has been validated on Bittensor testnet netuid 505. It is not currently represented as a live Finney subnet.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" id="faq-q-3" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a-3">What subnet number is Arctura on Bittensor?<span class="plus" aria-hidden="true">+</span></button>
-          <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p>Arctura is live on Bittensor as subnet 505 (SN505).</p></div>
+          <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p>The verified implementation used testnet netuid 505. A mainnet netuid has not been published.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" id="faq-q-4" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a-4">What is Resonance BFT?<span class="plus" aria-hidden="true">+</span></button>
@@ -505,7 +499,7 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <div class="brand"><span class="dot"></span>ARCTURA</div>
-        <p>Arctura Network is Bittensor subnet 505 (SN505), coordinating validators, miners, and an AI agent mesh through Resonance BFT consensus, governed by the Council Protocol. Built by Coreweaver Labs.</p>
+        <p>Arctura Network is an open-source ARM subnet implementation validated on Bittensor testnet netuid 505. Mainnet launch remains gated by evidence and operator approval.</p>
       </div>
       <div class="foot-col">
         <div class="foot-col-head">Network</div>
@@ -521,7 +515,7 @@
         <ul>
           <li><a href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">ARM specification ↗</a></li>
           <li><a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">GitHub ↗</a></li>
-          <li><a href="https://taostats.io/subnets/505" target="_blank" rel="noopener">Verify on-chain (taostats) ↗</a></li>
+          <li><a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">Inspect implementation ↗</a></li>
           <li><a href="https://arctura.org/llms.txt" target="_blank" rel="noopener">llms.txt ↗</a></li>
         </ul>
       </div>
