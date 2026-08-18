@@ -1,0 +1,10 @@
+# Arctura Network
+
+Arctura Network is the network and governance discovery surface for the Arctura ecosystem.
+
+Canonical: https://arctura.network/
+Service descriptor: https://arctura.network/.well-known/aureus.json
+Agent card: https://arctura.network/.well-known/agent.json
+Ecosystem registry: https://base.arctura.network/network.json
+
+Operational note: A2A, MCP, AP2, and autonomous settlement references describe architecture unless an endpoint is explicitly marked implemented in the agent card.

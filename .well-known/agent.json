@@ -1,0 +1,17 @@
+{
+  "protocol_version": "1.0",
+  "name": "Arctura Network",
+  "description": "Network and governance discovery surface for the Arctura ecosystem.",
+  "url": "https://arctura.network/",
+  "service_descriptor": "https://arctura.network/.well-known/aureus.json",
+  "registry": "https://base.arctura.network/network.json",
+  "capabilities": {
+    "streaming": false,
+    "push_notifications": false,
+    "payments": false
+  },
+  "skills": [
+    { "id": "network-discovery", "name": "Network discovery", "status": "implemented" },
+    { "id": "governance-signal", "name": "Governance signal", "status": "documentation-only" }
+  ]
+}

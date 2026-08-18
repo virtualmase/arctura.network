@@ -1,26 +1,50 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
+
 const app = express();
+const root = __dirname;
 
-// Serve all static files from the current directory
-app.use(express.static(path.join(__dirname)));
-
-// Home page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.disable("x-powered-by");
+app.use((request, response, next) => {
+  response.setHeader("X-Content-Type-Options", "nosniff");
+  response.setHeader("X-Frame-Options", "DENY");
+  response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.setHeader("Permissions-Policy", "camera=(), geolocation=(), microphone=(), payment=()");
+  if (request.secure || request.headers["x-forwarded-proto"] === "https") {
+    response.setHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+  }
+  next();
 });
 
-// FAQ page
-app.get('/faq', (req, res) => {
-  res.sendFile(path.join(__dirname, 'faq.html'));
+app.get("/health", (_request, response) => {
+  response.json({ service: "arctura-network", status: "ok", version: "1.1.0" });
 });
 
-// Fallback — serve index.html for any unmatched route
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get("/ready", (_request, response) => {
+  response.json({ service: "arctura-network", ready: true, dependencies: "static" });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Arctura server running on port ${PORT}`);
+app.get("/.well-known/agent.json", (_request, response) => {
+  response.sendFile(path.join(root, ".well-known", "agent.json"));
 });
+
+app.use(express.static(root, { extensions: ["html"], index: "index.html" }));
+
+app.get("/faq", (_request, response) => {
+  response.sendFile(path.join(root, "faq", "index.html"));
+});
+
+app.use("/api", (_request, response) => {
+  response.status(404).json({ error: "not_found" });
+});
+
+app.use((_request, response) => {
+  response.status(404).sendFile(path.join(root, "404.html"));
+});
+
+if (require.main === module) {
+  const port = Number(process.env.PORT || 3000);
+  app.listen(port, () => console.log(`Arctura server running on port ${port}`));
+}
+
+module.exports = app;

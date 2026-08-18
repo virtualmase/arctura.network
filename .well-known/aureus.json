@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "service_id": "arctura-network",
+  "name": "Arctura Network",
+  "canonical_url": "https://arctura.network/",
+  "role": "network-and-governance-signal",
+  "status": "production",
+  "authority": {
+    "autonomous_payments": false,
+    "human_approval_required": ["network-governance", "treasury", "mainnet-activation"]
+  },
+  "capabilities": ["network-documentation", "governance-signal", "validator-discovery"],
+  "related_services": {
+    "arm_agency": "https://www.arm-agency.com/",
+    "aure": "https://www.au-re.org/",
+    "base_gateway": "https://base.arctura.network/"
+  },
+  "commerce": { "x402": "disabled" },
+  "registry": "https://base.arctura.network/network.json"
+}
