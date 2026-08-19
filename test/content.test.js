@@ -17,8 +17,9 @@ test("public evidence record declares its proof boundary without a mainnet claim
   const status = JSON.parse(read("evidence", "netuid-505", "status.json"));
   assert.equal(status.network.netuid, 505);
   assert.equal(status.network.finney_netuid, null);
-  assert.equal(status.claims[0].publicly_reproducible, false);
-  assert.match(status.claims[0].boundary, /does not independently prove live chain state/i);
+  assert.match(status.network.scope, /local testnet launch/i);
+  assert.match(status.claims[0].assertion, /launched and exercised/i);
+  assert.match(status.claims[0].boundary, /does not include an external explorer/i);
 });
 
 test("authority record distinguishes related Arctura surfaces and source precedence", () => {

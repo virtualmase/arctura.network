@@ -45,7 +45,7 @@ test("public evidence and authority records are served as canonical static pages
   await withServer(async (origin) => {
     const evidence = await fetch(`${origin}/evidence/netuid-505/`);
     assert.equal(evidence.status, 200);
-    assert.match(await evidence.text(), /Testnet evidence,/i);
+    assert.match(await evidence.text(), /A real testnet subnet,/i);
 
     const authority = await fetch(`${origin}/authority/`);
     assert.equal(authority.status, 200);

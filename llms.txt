@@ -7,16 +7,22 @@ Updated: 2026-08-19
 
 ## Current operational boundary
 
-Arctura Network is the public operational-status surface for an open-source Autonomous Resource Management subnet implementation. Arctura states that its validator and miner implementation was exercised on Bittensor testnet netuid 505.
+Arctura Base is a real, documented **local Bittensor testnet subnet launch on netuid 505**. The primary implementation repository’s run plan documents Bittensor test-network commands using `--netuid 505`, plus bounded results: a miner reached live state and a validator entered its live loop and issued a mandate.
 
-This is a first-party operational statement. The current public record does not include a signed testnet transcript, explorer reference, immutable receipt, or raw node log. It must not be read as independent verification of live chain state.
+The public record does not convert that local-testnet launch into stronger unrecorded outcomes. The same run plan says that the miner was not running concurrently during the bounded validator run, so no miner response was observed, and short-run weight setting may not have been attempted. No external testnet metagraph or explorer snapshot is currently published.
 
-Arctura is not currently represented as a live Bittensor Finney subnet. No mainnet netuid, emissions state, or live quorum state is published. Mainnet remains gated by sustained operational evidence and explicit operator approval.
+Arctura is not currently represented as a live Bittensor Finney subnet. No mainnet netuid, emissions state, or live quorum state is published.
+
+## Primary sources
+
+- Local testnet launch and bounded run record: https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/TESTNET_RUN_PLAN.md
+- Operations record: https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/ARCTURA_OPERATIONS_AND_SECURITY.md
+- Published implementation, tests, and runbooks: https://github.com/bittensaur/arctura-base-subnet
 
 ## Related surfaces and source precedence
 
 1. Arctura Network (`https://arctura.network/`) is authoritative for current network status and dated evidence records.
-2. The Arctura base subnet repository (`https://github.com/bittensaur/arctura-base-subnet`) is authoritative for published code, tests, releases, issues, and runbooks.
+2. The Arctura base subnet repository (`https://github.com/bittensaur/arctura-base-subnet`) is authoritative for published code, tests, operations records, releases, issues, and runbooks.
 3. Autonomous Resource Management (`https://autonomousresourcemanagement.com/`) is the technical framework and standards reference; it is not direct proof of a particular Arctura Network run.
 4. Arctura Observatory (`https://arctura.org/`) is the collective identity and contextual archive; it is not authoritative for current subnet state.
 

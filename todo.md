@@ -6,3 +6,4 @@
 - [x] Align canonical metadata, crawler records, sitemap, and host redirect behavior to the apex URL.
 - [x] Add regression tests for evidence and canonical routes; verify the static site locally.
 - [x] Commit and publish the completed public-record update.
+- [x] Reconcile Netuid 505 claims with the primary Arctura Base repository and publish only the supported local-testnet launch scope.

@@ -1,68 +1,76 @@
 {
-  "record_version": "1.0.0",
-  "record_type": "testnet_evidence_status",
+  "record_version": "1.1.0",
+  "record_type": "testnet_launch_and_evidence_status",
   "canonical_url": "https://arctura.network/evidence/netuid-505/",
   "updated_at": "2026-08-19",
   "subject": {
-    "name": "Arctura Network",
+    "name": "Arctura Base",
     "role": "open-source ARM validator and miner implementation"
   },
   "network": {
-    "name": "Bittensor testnet",
+    "name": "Bittensor local testnet",
     "netuid": 505,
-    "scope": "testnet exercise",
+    "scope": "documented local testnet launch and bounded runtime exercise",
     "finney_netuid": null,
-    "mainnet_status": "not published; gated by sustained operational evidence and explicit operator approval"
+    "mainnet_status": "not published; no Finney launch is claimed"
   },
   "claims": [
     {
-      "id": "NETUID-505-STATUS",
-      "assertion": "The implementation was exercised on Bittensor testnet netuid 505.",
-      "evidence_level": "first-party operational statement",
-      "publicly_reproducible": false,
-      "public_artifact": null,
-      "boundary": "This record does not independently prove live chain state."
+      "id": "NETUID-505-LAUNCH",
+      "assertion": "Arctura Base was launched and exercised as a local Bittensor testnet subnet on netuid 505.",
+      "evidence_level": "primary implementation repository and first-party operations records",
+      "publicly_inspectable": true,
+      "historically_independent": false,
+      "public_artifacts": [
+        "https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/TESTNET_RUN_PLAN.md",
+        "https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/ARCTURA_OPERATIONS_AND_SECURITY.md"
+      ],
+      "boundary": "The public record documents a local testnet launch. It does not include an external explorer or metagraph snapshot for independent historical confirmation."
     },
     {
-      "id": "NETUID-505-WORKFLOW",
-      "assertion": "The stated testnet exercise covered mandate issuance, miner attestation, validator scoring, and a testnet weight commit.",
-      "evidence_level": "first-party operational statement",
-      "publicly_reproducible": false,
-      "public_artifact": null,
-      "boundary": "No signed transcript, explorer URL, or raw run log is published in this record."
+      "id": "NETUID-505-BOUNDED-RUN",
+      "assertion": "The documented bounded run reached a live miner state and a live validator loop that issued a mandate on netuid 505.",
+      "evidence_level": "primary implementation repository operations record",
+      "publicly_inspectable": true,
+      "historically_independent": false,
+      "public_artifacts": [
+        "https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/TESTNET_RUN_PLAN.md"
+      ],
+      "boundary": "The same record says that the miner was not running concurrently during the bounded validator run, so no miner response was observed; short-run weight setting may not have been attempted."
+    },
+    {
+      "id": "IMPLEMENTATION-SOURCE",
+      "assertion": "The implementation, operational scripts, and test plan are publicly available in the Arctura Base repository.",
+      "evidence_level": "public source artifact",
+      "publicly_inspectable": true,
+      "historically_independent": true,
+      "public_artifacts": [
+        "https://github.com/bittensaur/arctura-base-subnet"
+      ],
+      "boundary": "Published code and instructions do not by themselves prove an unrecorded historical chain event."
     },
     {
       "id": "MAINNET-BOUNDARY",
-      "assertion": "No active Finney netuid or emissions state is claimed.",
+      "assertion": "No active Finney netuid, emissions state, or mainnet availability is claimed.",
       "evidence_level": "current public status boundary",
-      "publicly_reproducible": true,
-      "public_artifact": "https://arctura.network/",
-      "boundary": "A testnet exercise is not a mainnet launch claim."
-    }
-  ],
-  "published_sources": [
-    {
-      "label": "Arctura Network status surface",
-      "url": "https://arctura.network/"
-    },
-    {
-      "label": "Arctura base subnet implementation repository",
-      "url": "https://github.com/bittensaur/arctura-base-subnet"
-    },
-    {
-      "label": "Autonomous Resource Management technical reference",
-      "url": "https://autonomousresourcemanagement.com/"
+      "publicly_inspectable": true,
+      "historically_independent": true,
+      "public_artifacts": [
+        "https://arctura.network/"
+      ],
+      "boundary": "A local Bittensor testnet launch is not a Finney-mainnet launch claim."
     }
   ],
   "not_yet_published": [
-    "signed testnet transcript",
-    "chain explorer reference or block-level receipt",
-    "raw node logs",
+    "external Bittensor testnet metagraph or explorer snapshot for netuid 505",
+    "concurrent miner-and-validator end-to-end transcript",
+    "non-zero validator-scoring and weight-submission artifact from a sustained run",
     "source-backed live quorum feed"
   ],
   "next_artifact_requirements": [
     "UTC start and end timestamps",
     "network and netuid",
+    "metagraph or explorer reference where available",
     "reproducible command or method",
     "artifact hash or immutable URL",
     "scope, result, and known limitations"
