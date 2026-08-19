@@ -10,3 +10,6 @@
 - [x] Publish a durable Netuid 505 documentation page with primary-source citations, operational sequence, and explicit evidence boundaries.
 - [x] Add documentation navigation, sitemap, and machine-readable discovery links for the Netuid 505 record.
 - [x] Validate and publish the documentation page to the live Arctura Network domain.
+- [x] Refine the homepage sticky navigation so the documentation entry is clear, concise, and cohesive with evidence and authority records.
+- [x] Add consistent current-page and mobile navigation behavior across homepage, documentation, evidence, and authority pages.
+- [x] Validate the navigation refinement at desktop and mobile widths, then publish it to the live domain.
