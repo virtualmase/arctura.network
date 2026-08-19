@@ -5,4 +5,4 @@
 - [x] Publish and link a canonical Arctura relationship record across Arctura Network, Arctura Observatory, and the ARM technical reference.
 - [x] Align canonical metadata, crawler records, sitemap, and host redirect behavior to the apex URL.
 - [x] Add regression tests for evidence and canonical routes; verify the static site locally.
-- [ ] Commit and publish the completed public-record update.
+- [x] Commit and publish the completed public-record update.
