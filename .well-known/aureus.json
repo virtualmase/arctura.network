@@ -3,16 +3,18 @@
   "service_id": "arctura-network",
   "name": "Arctura Network",
   "canonical_url": "https://arctura.network/",
-  "role": "network-and-governance-signal",
-  "status": "production",
+  "role": "testnet implementation status and evidence surface",
+  "status": "testnet-gated",
   "authority": {
     "autonomous_payments": false,
     "human_approval_required": ["network-governance", "treasury", "mainnet-activation"]
   },
-  "capabilities": ["network-documentation", "governance-signal", "validator-discovery"],
+  "capabilities": ["network-documentation", "testnet-evidence-record", "validator-discovery"],
   "related_services": {
-    "arm_agency": "https://www.arm-agency.com/",
-    "aure": "https://www.au-re.org/",
+    "testnet_evidence_record": "https://arctura.network/evidence/netuid-505/",
+    "authority_record": "https://arctura.network/authority/",
+    "arm_technical_reference": "https://autonomousresourcemanagement.com/",
+    "arctura_observatory": "https://arctura.org/",
     "base_gateway": "https://base.arctura.network/"
   },
   "commerce": { "x402": "disabled" },

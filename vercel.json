@@ -1,6 +1,14 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.arctura.network" }],
+      "destination": "https://arctura.network/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/.well-known/aureus.json",

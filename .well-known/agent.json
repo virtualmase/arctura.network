@@ -1,7 +1,7 @@
 {
   "protocol_version": "1.0",
   "name": "Arctura Network",
-  "description": "Network and governance discovery surface for the Arctura ecosystem.",
+  "description": "Testnet implementation status and evidence discovery surface for Arctura Network.",
   "url": "https://arctura.network/",
   "service_descriptor": "https://arctura.network/.well-known/aureus.json",
   "registry": "https://base.arctura.network/network.json",
@@ -12,6 +12,8 @@
   },
   "skills": [
     { "id": "network-discovery", "name": "Network discovery", "status": "implemented" },
+    { "id": "testnet-evidence", "name": "Testnet evidence record", "status": "implemented", "url": "https://arctura.network/evidence/netuid-505/" },
+    { "id": "cross-domain-authority", "name": "Cross-domain authority record", "status": "implemented", "url": "https://arctura.network/authority/" },
     { "id": "governance-signal", "name": "Governance signal", "status": "documentation-only" }
   ]
 }

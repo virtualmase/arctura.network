@@ -1,0 +1,7 @@
+# Validation Record
+
+**Validated:** 2026-08-19
+
+The local static preview rendered the Netuid 505 evidence record at `/evidence/netuid-505/` with an explicit testnet-only boundary, a first-party-evidence disclosure, no Finney-netuid claim, and a clearly non-live quorum state. The authority page at `/authority/` rendered the distinct roles and source precedence for Arctura Network, Arctura Observatory, the Autonomous Resource Management reference, and the public implementation repository.
+
+The local regression suite passed eight tests, including static route availability, machine-readable evidence metadata, non-live quorum copy, cross-domain authority records, and the permanent `www`-to-apex redirect. The static build command completed successfully.

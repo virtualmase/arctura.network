@@ -1,0 +1,41 @@
+{
+  "record_version": "1.0.0",
+  "record_type": "cross_domain_authority",
+  "canonical_url": "https://arctura.network/authority/",
+  "updated_at": "2026-08-19",
+  "canonical_host": "https://arctura.network/",
+  "relationship_statement": "Arctura Network is the public operational status surface for the open-source ARM subnet implementation. Arctura Observatory is the collective's public identity and archive. Autonomous Resource Management is the technical reference framework. The public code repository is the primary source for published implementation details.",
+  "surfaces": [
+    {
+      "name": "Arctura Network",
+      "url": "https://arctura.network/",
+      "role": "operational status and public implementation evidence",
+      "authoritative_for": ["current testnet or mainnet boundary", "dated network evidence records", "public implementation links"]
+    },
+    {
+      "name": "Arctura Observatory",
+      "url": "https://arctura.org/",
+      "role": "collective identity, archive, and context",
+      "authoritative_for": ["collective framing", "public memory", "contextual records"]
+    },
+    {
+      "name": "Autonomous Resource Management",
+      "url": "https://autonomousresourcemanagement.com/",
+      "role": "technical framework and standards reference",
+      "authoritative_for": ["definitions", "technical vocabulary", "framework context"]
+    },
+    {
+      "name": "Arctura base subnet repository",
+      "url": "https://github.com/bittensaur/arctura-base-subnet",
+      "role": "primary published implementation source",
+      "authoritative_for": ["code", "tests", "issues", "releases", "published runbooks"]
+    }
+  ],
+  "source_precedence": [
+    "dated Arctura Network evidence record",
+    "published implementation artifact in the code repository",
+    "ARM technical reference",
+    "Arctura Observatory contextual record"
+  ],
+  "related_but_not_alternate_identities": true
+}

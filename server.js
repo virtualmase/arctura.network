@@ -3,9 +3,15 @@ const path = require("path");
 
 const app = express();
 const root = __dirname;
+const canonicalHost = "arctura.network";
 
 app.disable("x-powered-by");
 app.use((request, response, next) => {
+  const forwardedHost = request.headers["x-forwarded-host"]?.split(",")[0]?.trim();
+  const host = (forwardedHost || request.headers.host)?.split(":")[0]?.toLowerCase();
+  if (host === `www.${canonicalHost}`) {
+    return response.redirect(308, `https://${canonicalHost}${request.originalUrl || request.url}`);
+  }
   response.setHeader("X-Content-Type-Options", "nosniff");
   response.setHeader("X-Frame-Options", "DENY");
   response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");

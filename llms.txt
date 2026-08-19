@@ -1,20 +1,23 @@
 # Arctura Network
 
 Canonical: https://arctura.network/
-Role: Open-source ARM subnet implementation and network discovery surface
-Updated: 2026-08-18
+Operational evidence record: https://arctura.network/evidence/netuid-505/
+Authority record: https://arctura.network/authority/
+Updated: 2026-08-19
 
-## Verified status
+## Current operational boundary
 
-Arctura's validator and miner implementation has been exercised on Bittensor testnet netuid 505. Local handoff evidence records mandate issuance, miner attestation, scoring, and a successful testnet weight commit.
+Arctura Network is the public operational-status surface for an open-source Autonomous Resource Management subnet implementation. Arctura states that its validator and miner implementation was exercised on Bittensor testnet netuid 505.
 
-Arctura is not currently represented as a live Bittensor Finney subnet. No mainnet netuid is published. Mainnet remains gated by a sustained evidence report and explicit operator approval.
+This is a first-party operational statement. The current public record does not include a signed testnet transcript, explorer reference, immutable receipt, or raw node log. It must not be read as independent verification of live chain state.
 
-## Related properties
+Arctura is not currently represented as a live Bittensor Finney subnet. No mainnet netuid, emissions state, or live quorum state is published. Mainnet remains gated by sustained operational evidence and explicit operator approval.
 
-- ARM technical reference: https://autonomousresourcemanagement.com/
-- Base Sepolia gateway: https://base.arctura.network/
-- Knowledge archive: https://arctura.org/
-- Source: https://github.com/bittensaur/arctura-base-subnet
+## Related surfaces and source precedence
+
+1. Arctura Network (`https://arctura.network/`) is authoritative for current network status and dated evidence records.
+2. The Arctura base subnet repository (`https://github.com/bittensaur/arctura-base-subnet`) is authoritative for published code, tests, releases, issues, and runbooks.
+3. Autonomous Resource Management (`https://autonomousresourcemanagement.com/`) is the technical framework and standards reference; it is not direct proof of a particular Arctura Network run.
+4. Arctura Observatory (`https://arctura.org/`) is the collective identity and contextual archive; it is not authoritative for current subnet state.
 
 These are related properties with distinct roles, not alternate identities.

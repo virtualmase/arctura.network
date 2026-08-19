@@ -9,12 +9,12 @@
 <meta name="author" content="Arctura Network · Coreweaver Labs">
 <meta name="base:app_id" content="69f78ebb879b4ae3fa1c70b6" />
 <meta name="talentapp:project_verification" content="b7ccbe592b90279b90cea1fb75ab3508960de478b993d8a0e59471291f5f17252f9786d52a768a70178fd6b0a26754644cf6635ba8d9e5540f5257185d7a6aa0">
-<link rel="canonical" href="https://arctura.network">
+<link rel="canonical" href="https://arctura.network/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2306070B'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%2300D4C8'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#06070B">
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://arctura.network">
+<meta property="og:url" content="https://arctura.network/">
 <meta property="og:title" content="Arctura Network — ARM Testnet Architecture on Bittensor">
 <meta property="og:description" content="Open-source validator and miner implementation validated on Bittensor testnet netuid 505. Not a live Finney subnet.">
 <meta property="og:image" content="https://arctura.network/og-network.jpg">
@@ -31,7 +31,7 @@
     {
       "@type": "WebPage",
       "@id": "https://arctura.network#webpage",
-      "url": "https://arctura.network",
+      "url": "https://arctura.network/",
       "name": "Arctura Network — ARM Testnet Architecture on Bittensor",
       "description": "An open-source Autonomous Resource Management subnet implementation validated on Bittensor testnet netuid 505. Mainnet launch remains gated.",
       "inLanguage": "en-US",
@@ -42,7 +42,7 @@
       "@type": "Organization",
       "@id": "https://arctura.network#organization",
       "name": "Arctura Network",
-      "url": "https://arctura.network",
+      "url": "https://arctura.network/",
       "description": "Arctura Network publishes an open-source ARM subnet implementation tested on Bittensor testnet netuid 505. It does not currently claim a Finney netuid.",
       "knowsAbout": ["Bittensor testnet", "Autonomous Resource Management", "validator and miner incentive design"],
       "sameAs": [
@@ -53,7 +53,7 @@
     {
       "@type": "WebSite",
       "@id": "https://arctura.network#website",
-      "url": "https://arctura.network",
+      "url": "https://arctura.network/",
       "name": "Arctura Network",
       "publisher": { "@id": "https://arctura.network#organization" }
     },
@@ -335,6 +335,8 @@
       <a href="#arm">The subnet</a>
       <a href="#protocol">Council Protocol</a>
       <a href="#participate">Run a node</a>
+      <a href="/evidence/netuid-505/">Evidence</a>
+      <a href="/authority/">Authority</a>
       <a href="#faq">FAQ</a>
     </nav>
     <a class="nav-cta" href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">Read the docs</a>
@@ -344,6 +346,8 @@
     <a href="#arm">The subnet</a>
     <a href="#protocol">Council Protocol</a>
     <a href="#participate">Run a node</a>
+    <a href="/evidence/netuid-505/">Evidence</a>
+    <a href="/authority/">Authority</a>
     <a href="#faq">FAQ</a>
   </nav>
 </header>
@@ -357,14 +361,16 @@
       <h1 class="hero-h">Autonomous <em>resource management</em>, tested as a subnet.</h1>
       <p class="hero-sub">Arctura is an open-source validator and miner implementation for Autonomous Resource Management. The code has produced testnet mandate, scoring, attestation, and weight-setting evidence on Bittensor testnet netuid 505. It is not a live Finney subnet; mainnet remains gated by sustained operational evidence and an explicit operator decision.</p>
       <div class="hero-actions">
+        <a class="btn btn-solid" href="/evidence/netuid-505/">Review testnet evidence</a>
         <a class="btn btn-solid" href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">Read the ARM docs</a>
         <a class="btn btn-ghost" href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">View the repo</a>
       </div>
     </div>
-    <div class="quorum" aria-hidden="true">
-      <div class="quorum-label"><span>Quorum</span><span id="quorum-pct">0%</span></div>
-      <div class="quorum-bar"><div class="quorum-fill" id="quorum-fill"></div></div>
-      <div class="quorum-status" id="quorum-status">collecting votes…</div>
+    <div class="quorum" aria-label="Illustrative quorum display; this is not live network telemetry.">
+      <div class="quorum-label"><span>Quorum display</span><span id="quorum-pct">not live</span></div>
+      <div class="quorum-bar"><div class="quorum-fill" id="quorum-fill" style="width:0%"></div></div>
+      <div class="quorum-status" id="quorum-status"><span class="val">Illustrative only.</span> No source-backed live quorum feed is published.</div>
+      <a class="quorum-status" href="/evidence/netuid-505/">Read the evidence status →</a>
     </div>
   </section>
 
@@ -444,8 +450,8 @@
         <div class="path-card">
           <div class="path-role">Observer</div>
           <div class="path-title">Follow the signal</div>
-          <div class="path-desc">Read the weekly network report, watch consensus rounds settle in real time on the quorum meter, and see exactly what the Council has approved — and why — without running any infrastructure yourself.</div>
-          <a class="path-link" href="https://arctura.org" target="_blank" rel="noopener">Read the signal report →</a>
+          <div class="path-desc">Review the current evidence record and published Council materials. The homepage quorum visualization is illustrative until a source-backed live state feed is available.</div>
+          <a class="path-link" href="/evidence/netuid-505/">Read the evidence status →</a>
         </div>
       </div>
     </div>
@@ -507,6 +513,8 @@
           <li><a href="#arm">How it works</a></li>
           <li><a href="#protocol">Council Protocol</a></li>
           <li><a href="#participate">Run a node</a></li>
+          <li><a href="/evidence/netuid-505/">Testnet evidence</a></li>
+          <li><a href="/authority/">Authority record</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
@@ -523,6 +531,7 @@
         <div class="foot-col-head">Ecosystem</div>
         <ul>
           <li><a href="https://arctura.org" target="_blank" rel="noopener">arctura.org ↗</a></li>
+          <li><a href="/authority/">Surface roles</a></li>
           <li><a href="https://x.com/ArcturaNetwork" target="_blank" rel="noopener">@ArcturaNetwork ↗</a></li>
         </ul>
       </div>
@@ -586,7 +595,6 @@ const canvas = document.getElementById('mesh');
 const ctx = canvas.getContext('2d');
 let W, H, nodes = [];
 const NODE_COUNT = 22;
-const QUORUM_RATIO = 2/3;
 
 function resize(){
   W = canvas.width = canvas.offsetWidth;
@@ -620,8 +628,6 @@ function draw(now){
     if(n.voted) votedCount++;
   });
 
-  const quorumMet = votedCount >= Math.ceil(NODE_COUNT * QUORUM_RATIO);
-
   // connections
   for(let i=0;i<nodes.length;i++){
     for(let j=i+1;j<nodes.length;j++){
@@ -643,23 +649,6 @@ function draw(now){
     ctx.fillStyle = n.voted ? 'rgba(0,212,200,0.85)' : 'rgba(139,124,246,0.55)';
     ctx.fill();
   });
-
-  // update hero quorum widget
-  const pct = Math.round((votedCount/NODE_COUNT)*100);
-  const fillEl = document.getElementById('quorum-fill');
-  const pctEl = document.getElementById('quorum-pct');
-  const statusEl = document.getElementById('quorum-status');
-  if(fillEl){
-    fillEl.style.width = pct + '%';
-    pctEl.textContent = pct + '%';
-    if(quorumMet){
-      fillEl.style.background = 'var(--attest)';
-      statusEl.innerHTML = 'quorum <span class="val">reached</span> — settling';
-    } else {
-      fillEl.style.background = 'linear-gradient(90deg, var(--pending), var(--signal))';
-      statusEl.innerHTML = 'collecting votes…';
-    }
-  }
 
   if(elapsed > roundLength + 2000){
     roundStart = now; initNodes();
