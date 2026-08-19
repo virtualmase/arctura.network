@@ -12,6 +12,7 @@
   },
   "skills": [
     { "id": "network-discovery", "name": "Network discovery", "status": "implemented" },
+    { "id": "testnet-documentation", "name": "Netuid 505 technical documentation", "status": "implemented", "url": "https://arctura.network/documentation/netuid-505/" },
     { "id": "testnet-evidence", "name": "Testnet evidence record", "status": "implemented", "url": "https://arctura.network/evidence/netuid-505/" },
     { "id": "cross-domain-authority", "name": "Cross-domain authority record", "status": "implemented", "url": "https://arctura.network/authority/" },
     { "id": "governance-signal", "name": "Governance signal", "status": "documentation-only" }

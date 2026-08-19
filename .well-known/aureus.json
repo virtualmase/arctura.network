@@ -9,9 +9,10 @@
     "autonomous_payments": false,
     "human_approval_required": ["network-governance", "treasury", "mainnet-activation"]
   },
-  "capabilities": ["network-documentation", "testnet-evidence-record", "validator-discovery"],
+  "capabilities": ["network-documentation", "testnet-technical-documentation", "testnet-evidence-record", "validator-discovery"],
   "related_services": {
     "testnet_evidence_record": "https://arctura.network/evidence/netuid-505/",
+    "testnet_documentation": "https://arctura.network/documentation/netuid-505/",
     "authority_record": "https://arctura.network/authority/",
     "arm_technical_reference": "https://autonomousresourcemanagement.com/",
     "arctura_observatory": "https://arctura.org/",

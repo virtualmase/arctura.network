@@ -2,6 +2,7 @@
   "record_version": "1.1.0",
   "record_type": "testnet_launch_and_evidence_status",
   "canonical_url": "https://arctura.network/evidence/netuid-505/",
+  "documentation_url": "https://arctura.network/documentation/netuid-505/",
   "updated_at": "2026-08-19",
   "subject": {
     "name": "Arctura Base",

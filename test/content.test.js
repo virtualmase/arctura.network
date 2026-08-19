@@ -28,3 +28,10 @@ test("authority record distinguishes related Arctura surfaces and source precede
   assert.equal(authority.surfaces[0].url, "https://arctura.network/");
   assert.equal(authority.source_precedence[0], "dated Arctura Network evidence record");
 });
+
+test("Netuid 505 documentation cites the primary run record and preserves the bounded-run boundary", () => {
+  const documentation = read("documentation", "netuid-505", "index.html");
+  assert.match(documentation, /TESTNET_RUN_PLAN\.md/);
+  assert.match(documentation, /miner was not running concurrently/i);
+  assert.match(documentation, /No Finney netuid, emissions state, or mainnet availability is claimed/i);
+});

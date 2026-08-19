@@ -2,6 +2,7 @@
 
 Canonical: https://arctura.network/
 Operational evidence record: https://arctura.network/evidence/netuid-505/
+Technical documentation: https://arctura.network/documentation/netuid-505/
 Authority record: https://arctura.network/authority/
 Updated: 2026-08-19
 
