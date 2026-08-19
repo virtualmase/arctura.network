@@ -9,7 +9,8 @@ const read = (...segments) => fs.readFileSync(path.join(root, ...segments), "utf
 test("homepage labels quorum visualisation as non-live and links to evidence", () => {
   const home = read("index.html");
   assert.match(home, /Illustrative only\.<\/span> No source-backed live quorum feed is published\./);
-  assert.match(home, /href="\/evidence\/netuid-505\/">Review testnet evidence/);
+  assert.match(home, /href="\/documentation\/netuid-505\/">Read Netuid 505 record/);
+  assert.match(home, /Public records<br>Read in order/);
   assert.doesNotMatch(home, /watch consensus rounds settle in real time on the quorum meter/i);
 });
 
@@ -34,4 +35,5 @@ test("Netuid 505 documentation cites the primary run record and preserves the bo
   assert.match(documentation, /TESTNET_RUN_PLAN\.md/);
   assert.match(documentation, /miner was not running concurrently/i);
   assert.match(documentation, /No Finney netuid, emissions state, or mainnet availability is claimed/i);
+  assert.match(documentation, /aria-current="page">Launch record/);
 });

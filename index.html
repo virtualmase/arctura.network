@@ -164,8 +164,9 @@
   .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:1rem clamp(1.25rem,4vw,3rem); }
   .brand{ font-family:var(--display); font-weight:800; letter-spacing:0.02em; font-size:1rem; display:flex; align-items:center; gap:0.6rem; }
   .brand .dot{ width:7px; height:7px; border-radius:50%; background:var(--signal); box-shadow:0 0 8px var(--signal); }
-  nav.links{ display:flex; gap:2rem; font-size:0.82rem; color:var(--star-dim); }
+  nav.links{ display:flex; gap:1.35rem; font-size:0.76rem; color:var(--star-dim); }
   nav.links a:hover{ color:var(--star); }
+  nav.links a.nav-record{ color:var(--signal); }
   .nav-cta{
     font-size:0.78rem; padding:0.55rem 1.1rem; border:1px solid var(--line-strong); border-radius:2px;
     color:var(--star); letter-spacing:0.04em;
@@ -239,6 +240,17 @@
   .btn-ghost{ border:1px solid var(--line-strong); color:var(--star); }
   .btn-ghost:hover{ border-color:var(--signal); color:var(--signal); }
 
+  .record-rail{
+    position:relative; z-index:2; display:grid; grid-template-columns:9rem repeat(3, minmax(0, 1fr));
+    gap:1px; margin-top:clamp(2.5rem,6vw,4.5rem); border:1px solid var(--line); background:var(--line);
+  }
+  .record-rail-head{ background:rgba(6,7,11,0.96); padding:1.2rem; color:var(--star-dim); font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; display:flex; align-items:flex-start; }
+  .record-link{ background:rgba(6,7,11,0.96); padding:1.15rem 1.25rem; display:flex; flex-direction:column; gap:0.28rem; transition:background 0.18s ease, color 0.18s ease; }
+  .record-link:hover{ background:rgba(0,212,200,0.08); }
+  .record-link .record-num{ color:var(--signal); font-size:0.66rem; letter-spacing:0.12em; }
+  .record-link strong{ font-family:var(--display); font-size:0.95rem; line-height:1.25; }
+  .record-link span:last-child{ color:var(--star-dim); font-size:0.72rem; line-height:1.5; }
+
   /* quorum meter — hero signature element */
   .quorum{
     position:absolute; right:clamp(1rem,4vw,4rem); bottom:clamp(2rem,6vw,4rem); z-index:2;
@@ -284,7 +296,7 @@
   .path-desc{ color:var(--star-dim); font-size:0.88rem; line-height:1.65; flex-grow:1; }
   .path-link{ font-size:0.82rem; color:var(--signal); display:inline-flex; align-items:center; gap:0.4em; }
   .path-link:hover{ gap:0.6em; }
-  @media (max-width:900px){ .paths{ grid-template-columns:1fr; } }
+  @media (max-width:900px){ .paths{ grid-template-columns:1fr; } .record-rail{ grid-template-columns:1fr 1fr; } .record-rail-head{ grid-column:1/-1; } }
 
   /* ── FAQ ── */
   .faq-list{ margin-top:2rem; border-top:1px solid var(--line); }
@@ -316,6 +328,7 @@
   }
   @media (max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
   @media (max-width:540px){ .foot-grid{ grid-template-columns:1fr; } }
+  @media (max-width:540px){ .record-rail{ grid-template-columns:1fr; } }
 
   .skip-link{
     position:absolute; left:-999px; top:0; background:var(--star); color:var(--void);
@@ -332,22 +345,22 @@
   <div class="nav-inner">
     <div class="brand"><span class="dot"></span>ARCTURA</div>
     <nav class="links">
-      <a href="#arm">The subnet</a>
+      <a href="#arm">Subnet</a>
       <a href="#protocol">Council Protocol</a>
-      <a href="#participate">Run a node</a>
-      <a href="/documentation/netuid-505/">Documentation</a>
+      <a href="#participate">Participate</a>
+      <a class="nav-record" href="/documentation/netuid-505/">Netuid 505 record</a>
       <a href="/evidence/netuid-505/">Evidence</a>
       <a href="/authority/">Authority</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="nav-cta" href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">Read the docs</a>
+    <a class="nav-cta" href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">ARM reference ↗</a>
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Open menu"><span></span></button>
   </div>
   <nav class="nav-mobile" id="nav-mobile">
-    <a href="#arm">The subnet</a>
+    <a href="#arm">Subnet</a>
     <a href="#protocol">Council Protocol</a>
-    <a href="#participate">Run a node</a>
-    <a href="/documentation/netuid-505/">Documentation</a>
+    <a href="#participate">Participate</a>
+    <a href="/documentation/netuid-505/">Netuid 505 launch record</a>
     <a href="/evidence/netuid-505/">Evidence</a>
     <a href="/authority/">Authority</a>
     <a href="#faq">FAQ</a>
@@ -363,10 +376,15 @@
       <h1 class="hero-h">Autonomous <em>resource management</em>, tested as a subnet.</h1>
       <p class="hero-sub">Arctura Base is an open-source validator and miner implementation for Autonomous Resource Management, launched and exercised as a local Bittensor testnet subnet on netuid 505. The primary run record documents a live miner state, a validator live loop, and mandate issuance. It does not report concurrent miner response, sustained score/weights, an external metagraph receipt, or a Finney-mainnet launch.</p>
       <div class="hero-actions">
-        <a class="btn btn-ghost" href="/documentation/netuid-505/">Read technical record</a>
-        <a class="btn btn-solid" href="/evidence/netuid-505/">Review testnet evidence</a>
-        <a class="btn btn-solid" href="https://autonomousresourcemanagement.com" target="_blank" rel="noopener">Read the ARM docs</a>
+        <a class="btn btn-solid" href="/documentation/netuid-505/">Read Netuid 505 record</a>
+        <a class="btn btn-ghost" href="/evidence/netuid-505/">Review evidence status</a>
         <a class="btn btn-ghost" href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">View the repo</a>
+      </div>
+      <div class="record-rail" aria-label="Public records">
+        <div class="record-rail-head">Public records<br>Read in order</div>
+        <a class="record-link" href="/documentation/netuid-505/"><span class="record-num">01 · Launch record</span><strong>Netuid 505</strong><span>Method, bounded run, and limits.</span></a>
+        <a class="record-link" href="/evidence/netuid-505/"><span class="record-num">02 · Evidence status</span><strong>Claim matrix</strong><span>What is documented, observed, and missing.</span></a>
+        <a class="record-link" href="/authority/"><span class="record-num">03 · Source map</span><strong>Authority record</strong><span>Which surface establishes which claim.</span></a>
       </div>
     </div>
     <div class="quorum" aria-label="Illustrative quorum display; this is not live network telemetry.">
@@ -516,7 +534,7 @@
           <li><a href="#arm">How it works</a></li>
           <li><a href="#protocol">Council Protocol</a></li>
           <li><a href="#participate">Run a node</a></li>
-          <li><a href="/documentation/netuid-505/">Technical record</a></li>
+          <li><a href="/documentation/netuid-505/">Netuid 505 launch record</a></li>
           <li><a href="/evidence/netuid-505/">Testnet evidence</a></li>
           <li><a href="/authority/">Authority record</a></li>
           <li><a href="#faq">FAQ</a></li>
