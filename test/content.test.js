@@ -11,6 +11,7 @@ test("homepage labels quorum visualisation as non-live and links to evidence", (
   assert.match(home, /Illustrative only\.<\/span> No source-backed live quorum feed is published\./);
   assert.match(home, /href="\/documentation\/netuid-505\/">Read Netuid 505 record/);
   assert.match(home, /Public records<br>Read in order/);
+  assert.match(home, /<nav class="links">\s*<a href="\/participate\/">Community<\/a>/);
   assert.doesNotMatch(home, /watch consensus rounds settle in real time on the quorum meter/i);
 });
 
