@@ -3,6 +3,8 @@
 Canonical: https://arctura.network/
 Operational evidence record: https://arctura.network/evidence/netuid-505/
 Technical documentation: https://arctura.network/documentation/netuid-505/
+Community contribution and validator guidance: https://arctura.network/participate/
+Netuid 505 public launch note: https://arctura.network/updates/netuid-505-launch/
 Authority record: https://arctura.network/authority/
 Updated: 2026-08-19
 

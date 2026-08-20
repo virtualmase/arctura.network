@@ -19,6 +19,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://arctura.network/participate/</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arctura.network/updates/netuid-505-launch/</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://arctura.network/authority/</loc>
     <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>

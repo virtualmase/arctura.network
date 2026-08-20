@@ -37,3 +37,12 @@ test("Netuid 505 documentation cites the primary run record and preserves the bo
   assert.match(documentation, /No Finney netuid, emissions state, or mainnet availability is claimed/i);
   assert.match(documentation, /aria-current="page">Launch record/);
 });
+
+test("community guidance and launch note preserve testnet-only contribution boundaries", () => {
+  const participation = read("participate", "index.html");
+  const launchNote = read("updates", "netuid-505-launch", "index.html");
+  assert.match(participation, /No public Finney netuid, validator enrollment, stake instruction, or emissions availability is published/i);
+  assert.match(participation, /CONTRIBUTING\.md/);
+  assert.match(launchNote, /No Finney netuid, emissions state, validator enrollment, or mainnet availability is published/i);
+  assert.match(launchNote, /TESTNET_RUN_PLAN\.md/);
+});

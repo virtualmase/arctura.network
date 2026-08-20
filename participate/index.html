@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>Community Contribution and Validator Guidance — Arctura Network</title>
+  <meta name="description" content="Source-bounded contribution and validator guidance for Arctura Base’s Netuid 505 local Bittensor testnet record. No Finney validator enrollment is currently offered.">
+  <link rel="canonical" href="https://arctura.network/participate/">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://arctura.network/participate/">
+  <meta property="og:title" content="Community Contribution and Validator Guidance — Arctura Network">
+  <meta property="og:description" content="Contribute to the published Arctura Base implementation or follow the bounded Netuid 505 local-testnet operator path.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Azeret+Mono:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/records.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": "https://arctura.network/participate/#guidance",
+    "name": "How to contribute to Arctura Base and follow its Netuid 505 testnet guidance",
+    "url": "https://arctura.network/participate/",
+    "description": "Source-bounded guidance for contributing code or following the documented local Bittensor testnet operator path for Arctura Base.",
+    "isBasedOn": [
+      "https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/CONTRIBUTING.md",
+      "https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/TESTNET_RUN_PLAN.md"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to guidance</a>
+  <header class="site-nav"><div>
+    <a class="brand" href="/">ARCTURA</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/participate/" aria-current="page">Community</a>
+      <a href="/documentation/netuid-505/">Launch record</a>
+      <a href="/evidence/netuid-505/">Evidence</a>
+      <a href="/updates/netuid-505-launch/">Update</a>
+      <a href="/authority/">Authority</a>
+      <a href="https://github.com/bittensaur/arctura-base-subnet" rel="noopener" target="_blank">Source code</a>
+    </nav>
+  </div></header>
+  <main id="main">
+    <section class="hero"><div class="wrap">
+      <p class="eyebrow">Community guidance · ARCTURA-COM-01</p>
+      <h1>Contribute to the work. <em>Do not infer access.</em></h1>
+      <p class="lede">Arctura Base is open source. Community participation begins with the published repository, its tests, and its issue tracker. The current public operator path concerns the documented local Bittensor testnet launch on netuid 505; it is not an invitation to a Finney validator program, staking program, or emissions program.</p>
+      <div class="meta"><span><strong>Repository:</strong> <a href="https://github.com/bittensaur/arctura-base-subnet" rel="noopener" target="_blank">arctura-base-subnet</a></span><span><strong>Current network scope:</strong> local testnet · 505</span><span><strong>Mainnet enrollment:</strong> not published</span></div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <p class="eyebrow">Choose the right path</p>
+      <h2>Three ways to <em>participate responsibly.</em></h2>
+      <div class="record-grid">
+        <article class="record"><div class="record-label">Code contributor</div><div class="record-value signal">Repository first</div><p>Fork the public repository, work from an issue, add tests, pass the stated verification checks, and open a reviewable pull request.</p></article>
+        <article class="record"><div class="record-label">Testnet operator</div><div class="record-value">Bounded local run</div><p>Use the documented Bittensor testnet and netuid 505 procedure. Keep the run separate from any claim about Finney or emissions.</p></article>
+        <article class="record"><div class="record-label">Observer</div><div class="record-value">Follow records</div><p>Read the launch record, evidence status, and public update. Report documentation conflicts through the repository issue tracker.</p></article>
+        <article class="record"><div class="record-label">Not currently offered</div><div class="record-value">Finney enrollment</div><p>No public Finney netuid, validator enrollment, stake instruction, or emissions availability is published on this site.</p></article>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <p class="eyebrow">Contribution requirements</p>
+      <h2>Make a change that can <em>be reviewed.</em></h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Requirement</th><th>Public standard</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Start with the repository</strong></td><td>Clone the public codebase, install the documented development dependencies, and use the issue tracker when instructions conflict or fail.</td><td><a href="https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/CONTRIBUTING.md" rel="noopener" target="_blank">Contribution guide</a></td></tr>
+          <tr><td><strong>Protect secrets</strong></td><td>Never commit environment files, wallet files, mnemonic material, process identifiers, or runtime logs containing private credentials.</td><td><a href="https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/CONTRIBUTING.md" rel="noopener" target="_blank">Contribution guide</a> [1]</td></tr>
+          <tr><td><strong>Test the change</strong></td><td>Add tests for new behavior and run the stated verification suite before opening a pull request.</td><td><a href="https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/CONTRIBUTING.md" rel="noopener" target="_blank">Contribution guide</a></td></tr>
+          <tr><td><strong>Submit a reviewable PR</strong></td><td>Describe the change, identify the issue it closes, include verification output, and address review comments. The public guide states that CI and at least one reviewer approval precede merge.</td><td><a href="https://github.com/bittensaur/arctura-base-subnet/blob/main/docs/CONTRIBUTING.md" rel="noopener" target="_blank">Contribution guide</a></td></tr>
+        </tbody>
+      </table></div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <p class="eyebrow">Validator requirements</p>
+      <h2>Netuid 505 is a <em>testnet record, not a mainnet offer.</em></h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Operator condition</th><th>Current public requirement</th><th>Boundary</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Network</strong></td><td>The documented run uses the Bittensor test network and netuid 505.</td><td>Do not substitute a Finney network or infer a live mainnet registration.[2]</td></tr>
+          <tr><td><strong>Preflight</strong></td><td>Run the repository’s stated test suite and Base RPC checks before starting Bittensor processes.</td><td>Preflight confirms the local environment; it is not a public chain receipt.[2]</td></tr>
+          <tr><td><strong>Runtime scope</strong></td><td>Use the documented bounded miner and validator startup method, including the run plan’s alternate miner axon port.</td><td>The current known-results record is bounded. It does not claim a concurrent response, sustained score, or weight result.[2]</td></tr>
+          <tr><td><strong>Keys and logs</strong></td><td>Keep wallet and environment material private. Use distinct test credentials and do not publish secret-bearing output.</td><td>Nothing on this page asks an operator to share keys, stake funds, or perform a mainnet transaction.[1]</td></tr>
+          <tr><td><strong>Finney participation</strong></td><td>Wait for a dated, authoritative Finney launch record before considering a mainnet operator path.</td><td>No current public validator enrollment, emissions state, or Finney netuid is published.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="notice"><strong>Safety boundary.</strong> The public record is a technical documentation path, not financial or staking advice. It does not request funds, keys, or registrations. Any future mainnet operation must be introduced through a separate dated launch record.</div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <p class="eyebrow">Where to engage</p>
+      <h2>Use a public, <em>traceable channel.</em></h2>
+      <p>Open technical work belongs in the repository. Start with the issue tracker, then submit a pull request against the documented process. The contribution guide also lists the public Bittensor and Base builder channels, the project account, and a direct council mailbox.[1]</p>
+      <div class="references"><strong>Related records:</strong> Read the <a href="/documentation/netuid-505/">Netuid 505 launch record</a> before operating a test run, the <a href="/evidence/netuid-505/">evidence status</a> before repeating a claim, and the <a href="/updates/netuid-505-launch/">public launch note</a> for the concise community summary.</div>
+    </div></section>
+  </main>
+  <footer class="footer"><div class="wrap"><span>Arctura Network · community guidance</span><span><a href="/documentation/netuid-505/">Launch record</a> · <a href="/updates/netuid-505-launch/">Launch note</a></span></div></footer>
+</body>
+</html>

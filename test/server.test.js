@@ -55,6 +55,14 @@ test("public evidence and authority records are served as canonical static pages
     assert.equal(documentation.status, 200);
     assert.match(await documentation.text(), /Netuid 505:/i);
 
+    const participation = await fetch(`${origin}/participate/`);
+    assert.equal(participation.status, 200);
+    assert.match(await participation.text(), /Community guidance/i);
+
+    const launchNote = await fetch(`${origin}/updates/netuid-505-launch/`);
+    assert.equal(launchNote.status, 200);
+    assert.match(await launchNote.text(), /Netuid 505 is now/i);
+
     const record = await fetch(`${origin}/evidence/netuid-505/status.json`);
     assert.equal(record.status, 200);
     assert.equal((await record.json()).network.netuid, 505);
