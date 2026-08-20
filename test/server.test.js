@@ -79,3 +79,14 @@ test("www requests permanently redirect to the canonical apex host", async () =>
     assert.equal(response.headers.get("location"), "https://arctura.network/evidence/netuid-505/?from=test");
   });
 });
+
+test("ARM Agency parent route provides a bounded handoff to the separate managed application", async () => {
+  await withServer(async (origin) => {
+    const response = await fetch(`${origin}/arm-agency/`);
+    assert.equal(response.status, 200);
+    const page = await response.text();
+    assert.match(page, /Work with proof/i);
+    assert.match(page, /separate managed application/i);
+    assert.match(page, /Bittensor testnet evidence surface/i);
+  });
+});

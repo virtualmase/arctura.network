@@ -16,3 +16,4 @@
 - [x] Publish a source-bounded community contribution and validator-requirements section based on the Netuid 505 primary record.
 - [x] Publish a concise public Netuid 505 launch announcement with explicit local-testnet and mainnet boundaries.
 - [x] Audit live homepage and record-page navigation, correct any remaining cohesion issues, and verify the production changes.
+- [x] Add a preview-first `/arm-agency` parent route that distinguishes the managed ARM Agency application from the Arctura Network Bittensor evidence surface.

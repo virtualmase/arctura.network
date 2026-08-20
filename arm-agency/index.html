@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARM Agency — Arctura Network</title>
+  <meta name="description" content="ARM Agency is Arctura's separate evidence-led application for bounded work, verifiable submissions, and human-reviewed lead intake.">
+  <link rel="canonical" href="https://arctura.network/arm-agency">
+  <meta name="theme-color" content="#07112b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ARM Agency — Arctura Network">
+  <meta property="og:description" content="A separate application for bounded work, evidence receipts, and human-reviewed intake.">
+  <meta property="og:url" content="https://arctura.network/arm-agency">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#07112b; --ink-2:#101d43; --paper:#f5f8ff; --muted:#9facd1; --blue:#2d6df6; --violet:#7958ff; --line:rgba(255,255,255,.13); --radius:22px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--ink); color:var(--paper); font:16px/1.6 Manrope,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; }
+    a:focus-visible { outline:3px solid #fff; outline-offset:4px; border-radius:6px; }
+    .shell { width:min(1160px,calc(100% - 2.5rem)); margin:auto; }
+    .topbar { padding:1.15rem 0; display:flex; justify-content:space-between; align-items:center; gap:1rem; border-bottom:1px solid var(--line); }
+    .brand, .crumb { text-decoration:none; font-weight:800; letter-spacing:-.02em; }
+    .brand small { color:#9bb9ff; font:500 .68rem/1 "DM Mono",monospace; letter-spacing:.18em; text-transform:uppercase; margin-left:.6rem; }
+    .crumb { color:#c6d2ee; font-size:.85rem; font-weight:600; }
+    .hero { padding:clamp(5.5rem,12vw,10rem) 0 4rem; position:relative; overflow:hidden; }
+    .hero::before { content:""; position:absolute; width:70vw; height:70vw; max-width:840px; max-height:840px; right:-20vw; top:-36vw; border-radius:50%; background:radial-gradient(circle at 42% 47%,rgba(85,142,255,.8),rgba(80,83,246,.34) 36%,rgba(7,17,43,0) 70%); filter:blur(5px); pointer-events:none; }
+    .eyebrow { position:relative; display:inline-flex; align-items:center; gap:.55rem; color:#cbd8ff; font:500 .71rem/1 "DM Mono",monospace; letter-spacing:.14em; text-transform:uppercase; padding:.55rem .75rem; border:1px solid var(--line); border-radius:999px; background:rgba(8,21,55,.5); }
+    .eyebrow::before { content:""; width:.5rem; height:.5rem; border-radius:50%; background:#78a1ff; box-shadow:0 0 16px #78a1ff; }
+    h1 { position:relative; max-width:850px; margin:1.4rem 0 1.2rem; font-size:clamp(3.2rem,8vw,6.8rem); line-height:.96; letter-spacing:-.075em; }
+    h1 span { color:#b9c8ff; }
+    .lede { position:relative; max-width:680px; color:#c4d0eb; font-size:clamp(1rem,2vw,1.25rem); }
+    .actions { position:relative; display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:3.1rem; padding:.7rem 1.15rem; text-decoration:none; font-weight:800; border-radius:999px; border:1px solid transparent; transition:transform .18s ease,background .18s ease; }
+    .button:active { transform:scale(.98); }
+    .button.primary { background:#f5f8ff; color:#102057; }
+    .button.primary:hover { background:#cad8ff; }
+    .button.secondary { border-color:var(--line); color:#eff4ff; background:rgba(255,255,255,.045); }
+    .button.secondary:hover { background:rgba(255,255,255,.11); }
+    .boundary { position:relative; margin-top:3.25rem; padding:1rem 1.15rem; max-width:850px; border-left:3px solid #7ba1ff; background:rgba(135,161,255,.09); color:#d0dcf9; font-size:.9rem; }
+    section { padding:clamp(3.75rem,8vw,6.5rem) 0; border-top:1px solid var(--line); }
+    h2 { margin:0 0 1rem; font-size:clamp(2rem,4vw,3.4rem); line-height:1.05; letter-spacing:-.055em; }
+    .intro { max-width:690px; color:#b9c5e2; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2.25rem; }
+    .card { padding:1.35rem; border:1px solid var(--line); border-radius:var(--radius); background:linear-gradient(145deg,rgba(31,48,104,.55),rgba(13,23,55,.7)); }
+    .card-label { color:#9fb7f8; font:500 .7rem/1 "DM Mono",monospace; letter-spacing:.13em; text-transform:uppercase; }
+    .card h3 { margin:.65rem 0 .55rem; font-size:1.22rem; letter-spacing:-.03em; }
+    .card p { margin:0; color:#b7c3dd; font-size:.91rem; }
+    .routing { display:grid; grid-template-columns:1fr 1.25fr; gap:1.5rem; align-items:start; }
+    .route-list { display:grid; gap:.65rem; }
+    .route { padding:1rem; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.035); }
+    .route code { color:#cbd9ff; font:500 .77rem/1.4 "DM Mono",monospace; overflow-wrap:anywhere; }
+    .route p { margin:.4rem 0 0; color:#b5c1dc; font-size:.87rem; }
+    .note { padding:1.4rem; border-radius:var(--radius); background:linear-gradient(135deg,#2d5fe9,#7856f5); box-shadow:0 18px 70px rgba(45,97,235,.2); }
+    .note h3 { margin:0 0 .55rem; font-size:1.45rem; line-height:1.15; }
+    .note p { margin:0 0 1.2rem; color:#eef2ff; }
+    footer { padding:2.5rem 0 3rem; color:#9eacca; font-size:.8rem; }
+    footer a { text-decoration-color:rgba(200,215,255,.45); }
+    @media (max-width:760px) { .topbar { align-items:flex-start; flex-direction:column; } .grid,.routing { grid-template-columns:1fr; } .hero::before { right:-50vw; top:-35vw; width:120vw; height:120vw; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before { scroll-behavior:auto!important; transition:none!important; } }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <a class="brand" href="/">ARCTURA <small>Network</small></a>
+    <a class="crumb" href="/">← Network evidence surface</a>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <div class="eyebrow">Separate application surface</div>
+        <h1>Work with proof.<br><span>Build with boundaries.</span></h1>
+        <p class="lede">ARM Agency is Arctura’s evidence-led application for organizations defining bounded work, operators declaring scope, and human reviewers assessing receipts. It is a separate managed application—not a claim about the Arctura Network Bittensor testnet record.</p>
+        <div class="actions">
+          <a class="button primary" href="https://armagency-dnotscp3.manus.space" target="_blank" rel="noopener">Open ARM Agency ↗</a>
+          <a class="button secondary" href="mailto:build@arm-agency.arctura.network">Contact build@arm-agency.arctura.network</a>
+        </div>
+        <p class="boundary"><strong>Boundary:</strong> The Arctura Network root site documents a Bittensor testnet evidence surface. ARM Agency is an independent application with its own product, review, and communication controls. No payment, wallet, custody, or autonomous execution capability is represented here.</p>
+      </div>
+    </section>
+    <section>
+      <div class="shell">
+        <h2>One portfolio. <span>Distinct responsibilities.</span></h2>
+        <p class="intro">The parent route provides context and a stable entry point. The managed application owns interactive marketplace workflows. Inbound contact is directed to a dedicated mailbox and the application’s human-reviewed form; it is not an automated correspondence system.</p>
+        <div class="grid">
+          <article class="card"><div class="card-label">Parent route</div><h3>Network context</h3><p>`arctura.network/arm-agency` explains the relationship, boundaries, and route into the product without copying its full application stack.</p></article>
+          <article class="card"><div class="card-label">Managed app</div><h3>Operational product</h3><p>ARM Agency owns mandates, work discovery, evidence receipts, citations, and public lead intake in its separate full-stack deployment.</p></article>
+          <article class="card"><div class="card-label">Human control</div><h3>Inbound, not autonomous</h3><p>The build mailbox and lead intake are for human review. Inbound event notification does not authorize reading, replying, forwarding, or executing actions.</p></article>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="shell routing">
+        <div>
+          <h2>Clear routing, no duplicate product.</h2>
+          <p class="intro">A folder belongs in the root repository for the parent page. The complete application does not: it needs its managed server, database, authentication, and release controls.</p>
+        </div>
+        <div class="route-list">
+          <div class="route"><code>arctura.network/arm-agency</code><p>Public context and durable entry page. This static route lives in the root-domain repository.</p></div>
+          <div class="route"><code>armagency-dnotscp3.manus.space</code><p>Current managed ARM Agency application, including the verified inbound webhook receiver.</p></div>
+          <div class="route"><code>arm-agency.arctura.network</code><p>Reserved product subdomain and interim Hostinger surface. It should point to the managed app after custom-domain binding is available.</p></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="shell note">
+        <h3>Ready to establish a bounded mandate?</h3>
+        <p>Enter the application to review the work board, evidence model, organization intake, and public citations. Every operational action remains subject to its displayed boundary.</p>
+        <a class="button primary" href="https://armagency-dnotscp3.manus.space/contact" target="_blank" rel="noopener">Open human-reviewed intake ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer class="shell">© Arctura Network · <a href="/">Evidence surface</a> · <a href="/documentation/netuid-505">Testnet record</a> · <a href="https://github.com/virtualmase/arctura.network" target="_blank" rel="noopener">Source repository ↗</a></footer>
+</body>
+</html>
