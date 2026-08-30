@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arctura.network/schemas/work-order/v1/schema.json",
+  "title": "Arctura Agent Work Order",
+  "description": "A portable record defining useful agent work, its authority boundaries, acceptance checks, and stewardship owner.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "createdAt", "status", "work", "boundaries", "proof", "stewardship"],
+  "properties": {
+    "schema": { "const": "https://arctura.network/schemas/work-order/v1/schema.json" },
+    "id": { "type": "string", "pattern": "^awo-[A-Za-z0-9._-]+$", "minLength": 5, "maxLength": 120 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["proposed", "tested", "accepted", "rejected", "archived"] },
+    "work": {
+      "type": "object", "additionalProperties": false, "required": ["name", "expectedResult"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "expectedResult": { "type": "string", "minLength": 1, "maxLength": 600 }
+      }
+    },
+    "boundaries": {
+      "type": "object", "additionalProperties": false, "required": ["approvedInputs", "excludedInputs", "allowedActions", "humanReviewRequiredBefore"],
+      "properties": {
+        "approvedInputs": { "type": "string", "minLength": 1, "maxLength": 800 },
+        "excludedInputs": { "type": ["string", "null"], "maxLength": 500 },
+        "allowedActions": { "type": "string", "minLength": 1, "maxLength": 700 },
+        "humanReviewRequiredBefore": { "type": "string", "minLength": 1, "maxLength": 700 }
+      }
+    },
+    "proof": {
+      "type": "object", "additionalProperties": false, "required": ["acceptanceChecks", "failureAndRefusalCases", "evidenceToKeep"],
+      "properties": {
+        "acceptanceChecks": { "type": "string", "minLength": 1, "maxLength": 1000 },
+        "failureAndRefusalCases": { "type": ["string", "null"], "maxLength": 700 },
+        "evidenceToKeep": { "type": "string", "minLength": 1, "maxLength": 800 }
+      }
+    },
+    "stewardship": {
+      "type": "object", "additionalProperties": false, "required": ["owner", "reviewStatus"],
+      "properties": {
+        "owner": { "type": ["string", "null"], "maxLength": 100 },
+        "reviewStatus": { "enum": ["not-reviewed", "in-review", "approved", "changes-requested"] }
+      }
+    }
+  }
+}

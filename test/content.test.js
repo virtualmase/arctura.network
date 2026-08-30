@@ -59,3 +59,13 @@ test("Agent Work Order prototype exposes bounded work and proof fields", () => {
   assert.match(tool, /No telemetry/);
   assert.doesNotMatch(tool, /fetch\(|XMLHttpRequest/);
 });
+
+test("Work Order exports identify the public versioned schema", () => {
+  const script = read("js/work-order.js");
+  const schema = JSON.parse(read("schemas/work-order/v1/schema.json"));
+  const example = JSON.parse(read("examples/work-orders/support-response-review.json"));
+  const schemaUrl = "https://arctura.network/schemas/work-order/v1/schema.json";
+  assert.match(script, new RegExp(schemaUrl.replace(/[.]/g, "\\.")));
+  assert.equal(schema.$id, schemaUrl);
+  assert.equal(example.schema, schemaUrl);
+});

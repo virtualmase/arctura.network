@@ -1,0 +1,25 @@
+{
+  "schema": "https://arctura.network/schemas/work-order/v1/schema.json",
+  "id": "awo-support-response-review-v1",
+  "createdAt": "2026-08-30T17:30:00Z",
+  "status": "proposed",
+  "work": {
+    "name": "Review a support response",
+    "expectedResult": "A draft response that answers the customer question and identifies the approved policy used."
+  },
+  "boundaries": {
+    "approvedInputs": "Customer message, current support policy, and the status fields required to answer the question.",
+    "excludedInputs": "Private staff notes, expired policies, and records belonging to other customers.",
+    "allowedActions": "Draft a response, identify the relevant policy section, and flag missing information.",
+    "humanReviewRequiredBefore": "Sending a response, changing an account, issuing credit, or making an exception to policy."
+  },
+  "proof": {
+    "acceptanceChecks": "Answers the stated question; cites an approved policy; makes no unsupported promise; includes no unrelated private information.",
+    "failureAndRefusalCases": "No current policy is available; instructions conflict; the requested action exceeds the stated authority.",
+    "evidenceToKeep": "Work-order version, input record IDs, policy version, model and instruction version, checks passed or failed, and reviewer decision."
+  },
+  "stewardship": {
+    "owner": "Support operations",
+    "reviewStatus": "not-reviewed"
+  }
+}

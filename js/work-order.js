@@ -27,7 +27,7 @@ if (form) {
     event.preventDefault();
     if (!validStep()) return;
     const values = Object.fromEntries(new FormData(form));
-    latest = { schema: 'https://arctura.network/schemas/work-order/v1', id: `awo-${Date.now()}`, createdAt: new Date().toISOString(), status: 'proposed', work: { name: values.name, expectedResult: values.job }, boundaries: { approvedInputs: values.inputs, excludedInputs: values.excludedInputs || null, allowedActions: values.allowedActions, humanReviewRequiredBefore: values.humanReview }, proof: { acceptanceChecks: values.checks, failureAndRefusalCases: values.failureCases || null, evidenceToKeep: values.evidence }, stewardship: { owner: values.owner || null, reviewStatus: 'not-reviewed' } };
+    latest = { schema: 'https://arctura.network/schemas/work-order/v1/schema.json', id: `awo-${Date.now()}`, createdAt: new Date().toISOString(), status: 'proposed', work: { name: values.name, expectedResult: values.job }, boundaries: { approvedInputs: values.inputs, excludedInputs: values.excludedInputs || null, allowedActions: values.allowedActions, humanReviewRequiredBefore: values.humanReview }, proof: { acceptanceChecks: values.checks, failureAndRefusalCases: values.failureCases || null, evidenceToKeep: values.evidence }, stewardship: { owner: values.owner || null, reviewStatus: 'not-reviewed' } };
     output.textContent = JSON.stringify(latest, null, 2); state.textContent = 'Proposed'; actions.hidden = false;
   });
   document.querySelector('#copy-order').addEventListener('click', async (event) => { if (!latest) return; await navigator.clipboard.writeText(JSON.stringify(latest, null, 2)); event.currentTarget.textContent = 'Copied'; setTimeout(() => { event.currentTarget.textContent = 'Copy JSON'; }, 1500); });
