@@ -35,6 +35,10 @@ The current schema is published at:
 
 `https://arctura.network/schemas/work-order/v1/schema.json`
 
+## Work Order evaluations
+
+Use the structured **Share a Work Order evaluation** issue form to report whether a tested order produced its expected result, respected its authority boundary, and passed its acceptance checks. Report privacy-safe checks and evidence, not private prompts, customer data, credentials, or confidential outputs. Evaluation issues carry the `evaluation` label so verified use can be counted without embedding telemetry in the local-only builder.
+
 ## Public evidence
 
 A public claim needs a source that an independent reviewer can inspect. When evidence is incomplete, state the boundary explicitly. Never broaden a bounded test result into a mainnet, production, security, or performance claim.

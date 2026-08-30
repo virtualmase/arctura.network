@@ -98,3 +98,14 @@ test("Work Order v1 release is reproducible and legacy claims remain non-indexab
     assert.match(headers, new RegExp(`/${route}/\\*\\n  X-Robots-Tag: noindex, noarchive`));
   }
 });
+
+test("Work Order evaluation conversion is structured, measurable, and privacy-safe", () => {
+  const issueForm = read(".github/ISSUE_TEMPLATE/work-order-evaluation.yml");
+  const tool = read("tools/work-order/index.html");
+  const contributing = read("CONTRIBUTING.md");
+  assert.match(issueForm, /labels: \[evaluation\]/);
+  assert.match(issueForm, /no credentials, wallet material, private customer data, personal information/);
+  assert.match(issueForm, /does not certify the agent, model, work order, or result/);
+  assert.match(tool, /template=work-order-evaluation\.yml/);
+  assert.match(contributing, /verified use can be counted without embedding telemetry/i);
+});

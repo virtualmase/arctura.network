@@ -1,0 +1,60 @@
+name: Share a Work Order evaluation
+description: Report a privacy-safe result from testing Agent Work Order v1.
+title: "[evaluation] "
+labels: [evaluation]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing Work Order v1. Report checks and boundaries, not private inputs or model outputs. Synthetic and anonymized evaluations are welcome.
+  - type: input
+    id: work_order
+    attributes:
+      label: Work Order identifier
+      description: Use the document's `awo-...` identifier or link a public synthetic example.
+      placeholder: awo-support-response-review-v1
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Observed outcome
+      options:
+        - Expected result produced
+        - Partially produced
+        - Refused as intended
+        - Failed checks
+        - Not run
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Acceptance checks and results
+      description: List each relevant check and whether it passed, failed, or was not run.
+      placeholder: "Policy citation: passed\nUnsupported promises: passed\nHuman review boundary: passed"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Inspectable, privacy-safe evidence
+      description: Link a synthetic artifact, test, or public record when available. Do not paste private prompts, customer data, credentials, or model outputs.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations and failures
+      description: State what this evaluation cannot establish and what should improve.
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Publication boundaries
+      options:
+        - label: This report contains no credentials, wallet material, private customer data, personal information, or confidential model inputs or outputs.
+          required: true
+        - label: I understand that submitting an evaluation does not certify the agent, model, work order, or result.
+          required: true
