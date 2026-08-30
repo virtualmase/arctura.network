@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Send vulnerability reports privately to **ops@arctura.network**. Do not open a public issue for an unpatched vulnerability or include credentials, private data, wallet material, or exploit details in repository discussions.
+Send vulnerability reports privately to **ops@arm-agency.com**, Arctura Network's delegated DevOps provider. Do not open a public issue for an unpatched vulnerability or include credentials, private data, wallet material, or exploit details in repository discussions.
 
 Include:
 
@@ -13,7 +13,7 @@ Include:
 - any temporary mitigation already applied;
 - a safe way to contact you.
 
-Arctura will acknowledge a complete report when the operations mailbox is monitored, establish a private review record, and publish verified remediation information when disclosure is safe. This policy does not promise a bounty or a fixed response time.
+ARM Agency will coordinate infrastructure triage under Arctura Network direction, establish a private review record, and publish verified remediation information when disclosure is safe. This policy does not promise a bounty or a fixed response time.
 
 ## Scope
 

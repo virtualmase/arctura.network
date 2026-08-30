@@ -8,6 +8,7 @@
     "build": "echo 'Static site, no build step needed'",
     "test": "node --test",
     "validate:publishing": "node scripts/validate-published-routes.mjs",
+    "validate:edge": "node scripts/validate-edge-static.mjs",
     "validate:work-order": "node scripts/validate-work-order.mjs",
     "audit:live": "node scripts/audit-live-site.mjs"
   },

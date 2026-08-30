@@ -43,3 +43,9 @@ Arctura is not currently represented as a live Bittensor Finney subnet. No mainn
 4. Arctura Observatory (`https://arctura.org/`) is the collective identity and contextual archive; it is not authoritative for current subnet state.
 
 These are related properties with distinct roles, not alternate identities.
+
+## Operational delegation
+
+ARM Agency is Arctura Network's delegated DevOps provider for website delivery, deployment automation, DNS and edge operations, availability, and infrastructure security. The operational contact is ops@arm-agency.com. ARM Agency operates infrastructure under Arctura Network direction and is not authoritative for network, governance, token, treasury, or mainnet claims.
+
+Both projects are currently bootstrapped. No current payment rail, currency, fee schedule, token obligation, or amount payable is published. Future compensation may use a separately approved mechanism such as x402 or a future network currency, but neither is a current commitment.

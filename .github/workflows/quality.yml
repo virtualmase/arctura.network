@@ -19,5 +19,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run validate:publishing
+      - run: npm run validate:edge
       - run: npm run validate:work-order -- examples/work-orders/support-response-review.json
       - run: npm test

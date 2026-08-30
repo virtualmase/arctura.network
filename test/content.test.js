@@ -29,6 +29,12 @@ test("authority record distinguishes related Arctura surfaces and source precede
   assert.equal(authority.related_but_not_alternate_identities, true);
   assert.equal(authority.surfaces[0].url, "https://arctura.network/");
   assert.equal(authority.source_precedence[0], "dated Arctura Network evidence record");
+  assert.equal(authority.delegations[0].provider, "ARM Agency");
+  assert.equal(authority.delegations[0].contact, "ops@arm-agency.com");
+  assert.match(authority.delegations[0].commercial_status, /no current payment rail/i);
+  const authorityPage = read("authority", "index.html");
+  assert.match(authorityPage, /ARM Agency/);
+  assert.match(authorityPage, /possible mechanisms, not current commitments/i);
 });
 
 test("Netuid 505 documentation cites the primary run record and preserves the bounded-run boundary", () => {

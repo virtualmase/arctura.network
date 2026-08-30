@@ -27,10 +27,11 @@ Then open `http://localhost:3000`.
 ```bash
 npm test
 npm run validate:publishing
+npm run validate:edge
 npm run validate:work-order -- examples/work-orders/support-response-review.json
 ```
 
-The publishing validator checks canonical routes, metadata, structured data, crawl paths, and sitemap coverage. The Work Order validator checks examples against the published v1 contract.
+The publishing validator checks canonical routes, metadata, structured data, crawl paths, and sitemap coverage. The edge validator checks that health, readiness, security headers, and the canonical host redirect remain portable to static edge hosting. The Work Order validator checks examples against the published v1 contract.
 
 ## Contribute and report
 

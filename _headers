@@ -12,3 +12,11 @@
 /examples/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300
+
+/health
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: no-store
+
+/ready
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: no-store

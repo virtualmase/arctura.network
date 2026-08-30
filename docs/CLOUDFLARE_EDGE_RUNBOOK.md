@@ -7,11 +7,14 @@ Updated: 2026-08-30
 - **GitHub** is the canonical source, review, release, and public issue record.
 - **Cloudflare** is the DNS, TLS, caching, security, analytics, and serverless edge.
 - **Hostinger** remains the mail provider during the transition.
+- **ARM Agency** is the delegated DevOps provider for website delivery, deployment automation, DNS and edge operations, availability, and infrastructure security. Operational contact: `ops@arm-agency.com`.
 - A VPS is not part of the website stack. Add one only for an always-on node, daemon, GPU workload, or other process that cannot run safely on the edge.
+
+ARM Agency operates this infrastructure under Arctura Network direction. This delegation does not authorize network, governance, token, treasury, or mainnet claims. Both projects are currently bootstrapped; no current payment rail, currency, fee schedule, or payable obligation is published. Any later compensation, including a possible x402 flow or future network currency, requires a separately approved and published agreement.
 
 ## Current migration state
 
-The Cloudflare zone exists in `pending` state. Its assigned nameservers are:
+The Cloudflare zone exists in ARM Agency's operational account in `pending` state. The same account already operates the Swell property; this does not merge either property's identity, data, or authority. Its assigned nameservers are:
 
 - `gail.ns.cloudflare.com`
 - `odin.ns.cloudflare.com`
@@ -21,7 +24,7 @@ The live authoritative nameservers remain Hostinger:
 - `hermes.dns-parking.com`
 - `artemis.dns-parking.com`
 
-Do not change nameservers until the Cloudflare record inventory has been compared with the live Hostinger zone and the Arctura operations identity has been established.
+Do not change nameservers until the Cloudflare record inventory has been compared with the live Hostinger zone. The operations identity is established as ARM Agency. `arctura.org` is held separately and is outside this migration.
 
 ## Records that must remain DNS-only
 
@@ -42,7 +45,7 @@ Before a nameserver change:
 2. Compare every live record with the pending Cloudflare zone.
 3. Confirm apex and `www` point to the intended web origin.
 4. Confirm MX, SPF, all three Hostinger DKIM selectors, DMARC, and mail discovery records are DNS-only.
-5. Add an Arctura-controlled administrator with MFA and retain an external break-glass administrator.
+5. Add an Arctura-controlled administrator with MFA, delegate least-privilege operational access to ARM Agency, and retain an external break-glass administrator.
 6. Lower DNS TTLs if Hostinger permits it and record the previous nameservers.
 7. Obtain explicit approval for the nameserver change.
 

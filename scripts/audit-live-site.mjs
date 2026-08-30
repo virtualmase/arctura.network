@@ -5,6 +5,8 @@ const checks = [
   ["/insights/train-your-agent/", "By Arctura Network"],
   ["/evidence/netuid-505/", "A real testnet subnet"],
   ["/documentation/netuid-505/", "Netuid 505"],
+  ["/health", '"status":"ok"'],
+  ["/ready", '"ready":true'],
   ["/schemas/work-order/v1/schema.json", '"Arctura Agent Work Order"'],
   ["/examples/work-orders/support-response-review.json", '"awo-support-response-review-v1"']
 ];
