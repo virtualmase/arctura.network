@@ -6,7 +6,17 @@ Technical documentation: https://arctura.network/documentation/netuid-505/
 Community contribution and validator guidance: https://arctura.network/participate/
 Netuid 505 public launch note: https://arctura.network/updates/netuid-505-launch/
 Authority record: https://arctura.network/authority/
-Updated: 2026-08-19
+Field Notes: https://arctura.network/insights/
+Agent training guide: https://arctura.network/insights/train-your-agent/
+Updated: 2026-08-30
+
+## Public idea
+
+Arctura is a network where people and software contribute useful work, check results, keep a record, and improve the system they share.
+
+Doctrine: Do the work. Check the work. Improve the system.
+
+The agent guide is an Arctura operating note about defining work, selecting a capable model, choosing where it runs, improving it in measured stages, and keeping an evaluation record. It is not a vendor ranking.
 
 ## Current operational boundary
 

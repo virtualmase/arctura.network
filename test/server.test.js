@@ -79,3 +79,17 @@ test("www requests permanently redirect to the canonical apex host", async () =>
     assert.equal(response.headers.get("location"), "https://arctura.network/evidence/netuid-505/?from=test");
   });
 });
+
+test("the agent guide is published through Field Notes", async () => {
+  await withServer(async (origin) => {
+    const index = await fetch(`${origin}/insights/`);
+    assert.equal(index.status, 200);
+    assert.match(await index.text(), /Train your agent by defining the work/);
+
+    const article = await fetch(`${origin}/insights/train-your-agent/`);
+    assert.equal(article.status, 200);
+    const html = await article.text();
+    assert.match(html, /By Arctura Network/);
+    assert.doesNotMatch(html, /Mason Nguyen|AI Mastery/);
+  });
+});

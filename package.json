@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "echo 'Static site, no build step needed'",
-    "test": "node --test"
+    "test": "node --test",
+    "validate:publishing": "node scripts/validate-published-routes.mjs"
   },
   "dependencies": {
     "express": "^4.18.2"

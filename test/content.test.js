@@ -6,13 +6,13 @@ const test = require("node:test");
 const root = path.join(__dirname, "..");
 const read = (...segments) => fs.readFileSync(path.join(root, ...segments), "utf8");
 
-test("homepage labels quorum visualisation as non-live and links to evidence", () => {
+test("homepage preserves the bounded testnet record and links to evidence", () => {
   const home = read("index.html");
-  assert.match(home, /Illustrative only\.<\/span> No source-backed live quorum feed is published\./);
-  assert.match(home, /href="\/documentation\/netuid-505\/">Read Netuid 505 record/);
-  assert.match(home, /Public records<br>Read in order/);
-  assert.match(home, /<nav class="links">\s*<a href="\/participate\/">Community<\/a>/);
-  assert.doesNotMatch(home, /watch consensus rounds settle in real time on the quorum meter/i);
+  assert.match(home, /href="\/documentation\/netuid-505\/">Read the Netuid 505 record/);
+  assert.match(home, /href="\/evidence\/netuid-505\/">Review the evidence/);
+  assert.match(home, /No mainnet netuid has been published\./);
+  assert.match(home, /href="\/participate\/">Take part<\/a>/);
+  assert.doesNotMatch(home, /live quorum|live Finney|staking available/i);
 });
 
 test("public evidence record declares its proof boundary without a mainnet claim", () => {
