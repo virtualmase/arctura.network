@@ -9,6 +9,7 @@ Arctura explores how people and software can contribute useful work, check resul
 - A public network and evidence site at [arctura.network](https://arctura.network/).
 - A documented local Bittensor testnet run for Arctura Base on netuid 505.
 - An [Agent Work Order builder](https://arctura.network/tools/work-order/) for defining bounded, checkable agent work.
+- A 16-part [Work Standard](https://arctura.network/work-standard/) for framing authority, proof, handoffs, and record stewardship.
 - [Field Notes](https://arctura.network/insights/) that explain decisions and operating methods in ordinary language.
 - A monthly [Work / Proof / Stewardship record](https://arctura.network/records/2026-08/) that publishes adoption evidence, unknowns, and next commitments.
 
@@ -30,9 +31,12 @@ npm test
 npm run validate:publishing
 npm run validate:edge
 npm run validate:work-order -- examples/work-orders/support-response-review.json
+npm run publish:work-standard
 ```
 
 The publishing validator checks canonical routes, metadata, structured data, crawl paths, and sitemap coverage. The edge validator checks that health, readiness, security headers, and the canonical host redirect remain portable to static edge hosting. The Work Order validator checks examples against the published v1 contract.
+
+Work Standard source lives in `content/work-standard/`. The publisher generates the 16 article pages from that canonical source and synchronizes sitemap and machine-readable discovery. Read `docs/CONTENT_PUBLISHING_STANDARD.md` before starting a new content cluster.
 
 ## Contribute and report
 

@@ -66,3 +66,9 @@ Keep the former Hostinger nameservers and zone snapshot in the private operation
 ## Serverless evolution
 
 Use static assets first. Add Cloudflare Workers only for bounded server-side behavior such as form handling, signed work-order receipts, rate-limited APIs, scheduled checks, or redirects that cannot remain static. Keep durable data behind an explicit schema and export path. Do not add a VPS merely to reproduce behavior available in Pages or Workers.
+
+## Work Order measurement
+
+Cloudflare Zaraz is the custom-event system of record for the local-only Work Order builder. The frontend emits only `work_order_builder_view`, `work_order_builder_start`, and `work_order_export`; export events include only a fixed `method` value of `copy` or `download`. Do not add form values, generated Work Order JSON, identifiers, URLs, or free text to event properties.
+
+The calls safely no-op until Zaraz is available. After the zone is active, enable Zaraz, map these events to the approved analytics destination, and verify them with synthetic inputs. Treat source instrumentation as prepared—not live measurement—until events appear in the destination and the verification date is added to the operating record.

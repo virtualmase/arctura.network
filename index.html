@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Arctura Network — A Network for Useful Work</title>
-  <meta name="description" content="Arctura is a network where people and software contribute useful work, check results, keep a public record, and improve the system they share.">
+  <title>Arctura Network — Define the Work. Prove the Result.</title>
+  <meta name="description" content="A practical standard and local-first Work Order builder for defining bounded agent work, checking results, and preserving inspectable evidence.">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
   <meta name="author" content="Arctura Network · Coreweaver Labs">
   <meta name="base:app_id" content="69f78ebb879b4ae3fa1c70b6">
@@ -15,14 +15,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <meta name="theme-color" content="#F0EEE7">
   <meta property="og:type" content="website"><meta property="og:url" content="https://arctura.network/">
-  <meta property="og:title" content="Arctura Network — A Network for Useful Work">
-  <meta property="og:description" content="People and software can do useful work together, check the results, and improve the system they share.">
+  <meta property="og:title" content="Arctura Network — Define the Work. Prove the Result.">
+  <meta property="og:description" content="A practical standard and Work Order builder for accountable agent work.">
   <meta property="og:image" content="https://arctura.network/assets/arctura-network-worker.png">
   <meta property="og:site_name" content="Arctura Network"><meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Arctura Network — A Network for Useful Work">
-  <meta name="twitter:description" content="Do useful work. Check the result. Improve the system.">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://arctura.network/#webpage","url":"https://arctura.network/","name":"Arctura Network — A Network for Useful Work","description":"Arctura is a network where people and software contribute useful work, check results, keep a public record, and improve the system they share.","inLanguage":"en-US","isPartOf":{"@id":"https://arctura.network/#website"},"about":{"@id":"https://arctura.network/#organization"}},{"@type":"Organization","@id":"https://arctura.network/#organization","name":"Arctura Network","url":"https://arctura.network/","description":"Arctura builds systems that let people and software contribute, review, decide, and improve together.","sameAs":["https://github.com/virtualmase/arctura.network","https://x.com/ArcturaNetwork"]},{"@type":"WebSite","@id":"https://arctura.network/#website","url":"https://arctura.network/","name":"Arctura Network","publisher":{"@id":"https://arctura.network/#organization"}}]}</script>
+  <meta name="twitter:title" content="Arctura Network — Define the Work. Prove the Result.">
+  <meta name="twitter:description" content="Bound the job, authority, checks, evidence, and human handoff before an agent acts.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://arctura.network/#webpage","url":"https://arctura.network/","name":"Arctura Network — Define the Work. Prove the Result.","description":"A practical standard and local-first Work Order builder for defining bounded agent work, checking results, and preserving inspectable evidence.","inLanguage":"en-US","isPartOf":{"@id":"https://arctura.network/#website"},"about":{"@id":"https://arctura.network/#organization"}},{"@type":"Organization","@id":"https://arctura.network/#organization","name":"Arctura Network","url":"https://arctura.network/","description":"Arctura publishes practical methods, tools, and evidence for accountable work between people and software.","sameAs":["https://github.com/virtualmase/arctura.network","https://x.com/ArcturaNetwork"]},{"@type":"WebSite","@id":"https://arctura.network/#website","url":"https://arctura.network/","name":"Arctura Network","publisher":{"@id":"https://arctura.network/#organization"}}]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/site.css"><script src="/js/site.js" defer></script>
@@ -32,33 +32,34 @@
   <header class="site-header">
     <div class="wrap nav-row">
       <a class="brand" href="/" aria-label="Arctura Network home"><img src="/assets/favicon.svg" alt="" width="34" height="34" loading="eager" decoding="async"><span>ARCTURA.NETWORK</span></a>
-      <nav class="desktop-nav" aria-label="Primary"><a href="#about">About</a><a href="#how-it-works">How it works</a><a href="#council">The Council</a><a href="/insights/">Field Notes</a><a href="/participate/">Take part</a></nav>
-      <a class="button button-small desktop-cta" href="#take-part">Take part</a>
+      <nav class="desktop-nav" aria-label="Primary"><a href="/work-standard/">The Standard</a><a href="/tools/work-order/">Work Order</a><a href="/evidence/netuid-505/">Evidence</a><a href="/insights/">Field Notes</a><a href="/participate/">Contribute</a></nav>
+      <a class="button button-small desktop-cta" href="/tools/work-order/">Build a work order</a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav"><span class="sr-only">Open menu</span><span></span><span></span></button>
     </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden><a href="#about">About</a><a href="#how-it-works">How it works</a><a href="#council">The Council</a><a href="/insights/">Field Notes</a><a href="#take-part">Take part</a></nav>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden><a href="/work-standard/">The Standard</a><a href="/tools/work-order/">Work Order</a><a href="/evidence/netuid-505/">Evidence</a><a href="/insights/">Field Notes</a><a href="/participate/">Contribute</a></nav>
   </header>
 
   <main id="main">
     <section class="hero section" id="about">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Arctura Network</p><h1>A network for<br><em>useful work.</em></h1>
-          <p class="hero-lede">People and software can do useful work together, check the results, and improve the system they share.</p>
-          <div class="actions"><a class="button" href="/tools/work-order/">Create a work order</a><a class="text-link" href="#how-it-works">See how it works <span aria-hidden="true">→</span></a></div>
+          <p class="eyebrow">A standard for accountable agents</p><h1>Define the work.<br><em>Prove the result.</em></h1>
+          <p class="hero-lede">Arctura gives agent builders a practical way to set the job, authority, checks, evidence, and human handoff before software acts.</p>
+          <div class="actions"><a class="button" href="/tools/work-order/">Create a work order</a><a class="text-link" href="/examples/work-orders/support-response-review.json">See a completed example <span aria-hidden="true">→</span></a></div>
           <p class="doctrine">Work. Proof. Stewardship.</p>
         </div>
-        <figure class="hero-mark"><img src="/assets/arctura-network-mark.png" alt="The Arctura mark: participants connected around one shared field." width="1254" height="1254" loading="eager" decoding="async" fetchpriority="high"><figcaption><span>01</span> Many participants. One shared field. One useful result.</figcaption></figure>
+        <figure class="hero-mark"><img src="/assets/arctura-network-mark.png" alt="The Arctura mark: participants connected around one shared field." width="1254" height="1254" loading="eager" decoding="async" fetchpriority="high"><figcaption><span>01</span> A clear instruction. A bounded agent. A result someone else can check.</figcaption></figure>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="happens-title"><div class="wrap"><p class="eyebrow">The standard</p><h2 id="happens-title">What happens here</h2>
-      <div class="three-grid"><article class="principle"><span>01</span><h3>Do the work</h3><p>Contribute something useful.</p></article><article class="principle"><span>02</span><h3>Check the work</h3><p>Important results are reviewed.</p></article><article class="principle"><span>03</span><h3>Improve the system</h3><p>Good work shapes what comes next.</p></article></div>
+    <section class="section" aria-labelledby="happens-title"><div class="wrap"><div class="split-heading"><div><p class="eyebrow">The operating idea</p><h2 id="happens-title">Useful work leaves a trail.</h2></div><p class="section-intro">A capable model is not enough. Accountable work begins with a clear mandate, stays inside written limits, and ends with evidence another person can inspect.</p></div>
+      <div class="three-grid"><article class="principle"><span>01 · Work</span><h3>Name the result</h3><p>Define the actual job, approved inputs, allowed actions, and accountable owner.</p></article><article class="principle"><span>02 · Proof</span><h3>Choose the checks</h3><p>State what success, failure, refusal, and sufficient evidence look like before execution.</p></article><article class="principle"><span>03 · Stewardship</span><h3>Keep it reviewable</h3><p>Record the outcome, route human decisions correctly, and revise what the evidence disproves.</p></article></div>
     </div></section>
 
     <section class="section paper-section" id="how-it-works" aria-labelledby="works-title">
-      <div class="wrap split-heading"><div><p class="eyebrow">A shared process</p><h2 id="works-title">How it works</h2></div><p class="section-intro">Work moves through four clear steps. Each one leaves enough information for the next person to understand what happened.</p></div>
-      <ol class="wrap process"><li><span>1</span><div><h3>Contribute work</h3><p>Share useful work with the network.</p></div></li><li><span>2</span><div><h3>Review results</h3><p>Reviewers check for quality and correctness.</p></div></li><li><span>3</span><div><h3>Reach agreement</h3><p>The network agrees on what should be accepted.</p></div></li><li><span>4</span><div><h3>Keep the record</h3><p>The result is stored with enough evidence to inspect later.</p></div></li></ol>
+      <div class="wrap split-heading"><div><p class="eyebrow">From intent to evidence</p><h2 id="works-title">One practical path.</h2></div><p class="section-intro">The Work Order turns an intention into a portable contract. It does not certify the agent or guarantee the result; it makes the work easier to run, review, and improve.</p></div>
+      <ol class="wrap process"><li><span>1</span><div><h3>Define</h3><p>Name the expected result and the inputs the agent may use.</p></div></li><li><span>2</span><div><h3>Bound</h3><p>Write the allowed actions, exclusions, owner, and human-review points.</p></div></li><li><span>3</span><div><h3>Check</h3><p>Decide the acceptance checks and evidence before the agent begins.</p></div></li><li><span>4</span><div><h3>Evaluate</h3><p>Compare the result with the order and preserve a privacy-safe record.</p></div></li></ol>
+      <div class="wrap section-actions"><a class="button" href="/tools/work-order/">Build your first work order</a><a class="text-link" href="/updates/work-order-v1/">Read the v1 release <span aria-hidden="true">→</span></a></div>
     </section>
 
     <section class="section" id="today" aria-labelledby="today-title"><div class="wrap today-grid"><div><p class="eyebrow">Current implementation</p><h2 id="today-title">Where it runs today</h2><p class="section-intro">Arctura currently has a working implementation on Bittensor testnet as Arctura Base. The documented testnet run used netuid 505. This is one implementation of the larger network.</p>
@@ -66,9 +67,11 @@
       <aside class="status-card" aria-label="Arctura Base implementation status"><div class="stamp">Tested</div><dl><div><dt>System</dt><dd>Bittensor</dd></div><div><dt>Network</dt><dd>Testnet</dd></div><div><dt>Netuid</dt><dd>505</dd></div><div><dt>Evidence</dt><dd>Public record</dd></div></dl><p>No mainnet netuid has been published.</p></aside>
     </div></section>
 
-    <section class="section paper-section" id="council" aria-labelledby="council-title"><div class="wrap split-heading"><div><p class="eyebrow">Shared decisions</p><h2 id="council-title">The Council</h2></div><p class="section-intro">Proposed changes pass five checks before a vote. The checks ask whether the change is needed, clear, useful, durable, and safe to reverse.</p></div>
-      <ol class="wrap council-list"><li><span>01</span><strong>Need</strong><p>Is there a real reason to make this change?</p></li><li><span>02</span><strong>Clarity</strong><p>Can people understand what changes and who owns it?</p></li><li><span>03</span><strong>Usefulness</strong><p>Does this add something the network actually needs?</p></li><li><span>04</span><strong>Durability</strong><p>Will the decision still make sense later?</p></li><li><span>05</span><strong>Reversal</strong><p>Can we safely change course if the assumption is wrong?</p></li></ol>
+    <section class="section paper-section" id="council" aria-labelledby="council-title"><div class="wrap split-heading"><div><p class="eyebrow">A proposed review lens</p><h2 id="council-title">Five checks before change.</h2></div><p class="section-intro">Arctura uses five questions to review proposed changes. This is a published decision framework—not a claim of decentralized governance, elected membership, or on-chain voting.</p></div>
+      <ol class="wrap council-list"><li><span>01</span><strong>Need</strong><p>Is there a real reason to make this change?</p></li><li><span>02</span><strong>Clarity</strong><p>Can people understand what changes and who owns it?</p></li><li><span>03</span><strong>Usefulness</strong><p>Does this add something the network actually needs?</p></li><li><span>04</span><strong>Durability</strong><p>Will the decision still make sense later?</p></li><li><span>05</span><strong>Reversal</strong><p>Can we safely change course if the assumption is wrong?</p></li></ol><p class="wrap boundary-note"><strong>Boundary:</strong> Future governance mechanics require named participants, a published policy, and inspectable decisions before they are represented as active.</p>
     </section>
+
+    <section class="section standard-feature" aria-labelledby="standard-title"><div class="wrap standard-feature-grid"><div><p class="eyebrow">The Work Standard · 16 parts</p><h2 id="standard-title">A durable method for accountable agent work.</h2><p class="section-intro">The Work Standard connects problem framing, authority, evidence, interoperability, human handoff, and record maintenance into one reviewable path.</p><div class="actions"><a class="button" href="/work-standard/">Explore the standard</a><a class="text-link" href="/work-standard/#path">See the full path <span aria-hidden="true">→</span></a></div></div><div class="standard-index" aria-label="Work Standard themes"><span>01 Question</span><span>02 Mandate</span><span>03 Authority</span><span>04 Execution</span><span>05 Evidence</span><span>06 Handoff</span><span>07 Decision</span><span>08 Record</span></div></div></section>
 
     <section class="section" id="take-part" aria-labelledby="take-part-title"><div class="wrap"><p class="eyebrow">Join the work</p><h2 id="take-part-title">Ways to take part</h2><div class="three-grid roles">
       <article><span>01</span><h3>Operate</h3><p>Follow the documented local testnet run within its published limits.</p><a href="/participate/">Read the operator guidance <span aria-hidden="true">→</span></a></article>
@@ -77,7 +80,7 @@
     </div></div></section>
   </main>
 
-  <footer class="site-footer"><div class="wrap footer-grid"><div class="footer-brand"><img src="/assets/favicon.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>ARCTURA.NETWORK</strong><p>Do useful work. Show your work.</p></div><div><h2>Network</h2><a href="#about">About</a><a href="#how-it-works">How it works</a><a href="#council">The Council</a><a href="/participate/">Take part</a></div><div><h2>Record</h2><a href="/evidence/netuid-505/">Evidence</a><a href="/documentation/netuid-505/">Testnet record</a><a href="/authority/">Authority</a><a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">GitHub ↗</a></div><div><h2>Notes</h2><a href="/insights/">Field Notes</a><a href="/updates/netuid-505-launch/">Updates</a><a href="/faq/">FAQ</a></div></div>
+  <footer class="site-footer"><div class="wrap footer-grid"><div class="footer-brand"><img src="/assets/favicon.svg" alt="" width="42" height="42" loading="lazy" decoding="async"><strong>ARCTURA.NETWORK</strong><p>Define the work. Prove the result.</p></div><div><h2>Use</h2><a href="/tools/work-order/">Work Order</a><a href="/examples/work-orders/support-response-review.json">Example</a><a href="/work-standard/">The Standard</a><a href="/participate/">Contribute</a></div><div><h2>Evidence</h2><a href="/evidence/netuid-505/">Evidence record</a><a href="/documentation/netuid-505/">Testnet record</a><a href="/authority/">Authority</a><a href="https://github.com/bittensaur/arctura-base-subnet" target="_blank" rel="noopener">Source ↗</a></div><div><h2>Read</h2><a href="/insights/">Field Notes</a><a href="/updates/netuid-505-launch/">Updates</a><a href="/faq/">FAQ</a></div></div>
     <div class="wrap footer-bottom"><span>© <span id="year">2026</span> Arctura Network</span><span>Work. Proof. Stewardship.</span></div></footer>
 </body>
 </html>

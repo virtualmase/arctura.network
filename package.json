@@ -10,6 +10,7 @@
     "validate:publishing": "node scripts/validate-published-routes.mjs",
     "validate:edge": "node scripts/validate-edge-static.mjs",
     "validate:work-order": "node scripts/validate-work-order.mjs",
+    "publish:work-standard": "node scripts/publish-work-standard.mjs",
     "audit:live": "node scripts/audit-live-site.mjs"
   },
   "dependencies": {

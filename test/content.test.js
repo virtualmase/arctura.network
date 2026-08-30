@@ -11,7 +11,7 @@ test("homepage preserves the bounded testnet record and links to evidence", () =
   assert.match(home, /href="\/documentation\/netuid-505\/">Read the Netuid 505 record/);
   assert.match(home, /href="\/evidence\/netuid-505\/">Review the evidence/);
   assert.match(home, /No mainnet netuid has been published\./);
-  assert.match(home, /href="\/participate\/">Take part<\/a>/);
+  assert.match(home, /href="\/participate\/">Contribute<\/a>/);
   assert.doesNotMatch(home, /live quorum|live Finney|staking available/i);
 });
 
@@ -62,7 +62,7 @@ test("Agent Work Order prototype exposes bounded work and proof fields", () => {
   for (const field of ["expectedResult", "approvedInputs", "allowedActions", "acceptanceChecks", "evidenceToKeep", "reviewStatus"]) {
     assert.match(script, new RegExp(field));
   }
-  assert.match(tool, /No telemetry/);
+  assert.match(tool, /never your answers or exported JSON/i);
   assert.doesNotMatch(tool, /fetch\(|XMLHttpRequest/);
 });
 
@@ -108,4 +108,38 @@ test("Work Order evaluation conversion is structured, measurable, and privacy-sa
   assert.match(issueForm, /does not certify the agent, model, work order, or result/);
   assert.match(tool, /template=work-order-evaluation\.yml/);
   assert.match(contributing, /verified use can be counted without embedding telemetry/i);
+});
+
+test("Work Order analytics emit fixed, content-free Cloudflare Zaraz events", () => {
+  const script = read("js/work-order.js");
+  assert.match(script, /window\.zaraz\?\.track/);
+  assert.match(script, /track\('work_order_builder_view'\)/);
+  assert.match(script, /track\('work_order_builder_start'\)/);
+  assert.match(script, /track\('work_order_export', \{ method: 'copy' \}\)/);
+  assert.match(script, /track\('work_order_export', \{ method: 'download' \}\)/);
+  assert.doesNotMatch(script, /track\([^\n]*(values|latest|FormData)/);
+});
+
+test("Work Standard publishes a bounded hub and 16 connected organic articles", () => {
+  const hub = read("work-standard", "index.html");
+  assert.match(hub, /Published methodology/);
+  assert.match(hub, /not (?:a claim|evidence) of (?:a DAO|decentralized governance)/i);
+  assert.match(hub, /href="\/work-standard\/what-counts-as-work\/"/);
+  const directories = fs.readdirSync(path.join(root, "work-standard"), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory());
+  assert.equal(directories.length, 16);
+  for (const entry of directories) {
+    const article = read("work-standard", entry.name, "index.html");
+    assert.match(article, /Published methodology, version 0\.1/);
+    assert.match(article, /Create a work order/);
+    assert.match(article, /application\/ld\+json/);
+  }
+});
+
+test("FAQ replaces legacy claims with current evidence-safe answers", () => {
+  const faq = read("faq", "index.html");
+  assert.match(faq, /No active DAO, token offer, investment, payment rail/i);
+  assert.match(faq, /No Finney mainnet netuid, public staking path/i);
+  assert.match(faq, /never form answers or exported JSON/i);
+  assert.doesNotMatch(faq, /Resonance BFT|Truth Ledger|28% average reduction|net-negative/i);
 });

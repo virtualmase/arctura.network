@@ -11,7 +11,7 @@ Increase Arctura's durable value by proving that people use its tools, return to
 - Hostinger estimate supplied by the owner: approximately $700.
 - GitHub, trailing 14 days: 32 views from 2 unique visitors; 98 clones from 49 unique cloners.
 - Repository: 0 stars, 0 forks, 0 watchers, 1 open issue at baseline.
-- Website analytics: no verified first-party event instrumentation in the repository.
+- Website analytics: content-free Work Order events are instrumented for Cloudflare Zaraz, but collection remains unverified until the Cloudflare zone and Zaraz are active.
 - Public product surface before this iteration: documentation, evidence, Field Notes, and a local-testnet implementation record.
 
 GitHub traffic is directional. Clone counts do not establish product adoption, active operators, or customers.
@@ -39,7 +39,7 @@ Guardrails:
 ### Days 0–30: one useful product
 
 - Ship the local-only Agent Work Order builder.
-- Add privacy-respecting event measurement after selecting an analytics source of truth.
+- Activate Cloudflare Zaraz as the custom-event system of record and verify the fixed builder-view, builder-start, and export events without transmitting Work Order content.
 - Publish one worked example and one evaluation template.
 - Establish repository description, README, issue templates, and a monthly maintenance review.
 

@@ -16,3 +16,8 @@
 - [x] Publish a source-bounded community contribution and validator-requirements section based on the Netuid 505 primary record.
 - [x] Publish a concise public Netuid 505 launch announcement with explicit local-testnet and mainnet boundaries.
 - [x] Audit live homepage and record-page navigation, correct any remaining cohesion issues, and verify the production changes.
+- [x] Reposition the frontend around accountable agent work with a product-led homepage and concrete CTA sequence.
+- [x] Publish the Work Standard hub and 16 evidence-bounded organic articles from one reusable source and renderer.
+- [x] Replace the legacy FAQ with current, evidence-safe answers and connect it to the product journey.
+- [x] Add a durable content publishing standard, machine-readable discovery, sitemap coverage, and regression enforcement.
+- [x] Integrate the supplied Arctura diagrams and privacy-safe Work Order event instrumentation.
