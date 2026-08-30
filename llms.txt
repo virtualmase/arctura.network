@@ -9,6 +9,8 @@ Authority record: https://arctura.network/authority/
 Field Notes: https://arctura.network/insights/
 Agent training guide: https://arctura.network/insights/train-your-agent/
 Agent Work Order builder: https://arctura.network/tools/work-order/
+August 2026 Work / Proof / Stewardship record: https://arctura.network/records/2026-08/
+Work Order evaluation template: https://arctura.network/examples/evaluations/work-order-evaluation-template.json
 Updated: 2026-08-30
 
 ## Public idea
@@ -20,6 +22,8 @@ Doctrine: Do the work. Check the work. Improve the system.
 The agent guide is an Arctura operating note about defining work, selecting a capable model, choosing where it runs, improving it in measured stages, and keeping an evaluation record. It is not a vendor ranking.
 
 The Agent Work Order builder is a local-only browser tool. It creates a portable JSON record for an agent's expected result, approved inputs, authority, acceptance checks, and evidence. It does not upload or retain user input.
+
+The monthly Work / Proof / Stewardship record publishes observed adoption signals, unknowns, shipped artifacts, and next commitments. The August 2026 baseline reports GitHub repository traffic only and does not claim website visitors, customers, revenue, or active operators.
 
 ## Current operational boundary
 

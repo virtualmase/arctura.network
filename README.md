@@ -10,6 +10,7 @@ Arctura explores how people and software can contribute useful work, check resul
 - A documented local Bittensor testnet run for Arctura Base on netuid 505.
 - An [Agent Work Order builder](https://arctura.network/tools/work-order/) for defining bounded, checkable agent work.
 - [Field Notes](https://arctura.network/insights/) that explain decisions and operating methods in ordinary language.
+- A monthly [Work / Proof / Stewardship record](https://arctura.network/records/2026-08/) that publishes adoption evidence, unknowns, and next commitments.
 
 No Finney mainnet netuid, public staking path, emissions state, or live quorum feed is claimed.
 

@@ -1,0 +1,27 @@
+{
+  "template": "https://arctura.network/examples/evaluations/work-order-evaluation-template.json",
+  "templateVersion": "1.0.0",
+  "workOrderId": "awo-replace-with-work-order-id",
+  "evaluatedAt": "2026-08-30T00:00:00Z",
+  "evaluator": "replace-with-role-or-anonymous-reviewer",
+  "result": {
+    "status": "not-run",
+    "expectedResultProduced": false,
+    "summary": "Describe the observed result without including private input or output content."
+  },
+  "checks": [
+    {
+      "name": "Replace with one acceptance check from the Work Order",
+      "status": "not-run",
+      "evidence": "Link or identify a privacy-safe artifact another reviewer can inspect."
+    }
+  ],
+  "boundaryReview": {
+    "usedOnlyApprovedInputs": null,
+    "stayedWithinAllowedActions": null,
+    "humanReviewBoundaryRespected": null,
+    "notes": "Record exceptions or refusal behavior."
+  },
+  "decision": "not-reviewed",
+  "limitations": "State what this evaluation cannot establish."
+}

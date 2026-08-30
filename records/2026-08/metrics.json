@@ -1,0 +1,34 @@
+{
+  "record_version": "1.0.0",
+  "record_id": "arctura-wps-2026-08",
+  "period": {
+    "start": "2026-08-16",
+    "end": "2026-08-29",
+    "captured_on": "2026-08-30",
+    "window": "GitHub API trailing 14-day traffic window"
+  },
+  "sources": {
+    "repository": "https://github.com/virtualmase/arctura.network",
+    "repository_api": "https://api.github.com/repos/virtualmase/arctura.network",
+    "views_api": "https://api.github.com/repos/virtualmase/arctura.network/traffic/views",
+    "clones_api": "https://api.github.com/repos/virtualmase/arctura.network/traffic/clones"
+  },
+  "observed": {
+    "repository_views": 32,
+    "repository_unique_visitors": 2,
+    "repository_clones": 98,
+    "repository_unique_cloners": 49,
+    "stars": 0,
+    "forks": 0,
+    "open_issues": 2
+  },
+  "unknown": [
+    "arctura.network visitors",
+    "returning website visitors",
+    "Work Order builder starts, completions, or exports",
+    "production users, customers, or revenue",
+    "active external operators"
+  ],
+  "interpretation": "Repository cloning materially exceeded visible community conversion. The data establishes technical curiosity, not adoption, revenue, or network activity.",
+  "privacy_boundary": "No visitor identity, work-order content, mailbox data, or personal information is included."
+}

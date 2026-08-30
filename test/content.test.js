@@ -75,3 +75,16 @@ test("Work Order exports identify the public versioned schema", () => {
   assert.equal(schema.$id, schemaUrl);
   assert.equal(example.schema, schemaUrl);
 });
+
+test("monthly operating record publishes an honest adoption baseline and evaluation path", () => {
+  const record = read("records/2026-08/index.html");
+  const metrics = JSON.parse(read("records/2026-08/metrics.json"));
+  const evaluation = JSON.parse(read("examples/evaluations/work-order-evaluation-template.json"));
+  assert.equal(metrics.observed.repository_unique_cloners, 49);
+  assert.equal(metrics.observed.stars, 0);
+  assert.ok(metrics.unknown.includes("arctura.network visitors"));
+  assert.match(record, /curiosity, <em>not adoption yet/i);
+  assert.match(record, /privacy-respecting aggregate analytics/i);
+  assert.equal(evaluation.result.status, "not-run");
+  assert.match(evaluation.limitations, /cannot establish/i);
+});
