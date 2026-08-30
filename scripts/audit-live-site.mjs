@@ -1,6 +1,6 @@
 const origin = process.env.ARCTURA_ORIGIN || "https://arctura.network";
 const checks = [
-  ["/", "A network for useful work."],
+  ["/", "Arctura Network — A Network for Useful Work"],
   ["/tools/work-order/", "Define the work before you train the agent."],
   ["/insights/train-your-agent/", "By Arctura Network"],
   ["/evidence/netuid-505/", "A real testnet subnet"],
