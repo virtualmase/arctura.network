@@ -17,6 +17,7 @@
     { "id": "netuid-505-launch-note", "name": "Netuid 505 public launch note", "status": "implemented", "url": "https://arctura.network/updates/netuid-505-launch/" },
     { "id": "testnet-evidence", "name": "Testnet evidence record", "status": "implemented", "url": "https://arctura.network/evidence/netuid-505/" },
     { "id": "cross-domain-authority", "name": "Cross-domain authority record", "status": "implemented", "url": "https://arctura.network/authority/" },
+    { "id": "agent-work-order-v1", "name": "Define and validate a bounded Agent Work Order", "status": "implemented", "url": "https://arctura.network/updates/work-order-v1/" },
     { "id": "governance-signal", "name": "Governance signal", "status": "documentation-only" }
   ]
 }

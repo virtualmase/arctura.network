@@ -20,3 +20,27 @@
 /ready
   Content-Type: application/json; charset=utf-8
   Cache-Control: no-store
+
+/archive/*
+  X-Robots-Tag: noindex, noarchive
+
+/architecture/*
+  X-Robots-Tag: noindex, noarchive
+
+/base/*
+  X-Robots-Tag: noindex, noarchive
+
+/compare/*
+  X-Robots-Tag: noindex, noarchive
+
+/onboarding/*
+  X-Robots-Tag: noindex, noarchive
+
+/operon/*
+  X-Robots-Tag: noindex, noarchive
+
+/patrons/*
+  X-Robots-Tag: noindex, noarchive
+
+/which-tier/*
+  X-Robots-Tag: noindex, noarchive

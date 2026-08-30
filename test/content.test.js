@@ -88,3 +88,13 @@ test("monthly operating record publishes an honest adoption baseline and evaluat
   assert.equal(evaluation.result.status, "not-run");
   assert.match(evaluation.limitations, /cannot establish/i);
 });
+
+test("Work Order v1 release is reproducible and legacy claims remain non-indexable", () => {
+  const release = read("updates/work-order-v1/index.html");
+  const headers = read("_headers");
+  assert.match(release, /npm run validate:work-order/);
+  assert.match(release, /No hosted execution service, certification, payment rail, or production-agent guarantee/);
+  for (const route of ["archive", "architecture", "base", "compare", "onboarding", "operon", "patrons", "which-tier"]) {
+    assert.match(headers, new RegExp(`/${route}/\\*\\n  X-Robots-Tag: noindex, noarchive`));
+  }
+});

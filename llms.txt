@@ -11,6 +11,7 @@ Agent training guide: https://arctura.network/insights/train-your-agent/
 Agent Work Order builder: https://arctura.network/tools/work-order/
 August 2026 Work / Proof / Stewardship record: https://arctura.network/records/2026-08/
 Work Order evaluation template: https://arctura.network/examples/evaluations/work-order-evaluation-template.json
+Agent Work Order v1 release: https://arctura.network/updates/work-order-v1/
 Updated: 2026-08-30
 
 ## Public idea
