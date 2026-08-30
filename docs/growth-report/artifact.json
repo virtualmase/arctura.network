@@ -1,0 +1,66 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Arctura Growth Strategy",
+    "description": "A value-building plan based on verified utility, audience, contribution, and evidence.",
+    "generatedAt": "2026-08-30T17:00:00Z",
+    "sources": [
+      {
+        "id": "github-traffic",
+        "label": "GitHub repository traffic, trailing 14 days",
+        "href": "https://api.github.com/repos/virtualmase/arctura.network/traffic/views",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT 2 AS uniqueVisitors, 49 AS uniqueCloners, 0 AS stars;",
+          "description": "Reviewed GitHub REST API results represented as one reproducible snapshot row.",
+          "executed_at": "2026-08-30T16:30:00Z",
+          "language": "sql",
+          "filters": ["Trailing 14-day GitHub traffic window", "Repository: virtualmase/arctura.network"],
+          "metric_definitions": ["uniqueVisitors is the distinct repository visitor count returned by GitHub.", "uniqueCloners is the distinct repository cloner count returned by GitHub.", "stars is the public repository star count at review time."]
+        }
+      },
+      {
+        "id": "repo-audit",
+        "label": "Arctura repository and live-site audit",
+        "href": "https://github.com/virtualmase/arctura.network"
+      },
+      {
+        "id": "owner-estimate",
+        "label": "Owner-provided Hostinger estimate"
+      }
+    ],
+    "cards": [
+      {"id":"visitors","dataset":"baseline","sourceId":"github-traffic","description":"Distinct repository visitors reported by GitHub in the trailing 14 days.","metrics":[{"label":"GitHub unique visitors, 14d","field":"uniqueVisitors","format":"number"}]},
+      {"id":"cloners","dataset":"baseline","sourceId":"github-traffic","description":"Distinct repository cloners reported by GitHub in the trailing 14 days; this does not establish active use.","metrics":[{"label":"GitHub unique cloners, 14d","field":"uniqueCloners","format":"number"}]},
+      {"id":"community","dataset":"baseline","sourceId":"github-traffic","description":"Public repository stars at the time of review.","metrics":[{"label":"GitHub stars","field":"stars","format":"number"}]}
+    ],
+    "charts": [
+      {"id":"github-signals","title":"GitHub repository signals","subtitle":"Trailing 14-day traffic window; stars measured at review time","type":"bar","dataset":"githubSignals","sourceId":"github-traffic","encodings":{"x":{"field":"signal","type":"nominal","label":"Signal"},"y":{"field":"count","type":"quantitative","label":"Count","format":"number"}},"valueFormat":"number","layout":"full","maxRows":3}
+    ],
+    "blocks": [
+      {"id":"title","type":"markdown","layout":"full","body":"# Arctura Growth Strategy"},
+      {"id":"summary","type":"markdown","layout":"full","body":"## Executive Summary\n\n- **Do not optimize for the $700 estimate.** Third-party domain estimates are opaque and lag real value. Build measurable utility, returning users, credible evidence, and contributor activity; let valuation follow.\n- **The current constraint is adoption, not visual quality.** Arctura now has a coherent public identity and strong evidence boundaries, but no verified site analytics, customers, active operators, or repeat product usage.\n- **Lead with one useful tool.** The first next prototype is a local-only Agent Work Order builder. It converts Arctura's doctrine into a practical artifact people can use, share, test, and improve.\n- **Run a 90-day proof loop.** Ship a tool, measure activation, interview users, publish failures and improvements, then add one deterministic reference worker only after demand appears."},
+      {"id":"baseline-copy","type":"markdown","layout":"full","sourceId":"github-traffic","body":"## Interest exists, but adoption is unproven\n\nThe trailing 14-day GitHub window recorded **2 unique repository visitors** and **49 unique cloners**. The clone concentration occurred around the evidence-documentation release, which suggests technical interest but does not prove use, retention, customers, or operators. The repository had no stars, forks, or watchers at review time.\n\n**Implication:** broad paid promotion would be premature. First create an activation event worth promoting and a way to distinguish curiosity from useful work completed."},
+      {"id":"baseline-metrics","type":"metric-strip","layout":"full","cardIds":["visitors","cloners","community"]},
+      {"id":"baseline-chart","type":"chart","layout":"full","chartId":"github-signals"},
+      {"id":"value-model","type":"markdown","layout":"full","sourceId":"repo-audit","body":"## Durable value has four parts\n\n1. **Utility:** a visitor can complete a real job, not merely read claims.\n2. **Proof:** results, limitations, changes, and failures remain inspectable.\n3. **Distribution:** each useful release reaches a small relevant audience through Field Notes, GitHub releases, social updates, and direct builder outreach.\n4. **Stewardship:** tests, source freshness, claim boundaries, and maintenance occur on a visible cadence.\n\nThe current site is strongest on proof and weakest on measured utility and distribution. The Agent Work Order builder directly addresses that imbalance without inventing network capabilities."},
+      {"id":"kpis","type":"markdown","layout":"full","body":"## Measure work completed, not attention alone\n\nUse **monthly verified work orders completed** as the intended north-star outcome. Until a privacy-preserving completion signal exists, use two provisional measures: Work Order builder starts and JSON exports.\n\nSupporting metrics:\n\n- **Activation:** exports divided by builder visits.\n- **Return use:** people who use a tool or evidence route in more than one week of a rolling 28-day period.\n- **Contribution:** merged improvements or accepted evidence records per month.\n\nGuardrails: no unsupported mainnet or staking claims; no work-order content collection without consent; every public prototype must pass route, metadata, accessibility, and evidence-boundary tests."},
+      {"id":"next-steps","type":"markdown","layout":"full","body":"## The next 90 days\n\n### Days 0–30 — Make one tool useful\n\n- Ship the local-only Agent Work Order builder.\n- Select a privacy-respecting analytics source and instrument starts, completions, and exports without recording work-order contents.\n- Publish one worked example and one evaluation template.\n- Add repository description, README, issue templates, and a monthly maintenance review.\n\n### Days 31–60 — Prove use\n\n- Interview 5–10 agent builders or operators.\n- Publish aggregated, consented lessons from real work orders.\n- Add a versioned JSON schema and validator.\n- Publish a prototype changelog using TESTED, IN DEVELOPMENT, PROPOSED, and ARCHIVED states.\n\n### Days 61–90 — Build the contribution loop\n\n- Accept example work orders and evaluation cases through reviewed pull requests.\n- Publish the first monthly Work / Proof / Stewardship record.\n- Add one harmless, deterministic reference worker that executes a bounded work order.\n- Compare expected results against recorded checks and publish failures as well as passes."},
+      {"id":"questions","type":"markdown","layout":"full","body":"## Decisions still needed\n\n- Which privacy-respecting analytics source will be the measurement system of record: Hostinger analytics, a first-party endpoint, or another approved service?\n- Who is the first narrow user: independent agent builders, Bittensor operators, or teams adopting agent work orders?\n- What license should govern the website code and future work-order schema?\n- Which optional completion signal can prove use without collecting sensitive work-order content?"},
+      {"id":"caveats","type":"markdown","layout":"full","body":"## Caveats and Assumptions\n\nThe approximately $700 valuation is owner-reported; its formula and inputs were not available. GitHub traffic covers only the repository and only the API's trailing window. It does not measure arctura.network visitors, builder use, revenue, customers, active nodes, or brand recognition. Targets should remain provisional until site analytics and at least four weeks of tool usage exist."}
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-30T17:00:00Z",
+    "status": "ready",
+    "datasets": {"baseline":[{"uniqueVisitors":2,"uniqueCloners":49,"stars":0}],"githubSignals":[{"signal":"Unique visitors","count":2},{"signal":"Unique cloners","count":49},{"signal":"Stars","count":0}]}
+  },
+  "sources": [
+    {"id":"github-traffic","label":"GitHub repository traffic, trailing 14 days","href":"https://api.github.com/repos/virtualmase/arctura.network/traffic/views"},
+    {"id":"repo-audit","label":"Arctura repository and live-site audit","href":"https://github.com/virtualmase/arctura.network"},
+    {"id":"owner-estimate","label":"Owner-provided Hostinger estimate"}
+  ]
+}

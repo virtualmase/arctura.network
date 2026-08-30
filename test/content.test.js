@@ -47,3 +47,15 @@ test("community guidance and launch note preserve testnet-only contribution boun
   assert.match(launchNote, /No Finney netuid, emissions state, validator enrollment, or mainnet availability is published/i);
   assert.match(launchNote, /TESTNET_RUN_PLAN\.md/);
 });
+
+test("Agent Work Order prototype exposes bounded work and proof fields", () => {
+  const home = read("index.html");
+  const tool = read("tools", "work-order", "index.html");
+  const script = read("js", "work-order.js");
+  assert.match(home, /href="\/tools\/work-order\/">Create a work order/);
+  for (const field of ["expectedResult", "approvedInputs", "allowedActions", "acceptanceChecks", "evidenceToKeep", "reviewStatus"]) {
+    assert.match(script, new RegExp(field));
+  }
+  assert.match(tool, /No telemetry/);
+  assert.doesNotMatch(tool, /fetch\(|XMLHttpRequest/);
+});

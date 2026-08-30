@@ -93,3 +93,14 @@ test("the agent guide is published through Field Notes", async () => {
     assert.doesNotMatch(html, /Mason Nguyen|AI Mastery/);
   });
 });
+
+test("the Agent Work Order prototype is public and local-first", async () => {
+  await withServer(async (origin) => {
+    const response = await fetch(`${origin}/tools/work-order/`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, /Define the work before you train the agent/);
+    assert.match(html, /Nothing is uploaded or saved by Arctura/);
+    assert.match(html, /\/js\/work-order\.js/);
+  });
+});

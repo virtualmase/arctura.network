@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const origin = "https://arctura.network";
-const published = ["/", "/insights/", "/insights/train-your-agent/"];
+const published = ["/", "/insights/", "/insights/train-your-agent/", "/tools/work-order/"];
 const errors = [];
 
 const fileFor = (route) => route === "/" ? "index.html" : path.join(route.slice(1), "index.html");
@@ -35,7 +35,7 @@ for (const html of htmlByRoute.values()) {
     localLinks.add(href.endsWith("/") ? href : `${href}/`);
   }
 }
-for (const route of ["/insights/", "/insights/train-your-agent/"]) if (!localLinks.has(route)) errors.push(`${route}: not reachable through a crawlable link`);
+for (const route of ["/insights/", "/insights/train-your-agent/", "/tools/work-order/"]) if (!localLinks.has(route)) errors.push(`${route}: not reachable through a crawlable link`);
 
 const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 for (const route of published) if (!sitemap.includes(`<loc>${origin}${route}</loc>`)) errors.push(`${route}: absent from sitemap`);

@@ -8,6 +8,7 @@ Netuid 505 public launch note: https://arctura.network/updates/netuid-505-launch
 Authority record: https://arctura.network/authority/
 Field Notes: https://arctura.network/insights/
 Agent training guide: https://arctura.network/insights/train-your-agent/
+Agent Work Order builder: https://arctura.network/tools/work-order/
 Updated: 2026-08-30
 
 ## Public idea
@@ -17,6 +18,8 @@ Arctura is a network where people and software contribute useful work, check res
 Doctrine: Do the work. Check the work. Improve the system.
 
 The agent guide is an Arctura operating note about defining work, selecting a capable model, choosing where it runs, improving it in measured stages, and keeping an evaluation record. It is not a vendor ranking.
+
+The Agent Work Order builder is a local-only browser tool. It creates a portable JSON record for an agent's expected result, approved inputs, authority, acceptance checks, and evidence. It does not upload or retain user input.
 
 ## Current operational boundary
 
