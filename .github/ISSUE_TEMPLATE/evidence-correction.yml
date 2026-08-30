@@ -1,0 +1,42 @@
+name: Evidence or documentation correction
+description: Report a claim, source, route, or record that needs correction.
+title: "[record] "
+labels: [documentation]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping keep the public record accurate. Do not submit private data or security vulnerabilities here.
+  - type: input
+    id: location
+    attributes:
+      label: Public location
+      description: Link to the affected page, file, or record.
+      placeholder: https://arctura.network/...
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What is currently stated?
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should it say instead?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Inspectable evidence
+      description: Link the primary source or describe how another reviewer can verify the correction.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Safety check
+      options:
+        - label: This report contains no credentials, wallet material, private customer data, or unpatched exploit details.
+          required: true

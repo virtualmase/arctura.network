@@ -27,9 +27,16 @@ Then open `http://localhost:3000`.
 ```bash
 npm test
 npm run validate:publishing
+npm run validate:work-order -- examples/work-orders/support-response-review.json
 ```
 
-The publishing validator checks the canonical public routes, metadata, structured data, crawl paths, and sitemap coverage.
+The publishing validator checks canonical routes, metadata, structured data, crawl paths, and sitemap coverage. The Work Order validator checks examples against the published v1 contract.
+
+## Contribute and report
+
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing work or evidence.
+- Use the structured issue forms for record corrections and Work Order examples.
+- Report vulnerabilities privately according to [SECURITY.md](SECURITY.md).
 
 ## Public record
 

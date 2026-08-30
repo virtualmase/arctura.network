@@ -1,0 +1,41 @@
+name: Contribute a Work Order example
+description: Propose an anonymized, reusable example for the public Work Order format.
+title: "[work order] "
+labels: [example]
+body:
+  - type: input
+    id: work
+    attributes:
+      label: Useful work
+      description: Name the result this example should produce.
+    validations:
+      required: true
+  - type: textarea
+    id: user
+    attributes:
+      label: Who would use it and why?
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Acceptance checks
+      description: State checks another person can apply to the result.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Authority and refusal boundaries
+      description: What may the agent do, and when must it stop or ask a person?
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Publication check
+      options:
+        - label: The proposed example is synthetic or anonymized and contains no private data or secrets.
+          required: true
+        - label: I can express it as a JSON document that validates against Work Order v1.
+          required: true
