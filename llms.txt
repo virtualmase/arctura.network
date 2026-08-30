@@ -8,6 +8,8 @@ Netuid 505 public launch note: https://arctura.network/updates/netuid-505-launch
 Authority record: https://arctura.network/authority/
 Field Notes: https://arctura.network/insights/
 Agent training guide: https://arctura.network/insights/train-your-agent/
+Agent Field Guide: https://arctura.network/agents/
+Agent Field Guide scope: Published educational methodology covering learn, grow, build, scale, sweep, expand, and contribute; not deployment evidence.
 Agent Work Order builder: https://arctura.network/tools/work-order/
 The Work Standard: https://arctura.network/work-standard/
 Work Standard scope: Published methodology; individual capabilities are operational only where linked evidence says so.

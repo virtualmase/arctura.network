@@ -38,3 +38,9 @@ Generic “learn more” and “take part” links are insufficient when a more 
 The canonical source is `content/work-standard/`. Run `npm run publish:work-standard` after editing it. The publisher generates the 16 article routes and synchronizes sitemap and `llms.txt` discovery. The hand-authored hub remains `work-standard/index.html`.
 
 Do not hand-copy the Work Standard into a new silo. Extend the source, renderer, validation, and internal-link model already present.
+
+## Agent Field Guide workflow
+
+The canonical source is `content/agent-field-guide/guides.json`. Run `npm run publish:agent-guide` after changing a practice. The publisher generates seven focused routes and synchronizes sitemap and `llms.txt` discovery. The hand-authored hub at `agents/index.html` connects every practice to the Work Standard, Work Order, examples, evaluation, evidence, and contribution path.
+
+The seven verbs are a continuous practice loop, not seven independent content categories. A new guide belongs here only when it produces a distinct artifact or review decision and can state what proof the reader should keep. Run `npm run publish:content` to regenerate both canonical content systems in one session.

@@ -11,6 +11,8 @@
     "validate:edge": "node scripts/validate-edge-static.mjs",
     "validate:work-order": "node scripts/validate-work-order.mjs",
     "publish:work-standard": "node scripts/publish-work-standard.mjs",
+    "publish:agent-guide": "node scripts/publish-agent-field-guide.mjs",
+    "publish:content": "npm run publish:work-standard && npm run publish:agent-guide",
     "audit:live": "node scripts/audit-live-site.mjs"
   },
   "dependencies": {

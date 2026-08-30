@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "learn",
+    "number": "01",
+    "verb": "Learn",
+    "title": "Learn the shape of accountable work",
+    "description": "Start with the real question, the evidence available, and the boundary an agent must not cross.",
+    "standard": "/work-standard/finding-the-real-question/",
+    "practice": ["Restate the requester’s actual decision before proposing a solution.", "Separate supplied facts, inferences, and unknowns.", "Identify the source that is authoritative for each important claim."],
+    "proof": "A short problem frame with cited sources, named unknowns, and an explicit decision owner.",
+    "next": "grow"
+  },
+  {
+    "slug": "grow",
+    "number": "02",
+    "verb": "Grow",
+    "title": "Grow through measured evaluation",
+    "description": "Improve one observable capability at a time and keep the baseline, test, result, and limitation together.",
+    "standard": "/work-standard/what-counts-as-proof/",
+    "practice": ["Choose one repeatable task and record the starting result.", "Change one meaningful variable: context, tool, instruction, or review gate.", "Run the same acceptance checks and retain failures as learning evidence."],
+    "proof": "A completed evaluation that shows the baseline, changed condition, result, and what the test cannot establish.",
+    "next": "build"
+  },
+  {
+    "slug": "build",
+    "number": "03",
+    "verb": "Build",
+    "title": "Build from a bounded work order",
+    "description": "Translate intent into an expected result, allowed actions, acceptance checks, evidence, and human review.",
+    "standard": "/work-standard/before-an-agent-acts/",
+    "practice": ["Define the result in terms another person or process can inspect.", "List approved inputs, allowed actions, exclusions, and stop conditions.", "Choose acceptance checks and evidence before execution begins."],
+    "proof": "A portable Work Order JSON record plus the artifact and evidence produced against it.",
+    "next": "scale"
+  },
+  {
+    "slug": "scale",
+    "number": "04",
+    "verb": "Scale",
+    "title": "Scale a result, not an assumption",
+    "description": "Repeat proven work with stable interfaces, explicit ownership, observable limits, and safe rollback.",
+    "standard": "/work-standard/readable-by-machines/",
+    "practice": ["Turn repeated inputs and outputs into a versioned contract.", "Keep identity, authority, and handoff points visible across every run.", "Add capacity only after reliability, cost, and failure behavior are measured."],
+    "proof": "A versioned workflow with repeat-run results, operating limits, an owner, and a tested reversal path.",
+    "next": "sweep"
+  },
+  {
+    "slug": "sweep",
+    "number": "05",
+    "verb": "Sweep",
+    "title": "Sweep the system for drift",
+    "description": "Recheck stale claims, broken paths, excess access, failed jobs, orphaned records, and unresolved decisions.",
+    "standard": "/work-standard/keeping-the-record-true/",
+    "practice": ["Compare public claims with the newest authoritative status record.", "Remove obsolete access, duplicate records, dead links, and abandoned artifacts.", "Route exceptions to an owner and date the next review."],
+    "proof": "A dated sweep record listing what was checked, corrected, escalated, and left unknown.",
+    "next": "expand"
+  },
+  {
+    "slug": "expand",
+    "number": "06",
+    "verb": "Expand",
+    "title": "Expand across clear boundaries",
+    "description": "Connect another tool, team, or environment only when roles, trust decisions, data movement, and failure ownership are explicit.",
+    "standard": "/work-standard/working-with-other-systems/",
+    "practice": ["Name the capability each system contributes and the source of its authority.", "Document what crosses the boundary, why, and under whose permission.", "Test the handoff, degraded mode, and recovery path before broader use."],
+    "proof": "A boundary map and integration test that identify control transfer, failure ownership, and recovery evidence.",
+    "next": "contribute"
+  },
+  {
+    "slug": "contribute",
+    "number": "07",
+    "verb": "Contribute",
+    "title": "Contribute a lesson others can inspect",
+    "description": "Return useful work to the shared system as a reproducible artifact, bounded evidence, correction, or tested improvement.",
+    "standard": "/work-standard/what-counts-as-work/",
+    "practice": ["State the problem, scope, method, result, and limitation plainly.", "Remove credentials, private data, and claims the record cannot support.", "Submit the smallest reviewable change with its validation steps."],
+    "proof": "A reviewable contribution linked to its Work Order, validation result, and claim boundary.",
+    "next": "learn"
+  }
+]

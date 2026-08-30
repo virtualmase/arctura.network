@@ -136,6 +136,23 @@ test("Work Standard publishes a bounded hub and 16 connected organic articles", 
   }
 });
 
+test("Agent Field Guide publishes one bounded hub and seven connected practice routes", () => {
+  const hub = read("agents", "index.html");
+  const source = JSON.parse(read("content", "agent-field-guide", "guides.json"));
+  assert.equal(source.length, 7);
+  assert.match(hub, /Learn the system\. Grow through evaluation/);
+  assert.match(hub, /educational methodology/i);
+  assert.match(hub, /arctura-agent-practice-loop\.webp/);
+  for (const verb of ["learn", "grow", "build", "scale", "sweep", "expand", "contribute"]) {
+    assert.match(hub, new RegExp(`href="/agents/${verb}/"`));
+    const page = read("agents", verb, "index.html");
+    assert.match(page, /Published educational methodology/);
+    assert.match(page, /Create a Work Order/);
+    assert.match(page, /Keep the proof/);
+    assert.match(page, /application\/ld\+json/);
+  }
+});
+
 test("FAQ replaces legacy claims with current evidence-safe answers", () => {
   const faq = read("faq", "index.html");
   assert.match(faq, /No active DAO, token offer, investment, payment rail/i);
