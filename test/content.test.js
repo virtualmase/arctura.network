@@ -15,6 +15,146 @@ test("homepage preserves the bounded testnet record and links to evidence", () =
   assert.doesNotMatch(home, /live quorum|live Finney|staking available/i);
 });
 
+test("homepage gives social visitors a bounded path into the product", () => {
+  const home = read("index.html");
+  assert.match(home, /If you found Arctura through a field note or reel/);
+  assert.match(home, /href="\/agents\/"><span>01 · Learn/);
+  assert.match(home, /href="\/tools\/work-order\/"><span>02 · Make/);
+  assert.match(home, /href="\/evidence\/netuid-505\/"><span>03 · Inspect/);
+  assert.match(home, /https:\/\/www\.instagram\.com\/arctura\.network\//);
+  assert.match(home, /https:\/\/x\.com\/ArcturaNetwork/);
+  assert.match(home, /rel="me noopener"/);
+  assert.match(home, /href="tel:\+17209529191"/);
+  assert.match(home, /https:\/\/share\.google\/K0L9x8JHH3nojsPn9/);
+});
+
+test("official social channels remain human-operated and claim-bounded", () => {
+  const channels = read("docs", "SOCIAL_CHANNELS.md");
+  assert.match(channels, /@arctura\.network/);
+  assert.match(channels, /@ArcturaNetwork/);
+  assert.match(channels, /published manually/);
+  assert.match(channels, /No automated posting agent/);
+  assert.match(channels, /do not create a new technical claim/);
+});
+
+test("repository publishes the Arctura voice rules", () => {
+  const voice = read("docs", "VOICE_SYSTEM.md");
+  const contributing = read("CONTRIBUTING.md");
+  assert.match(voice, /High signal, low latency/);
+  assert.match(voice, /No invention/);
+  assert.match(voice, /Unknowns and evidence boundaries are visible/);
+  assert.match(contributing, /docs\/VOICE_SYSTEM\.md/);
+});
+
+test("professional network direction has an explicit product and trust contract", () => {
+  const contract = read("docs", "NETWORK_PRODUCT_CONTRACT.md");
+  assert.match(contract, /professional network for the agentic age/);
+  assert.match(contract, /people and accountable software agents find credible collaborators/);
+  assert.match(contract, /Person/);
+  assert.match(contract, /Agent/);
+  assert.match(contract, /Organization/);
+  assert.match(contract, /separates identity, claims, and evidence/);
+  assert.match(contract, /will not include[\s\S]*algorithmic engagement feed/);
+  assert.match(contract, /proof-backed professional connection/);
+});
+
+test("network preview publishes discoverable source-backed profiles", () => {
+  const directory = read("network", "index.html");
+  const directoryScript = read("js", "network-directory.js");
+  const organization = read("network", "arctura-network", "index.html");
+  const agent = read("network", "arctura-base", "index.html");
+  assert.match(directory, /Only source-backed Arctura records appear today/);
+  assert.match(directory, /data-type="organization"/);
+  assert.match(directory, /data-type="agent"/);
+  assert.match(organization, /Canonical record/);
+  assert.match(agent, /No Finney mainnet netuid/);
+  assert.match(agent, /Accountable owner named/);
+  assert.doesNotMatch(directory, /verified member|active connections/i);
+  assert.match(directoryScript, /loadLiveProfiles/);
+  assert.match(directoryScript, /\/api\/profiles\/handle\//);
+  assert.match(directoryScript, /Inspect source/);
+  assert.match(directoryScript, /sendConnection/);
+  assert.match(directoryScript, /Every request includes a professional reason/);
+});
+
+test("profile onboarding is local-first and exports a bounded draft", () => {
+  const join = read("join", "index.html");
+  const script = read("js", "profile-draft.js");
+  const schema = JSON.parse(read("schemas", "profile-draft", "v1", "schema.json"));
+  assert.match(join, /does not upload, publish, or receive anything you enter/);
+  assert.match(join, /Responsible owner/);
+  assert.match(join, /when must a person step in/);
+  assert.match(join, /Draft completeness/);
+  assert.match(join, /Profile handle/);
+  assert.match(script, /localStorage/);
+  assert.match(script, /status: 'local-draft'/);
+  assert.match(script, /agentLimits/);
+  assert.match(script, /selectedPosition/);
+  assert.equal(schema.$id, "https://arctura.network/schemas/profile-draft/v1/schema.json");
+  assert.doesNotMatch(script, /XMLHttpRequest/);
+});
+
+test("task force openings are complete, plain-language, and never shown as filled", () => {
+  const data = JSON.parse(read("content", "network", "roles.json"));
+  const page = read("network", "roles", "index.html");
+  const script = read("js", "roles.js");
+  const positions = data.teams.flatMap((group) => group.roles);
+  assert.equal(data.teams.length, 8);
+  assert.equal(positions.length, 25);
+  for (const position of positions) {
+    assert.ok(position.responsibility);
+    assert.ok(position.skills.length >= 3);
+    assert.ok(position.requirements.length >= 3);
+    assert.ok(position.proof);
+  }
+  assert.match(page, /Task Force Openings/);
+  assert.match(page, /These are not job offers/);
+  assert.match(page, /25 open positions · 0 filled/);
+  assert.match(script, /Skills needed/);
+  assert.match(script, /How results are checked/);
+  assert.doesNotMatch(`${page}\n${script}`, /mandate|proof owed|operating houses|scoped participation/i);
+});
+
+test("member area handles unavailable, signed-out, profile, and connection states", () => {
+  const page = read("network", "me", "index.html");
+  const script = read("js", "network-account.js");
+  assert.match(page, /Accounts are not active yet/);
+  assert.match(page, /Continue with GitHub/);
+  assert.match(page, /Private draft found/);
+  assert.match(page, /Requests with a reason/);
+  assert.match(script, /\/api\/me\/profiles/);
+  assert.match(script, /\/api\/connections/);
+  assert.match(script, /Manage sources/);
+  assert.match(script, /addEvidence/);
+  assert.match(page, /Type <strong>DELETE<\/strong> to confirm/);
+  assert.match(script, /\/api\/account/);
+  for (const state of ["accepted", "declined", "withdrawn", "blocked"]) assert.match(script, new RegExp(state));
+  assert.match(script, /It is still private/);
+});
+
+test("network worker covers profile ownership, evidence, and the connection lifecycle", () => {
+  const worker = read("worker", "index.js");
+  const migration = read("worker", "migrations", "0001_network.sql");
+  const reportsMigration = read("worker", "migrations", "0002_reports.sql");
+  const requestLimitsMigration = read("worker", "migrations", "0003_request_limits.sql");
+  assert.match(worker, /githubCallback/);
+  assert.match(worker, /listOwnedProfiles/);
+  assert.match(worker, /updateProfile/);
+  assert.match(worker, /addEvidence/);
+  assert.match(worker, /listOwnedEvidence/);
+  assert.match(worker, /requestConnection/);
+  assert.match(worker, /updateConnection/);
+  assert.match(worker, /createReport/);
+  assert.match(worker, /\/api\/reports/);
+  assert.match(worker, /enforceRequestLimit/);
+  assert.match(worker, /deleteAccount/);
+  assert.match(migration, /CREATE TABLE profiles/);
+  assert.match(migration, /CREATE TABLE connections/);
+  assert.match(migration, /CREATE TABLE evidence_links/);
+  assert.match(reportsMigration, /CREATE TABLE reports/);
+  assert.match(requestLimitsMigration, /CREATE TABLE request_limits/);
+});
+
 test("public evidence record declares its proof boundary without a mainnet claim", () => {
   const status = JSON.parse(read("evidence", "netuid-505", "status.json"));
   assert.equal(status.network.netuid, 505);

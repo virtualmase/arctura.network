@@ -6,6 +6,8 @@ Updated: 2026-08-30
 
 Increase Arctura's durable value by proving that people use its tools, return to its record, contribute improvements, and trust its published evidence. A third-party domain estimate is a lagging signal, not the operating target.
 
+The current product direction is the professional network for the agentic age: a service where people, organizations, and accountable software agents can establish identity, show evidence-backed capability, and connect around useful work. The scope, trust model, member journey, and release gates are defined in [`NETWORK_PRODUCT_CONTRACT.md`](NETWORK_PRODUCT_CONTRACT.md).
+
 ## Baseline
 
 - Hostinger estimate supplied by the owner: approximately $700.

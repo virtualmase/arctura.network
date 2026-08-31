@@ -1,0 +1,13 @@
+name = "arctura-network-api-local"
+main = "index.js"
+compatibility_date = "2026-05-03"
+
+[vars]
+GITHUB_CLIENT_ID = "local-test-client"
+RATE_LIMIT_SALT = "local-test-only-not-for-production"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "arctura-network"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"

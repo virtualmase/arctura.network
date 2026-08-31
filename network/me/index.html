@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Member Area — Arctura Network</title>
+  <meta name="description" content="Manage your Arctura profiles, source links, and professional connections.">
+  <meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://arctura.network/network/me/"><link rel="icon" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css"><link rel="stylesheet" href="/css/network.css"><link rel="stylesheet" href="/css/account.css"><link rel="stylesheet" href="/css/evidence.css"><link rel="stylesheet" href="/css/account-settings.css">
+  <script src="/js/site.js" defer></script><script src="/js/network-account.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to member area</a>
+  <header class="site-header"><div class="wrap nav-row"><a class="brand" href="/"><img src="/assets/favicon.svg" alt="" width="34" height="34"><span>ARCTURA.NETWORK</span></a><nav class="desktop-nav" aria-label="Primary"><a href="/network/">Discover</a><a href="/network/roles/">Task Force</a><a href="/join/">Draft profile</a></nav><span class="preview-badge">Member area</span></div></header>
+  <main id="main" class="account-page"><div class="wrap account-shell">
+    <header class="account-header"><div><p class="eyebrow">Member area</p><h1>Your work on Arctura.</h1><p>Manage profiles, source links, and connection requests from one place.</p></div><div class="service-pill"><i aria-hidden="true"></i><span id="service-label">Checking account service</span></div></header>
+
+    <section class="account-state" id="service-unavailable" hidden><span class="state-number">00</span><div><h2>Accounts are not active yet.</h2><p>The member interface is ready, but the sign-in and database service has not been deployed. You can keep building a private profile draft in this browser.</p><div class="actions"><a class="button" href="/join/">Continue your draft</a><a class="text-link" href="/network/">Browse the directory →</a></div></div></section>
+    <section class="account-state" id="signed-out" hidden><span class="state-number">01</span><div><h2>Sign in to manage your profile.</h2><p>Arctura uses GitHub for the first account release. It does not collect a separate password.</p><a class="button" href="/api/auth/github/start">Continue with GitHub</a></div></section>
+
+    <div id="signed-in" hidden>
+      <div class="account-topline"><div><span>Signed in as</span><strong id="account-name"></strong></div><button type="button" id="sign-out">Sign out</button></div>
+      <nav class="account-tabs" aria-label="Member sections"><button type="button" data-tab="profiles" aria-selected="true">Profiles</button><button type="button" data-tab="connections" aria-selected="false">Connections <span id="connection-total">0</span></button><button type="button" data-tab="settings" aria-selected="false">Account</button></nav>
+
+      <section class="account-panel" id="panel-profiles"><div class="panel-heading"><div><p class="eyebrow">Your profiles</p><h2>Identity and work</h2></div><a class="button" href="/join/">Create another draft</a></div><div class="draft-import" id="draft-import" hidden><div><span>Private draft found</span><strong id="draft-name">Untitled profile</strong><p>Review the draft before sending it to your account. It will stay private until you choose to publish it.</p></div><button type="button" id="publish-draft">Add draft to account</button></div><div class="owned-profiles" id="owned-profiles"><p>Loading profiles…</p></div><section class="evidence-editor" id="evidence-editor" hidden aria-labelledby="evidence-title"><div class="evidence-editor-head"><div><span>Add source to</span><h3 id="evidence-title">Profile</h3></div><button type="button" id="close-evidence">Close</button></div><p>Describe the exact claim the source supports. New sources are labeled “Member submitted” until a separate review occurs.</p><form id="evidence-form"><input type="hidden" id="evidence-profile-id"><label><span>Source name</span><input id="evidence-label" required maxlength="100" placeholder="Project repository"></label><label><span>Source URL</span><input id="evidence-url" required type="url" maxlength="1000" placeholder="https://…"></label><label><span>What does this source show?</span><textarea id="evidence-claim" required maxlength="500" rows="4" placeholder="This repository shows…"></textarea></label><button type="submit">Add source</button></form><div id="profile-evidence" class="profile-evidence"></div></section></section>
+
+      <section class="account-panel" id="panel-connections" hidden><div class="panel-heading"><div><p class="eyebrow">Connections</p><h2>Requests with a reason</h2></div><p>Contact details remain private unless both sides choose to share them.</p></div><div class="connection-list" id="connection-list"><p>Loading connections…</p></div></section>
+      <section class="account-panel account-settings" id="panel-settings" hidden><div class="panel-heading"><div><p class="eyebrow">Account</p><h2>Privacy and access</h2></div></div><div class="settings-card"><h3>Sign-in</h3><p>Arctura uses your GitHub account for sign-in. It does not store a separate password.</p><button type="button" id="settings-sign-out">Sign out on this device</button></div><div class="settings-card danger-zone"><h3>Delete account</h3><p>This removes your sign-in record, sessions, private reports, sources you added, and profiles that have no other owner. This cannot be undone.</p><label for="delete-confirmation">Type <strong>DELETE</strong> to confirm</label><div><input id="delete-confirmation" autocomplete="off" spellcheck="false"><button type="button" id="delete-account" disabled>Delete account</button></div></div></section>
+    </div>
+    <p class="account-message" id="account-message" role="status" aria-live="polite"></p>
+  </div></main>
+</body></html>

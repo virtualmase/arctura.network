@@ -1,5 +1,7 @@
 # Contributing to Arctura Network
 
+Read [`docs/VOICE_SYSTEM.md`](docs/VOICE_SYSTEM.md) before writing public interface copy, documentation, release notes, or social material.
+
 Arctura accepts work that makes the network more useful, inspectable, and maintainable. Contributions should leave enough evidence for another person to understand what changed and verify the result.
 
 ## Useful contributions

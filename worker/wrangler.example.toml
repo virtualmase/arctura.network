@@ -1,0 +1,12 @@
+name = "arctura-network-api"
+main = "index.js"
+compatibility_date = "2026-08-31"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "arctura-network"
+database_id = "replace-with-cloudflare-d1-database-id"
+
+# Add GITHUB_CLIENT_ID as a non-secret environment variable.
+# Add GITHUB_CLIENT_SECRET with `wrangler secret put GITHUB_CLIENT_SECRET`.
+# Add RATE_LIMIT_SALT with `wrangler secret put RATE_LIMIT_SALT`.

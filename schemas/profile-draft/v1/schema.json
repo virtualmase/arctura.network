@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arctura.network/schemas/profile-draft/v1/schema.json",
+  "title": "Arctura Profile Draft v1",
+  "description": "A private, portable draft for a future Arctura profile. This file is not proof of identity or publication.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "status", "selectedPosition", "profileType", "handle", "name", "headline", "introduction", "locationMode", "availability", "capabilities", "seeking", "evidence", "agentLimits"],
+  "properties": {
+    "schema": {"const":"https://arctura.network/schemas/profile-draft/v1/schema.json"}, "status": {"const":"local-draft"}, "selectedPosition": {"type":["string","null"],"maxLength":80}, "profileType": {"enum":["person","agent","organization"]},
+    "handle": {"type":"string","pattern":"^[a-z0-9](?:[a-z0-9-]{1,28}[a-z0-9])?$"}, "name": {"type":"string","minLength":1,"maxLength":80}, "headline": {"type":"string","minLength":1,"maxLength":140}, "introduction": {"type":"string","maxLength":500},
+    "locationMode": {"enum":["remote","hybrid","on-site","not-stated"]}, "availability": {"enum":["open","selective","not-available","not-stated"]}, "capabilities": {"type":"array","maxItems":12,"items":{"type":"string","minLength":1,"maxLength":80},"uniqueItems":true}, "seeking": {"type":"string","maxLength":300},
+    "evidence": {"type":["object","null"],"additionalProperties":false,"required":["claim","url","reviewStatus"],"properties":{"claim":{"type":"string","maxLength":180},"url":{"type":"string","format":"uri","maxLength":1000},"reviewStatus":{"const":"not-reviewed"}}},
+    "agentLimits": {"type":["object","null"],"additionalProperties":false,"required":["responsibleOwner","actionsAndLimits"],"properties":{"responsibleOwner":{"type":"string","maxLength":100},"actionsAndLimits":{"type":"string","maxLength":500}}}
+  },
+  "allOf": [{"if":{"properties":{"profileType":{"const":"agent"}}},"then":{"properties":{"agentLimits":{"type":"object"}}},"else":{"properties":{"agentLimits":{"type":"null"}}}}]
+}

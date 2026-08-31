@@ -1,0 +1,90 @@
+{
+  "version": "1.0.0",
+  "status": "proposed",
+  "updated": "2026-08-31",
+  "assignments": [],
+  "assignmentRule": "A position is filled only when a named person, responsible agent, or person-agent team accepts the work and agrees to show the results.",
+  "teams": [
+    {
+      "id": "direction",
+      "name": "Direction",
+      "purpose": "Set the mission, product limits, and day-to-day responsibilities.",
+      "roles": [
+        {"id":"network-steward","title":"Founder & Network Steward","priority":"foundation","responsibility":"Hold the mission, public promise, and final responsibility for Arctura Network.","skills":["Product strategy","Systems judgment","Public accountability"],"requirements":["Named human owner","Published decision limits","Quarterly progress review"],"proof":"Published decisions, decision limits, and regular progress reports."},
+        {"id":"operations-lead","title":"Network Operations Lead","priority":"foundation","responsibility":"Turn strategy into a work plan, clear owners, release checks, and incident follow-through.","skills":["Operations design","Risk management","Cross-team coordination"],"requirements":["Named owner","Current responsibility map","Incident response authority"],"proof":"Current work plan, responsibility map, and reviewed delivery record."},
+        {"id":"product-lead","title":"Product Lead","priority":"foundation","responsibility":"Own the member journey from identity and discovery through connection and work people can check.","skills":["Product research","Journey design","Outcome measurement"],"requirements":["Member research practice","Release approval responsibility","Published product limits"],"proof":"Versioned product plan, research notes, release checks, and outcome metrics."}
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture",
+      "purpose": "Design the systems, interfaces, and data boundaries that should exist.",
+      "roles": [
+        {"id":"principal-architect","title":"Principal Systems Architect","priority":"foundation","responsibility":"Design the service, its security limits, and technical choices that can be reversed safely.","skills":["Distributed systems","Security planning","Technical decision design"],"requirements":["Production architecture experience","Written decision practice","Security review participation"],"proof":"Decision records, security maps, diagrams, and tested connections between systems."},
+        {"id":"identity-engineer","title":"Identity & Access Engineer","priority":"foundation","responsibility":"Build sign-in, profile ownership, sessions, account recovery, and access rules.","skills":["OAuth and OIDC","Session security","Access control"],"requirements":["Identity system experience","Recovery and abuse testing","Privacy-aware data handling"],"proof":"Sign-in and access tests, a recovery drill, and an access review."},
+        {"id":"platform-engineer","title":"Platform & API Engineer","priority":"foundation","responsibility":"Build lasting profile, evidence, connection, and moderation services.","skills":["API design","SQL data modeling","Edge services"],"requirements":["Safe database changes","Failure testing","Clear operating notes"],"proof":"Versioned APIs, database changes, service checks, and tested failure behavior."},
+        {"id":"product-engineer","title":"Frontend Product Engineer","priority":"foundation","responsibility":"Build clear, accessible discovery, profile, onboarding, and connection screens.","skills":["Semantic HTML","Responsive interface design","Accessible interaction"],"requirements":["Shipped product interfaces","Cross-browser testing","Performance ownership"],"proof":"Cross-device journey tests, accessibility results, performance report, and release record."},
+        {"id":"discovery-engineer","title":"Discovery & Data Engineer","priority":"growth","responsibility":"Help members find relevant people and agents without ranking them by attention or popularity.","skills":["Search systems","Search quality testing","Data quality"],"requirements":["Explainable search design","Fairness review","Privacy-safe measurement"],"proof":"Search rules, relevance tests, fairness review, and clear ranking signals."}
+      ]
+    },
+    {
+      "id": "agents",
+      "name": "Agent Systems",
+      "purpose": "Define how software agents participate under visible human accountability.",
+      "roles": [
+        {"id":"agent-systems-engineer","title":"Agent Systems Engineer","priority":"foundation","responsibility":"Design agent profiles, working limits, human handoffs, and work screens.","skills":["Agent orchestration","Tool permissions","Human handoff design"],"requirements":["Repeatable agent systems","Clear refusal behavior","Named human responsibility"],"proof":"Agent specifications, limit tests, refusal cases, and linked work records."},
+        {"id":"agent-evaluation-engineer","title":"Agent Evaluation Engineer","priority":"foundation","responsibility":"Measure agent behavior against written work orders and operating limits.","skills":["Test design","Statistical reasoning","Failure analysis"],"requirements":["Repeatable test tools","Careful result reporting","Hard-case design"],"proof":"Test sets, repeatable runs, failure analysis, and results with clear limits."},
+        {"id":"interoperability-architect","title":"Agent Integration Architect","priority":"growth","responsibility":"Make identity, capability, work, and evidence records usable across different systems.","skills":["Schema design","System integration","Version compatibility"],"requirements":["Published interface work","Change planning","Cross-system testing"],"proof":"Published schemas, compatibility tests, version rules, and change examples."}
+      ]
+    },
+    {
+      "id": "verification",
+      "name": "Verification",
+      "purpose": "Measure what the network produced and prove what actually works.",
+      "roles": [
+        {"id":"evidence-lead","title":"Evidence & Verification Lead","priority":"foundation","responsibility":"Set clear rules for claims, sources, review status, and known limits.","skills":["Source review","Careful claim writing","Audit design"],"requirements":["Independent review practice","Conflict disclosure","Correction authority"],"proof":"Evidence rules, reviewed records, disputes, corrections, and accepted results."},
+        {"id":"quality-engineer","title":"Quality & Accessibility Engineer","priority":"foundation","responsibility":"Test core journeys across devices, abilities, browsers, and failure states.","skills":["Accessibility testing","Journey automation","Defect review"],"requirements":["WCAG testing practice","Assistive technology review","Authority to stop a bad release"],"proof":"Automated and manual test results, accessibility review, and closed defects."},
+        {"id":"reliability-engineer","title":"Reliability Engineer","priority":"foundation","responsibility":"Keep sign-in, profiles, search, and connections working and recoverable.","skills":["Monitoring","Incident response","Recovery engineering"],"requirements":["Production operations experience","On-call handoff plan","Restore testing"],"proof":"Service targets, alerts, incident reviews, restore tests, and uptime record."},
+        {"id":"security-engineer","title":"Application Security Engineer","priority":"foundation","responsibility":"Protect accounts, private member data, APIs, and software dependencies.","skills":["Application security","Security review","Safe development practices"],"requirements":["Responsible disclosure practice","Incident response role","Independent security review"],"proof":"Security plan, security tests, dependency review, response exercises, and fixed issues."}
+      ]
+    },
+    {
+      "id": "records",
+      "name": "Records",
+      "purpose": "Preserve identity, work, evidence, decisions, and corrections as durable records.",
+      "roles": [
+        {"id":"technical-records-lead","title":"Technical Records Lead","priority":"foundation","responsibility":"Keep primary records, source history, retention rules, corrections, and exports accurate.","skills":["Technical writing","Records management","Source checking"],"requirements":["Careful change tracking","Correction process","Data export testing"],"proof":"Record inventory, retention schedule, correction log, and successful export tests."},
+        {"id":"schema-steward","title":"Schema & Data Steward","priority":"foundation","responsibility":"Keep profile, connection, work, and evidence data stable and readable by other systems.","skills":["JSON Schema","Data modeling","Version management"],"requirements":["Published schema work","Compatibility testing","Change documentation"],"proof":"Versioned schemas, validation tools, compatibility rules, and change record."},
+        {"id":"editorial-lead","title":"Editorial & Voice Lead","priority":"growth","responsibility":"Keep public language direct, accurate, useful, and consistent across the product and social channels.","skills":["Plain-language editing","Technical writing","Source review"],"requirements":["Strong editing portfolio","Fact-checking practice","Fast correction process"],"proof":"Voice guide, reviewed releases, source links, and correction history."}
+      ]
+    },
+    {
+      "id": "network",
+      "name": "Network",
+      "purpose": "Help the right members find one another and begin useful work with clear intent.",
+      "roles": [
+        {"id":"member-success-lead","title":"Member & Community Lead","priority":"foundation","responsibility":"Help members create credible profiles, find collaborators, contribute, and complete their first work.","skills":["Member onboarding","Community operations","User research"],"requirements":["Clear written communication","Support case tracking","Respect for member privacy"],"proof":"Onboarding outcomes, support record, member research, contributions, and first-use results."},
+        {"id":"partnerships-lead","title":"Partnerships Lead","priority":"growth","responsibility":"Build clear working relationships with agent platforms, research groups, and professional communities.","skills":["Partnership development","Technical communication","Agreement design"],"requirements":["Named partner contacts","Written scope and owners","Regular outcome review"],"proof":"Named agreements, working limits, owners, outcomes, and review dates."}
+      ]
+    },
+    {
+      "id": "trust",
+      "name": "Trust",
+      "purpose": "Keep identity, safety, privacy, and professional conduct enforceable.",
+      "roles": [
+        {"id":"trust-safety-lead","title":"Trust, Safety & Profile Integrity Lead","priority":"foundation","responsibility":"Run conduct rules, reports, moderation, identity disputes, blocks, appeals, and abuse response.","skills":["Trust and safety operations","Identity review","Case documentation"],"requirements":["Conflict-aware judgment","Private case handling","Appeal and correction process"],"proof":"Published rules, response targets, anonymous case totals, corrections, and appeal outcomes."},
+        {"id":"privacy-lead","title":"Privacy & Data Governance Lead","priority":"foundation","responsibility":"Limit data collection and manage consent, access, retention, export, and deletion.","skills":["Privacy engineering","Data mapping","Policy review"],"requirements":["Privacy law familiarity","Deletion testing","Third-party service review"],"proof":"Data map, privacy review, deletion tests, service-provider list, and request record."}
+      ]
+    },
+    {
+      "id": "stewardship",
+      "name": "Stewardship",
+      "purpose": "Operate, fund, improve, and responsibly retire what the network builds.",
+      "roles": [
+        {"id":"infrastructure-lead","title":"Infrastructure & Delivery Lead","priority":"foundation","responsibility":"Run deployments, edge settings, secrets, backups, rollback, and production access.","skills":["Cloudflare operations","Deployment automation","Backup and recovery"],"requirements":["Least-access practice","Rollback testing","Written incident handoff"],"proof":"Deployment record, access review, restore test, rollback drill, and uptime report."},
+        {"id":"program-manager","title":"Program & Delivery Manager","priority":"foundation","responsibility":"Coordinate dependencies, risks, release checks, and handoffs across teams.","skills":["Program planning","Risk tracking","Clear handoffs"],"requirements":["Current delivery plan","Named task owners","Decision tracking"],"proof":"Current delivery plan, decision log, risk list, and accepted milestones."},
+        {"id":"commercial-lead","title":"Commercial & Sustainability Lead","priority":"growth","responsibility":"Define clear offers, contracts, costs, revenue, and how Arctura can keep operating.","skills":["Business planning","Contract review","Financial modeling"],"requirements":["Written offer terms","Conflict disclosure","Basic financial controls"],"proof":"Published offer limits, signed agreements, cost record, and financial checks."}
+      ]
+    }
+  ]
+}
