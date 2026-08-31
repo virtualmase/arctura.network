@@ -37,6 +37,18 @@ test("official social channels remain human-operated and claim-bounded", () => {
   assert.match(channels, /do not create a new technical claim/);
 });
 
+test("site footers render accessible official-channel icons", () => {
+  const script = read("js", "site.js");
+  const styles = read("css", "site.css");
+  for (const channel of ["Instagram", "X", "LinkedIn", "GitHub", "Google"]) {
+    assert.match(script, new RegExp(`name: '${channel}'`));
+  }
+  assert.match(script, /linkedin\.com\/company\/arctura-network/);
+  assert.match(script, /aria-label="Arctura Network on \$\{name\}"/);
+  assert.match(script, /<svg viewBox="0 0 24 24" aria-hidden="true"/);
+  assert.match(styles, /\.social-link:focus-visible/);
+});
+
 test("repository publishes the Arctura voice rules", () => {
   const voice = read("docs", "VOICE_SYSTEM.md");
   const contributing = read("CONTRIBUTING.md");
