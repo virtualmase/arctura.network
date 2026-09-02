@@ -11,12 +11,16 @@ Agent training guide: https://arctura.network/insights/train-your-agent/
 Agent Field Guide: https://arctura.network/agents/
 Agent Field Guide scope: Published educational methodology covering learn, grow, build, scale, sweep, expand, and contribute; not deployment evidence.
 Agent Work Order builder: https://arctura.network/tools/work-order/
+Agent Accountability Card builder: https://arctura.network/tools/agent-accountability-card/
+Agent Accountability Card schema: https://arctura.network/schemas/agent-accountability-card/v1/schema.json
+AI Agent Readiness Check: https://arctura.network/tools/agent-readiness-check/
+Worked support-review agent example: https://arctura.network/examples/agents/support-review/
 The Work Standard: https://arctura.network/work-standard/
 Work Standard scope: Published methodology; individual capabilities are operational only where linked evidence says so.
 August 2026 Work / Proof / Stewardship record: https://arctura.network/records/2026-08/
 Work Order evaluation template: https://arctura.network/examples/evaluations/work-order-evaluation-template.json
 Agent Work Order v1 release: https://arctura.network/updates/work-order-v1/
-Updated: 2026-08-30
+Updated: 2026-09-02
 
 ## Public idea
 
@@ -27,6 +31,12 @@ Doctrine: Do the work. Check the work. Improve the system.
 The agent guide is an Arctura operating note about defining work, selecting a capable model, choosing where it runs, improving it in measured stages, and keeping an evaluation record. It is not a vendor ranking.
 
 The Agent Work Order builder is a local-only browser tool. It creates a portable JSON record for an agent's expected result, approved inputs, authority, acceptance checks, and evidence. It does not upload or retain user input.
+
+The Agent Accountability Card builder is a local-only browser tool for naming an agent's responsible owner, standing authority, prohibited actions, human handoffs, checks, and evidence. It complements capability-discovery records and does not certify that an agent is safe.
+
+The AI Agent Readiness Check is a local-only 12-point planning aid covering ownership, authority, human handoff, evaluation, and evidence. Its result is not a safety certification.
+
+The support-review agent page is an illustrative worked example with downloadable accountability, Work Order, and evaluation records. It does not claim a production deployment.
 
 The monthly Work / Proof / Stewardship record publishes observed adoption signals, unknowns, shipped artifacts, and next commitments. The August 2026 baseline reports GitHub repository traffic only and does not claim website visitors, customers, revenue, or active operators.
 

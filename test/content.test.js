@@ -11,16 +11,16 @@ test("homepage preserves the bounded testnet record and links to evidence", () =
   assert.match(home, /href="\/documentation\/netuid-505\/">Read the Netuid 505 record/);
   assert.match(home, /href="\/evidence\/netuid-505\/">Review the evidence/);
   assert.match(home, /No mainnet netuid has been published\./);
-  assert.match(home, /href="\/participate\/">Contribute<\/a>/);
+  assert.match(home, /href="\/participate\/">Read the operator guidance/);
   assert.doesNotMatch(home, /live quorum|live Finney|staking available/i);
 });
 
 test("homepage gives social visitors a bounded path into the product", () => {
   const home = read("index.html");
   assert.match(home, /If you found Arctura through a field note or reel/);
-  assert.match(home, /href="\/agents\/"><span>01 · Learn/);
-  assert.match(home, /href="\/tools\/work-order\/"><span>02 · Make/);
-  assert.match(home, /href="\/evidence\/netuid-505\/"><span>03 · Inspect/);
+  assert.match(home, /href="\/tools\/agent-readiness-check\/"><span>01 · Check/);
+  assert.match(home, /href="\/tools\/agent-accountability-card\/"><span>02 · Identify/);
+  assert.match(home, /href="\/tools\/work-order\/"><span>03 · Assign/);
   assert.match(home, /https:\/\/www\.instagram\.com\/arctura\.network\//);
   assert.match(home, /https:\/\/x\.com\/ArcturaNetwork/);
   assert.match(home, /rel="me noopener"/);
@@ -144,6 +144,71 @@ test("member area handles unavailable, signed-out, profile, and connection state
   assert.match(script, /It is still private/);
 });
 
+test('network routes preserve truthful, responsive navigation', () => {
+  const home = read('index.html');
+  const member = read('network/me/index.html');
+  const siteScript = read('js/site.js');
+  assert.doesNotMatch(home, />Create profile</);
+  assert.match(member, /class="menu-button"[^>]+aria-controls="mobile-nav"/);
+  assert.match(member, /class="mobile-nav" id="mobile-nav"/);
+  assert.match(siteScript, /if \(siteHeader && !siteHeader\.querySelector\('\.menu-button'\)\)/);
+  assert.match(siteScript, /link\.textContent\.trim\(\) === 'Create profile'/);
+});
+
+test('Agent Accountability Card publishes an open local-first trust record', () => {
+  const page = read('tools/agent-accountability-card/index.html');
+  const script = read('js/agent-accountability-card.js');
+  const schema = JSON.parse(read('schemas/agent-accountability-card/v1/schema.json'));
+  assert.match(page, /Make your agent accountable before it acts/);
+  for (const field of ['owner', 'allowed', 'prohibited', 'handoff', 'checks']) assert.match(page, new RegExp(`name="${field}"`));
+  assert.match(page, /local-first/i);
+  assert.match(page, /does not certify safety/i);
+  assert.match(script, /localStorage\.setItem\('arctura_agent_accountability_card_v1'/);
+  assert.match(script, /agent-accountability-card\.json/);
+  assert.match(script, /track\('accountability_card_view'\)/);
+  assert.match(script, /track\('accountability_card_start'\)/);
+  assert.match(script, /track\('accountability_card_export', \{method:'copy'\}\)/);
+  assert.doesNotMatch(script, /track\([^\n]+purpose|track\([^\n]+owner/);
+  assert.equal(schema.$id, 'https://arctura.network/schemas/agent-accountability-card/v1/schema.json');
+  assert.deepEqual(schema.required, ['schema', 'status', 'agent', 'accountability', 'authority', 'handoff', 'checks']);
+});
+
+test('readiness check creates a useful, privacy-safe acquisition path', () => {
+  const page = read('tools/agent-readiness-check/index.html');
+  const script = read('js/agent-readiness-check.js');
+  const home = read('index.html');
+  assert.match(page, /Is your AI agent ready to act/);
+  assert.equal((page.match(/type="checkbox"/g) || []).length, 12);
+  assert.match(page, /planning check, not a safety certification/i);
+  assert.match(script, /trackReadiness\('agent_readiness_view'\)/);
+  assert.match(script, /trackReadiness\('agent_readiness_result', \{band:result\.dataset\.band\}\)/);
+  assert.doesNotMatch(script, /localStorage|fetch\(/);
+  assert.match(home, /href="\/tools\/agent-readiness-check\/">Check your agent/);
+});
+
+test('homepage offers a bounded team pilot without overstating certification', () => {
+  const home = read('index.html');
+  const script = read('js/site.js');
+  assert.match(home, /Bring one agent and one real workflow/);
+  assert.match(home, /href="tel:\+17209529191" data-track="team_pilot_contact"/);
+  assert.match(home, /No certification promise/);
+  assert.match(script, /window\.zaraz\?\.track\(link\.dataset\.track\)/);
+});
+
+test('worked agent example connects boundaries, work, evaluation, and reusable records', () => {
+  const page = read('examples/agents/support-review/index.html');
+  const card = JSON.parse(read('assets/examples/support-review-accountability-card.json'));
+  const evaluation = JSON.parse(read('assets/examples/support-review-evaluation.json'));
+  assert.match(page, /Illustrative example/);
+  assert.match(page, /fictional/);
+  assert.match(page, /support-response-review\.json/);
+  assert.match(page, /support-review-accountability-card\.json/);
+  assert.match(page, /<svg[^>]+role="img"/);
+  assert.equal(card.agent.name, 'Support Review Agent');
+  assert.equal(evaluation.status, 'illustrative-example');
+  assert.equal(evaluation.observed.externalActionTaken, false);
+});
+
 test("network worker covers profile ownership, evidence, and the connection lifecycle", () => {
   const worker = read("worker", "index.js");
   const migration = read("worker", "migrations", "0001_network.sql");
@@ -210,7 +275,7 @@ test("Agent Work Order prototype exposes bounded work and proof fields", () => {
   const home = read("index.html");
   const tool = read("tools", "work-order", "index.html");
   const script = read("js", "work-order.js");
-  assert.match(home, /href="\/tools\/work-order\/">Create a work order/);
+  assert.match(home, /href="\/tools\/work-order\/"/);
   for (const field of ["expectedResult", "approvedInputs", "allowedActions", "acceptanceChecks", "evidenceToKeep", "reviewStatus"]) {
     assert.match(script, new RegExp(field));
   }

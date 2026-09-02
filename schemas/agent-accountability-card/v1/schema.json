@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arctura.network/schemas/agent-accountability-card/v1/schema.json",
+  "title": "Arctura Agent Accountability Card v1",
+  "type": "object",
+  "required": ["schema", "status", "agent", "accountability", "authority", "handoff", "checks"],
+  "properties": {
+    "schema": {"const": "https://arctura.network/schemas/agent-accountability-card/v1/schema.json"},
+    "status": {"enum": ["draft", "reviewed"]},
+    "agent": {"type": "object", "required": ["name", "purpose"], "properties": {"name": {"type": "string", "maxLength": 100}, "purpose": {"type": "string", "maxLength": 300}, "version": {"type": "string", "maxLength": 50}, "agentCardUrl": {"type": ["string", "null"], "format": "uri"}}},
+    "accountability": {"type": "object", "required": ["owner"], "properties": {"owner": {"type": "string", "maxLength": 120}, "contact": {"type": ["string", "null"], "maxLength": 200}}},
+    "authority": {"type": "object", "required": ["allowed", "prohibited"], "properties": {"allowed": {"type": "array", "items": {"type": "string"}, "maxItems": 20}, "prohibited": {"type": "array", "items": {"type": "string"}, "maxItems": 20}}},
+    "handoff": {"type": "array", "items": {"type": "string"}, "maxItems": 20},
+    "checks": {"type": "array", "items": {"type": "string"}, "maxItems": 20},
+    "evidence": {"type": "array", "items": {"type": "object", "required": ["claim", "url"], "properties": {"claim": {"type": "string", "maxLength": 300}, "url": {"type": "string", "format": "uri"}, "reviewStatus": {"enum": ["not-reviewed", "reviewed"]}}}, "maxItems": 10},
+    "updated": {"type": "string", "format": "date"}
+  }
+}

@@ -1,3 +1,31 @@
+document.querySelectorAll('a[href="/join/"]').forEach((link) => {
+  if (link.textContent.trim() === 'Create profile') link.textContent = 'Draft profile';
+});
+
+const siteHeader = document.querySelector('.site-header');
+if (siteHeader && !siteHeader.querySelector('.menu-button')) {
+  const desktopNav = siteHeader.querySelector('.desktop-nav');
+  if (desktopNav) {
+    const generatedMobileNav = document.createElement('nav');
+    generatedMobileNav.className = 'mobile-nav';
+    generatedMobileNav.id = 'mobile-nav';
+    generatedMobileNav.setAttribute('aria-label', 'Mobile');
+    generatedMobileNav.hidden = true;
+    generatedMobileNav.innerHTML = desktopNav.innerHTML;
+    const desktopDraftLink = siteHeader.querySelector('.desktop-cta[href="/join/"]');
+    if (desktopDraftLink && !generatedMobileNav.querySelector('a[href="/join/"]')) generatedMobileNav.append(desktopDraftLink.cloneNode(true));
+    generatedMobileNav.querySelector('.desktop-cta')?.classList.remove('button', 'button-small', 'desktop-cta');
+    const generatedMenuButton = document.createElement('button');
+    generatedMenuButton.className = 'menu-button';
+    generatedMenuButton.type = 'button';
+    generatedMenuButton.setAttribute('aria-expanded', 'false');
+    generatedMenuButton.setAttribute('aria-controls', 'mobile-nav');
+    generatedMenuButton.innerHTML = '<span class="sr-only">Open menu</span><span></span><span></span>';
+    siteHeader.querySelector('.nav-row').append(generatedMenuButton);
+    siteHeader.append(generatedMobileNav);
+  }
+}
+
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('#mobile-nav');
 
@@ -17,6 +45,10 @@ if (menuButton && mobileNav) {
 
 const year = document.querySelector('#year');
 if (year) year.textContent = String(new Date().getFullYear());
+
+document.querySelectorAll('[data-track]').forEach((link) => link.addEventListener('click', () => {
+  try { window.zaraz?.track(link.dataset.track); } catch { /* Analytics never blocks navigation. */ }
+}));
 
 const footer = document.querySelector('.site-footer');
 if (footer) {

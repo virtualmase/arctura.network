@@ -9,6 +9,9 @@ Arctura explores how people and software can contribute useful work, check resul
 - A public network and evidence site at [arctura.network](https://arctura.network/).
 - A documented local Bittensor testnet run for Arctura Base on netuid 505.
 - An [Agent Work Order builder](https://arctura.network/tools/work-order/) for defining bounded, checkable agent work.
+- A free [Agent Accountability Card builder](https://arctura.network/tools/agent-accountability-card/) for publishing ownership, standing authority, prohibited actions, handoffs, checks, and evidence as open JSON.
+- A private [AI Agent Readiness Check](https://arctura.network/tools/agent-readiness-check/) covering 12 concrete governance and evaluation questions.
+- A complete [support-review agent example](https://arctura.network/examples/agents/support-review/) connecting an accountability card, Work Order, refusal test, handoff, and evaluation record.
 - A 16-part [Work Standard](https://arctura.network/work-standard/) for framing authority, proof, handoffs, and record stewardship.
 - [Field Notes](https://arctura.network/insights/) that explain decisions and operating methods in ordinary language.
 - A monthly [Work / Proof / Stewardship record](https://arctura.network/records/2026-08/) that publishes adoption evidence, unknowns, and next commitments.
