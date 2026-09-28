@@ -5,13 +5,8 @@
 # ============================================================
 
 User-agent: *
-Content-Signal: search=yes,ai-input=yes,ai-train=no,use=reference
+# Preference: search and AI reference allowed; training crawler exclusions below.
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -21,11 +16,6 @@ Disallow: /.git/
 
 User-agent: Googlebot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -33,11 +23,6 @@ Disallow: /.git/
 
 User-agent: Bingbot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -45,11 +30,6 @@ Disallow: /.git/
 
 User-agent: DuckDuckBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -57,11 +37,6 @@ Disallow: /.git/
 
 User-agent: Applebot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -69,11 +44,6 @@ Disallow: /.git/
 
 User-agent: Bravebot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -81,11 +51,6 @@ Disallow: /.git/
 
 User-agent: YandexBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -97,11 +62,6 @@ Disallow: /.git/
 
 User-agent: OAI-SearchBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -109,11 +69,6 @@ Disallow: /.git/
 
 User-agent: ChatGPT-User
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -121,11 +76,6 @@ Disallow: /.git/
 
 User-agent: Claude-SearchBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -133,11 +83,6 @@ Disallow: /.git/
 
 User-agent: Claude-User
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -145,11 +90,6 @@ Disallow: /.git/
 
 User-agent: PerplexityBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -157,11 +97,6 @@ Disallow: /.git/
 
 User-agent: Perplexity-User
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -169,11 +104,6 @@ Disallow: /.git/
 
 User-agent: Grok
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -181,11 +111,6 @@ Disallow: /.git/
 
 User-agent: Grok-Extended
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -193,11 +118,6 @@ Disallow: /.git/
 
 User-agent: Manus
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -205,11 +125,6 @@ Disallow: /.git/
 
 User-agent: ManusBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -217,11 +132,6 @@ Disallow: /.git/
 
 User-agent: Kimi
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -229,11 +139,6 @@ Disallow: /.git/
 
 User-agent: MoonshotBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -241,11 +146,6 @@ Disallow: /.git/
 
 User-agent: Codex
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -253,11 +153,6 @@ Disallow: /.git/
 
 User-agent: OpenAI-CodexBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -265,11 +160,6 @@ Disallow: /.git/
 
 User-agent: Copilot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -277,11 +167,6 @@ Disallow: /.git/
 
 User-agent: CopilotBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -289,11 +174,6 @@ Disallow: /.git/
 
 User-agent: Gordon
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -301,11 +181,6 @@ Disallow: /.git/
 
 User-agent: GordonBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -313,11 +188,6 @@ Disallow: /.git/
 
 User-agent: YouBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -325,11 +195,6 @@ Disallow: /.git/
 
 User-agent: MistralBot
 Allow: /
-Disallow: /base/
-Disallow: /patrons/
-Disallow: /onboarding/
-Disallow: /operon/
-Disallow: /which-tier/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env
@@ -386,5 +251,6 @@ Disallow: /
 User-agent: ImagesiftBot
 Disallow: /
 
+# Legacy public pages remain crawlable so their noindex directives can be read.
 # ── SITEMAP ──
 Sitemap: https://arctura.network/sitemap.xml

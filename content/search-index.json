@@ -1,0 +1,368 @@
+[
+  {
+    "url": "/",
+    "title": "AI accountability, evidence & practical tools — Arctura Network",
+    "description": "Understand AI agents, inspect the evidence, and put responsible work into practice with sourced briefings, useful guides, and free tools from Arctura Network.",
+    "category": "home"
+  },
+  {
+    "url": "/insights/",
+    "title": "Field Notes — Arctura Network",
+    "description": "Clear, dated notes from Arctura Network about useful work, tested systems, decisions, and what still needs improvement.",
+    "category": "insights"
+  },
+  {
+    "url": "/insights/train-your-agent/",
+    "title": "Train Your Agent by Defining the Work — Arctura Network",
+    "description": "A practical Arctura guide to choosing a model, deciding where an agent should run, and improving it without training more than the work requires.",
+    "category": "insights"
+  },
+  {
+    "url": "/tools/work-order/",
+    "title": "Agent Work Order Builder — Arctura Network",
+    "description": "Define an agent’s job, inputs, authority, checks, and evidence before you build it. Export a portable Arctura work order as JSON.",
+    "category": "tools"
+  },
+  {
+    "url": "/tools/agent-accountability-card/",
+    "title": "Free AI Agent Accountability Card Builder — Arctura",
+    "description": "Create a portable record of an AI agent's owner, authority, prohibited actions, human handoffs, checks, and evidence. Private and local-first.",
+    "category": "tools"
+  },
+  {
+    "url": "/tools/agent-readiness-check/",
+    "title": "AI Agent Governance Checklist and Readiness Check — Arctura",
+    "description": "Check an AI agent's ownership, authority, handoffs, evaluation, evidence, and operational readiness in two minutes. Free and private.",
+    "category": "tools"
+  },
+  {
+    "url": "/examples/agents/support-review/",
+    "title": "Support Review AI Agent: Accountability and Evaluation Example",
+    "description": "A complete worked example of an AI support-review agent with ownership, authority limits, human handoffs, checks, and an evaluation record.",
+    "category": "examples"
+  },
+  {
+    "url": "/evidence/netuid-505/",
+    "title": "Netuid 505 Local Testnet Launch Record — Arctura Network",
+    "description": "The dated public record for Arctura Base's documented local Bittensor testnet launch on netuid 505, including bounded run results and explicit proof limits.",
+    "category": "evidence"
+  },
+  {
+    "url": "/documentation/netuid-505/",
+    "title": "Netuid 505 Local Testnet Launch Documentation — Arctura Network",
+    "description": "Technical documentation for Arctura Base's local Bittensor testnet launch on netuid 505, including source hierarchy, bounded run results, and explicit verification limits.",
+    "category": "documentation"
+  },
+  {
+    "url": "/participate/",
+    "title": "Community Contribution and Validator Guidance — Arctura Network",
+    "description": "Source-bounded contribution and validator guidance for Arctura Base’s Netuid 505 local Bittensor testnet record. No Finney validator enrollment is currently offered.",
+    "category": "participate"
+  },
+  {
+    "url": "/updates/netuid-505-launch/",
+    "title": "Public Note: Netuid 505 Local Testnet Launch — Arctura Network",
+    "description": "Arctura Network's public note on the documented Arctura Base local Bittensor testnet launch on netuid 505 and its explicit evidence boundaries.",
+    "category": "updates"
+  },
+  {
+    "url": "/authority/",
+    "title": "Arctura Authority Record — Surface Roles and Source Precedence",
+    "description": "The canonical relationship and source-precedence record for Arctura Network, Arctura Observatory, and the Autonomous Resource Management technical reference.",
+    "category": "authority"
+  },
+  {
+    "url": "/records/2026-08/",
+    "title": "August 2026 Work, Proof, Stewardship Record — Arctura Network",
+    "description": "Arctura Network's August 2026 operating record: shipped work, verification, adoption baseline, limits, and next stewardship commitments.",
+    "category": "records"
+  },
+  {
+    "url": "/updates/work-order-v1/",
+    "title": "Agent Work Order v1 Release — Arctura Network",
+    "description": "Agent Work Order v1 is a published, machine-readable contract for defining bounded agent work, acceptance checks, evidence, and human review.",
+    "category": "updates"
+  },
+  {
+    "url": "/work-standard/",
+    "title": "The Work Standard — Arctura Network",
+    "description": "A 16-part methodology for defining bounded agent work, checking results, preserving evidence, and routing human decisions.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/what-counts-as-work/",
+    "title": "1. What Counts as Work — Arctura Work Standard",
+    "description": "A contribution only counts as work if it changes something and someone else can independently check it. Arctura's definition, explained.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/what-a-claim-needs/",
+    "title": "2. What a Claim Needs — Arctura Work Standard",
+    "description": "How Arctura separates fact, interpretation, and promise before any claim enters the public record — and why mixing them breaks trust.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/one-record-per-thing/",
+    "title": "3. One Record Per Thing — Arctura Work Standard",
+    "description": "Every person, tool, and process in the network gets exactly one canonical record. No duplicate identities, no conflicting descriptions.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/before-an-agent-acts/",
+    "title": "4. Before an Agent Acts — Arctura Work Standard",
+    "description": "No agent acts without its resources, authority, and limits mapped first. Arctura's rule for keeping autonomous agents inside their bounds.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/proof-over-trust/",
+    "title": "5. Proof Over Trust — Arctura Work Standard",
+    "description": "Arctura doesn't ask to be trusted — it shows the record. Why evidence beats reputation, testimonials, and confidence.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/readable-by-machines/",
+    "title": "6. Readable by Machines — Arctura Work Standard",
+    "description": "Why Arctura structures its records for machine parsing — and what this does and doesn't promise about ranking or retrieval.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/working-with-other-systems/",
+    "title": "7. Working With Other Systems — Arctura Work Standard",
+    "description": "Interoperating with another agent system is not the same as trusting it. How Arctura defines roles, capabilities, and handoffs across systems.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/separating-what-moves/",
+    "title": "8. Separating What Moves — Arctura Work Standard",
+    "description": "Value, payment, delivery, and dispute are four separate states in Arctura's record — never collapsed into one status.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/how-decisions-get-bounded/",
+    "title": "9. How Decisions Get Bounded — Arctura Work Standard",
+    "description": "A five-question review framework for testing whether a proposed change is needed, clear, useful, durable, and safely reversible.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/what-gets-offered/",
+    "title": "10. What Gets Offered — Arctura Work Standard",
+    "description": "An Arctura offer states exactly what's provided, who qualifies, and what's excluded — no offer implies a result it can't back up.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/finding-the-real-question/",
+    "title": "11. Finding the Real Question — Arctura Work Standard",
+    "description": "Before work starts, the real problem is confirmed in the requester's own terms. Why solving the wrong problem well is still wrong.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/what-counts-as-proof/",
+    "title": "12. What Counts as Proof — Arctura Work Standard",
+    "description": "How Arctura assembles evidence that can be independently checked — and why one example is never presented as a guarantee.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/how-agents-talk/",
+    "title": "13. How Agents Talk — Arctura Work Standard",
+    "description": "When an Arctura agent talks, it states its real capability, backs claims with evidence, and names its own boundaries plainly.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/handing-off-to-a-person/",
+    "title": "14. Handing Off to a Person — Arctura Work Standard",
+    "description": "Some decisions require a person, not an agent. How Arctura defines handoff points in advance and routes them to the accountable owner.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/keeping-the-record-true/",
+    "title": "15. Keeping the Record True — Arctura Work Standard",
+    "description": "Records go stale. How Arctura rechecks claims over time and corrects the public record in the open instead of editing quietly.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/work-standard/the-whole-path-end-to-end/",
+    "title": "16. The Whole Path, End to End — Arctura Work Standard",
+    "description": "All 16 parts of Arctura's Work Standard connected into one reviewable path from real question to maintained, honest record.",
+    "category": "work-standard"
+  },
+  {
+    "url": "/faq/",
+    "title": "Frequently Asked Questions — Arctura Network",
+    "description": "Evidence-bounded answers about Arctura Network, Work Orders, testnet status, participation, governance, and privacy.",
+    "category": "faq"
+  },
+  {
+    "url": "/agents/",
+    "title": "Agent Field Guide — Learn, Build, Scale, Contribute | Arctura",
+    "description": "Seven connected practices for learning, evaluating, building, scaling, maintaining, expanding, and contributing accountable agent work.",
+    "category": "agents"
+  },
+  {
+    "url": "/agents/learn/",
+    "title": "Learn the shape of accountable work — Arctura Agent Field Guide",
+    "description": "Start with the real question, the evidence available, and the boundary an agent must not cross.",
+    "category": "agents"
+  },
+  {
+    "url": "/agents/grow/",
+    "title": "Grow through measured evaluation — Arctura Agent Field Guide",
+    "description": "Improve one observable capability at a time and keep the baseline, test, result, and limitation together.",
+    "category": "agents"
+  },
+  {
+    "url": "/agents/build/",
+    "title": "Build from a bounded work order — Arctura Agent Field Guide",
+    "description": "Translate intent into an expected result, allowed actions, acceptance checks, evidence, and human review.",
+    "category": "agents"
+  },
+  {
+    "url": "/agents/scale/",
+    "title": "Scale a result, not an assumption — Arctura Agent Field Guide",
+    "description": "Repeat proven work with stable interfaces, explicit ownership, observable limits, and safe rollback.",
+    "category": "agents"
+  },
+  {
+    "url": "/agents/sweep/",
+    "title": "Sweep the system for drift — Arctura Agent Field Guide",
+    "description": "Recheck stale claims, broken paths, excess access, failed jobs, orphaned records, and unresolved decisions.",
+    "category": "agents"
+  },
+  {
+    "url": "/agents/expand/",
+    "title": "Expand across clear boundaries — Arctura Agent Field Guide",
+    "description": "Connect another tool, team, or environment only when roles, trust decisions, data movement, and failure ownership are explicit.",
+    "category": "agents"
+  },
+  {
+    "url": "/agents/contribute/",
+    "title": "Contribute a lesson others can inspect — Arctura Agent Field Guide",
+    "description": "Return useful work to the shared system as a reproducible artifact, bounded evidence, correction, or tested improvement.",
+    "category": "agents"
+  },
+  {
+    "url": "/network/",
+    "title": "Discover — Arctura Network",
+    "description": "Discover people, organizations, and accountable agents through evidence-aware professional profiles on Arctura Network.",
+    "category": "network"
+  },
+  {
+    "url": "/network/arctura-network/",
+    "title": "Arctura Network — Organization Profile",
+    "description": "Canonical professional profile for Arctura Network, publisher of methods, tools, and evidence for accountable agent work.",
+    "category": "network"
+  },
+  {
+    "url": "/network/arctura-base/",
+    "title": "Arctura Base — Agent Profile",
+    "description": "Evidence-aware profile for Arctura Base, a bounded Bittensor testnet implementation.",
+    "category": "network"
+  },
+  {
+    "url": "/network/roles/",
+    "title": "Task Force Openings — Arctura Network",
+    "description": "Twenty-five open positions across eight teams building the professional network for the agentic age.",
+    "category": "network"
+  },
+  {
+    "url": "/join/",
+    "title": "Draft Your Profile — Arctura Network",
+    "description": "Draft a professional profile for the agentic age. Your data stays in this browser and can be exported for later use.",
+    "category": "join"
+  },
+  {
+    "url": "/tools/media-evidence-desk/",
+    "title": "Media Evidence Desk — Build a Verifiable Research Story | Arctura",
+    "description": "Plan an original study, audit source records, calculate defensible findings, prepare press assets, and export an evidence-backed media brief. Free and local-first.",
+    "category": "tools"
+  },
+  {
+    "url": "/start/",
+    "title": "Start with AI accountability — Arctura Network",
+    "description": "Choose a practical path to understand an AI decision, define responsible agent work, or use Arctura’s machine-readable records.",
+    "category": "start"
+  },
+  {
+    "url": "/resources/",
+    "title": "Resources for agents & developers — Arctura Network",
+    "description": "Discover versioned schemas, illustrative JSON examples, authority records, and editorial feeds for accountable AI agent work.",
+    "category": "resources"
+  },
+  {
+    "url": "/briefings/",
+    "title": "Briefings on AI agents & accountability — Arctura Network",
+    "description": "Sourced analysis of agent authority, evaluation, interoperability, and public evidence, with practical next steps for people and teams.",
+    "category": "briefings"
+  },
+  {
+    "url": "/guides/",
+    "title": "Practical guides for people, teams & AI agents — Arctura Network",
+    "description": "Learn how to question an AI decision, define your first accountable workflow, and inspect the evidence behind an agent’s work.",
+    "category": "guides"
+  },
+  {
+    "url": "/briefings/permission-is-not-a-tool-call/",
+    "title": "A tool connection is not permission to act — Arctura Network",
+    "description": "Before connecting an agent to another system, define who authorizes the work, which actions are allowed, and where that authority ends.",
+    "category": "briefings"
+  },
+  {
+    "url": "/briefings/evidence-before-scale/",
+    "title": "Before you scale an agent, scale the evidence — Arctura Network",
+    "description": "A successful demonstration answers a narrow question. Expansion needs a record of the conditions, failures, and human decisions behind the result.",
+    "category": "briefings"
+  },
+  {
+    "url": "/briefings/protocol-version-is-evidence/",
+    "title": "The protocol version belongs in the evidence — Arctura Network",
+    "description": "When agents depend on shared protocols, record which revision was actually used. Compatibility claims need a reproducible reference.",
+    "category": "briefings"
+  },
+  {
+    "url": "/briefings/useful-publishing-needs-evidence/",
+    "title": "More content is not the same as more value — Arctura Network",
+    "description": "A useful AI-assisted publication connects a source to an original explanation, a practical decision, and a record that can be checked.",
+    "category": "briefings"
+  },
+  {
+    "url": "/guides/when-an-ai-decision-affects-you/",
+    "title": "When an AI decision affects you, start here — Arctura Network",
+    "description": "Five practical questions for people and citizens who want to understand an automated result and ask the responsible operator for review.",
+    "category": "guides"
+  },
+  {
+    "url": "/guides/first-accountable-agent-workflow/",
+    "title": "Your first accountable agent workflow — Arctura Network",
+    "description": "Move from an open-ended instruction to one bounded task, a named reviewer, and a result you can inspect.",
+    "category": "guides"
+  },
+  {
+    "url": "/guides/read-an-agent-evidence-record/",
+    "title": "How to read an agent’s evidence record — Arctura Network",
+    "description": "Learn the difference between a claim, a template, a test result, and a conclusion before relying on another agent’s work.",
+    "category": "guides"
+  },
+  {
+    "url": "/tools/",
+    "title": "Free AI agent accountability tools — Arctura Network",
+    "description": "Check agent readiness, create an accountability card, define a work order, and investigate public claims with Arctura’s free browser tools.",
+    "category": "tools"
+  },
+  {
+    "url": "/evidence/",
+    "title": "AI agent evidence & public records — Arctura Network",
+    "description": "Inspect Arctura’s testnet evidence, authority records, illustrative examples, and operating reports with their status and limitations clearly identified.",
+    "category": "evidence"
+  },
+  {
+    "url": "/about/",
+    "title": "About Arctura Network — Arctura Network",
+    "description": "Arctura publishes practical intelligence, open tools, and inspectable evidence for accountable work between people and AI agents.",
+    "category": "about"
+  },
+  {
+    "url": "/editorial-policy/",
+    "title": "Editorial policy & source standards — Arctura Network",
+    "description": "How Arctura selects sources, labels analysis and examples, handles AI-assisted drafting, and corrects public claims.",
+    "category": "editorial-policy"
+  }
+]

@@ -15,12 +15,13 @@ test("homepage preserves the bounded testnet record and links to evidence", () =
   assert.doesNotMatch(home, /live quorum|live Finney|staking available/i);
 });
 
-test("homepage gives social visitors a bounded path into the product", () => {
+test("homepage connects people and agents to the guides and working tools", () => {
   const home = read("index.html");
-  assert.match(home, /If you found Arctura through a field note or reel/);
-  assert.match(home, /href="\/tools\/agent-readiness-check\/"><span>01 · Check/);
-  assert.match(home, /href="\/tools\/agent-accountability-card\/"><span>02 · Identify/);
-  assert.match(home, /href="\/tools\/work-order\/"><span>03 · Assign/);
+  assert.match(home, /href="\/guides\/when-an-ai-decision-affects-you\/"/);
+  assert.match(home, /href="\/resources\/"/);
+  assert.match(home, /href="\/tools\/agent-readiness-check\/"/);
+  assert.match(home, /href="\/tools\/agent-accountability-card\/"/);
+  assert.match(home, /href="\/tools\/work-order\/"/);
   assert.match(home, /https:\/\/www\.instagram\.com\/arctura\.network\//);
   assert.match(home, /https:\/\/x\.com\/ArcturaNetwork/);
   assert.match(home, /rel="me noopener"/);
@@ -183,7 +184,7 @@ test('readiness check creates a useful, privacy-safe acquisition path', () => {
   assert.match(script, /trackReadiness\('agent_readiness_view'\)/);
   assert.match(script, /trackReadiness\('agent_readiness_result', \{band:result\.dataset\.band\}\)/);
   assert.doesNotMatch(script, /localStorage|fetch\(/);
-  assert.match(home, /href="\/tools\/agent-readiness-check\/">Check your agent/);
+  assert.match(home, /href="\/tools\/agent-readiness-check\/"/);
 });
 
 test('homepage offers a bounded team pilot without overstating certification', () => {
@@ -207,6 +208,25 @@ test('worked agent example connects boundaries, work, evaluation, and reusable r
   assert.equal(card.agent.name, 'Support Review Agent');
   assert.equal(evaluation.status, 'illustrative-example');
   assert.equal(evaluation.observed.externalActionTaken, false);
+});
+
+test('Media Evidence Desk turns a study into a gated, exportable campaign record', () => {
+  const page = read('tools/media-evidence-desk/index.html');
+  const script = read('js/media-evidence-desk.js');
+  const schema = JSON.parse(read('schemas/media-evidence-desk/v1/schema.json'));
+  const home = read('index.html');
+  assert.match(page, /Turn a claim into a story a reporter can verify/);
+  assert.equal((page.match(/data-control=/g) || []).length, 12);
+  for (const gate of ['Story', 'Sample', 'Method', 'Review', 'Assets', 'Finding', 'Relevance', 'Response']) assert.match(script, new RegExp(`label: '${gate}'`));
+  assert.match(script, /sampleStatus: samples\.length >= targetSample\(\) \? 'target-met' : 'exploratory'/);
+  assert.match(script, /Pitch blocked: complete the story, target sample, methodology, and limitations first/);
+  assert.match(script, /arctura-media-evidence-record\.json/);
+  assert.match(script, /arctura-accountability-audit\.csv/);
+  assert.match(script, /localStorage\.setItem\(storageKey/);
+  assert.doesNotMatch(script, /fetch\(|XMLHttpRequest/);
+  assert.equal(schema.$id, 'https://arctura.network/schemas/media-evidence-desk/v1/schema.json');
+  assert.match(home, /href="\/tools\/media-evidence-desk\/"/);
+  assert.match(page, /Not an Arctura facility or documented deployment/);
 });
 
 test("network worker covers profile ownership, evidence, and the connection lifecycle", () => {

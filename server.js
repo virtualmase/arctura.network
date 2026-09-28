@@ -30,8 +30,16 @@ app.get("/ready", (_request, response) => {
   response.json({ service: "arctura-network", ready: true, dependencies: "static" });
 });
 
-app.get("/.well-known/agent.json", (_request, response) => {
-  response.sendFile(path.join(root, ".well-known", "agent.json"));
+for (const name of ["agent.json", "arctura-authority.json", "aureus.json"]) {
+  app.get(`/.well-known/${name}`, (_request, response) => {
+    response.sendFile(path.join(root, ".well-known", name));
+  });
+}
+app.get("/feed.json", (_request, response) => {
+  response.type("application/feed+json").sendFile(path.join(root, "feed.json"));
+});
+app.get("/feed.xml", (_request, response) => {
+  response.type("application/rss+xml").sendFile(path.join(root, "feed.xml"));
 });
 
 app.use(express.static(root, { extensions: ["html"], index: "index.html" }));

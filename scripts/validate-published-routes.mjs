@@ -12,7 +12,8 @@ const agentRoutes = fs.readdirSync(agentRoot, { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(agentRoot, entry.name, "index.html")))
   .map((entry) => `/agents/${entry.name}/`).sort();
 const networkRoutes = ["/network/", "/network/arctura-network/", "/network/arctura-base/", "/network/roles/", "/join/"];
-const published = ["/", ...networkRoutes, "/agents/", ...agentRoutes, "/faq/", "/insights/", "/insights/train-your-agent/", "/tools/work-order/", "/records/2026-08/", "/updates/work-order-v1/", "/work-standard/", ...standardRoutes];
+const currentProductRoutes = ["/tools/agent-readiness-check/", "/tools/agent-accountability-card/", "/tools/media-evidence-desk/", "/examples/agents/support-review/"];
+const published = ["/", ...networkRoutes, "/agents/", ...agentRoutes, "/faq/", "/insights/", "/insights/train-your-agent/", "/tools/work-order/", ...currentProductRoutes, "/records/2026-08/", "/updates/work-order-v1/", "/work-standard/", ...standardRoutes];
 const errors = [];
 
 const fileFor = (route) => route === "/" ? "index.html" : path.join(route.slice(1), "index.html");
@@ -44,7 +45,7 @@ for (const html of htmlByRoute.values()) {
     localLinks.add(href.endsWith("/") ? href : `${href}/`);
   }
 }
-for (const route of [...networkRoutes, "/agents/", ...agentRoutes, "/faq/", "/insights/", "/insights/train-your-agent/", "/tools/work-order/", "/records/2026-08/", "/updates/work-order-v1/", "/work-standard/", ...standardRoutes]) if (!localLinks.has(route)) errors.push(`${route}: not reachable through a crawlable link`);
+for (const route of [...networkRoutes, "/agents/", ...agentRoutes, "/faq/", "/insights/", "/insights/train-your-agent/", "/tools/work-order/", ...currentProductRoutes, "/records/2026-08/", "/updates/work-order-v1/", "/work-standard/", ...standardRoutes]) if (!localLinks.has(route)) errors.push(`${route}: not reachable through a crawlable link`);
 
 const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 for (const route of published) if (!sitemap.includes(`<loc>${origin}${route}</loc>`)) errors.push(`${route}: absent from sitemap`);

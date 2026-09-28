@@ -39,6 +39,8 @@ npm run publish:work-standard
 
 The publishing validator checks canonical routes, metadata, structured data, crawl paths, and sitemap coverage. The edge validator checks that health, readiness, security headers, and the canonical host redirect remain portable to static edge hosting. The Work Order validator checks examples against the published v1 contract.
 
+The local-first Media Evidence Desk at `/tools/media-evidence-desk/` turns a research hypothesis into a cited audit sample, calculated findings, explicit limitations, review and press-readiness gates, a targeted pitch draft, and exportable campaign JSON/CSV. Its public schema is `/schemas/media-evidence-desk/v1/schema.json`.
+
 Work Standard source lives in `content/work-standard/`. The publisher generates the 16 article pages from that canonical source and synchronizes sitemap and machine-readable discovery. Read `docs/CONTENT_PUBLISHING_STANDARD.md` before starting a new content cluster.
 
 ## Contribute and report
@@ -59,3 +61,13 @@ Work Standard source lives in `content/work-standard/`. The publisher generates 
 Do the work. Check the work. Improve the system.
 
 Work. Proof. Stewardship.
+
+## Editorial experience and publishing
+
+The public site now brings together briefings, guides, free tools, evidence, and resources for agents. See [the experience and publishing contract](docs/90_DAY_EXPERIENCE.md) for the design, authoring model, research pipeline, and release boundaries.
+
+- `npm run build` generates the current experience, feeds, shared navigation, and search index, then validates SEO.
+- `npm run collect:signals` collects candidate sources into `/tmp/arctura-signal-queue.json`; it does not publish.
+- `python3 -m unittest discover -s test -p 'test_*.py'` checks feed parsing and candidate preservation.
+
+Edit `content/editorial/articles.json` and the templates in `scripts/` rather than generated editorial HTML. Existing tools retain their local-first behavior. Production publication and live parity verification are separate from a local build.

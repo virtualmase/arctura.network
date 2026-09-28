@@ -14,17 +14,19 @@ Agent Work Order builder: https://arctura.network/tools/work-order/
 Agent Accountability Card builder: https://arctura.network/tools/agent-accountability-card/
 Agent Accountability Card schema: https://arctura.network/schemas/agent-accountability-card/v1/schema.json
 AI Agent Readiness Check: https://arctura.network/tools/agent-readiness-check/
+Media Evidence Desk: https://arctura.network/tools/media-evidence-desk/
+Media Evidence Desk schema: https://arctura.network/schemas/media-evidence-desk/v1/schema.json
 Worked support-review agent example: https://arctura.network/examples/agents/support-review/
 The Work Standard: https://arctura.network/work-standard/
 Work Standard scope: Published methodology; individual capabilities are operational only where linked evidence says so.
 August 2026 Work / Proof / Stewardship record: https://arctura.network/records/2026-08/
 Work Order evaluation template: https://arctura.network/examples/evaluations/work-order-evaluation-template.json
 Agent Work Order v1 release: https://arctura.network/updates/work-order-v1/
-Updated: 2026-09-02
+Updated: 2026-09-27
 
 ## Public idea
 
-Arctura is a network where people and software contribute useful work, check results, keep a record, and improve the system they share.
+Arctura publishes source-led briefings, practical guides, free browser tools, and inspectable evidence for accountable work between people and AI agents. The professional network remains a preview; editorial content does not establish active membership or governance.
 
 Doctrine: Do the work. Check the work. Improve the system.
 
@@ -35,6 +37,8 @@ The Agent Work Order builder is a local-only browser tool. It creates a portable
 The Agent Accountability Card builder is a local-only browser tool for naming an agent's responsible owner, standing authority, prohibited actions, human handoffs, checks, and evidence. It complements capability-discovery records and does not certify that an agent is safe.
 
 The AI Agent Readiness Check is a local-only 12-point planning aid covering ownership, authority, human handoff, evaluation, and evidence. Its result is not a safety certification.
+
+The Media Evidence Desk is a local-first research and media-readiness workspace. It calculates documented-control rates from cited audit records, keeps below-target findings labeled exploratory, blocks pitch generation until core evidence fields are complete, and exports JSON/CSV. It does not verify sources, certify findings, contact reporters, or guarantee coverage.
 
 The support-review agent page is an illustrative worked example with downloadable accountability, Work Order, and evaluation records. It does not claim a production deployment.
 
@@ -68,3 +72,24 @@ These are related properties with distinct roles, not alternate identities.
 ARM Agency is Arctura Network's delegated DevOps provider for website delivery, deployment automation, DNS and edge operations, availability, and infrastructure security. The operational contact is ops@arm-agency.com. ARM Agency operates infrastructure under Arctura Network direction and is not authoritative for network, governance, token, treasury, or mainnet claims.
 
 Both projects are currently bootstrapped. No current payment rail, currency, fee schedule, token obligation, or amount payable is published. Future compensation may use a separately approved mechanism such as x402 or a future network currency, but neither is a current commitment.
+
+## Starting points and resource discovery
+
+- People, citizens, and builders: https://arctura.network/start/
+- Schemas, examples, and evidence: https://arctura.network/resources/
+- Machine-readable resource index: https://arctura.network/resources/index.json
+
+The resource index is discovery metadata, not an execution API or a grant of authority.
+
+## Briefings, guides, and publication policy
+
+- Briefings: https://arctura.network/briefings/
+- Practical guides: https://arctura.network/guides/
+- Tool index: https://arctura.network/tools/
+- Evidence library: https://arctura.network/evidence/
+- About: https://arctura.network/about/
+- Editorial policy: https://arctura.network/editorial-policy/
+- RSS: https://arctura.network/feed.xml
+- JSON Feed: https://arctura.network/feed.json
+
+Briefings are source-led editorial analysis, not a live news wire. Research candidates are not published articles. No search traffic, membership, citation count, or third-party endorsement is implied.

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arctura.network/schemas/media-evidence-desk/v1/schema.json",
+  "title": "Arctura Media Evidence Desk Record v1",
+  "type": "object",
+  "required": ["schema", "status", "story", "research", "review", "press", "outreach", "rapidResponse", "updated"],
+  "properties": {
+    "schema": {"const": "https://arctura.network/schemas/media-evidence-desk/v1/schema.json"},
+    "status": {"enum": ["define-story", "evidence-building", "briefing-ready", "embargo-ready", "launch-ready"]},
+    "story": {"type": "object"},
+    "research": {"type": "object", "required": ["targetSample", "records", "controlRates", "sampleStatus"]},
+    "review": {"type": "object"},
+    "press": {"type": "object"},
+    "outreach": {"type": "object"},
+    "rapidResponse": {"type": "object"},
+    "updated": {"type": "string", "format": "date"}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "description": "Arctura public resource index. Discovery metadata, not an agent execution protocol.",
+  "resources": [
+    {
+      "name": "Site summary",
+      "url": "https://arctura.network/llms.txt",
+      "mediaType": "text/plain",
+      "description": "Plain-language context and operating boundaries."
+    },
+    {
+      "name": "Authority record",
+      "url": "https://arctura.network/.well-known/arctura-authority.json",
+      "mediaType": "application/json",
+      "description": "Which surface owns which claims."
+    },
+    {
+      "name": "Testnet evidence",
+      "url": "https://arctura.network/evidence/netuid-505/status.json",
+      "mediaType": "application/json",
+      "description": "Dated evidence and explicit limits for the documented run."
+    },
+    {
+      "name": "Accountability Card schema",
+      "url": "https://arctura.network/schemas/agent-accountability-card/v1/schema.json",
+      "mediaType": "application/schema+json",
+      "description": "Fields for ownership, authority, handoff, and checks."
+    },
+    {
+      "name": "Work Order schema",
+      "url": "https://arctura.network/schemas/work-order/v1/schema.json",
+      "mediaType": "application/schema+json",
+      "description": "Fields for one bounded task and its acceptance checks."
+    },
+    {
+      "name": "Example accountability card",
+      "url": "https://arctura.network/assets/examples/support-review-accountability-card.json",
+      "mediaType": "application/json",
+      "description": "Illustrative agent identity and boundaries."
+    },
+    {
+      "name": "Example work order",
+      "url": "https://arctura.network/examples/work-orders/support-response-review.json",
+      "mediaType": "application/json",
+      "description": "Illustrative task; not a production result."
+    },
+    {
+      "name": "Evaluation template",
+      "url": "https://arctura.network/examples/evaluations/work-order-evaluation-template.json",
+      "mediaType": "application/json",
+      "description": "Record checks and unknowns; starts in not-run state."
+    },
+    {
+      "name": "Briefings and guides JSON Feed",
+      "url": "https://arctura.network/feed.json",
+      "mediaType": "application/feed+json",
+      "description": "Published editorial records with canonical URLs and dates."
+    },
+    {
+      "name": "Public search index",
+      "url": "https://arctura.network/content/search-index.json",
+      "mediaType": "application/json",
+      "description": "Page titles, descriptions, and canonical paths for discovery."
+    }
+  ]
+}

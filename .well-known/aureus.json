@@ -3,13 +3,24 @@
   "service_id": "arctura-network",
   "name": "Arctura Network",
   "canonical_url": "https://arctura.network/",
-  "role": "testnet implementation status and evidence surface",
+  "role": "accountable AI intelligence, practical tools, and evidence discovery",
   "status": "testnet-gated",
   "authority": {
     "autonomous_payments": false,
-    "human_approval_required": ["network-governance", "treasury", "mainnet-activation"]
+    "human_approval_required": [
+      "network-governance",
+      "treasury",
+      "mainnet-activation"
+    ]
   },
-  "capabilities": ["network-documentation", "testnet-technical-documentation", "testnet-evidence-record", "community-contribution-guidance", "validator-guidance", "validator-discovery"],
+  "capabilities": [
+    "network-documentation",
+    "testnet-technical-documentation",
+    "testnet-evidence-record",
+    "community-contribution-guidance",
+    "validator-guidance",
+    "validator-discovery"
+  ],
   "related_services": {
     "testnet_evidence_record": "https://arctura.network/evidence/netuid-505/",
     "testnet_documentation": "https://arctura.network/documentation/netuid-505/",
@@ -18,8 +29,12 @@
     "authority_record": "https://arctura.network/authority/",
     "arm_technical_reference": "https://autonomousresourcemanagement.com/",
     "arctura_observatory": "https://arctura.org/",
-    "base_gateway": "https://base.arctura.network/"
+    "base_gateway": "https://base.arctura.network/",
+    "agent_resources": "https://arctura.network/resources/",
+    "briefings": "https://arctura.network/briefings/"
   },
-  "commerce": { "x402": "disabled" },
+  "commerce": {
+    "x402": "disabled"
+  },
   "registry": "https://base.arctura.network/network.json"
 }

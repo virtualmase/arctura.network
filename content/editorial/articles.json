@@ -1,0 +1,473 @@
+[
+  {
+    "slug": "permission-is-not-a-tool-call",
+    "title": "A tool connection is not permission to act.",
+    "description": "Before connecting an agent to another system, define who authorizes the work, which actions are allowed, and where that authority ends.",
+    "topic": "Authority",
+    "kind": "Briefing",
+    "published": "2026-09-27",
+    "modified": "2026-09-27",
+    "status": "published",
+    "author": "Arctura Network",
+    "sections": [
+      {
+        "id": "signal",
+        "title": "The source signal",
+        "paragraphs": [
+          "The Model Context Protocol security guidance describes risks around delegated access, including confused deputy attacks and token passthrough. Its consent guidance calls for explicit approval tied to the requesting client. A working connection alone does not establish that a particular action is appropriate."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "meaning",
+        "title": "What this means in practice",
+        "paragraphs": [
+          "Arctura’s practical interpretation: separate the technical ability to call a tool from the owner’s permission to perform the task. An agent that can read a support ticket should not inherit permission to send a reply, issue a refund, or export the customer history.",
+          "The useful record is specific. Name the system, action, permitted inputs, time window, and responsible owner. “Help with support” leaves too much for the system to infer."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "apply",
+        "title": "Make the boundary testable",
+        "paragraphs": [
+          "For a support-review agent, a bounded instruction might allow reading an approved, redacted ticket and drafting a response. Sending the response remains a person’s decision. Record the distinction before connecting the tool."
+        ],
+        "bullets": [
+          "Name one allowed read and one prohibited write.",
+          "Try a request outside the task and record whether the agent refuses or asks for authorization.",
+          "Define what happens when access expires or the owner withdraws permission.",
+          "Require a new approval when the action or destination changes."
+        ]
+      },
+      {
+        "id": "limits",
+        "title": "What this does not establish",
+        "paragraphs": [
+          "An accountability card records the intended boundary. The actual system still needs access controls and tests that enforce it. This briefing is a review pattern, not a security assessment of an MCP implementation."
+        ],
+        "bullets": []
+      }
+    ],
+    "action": {
+      "label": "Write the agent’s authority boundary",
+      "url": "/tools/agent-accountability-card/"
+    },
+    "sources": [
+      {
+        "name": "MCP security best practices, versioned guidance",
+        "url": "https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices",
+        "checked": "2026-09-27"
+      }
+    ]
+  },
+  {
+    "slug": "evidence-before-scale",
+    "title": "Before you scale an agent, scale the evidence.",
+    "description": "A successful demonstration answers a narrow question. Expansion needs a record of the conditions, failures, and human decisions behind the result.",
+    "topic": "Evaluation",
+    "kind": "Briefing",
+    "published": "2026-09-27",
+    "modified": "2026-09-27",
+    "status": "published",
+    "author": "Arctura Network",
+    "sections": [
+      {
+        "id": "signal",
+        "title": "The source signal",
+        "paragraphs": [
+          "NIST describes its AI Risk Management Framework as a voluntary resource for considering trustworthiness throughout the design, development, use, and evaluation of AI systems. The framework provides context for risk management; citing it is not a certification."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "meaning",
+        "title": "A demo is the beginning of a record",
+        "paragraphs": [
+          "Arctura’s application of that idea is simple: keep the conditions attached to the result. A support agent that drafted one acceptable answer has not demonstrated reliable performance across languages, missing policies, ambiguous requests, or attempts to exceed its authority.",
+          "Before expanding the workload, write down what would make the earlier evidence stop applying. A new model, tool, policy, data source, or owner can change the meaning of the original test."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "apply",
+        "title": "Build an expansion record",
+        "paragraphs": [
+          "Keep a small evaluation set that includes ordinary work, missing information, conflicting instructions, and a request outside the permitted scope. Decide acceptance checks before you run it."
+        ],
+        "bullets": [
+          "Record the model and tool versions, approved inputs, and test date.",
+          "Separate completed checks, failed checks, and checks that were not run.",
+          "Name the reviewer who can approve expansion.",
+          "Keep a rollback condition and the previous working configuration."
+        ]
+      },
+      {
+        "id": "limits",
+        "title": "Keep the conclusion proportional",
+        "paragraphs": [
+          "A passed evaluation supports the cases and conditions tested. It does not eliminate unknowns or prove general safety. Publish aggregate findings only when private inputs and confidential outputs have been removed."
+        ],
+        "bullets": []
+      }
+    ],
+    "action": {
+      "label": "Start an evaluation record",
+      "url": "/examples/evaluations/work-order-evaluation-template.json"
+    },
+    "sources": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "checked": "2026-09-27"
+      }
+    ]
+  },
+  {
+    "slug": "protocol-version-is-evidence",
+    "title": "The protocol version belongs in the evidence.",
+    "description": "When agents depend on shared protocols, record which revision was actually used. Compatibility claims need a reproducible reference.",
+    "topic": "Interoperability",
+    "kind": "Briefing",
+    "published": "2026-09-27",
+    "modified": "2026-09-27",
+    "status": "published",
+    "author": "Arctura Network",
+    "sections": [
+      {
+        "id": "signal",
+        "title": "The source signal",
+        "paragraphs": [
+          "The Model Context Protocol repository identifies 2026-07-28 as a stable specification release. A dated release is a useful reference for integration records; it does not show which revision a particular deployed client or server supports."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "meaning",
+        "title": "Record the system you actually tested",
+        "paragraphs": [
+          "Arctura’s recommendation is to name the negotiated protocol revision alongside the client, server, and configuration. “MCP-compatible” is too broad to reproduce a result or decide whether an earlier test still applies.",
+          "A release announcement and a deployed implementation answer different questions. Use the announcement to identify a change. Use the implementation’s actual behavior and test record to evaluate its effect on your workflow."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "apply",
+        "title": "A useful compatibility note",
+        "paragraphs": [
+          "Attach this information to the work record when an integration changes."
+        ],
+        "bullets": [
+          "The client and server versions used in the test.",
+          "The protocol revision selected for that connection.",
+          "The tool capabilities and authorization scope exercised.",
+          "The expected result, observed result, and any unsupported behavior.",
+          "The person responsible for accepting the new configuration."
+        ]
+      },
+      {
+        "id": "limits",
+        "title": "Do not turn a release into a deployment claim",
+        "paragraphs": [
+          "A specification release is not evidence that Arctura has deployed that version. Our worked examples remain illustrative, and the published testnet record retains its own scope."
+        ],
+        "bullets": []
+      }
+    ],
+    "action": {
+      "label": "Read the interoperability method",
+      "url": "/work-standard/working-with-other-systems/"
+    },
+    "sources": [
+      {
+        "name": "MCP specification release 2026-07-28",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/releases/tag/2026-07-28",
+        "checked": "2026-09-27"
+      }
+    ]
+  },
+  {
+    "slug": "useful-publishing-needs-evidence",
+    "title": "More content is not the same as more value.",
+    "description": "A useful AI-assisted publication connects a source to an original explanation, a practical decision, and a record that can be checked.",
+    "topic": "Public evidence",
+    "kind": "Briefing",
+    "published": "2026-09-27",
+    "modified": "2026-09-27",
+    "status": "published",
+    "author": "Arctura Network",
+    "sections": [
+      {
+        "id": "signal",
+        "title": "The source signal",
+        "paragraphs": [
+          "Google’s guidance on generative AI content says that producing many pages without adding value may violate its scaled content abuse policy. The relevant question is what the reader gains from the published page."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "meaning",
+        "title": "Make each update earn its place",
+        "paragraphs": [
+          "Arctura’s editorial approach begins with a visitor’s question. A protocol change might require a compatibility note. A research result might justify revising an evaluation checklist. An unrelated trending phrase does not justify a new page.",
+          "A briefing should link its sources, explain what they establish, and label the author’s interpretation. A repeated announcement with a different headline adds little."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "apply",
+        "title": "Use a publication check",
+        "paragraphs": [
+          "Before publishing an AI-assisted draft, identify the specific decision it helps someone make."
+        ],
+        "bullets": [
+          "Link the primary source and record when it was checked.",
+          "Distinguish the event date from the publication date.",
+          "Add a practical example, original method, or clear implication.",
+          "Link the relevant existing guide instead of duplicating it.",
+          "Keep corrections visible when a material claim changes."
+        ]
+      },
+      {
+        "id": "limits",
+        "title": "Evidence before promotion",
+        "paragraphs": [
+          "An external mention is not an endorsement. A citation in one AI response is an observation for that prompt and date, not a measure of universal visibility. Arctura does not invent reach, coverage, or citation counts."
+        ],
+        "bullets": []
+      }
+    ],
+    "action": {
+      "label": "Inspect a claim with the Media Evidence Desk",
+      "url": "/tools/media-evidence-desk/"
+    },
+    "sources": [
+      {
+        "name": "Google Search guidance on generative AI content",
+        "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+        "checked": "2026-09-27"
+      }
+    ]
+  },
+  {
+    "slug": "when-an-ai-decision-affects-you",
+    "title": "When an AI decision affects you, start here.",
+    "description": "Five practical questions for people and citizens who want to understand an automated result and ask the responsible operator for review.",
+    "topic": "Human review",
+    "kind": "Guide",
+    "published": "2026-09-27",
+    "modified": "2026-09-27",
+    "status": "published",
+    "author": "Arctura Network",
+    "sections": [
+      {
+        "id": "start",
+        "title": "Describe what happened",
+        "paragraphs": [
+          "Start with the result you received: a message, recommendation, account action, or other decision. Save the date and any reference number. You do not need to determine which model was used before asking who is responsible.",
+          "Keep your own private record. When contacting a service, use its established support channel. Avoid publishing identity documents, account credentials, private conversations, or information about someone else."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "owner",
+        "title": "1. Who is responsible for the outcome?",
+        "paragraphs": [
+          "Ask which person or organization operates the system and which team can review the result. A model name or vendor logo is not the same as an accountable operator.",
+          "A useful answer identifies a responsible role and a reachable review channel. If the system can only repeat its answer, ask the service operating it for human review."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "authority",
+        "title": "2. What was the system allowed to do?",
+        "paragraphs": [
+          "Ask whether the system produced a suggestion, prepared an action for approval, or acted directly. These are different responsibilities.",
+          "For example, a support assistant might draft a response for a staff member. That does not mean it can change an account or make a financial commitment. Ask about the actual action that affected you."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "evidence",
+        "title": "3. What information and checks supported the result?",
+        "paragraphs": [
+          "Ask for the relevant inputs, applicable policy, and checks in a form the operator can share safely. You may not receive internal prompts or another person’s data; the useful request is an explanation of your result and its basis.",
+          "If the information is wrong or incomplete, identify the specific correction. “The address used is outdated” gives a reviewer more to investigate than a general objection to AI."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "review",
+        "title": "4. Can a person review and correct it?",
+        "paragraphs": [
+          "Ask for the route to human review, what information is needed, and how you will be told the outcome. Keep the request focused on the disputed result.",
+          "Arctura’s sample request: “Please identify the team responsible for this result. I believe the following input is incorrect: ____. Please explain the review process and confirm whether a person can reconsider the outcome.”"
+        ],
+        "bullets": []
+      },
+      {
+        "id": "record",
+        "title": "5. What should the corrected record show?",
+        "paragraphs": [
+          "Keep the original result, the correction you requested, and the final response. If a correction is made, ask whether it changes related decisions or records.",
+          "This guide offers practical questions, not a statement of legal rights or a guarantee of access to an appeal. Arctura does not run an appeals service for outside organizations. For a worked illustration of responsibility and handoff, open our fictional support-review example."
+        ],
+        "bullets": []
+      }
+    ],
+    "action": {
+      "label": "See the support-review example",
+      "url": "/examples/agents/support-review/"
+    },
+    "sources": []
+  },
+  {
+    "slug": "first-accountable-agent-workflow",
+    "title": "Your first accountable agent workflow.",
+    "description": "Move from an open-ended instruction to one bounded task, a named reviewer, and a result you can inspect.",
+    "topic": "Evaluation",
+    "kind": "Guide",
+    "published": "2026-09-27",
+    "modified": "2026-09-27",
+    "status": "published",
+    "author": "Arctura Network",
+    "sections": [
+      {
+        "id": "choose",
+        "title": "Choose a small, reversible task",
+        "paragraphs": [
+          "Start with work whose result a person can review before it changes the outside world. Drafting a response from approved material is easier to evaluate than giving an agent permission to manage an entire support queue.",
+          "Our illustrative task is a support-response review: read a redacted draft and an approved policy excerpt, identify unsupported claims, and suggest revisions. The agent does not send the message."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "identity",
+        "title": "Write the standing boundaries",
+        "paragraphs": [
+          "Use an Accountability Card to name the owner, purpose, allowed actions, prohibited actions, and handoff triggers. This is the record that stays with the agent across individual tasks.",
+          "For the example, allowed actions include comparing the draft against the supplied policy. Prohibited actions include contacting the customer, changing the account, or obtaining additional private data. Missing policy evidence triggers a handoff."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "task",
+        "title": "Write one work order",
+        "paragraphs": [
+          "A Work Order describes the job for this run. Specify the expected output and the exact inputs approved for use. Include excluded inputs so the agent does not infer permission to search private systems."
+        ],
+        "bullets": [
+          "Result: a list of unsupported statements and suggested corrections.",
+          "Inputs: a redacted draft and a dated policy excerpt.",
+          "Owner: the team responsible for the workflow.",
+          "Reviewer: the person who accepts or rejects the result.",
+          "Stop condition: missing evidence or an instruction outside the task."
+        ]
+      },
+      {
+        "id": "checks",
+        "title": "Decide the checks before execution",
+        "paragraphs": [
+          "An acceptance check should be observable. “Be helpful” is hard to evaluate. “Every suggested policy statement cites the provided excerpt” gives the reviewer something concrete to inspect.",
+          "Include an ordinary case, a case with insufficient evidence, and a request to perform a prohibited action. Record expected behavior before running each case. A refusal can be the correct outcome."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "evaluate",
+        "title": "Record what actually happened",
+        "paragraphs": [
+          "Keep intended behavior separate from observation. For each check, record passed, failed, or not run, plus the evidence that supports that status. Do not mark an evaluation successful merely because the JSON is valid.",
+          "If a check fails, revise the instruction or control and run it again. Keep the earlier outcome so someone can understand the change. When sharing a result publicly, remove private inputs and identify what was synthetic."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "expand",
+        "title": "Expand only when the record supports it",
+        "paragraphs": [
+          "Before adding a new tool, data source, or external action, revisit the card and work order. The earlier evidence may no longer cover the changed conditions.",
+          "These records are a method for review. They do not enforce permissions by themselves or certify the agent. The responsible operator must implement the boundaries in the actual system."
+        ],
+        "bullets": []
+      }
+    ],
+    "action": {
+      "label": "Build your first Work Order",
+      "url": "/tools/work-order/"
+    },
+    "sources": []
+  },
+  {
+    "slug": "read-an-agent-evidence-record",
+    "title": "How to read an agent’s evidence record.",
+    "description": "Learn the difference between a claim, a template, a test result, and a conclusion before relying on another agent’s work.",
+    "topic": "Public evidence",
+    "kind": "Guide",
+    "published": "2026-09-27",
+    "modified": "2026-09-27",
+    "status": "published",
+    "author": "Arctura Network",
+    "sections": [
+      {
+        "id": "classify",
+        "title": "Identify what kind of record you have",
+        "paragraphs": [
+          "A template describes information to collect. An illustrative example demonstrates a format. A test record describes an observation under named conditions. A capability claim says what someone believes a system can do. These are not interchangeable.",
+          "Start with the status field and the visible label. If neither tells you whether the work happened, treat the result as unestablished and ask the owner for clarification."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "trace",
+        "title": "Trace the claim to its source",
+        "paragraphs": [
+          "Find the owner, source URL, date, and specific assertion. Prefer the record that documents the work over a summary of that record. A link to a repository home page may establish where the code lives without proving that a particular run occurred.",
+          "When a summary and its source disagree, keep the disagreement visible. Use the source’s narrower conclusion until a responsible party resolves it."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "conditions",
+        "title": "Read the conditions before the conclusion",
+        "paragraphs": [
+          "Look for the tested version, environment, approved inputs, and expected output. A local test and a public production service answer different questions.",
+          "Arctura’s Netuid 505 record is a useful example of this discipline: it describes a bounded local testnet run and preserves limits on what was observed. It should not be summarized as a general mainnet or production claim."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "checks",
+        "title": "Find the observation behind each check",
+        "paragraphs": [
+          "A check marked passed should point to an observation. A check marked not run remains unknown. Do not treat missing results as successes.",
+          "For a support-review task, a useful observation might show that the agent refused a request to send a message. A written instruction saying “do not send” is evidence of intent, not evidence that the boundary worked."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "reuse",
+        "title": "Decide whether you can reuse the conclusion",
+        "paragraphs": [
+          "Ask whether your task shares the tested conditions. A different language, dataset, tool version, or authority boundary may require new evaluation.",
+          "For machine readers, retain source URLs, status, dates, and limitations in downstream summaries. Validate structure against the named schema, then evaluate meaning separately. A valid record can still contain an unsupported claim."
+        ],
+        "bullets": []
+      },
+      {
+        "id": "correct",
+        "title": "Leave a correction that can be checked",
+        "paragraphs": [
+          "Name the precise assertion, explain the discrepancy, and link the supporting public source. Avoid uploading confidential logs just to make the point.",
+          "A useful correction improves the record for the next reader. It does not require a broader claim about the agent, organization, or industry."
+        ],
+        "bullets": []
+      }
+    ],
+    "action": {
+      "label": "Inspect the public evidence record",
+      "url": "/evidence/netuid-505/"
+    },
+    "sources": []
+  }
+]

@@ -1,0 +1,143 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Arctura Network — Briefings & Guides",
+  "home_page_url": "https://arctura.network/",
+  "feed_url": "https://arctura.network/feed.json",
+  "description": "Sources, practical methods, and accountable agent work.",
+  "language": "en-US",
+  "items": [
+    {
+      "id": "https://arctura.network/briefings/permission-is-not-a-tool-call/",
+      "url": "https://arctura.network/briefings/permission-is-not-a-tool-call/",
+      "title": "A tool connection is not permission to act.",
+      "summary": "Before connecting an agent to another system, define who authorizes the work, which actions are allowed, and where that authority ends.",
+      "content_text": "The source signal\nThe Model Context Protocol security guidance describes risks around delegated access, including confused deputy attacks and token passthrough. Its consent guidance calls for explicit approval tied to the requesting client. A working connection alone does not establish that a particular action is appropriate.\n\nWhat this means in practice\nArctura’s practical interpretation: separate the technical ability to call a tool from the owner’s permission to perform the task. An agent that can read a support ticket should not inherit permission to send a reply, issue a refund, or export the customer history.\n\nThe useful record is specific. Name the system, action, permitted inputs, time window, and responsible owner. “Help with support” leaves too much for the system to infer.\n\nMake the boundary testable\nFor a support-review agent, a bounded instruction might allow reading an approved, redacted ticket and drafting a response. Sending the response remains a person’s decision. Record the distinction before connecting the tool.\n\nName one allowed read and one prohibited write.\n\nTry a request outside the task and record whether the agent refuses or asks for authorization.\n\nDefine what happens when access expires or the owner withdraws permission.\n\nRequire a new approval when the action or destination changes.\n\nWhat this does not establish\nAn accountability card records the intended boundary. The actual system still needs access controls and tests that enforce it. This briefing is a review pattern, not a security assessment of an MCP implementation.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "date_modified": "2026-09-27T12:00:00Z",
+      "tags": [
+        "Authority",
+        "Briefing"
+      ],
+      "authors": [
+        {
+          "name": "Arctura Network",
+          "url": "https://arctura.network/about/"
+        }
+      ]
+    },
+    {
+      "id": "https://arctura.network/briefings/evidence-before-scale/",
+      "url": "https://arctura.network/briefings/evidence-before-scale/",
+      "title": "Before you scale an agent, scale the evidence.",
+      "summary": "A successful demonstration answers a narrow question. Expansion needs a record of the conditions, failures, and human decisions behind the result.",
+      "content_text": "The source signal\nNIST describes its AI Risk Management Framework as a voluntary resource for considering trustworthiness throughout the design, development, use, and evaluation of AI systems. The framework provides context for risk management; citing it is not a certification.\n\nA demo is the beginning of a record\nArctura’s application of that idea is simple: keep the conditions attached to the result. A support agent that drafted one acceptable answer has not demonstrated reliable performance across languages, missing policies, ambiguous requests, or attempts to exceed its authority.\n\nBefore expanding the workload, write down what would make the earlier evidence stop applying. A new model, tool, policy, data source, or owner can change the meaning of the original test.\n\nBuild an expansion record\nKeep a small evaluation set that includes ordinary work, missing information, conflicting instructions, and a request outside the permitted scope. Decide acceptance checks before you run it.\n\nRecord the model and tool versions, approved inputs, and test date.\n\nSeparate completed checks, failed checks, and checks that were not run.\n\nName the reviewer who can approve expansion.\n\nKeep a rollback condition and the previous working configuration.\n\nKeep the conclusion proportional\nA passed evaluation supports the cases and conditions tested. It does not eliminate unknowns or prove general safety. Publish aggregate findings only when private inputs and confidential outputs have been removed.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "date_modified": "2026-09-27T12:00:00Z",
+      "tags": [
+        "Evaluation",
+        "Briefing"
+      ],
+      "authors": [
+        {
+          "name": "Arctura Network",
+          "url": "https://arctura.network/about/"
+        }
+      ]
+    },
+    {
+      "id": "https://arctura.network/briefings/protocol-version-is-evidence/",
+      "url": "https://arctura.network/briefings/protocol-version-is-evidence/",
+      "title": "The protocol version belongs in the evidence.",
+      "summary": "When agents depend on shared protocols, record which revision was actually used. Compatibility claims need a reproducible reference.",
+      "content_text": "The source signal\nThe Model Context Protocol repository identifies 2026-07-28 as a stable specification release. A dated release is a useful reference for integration records; it does not show which revision a particular deployed client or server supports.\n\nRecord the system you actually tested\nArctura’s recommendation is to name the negotiated protocol revision alongside the client, server, and configuration. “MCP-compatible” is too broad to reproduce a result or decide whether an earlier test still applies.\n\nA release announcement and a deployed implementation answer different questions. Use the announcement to identify a change. Use the implementation’s actual behavior and test record to evaluate its effect on your workflow.\n\nA useful compatibility note\nAttach this information to the work record when an integration changes.\n\nThe client and server versions used in the test.\n\nThe protocol revision selected for that connection.\n\nThe tool capabilities and authorization scope exercised.\n\nThe expected result, observed result, and any unsupported behavior.\n\nThe person responsible for accepting the new configuration.\n\nDo not turn a release into a deployment claim\nA specification release is not evidence that Arctura has deployed that version. Our worked examples remain illustrative, and the published testnet record retains its own scope.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "date_modified": "2026-09-27T12:00:00Z",
+      "tags": [
+        "Interoperability",
+        "Briefing"
+      ],
+      "authors": [
+        {
+          "name": "Arctura Network",
+          "url": "https://arctura.network/about/"
+        }
+      ]
+    },
+    {
+      "id": "https://arctura.network/briefings/useful-publishing-needs-evidence/",
+      "url": "https://arctura.network/briefings/useful-publishing-needs-evidence/",
+      "title": "More content is not the same as more value.",
+      "summary": "A useful AI-assisted publication connects a source to an original explanation, a practical decision, and a record that can be checked.",
+      "content_text": "The source signal\nGoogle’s guidance on generative AI content says that producing many pages without adding value may violate its scaled content abuse policy. The relevant question is what the reader gains from the published page.\n\nMake each update earn its place\nArctura’s editorial approach begins with a visitor’s question. A protocol change might require a compatibility note. A research result might justify revising an evaluation checklist. An unrelated trending phrase does not justify a new page.\n\nA briefing should link its sources, explain what they establish, and label the author’s interpretation. A repeated announcement with a different headline adds little.\n\nUse a publication check\nBefore publishing an AI-assisted draft, identify the specific decision it helps someone make.\n\nLink the primary source and record when it was checked.\n\nDistinguish the event date from the publication date.\n\nAdd a practical example, original method, or clear implication.\n\nLink the relevant existing guide instead of duplicating it.\n\nKeep corrections visible when a material claim changes.\n\nEvidence before promotion\nAn external mention is not an endorsement. A citation in one AI response is an observation for that prompt and date, not a measure of universal visibility. Arctura does not invent reach, coverage, or citation counts.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "date_modified": "2026-09-27T12:00:00Z",
+      "tags": [
+        "Public evidence",
+        "Briefing"
+      ],
+      "authors": [
+        {
+          "name": "Arctura Network",
+          "url": "https://arctura.network/about/"
+        }
+      ]
+    },
+    {
+      "id": "https://arctura.network/guides/when-an-ai-decision-affects-you/",
+      "url": "https://arctura.network/guides/when-an-ai-decision-affects-you/",
+      "title": "When an AI decision affects you, start here.",
+      "summary": "Five practical questions for people and citizens who want to understand an automated result and ask the responsible operator for review.",
+      "content_text": "Describe what happened\nStart with the result you received: a message, recommendation, account action, or other decision. Save the date and any reference number. You do not need to determine which model was used before asking who is responsible.\n\nKeep your own private record. When contacting a service, use its established support channel. Avoid publishing identity documents, account credentials, private conversations, or information about someone else.\n\n1. Who is responsible for the outcome?\nAsk which person or organization operates the system and which team can review the result. A model name or vendor logo is not the same as an accountable operator.\n\nA useful answer identifies a responsible role and a reachable review channel. If the system can only repeat its answer, ask the service operating it for human review.\n\n2. What was the system allowed to do?\nAsk whether the system produced a suggestion, prepared an action for approval, or acted directly. These are different responsibilities.\n\nFor example, a support assistant might draft a response for a staff member. That does not mean it can change an account or make a financial commitment. Ask about the actual action that affected you.\n\n3. What information and checks supported the result?\nAsk for the relevant inputs, applicable policy, and checks in a form the operator can share safely. You may not receive internal prompts or another person’s data; the useful request is an explanation of your result and its basis.\n\nIf the information is wrong or incomplete, identify the specific correction. “The address used is outdated” gives a reviewer more to investigate than a general objection to AI.\n\n4. Can a person review and correct it?\nAsk for the route to human review, what information is needed, and how you will be told the outcome. Keep the request focused on the disputed result.\n\nArctura’s sample request: “Please identify the team responsible for this result. I believe the following input is incorrect: ____. Please explain the review process and confirm whether a person can reconsider the outcome.”\n\n5. What should the corrected record show?\nKeep the original result, the correction you requested, and the final response. If a correction is made, ask whether it changes related decisions or records.\n\nThis guide offers practical questions, not a statement of legal rights or a guarantee of access to an appeal. Arctura does not run an appeals service for outside organizations. For a worked illustration of responsibility and handoff, open our fictional support-review example.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "date_modified": "2026-09-27T12:00:00Z",
+      "tags": [
+        "Human review",
+        "Guide"
+      ],
+      "authors": [
+        {
+          "name": "Arctura Network",
+          "url": "https://arctura.network/about/"
+        }
+      ]
+    },
+    {
+      "id": "https://arctura.network/guides/first-accountable-agent-workflow/",
+      "url": "https://arctura.network/guides/first-accountable-agent-workflow/",
+      "title": "Your first accountable agent workflow.",
+      "summary": "Move from an open-ended instruction to one bounded task, a named reviewer, and a result you can inspect.",
+      "content_text": "Choose a small, reversible task\nStart with work whose result a person can review before it changes the outside world. Drafting a response from approved material is easier to evaluate than giving an agent permission to manage an entire support queue.\n\nOur illustrative task is a support-response review: read a redacted draft and an approved policy excerpt, identify unsupported claims, and suggest revisions. The agent does not send the message.\n\nWrite the standing boundaries\nUse an Accountability Card to name the owner, purpose, allowed actions, prohibited actions, and handoff triggers. This is the record that stays with the agent across individual tasks.\n\nFor the example, allowed actions include comparing the draft against the supplied policy. Prohibited actions include contacting the customer, changing the account, or obtaining additional private data. Missing policy evidence triggers a handoff.\n\nWrite one work order\nA Work Order describes the job for this run. Specify the expected output and the exact inputs approved for use. Include excluded inputs so the agent does not infer permission to search private systems.\n\nResult: a list of unsupported statements and suggested corrections.\n\nInputs: a redacted draft and a dated policy excerpt.\n\nOwner: the team responsible for the workflow.\n\nReviewer: the person who accepts or rejects the result.\n\nStop condition: missing evidence or an instruction outside the task.\n\nDecide the checks before execution\nAn acceptance check should be observable. “Be helpful” is hard to evaluate. “Every suggested policy statement cites the provided excerpt” gives the reviewer something concrete to inspect.\n\nInclude an ordinary case, a case with insufficient evidence, and a request to perform a prohibited action. Record expected behavior before running each case. A refusal can be the correct outcome.\n\nRecord what actually happened\nKeep intended behavior separate from observation. For each check, record passed, failed, or not run, plus the evidence that supports that status. Do not mark an evaluation successful merely because the JSON is valid.\n\nIf a check fails, revise the instruction or control and run it again. Keep the earlier outcome so someone can understand the change. When sharing a result publicly, remove private inputs and identify what was synthetic.\n\nExpand only when the record supports it\nBefore adding a new tool, data source, or external action, revisit the card and work order. The earlier evidence may no longer cover the changed conditions.\n\nThese records are a method for review. They do not enforce permissions by themselves or certify the agent. The responsible operator must implement the boundaries in the actual system.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "date_modified": "2026-09-27T12:00:00Z",
+      "tags": [
+        "Evaluation",
+        "Guide"
+      ],
+      "authors": [
+        {
+          "name": "Arctura Network",
+          "url": "https://arctura.network/about/"
+        }
+      ]
+    },
+    {
+      "id": "https://arctura.network/guides/read-an-agent-evidence-record/",
+      "url": "https://arctura.network/guides/read-an-agent-evidence-record/",
+      "title": "How to read an agent’s evidence record.",
+      "summary": "Learn the difference between a claim, a template, a test result, and a conclusion before relying on another agent’s work.",
+      "content_text": "Identify what kind of record you have\nA template describes information to collect. An illustrative example demonstrates a format. A test record describes an observation under named conditions. A capability claim says what someone believes a system can do. These are not interchangeable.\n\nStart with the status field and the visible label. If neither tells you whether the work happened, treat the result as unestablished and ask the owner for clarification.\n\nTrace the claim to its source\nFind the owner, source URL, date, and specific assertion. Prefer the record that documents the work over a summary of that record. A link to a repository home page may establish where the code lives without proving that a particular run occurred.\n\nWhen a summary and its source disagree, keep the disagreement visible. Use the source’s narrower conclusion until a responsible party resolves it.\n\nRead the conditions before the conclusion\nLook for the tested version, environment, approved inputs, and expected output. A local test and a public production service answer different questions.\n\nArctura’s Netuid 505 record is a useful example of this discipline: it describes a bounded local testnet run and preserves limits on what was observed. It should not be summarized as a general mainnet or production claim.\n\nFind the observation behind each check\nA check marked passed should point to an observation. A check marked not run remains unknown. Do not treat missing results as successes.\n\nFor a support-review task, a useful observation might show that the agent refused a request to send a message. A written instruction saying “do not send” is evidence of intent, not evidence that the boundary worked.\n\nDecide whether you can reuse the conclusion\nAsk whether your task shares the tested conditions. A different language, dataset, tool version, or authority boundary may require new evaluation.\n\nFor machine readers, retain source URLs, status, dates, and limitations in downstream summaries. Validate structure against the named schema, then evaluate meaning separately. A valid record can still contain an unsupported claim.\n\nLeave a correction that can be checked\nName the precise assertion, explain the discrepancy, and link the supporting public source. Avoid uploading confidential logs just to make the point.\n\nA useful correction improves the record for the next reader. It does not require a broader claim about the agent, organization, or industry.",
+      "date_published": "2026-09-27T12:00:00Z",
+      "date_modified": "2026-09-27T12:00:00Z",
+      "tags": [
+        "Public evidence",
+        "Guide"
+      ],
+      "authors": [
+        {
+          "name": "Arctura Network",
+          "url": "https://arctura.network/about/"
+        }
+      ]
+    }
+  ]
+}

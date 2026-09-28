@@ -104,3 +104,24 @@ test("the Agent Work Order prototype is public and local-first", async () => {
     assert.match(html, /\/js\/work-order\.js/);
   });
 });
+
+test('new publication routes, feeds, and declared machine resources resolve over HTTP', async () => {
+  await withServer(async (origin) => {
+    for (const route of ['/briefings/','/guides/','/tools/','/resources/','/evidence/','/search/']) {
+      const response=await fetch(origin+route);
+      assert.equal(response.status,200,route);
+      assert.match(await response.text(),/<main id="main">/);
+    }
+    const manifest=await (await fetch(origin+'/resources/index.json')).json();
+    for(const resource of manifest.resources) {
+      const response=await fetch(origin+new URL(resource.url).pathname);
+      assert.equal(response.status,200,resource.url);
+      if(resource.mediaType.includes('json')) await response.json();
+    }
+    const feed=await fetch(origin+'/feed.json');
+    assert.match(feed.headers.get('content-type'),/application\/feed\+json/);
+    assert.equal((await feed.json()).items.length,7);
+    const rss=await fetch(origin+'/feed.xml');
+    assert.match(rss.headers.get('content-type'),/application\/rss\+xml/);
+  });
+});

@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "sources": [
+    {"id":"mcp-releases","name":"Model Context Protocol releases","url":"https://github.com/modelcontextprotocol/modelcontextprotocol/releases.atom","kind":"official-release","priority":3},
+    {"id":"nist-news","name":"NIST news","url":"https://www.nist.gov/news-events/news/rss.xml","kind":"primary-source","priority":3},
+    {"id":"arxiv-ai","name":"arXiv Artificial Intelligence","url":"https://rss.arxiv.org/rss/cs.AI","kind":"research-preprint","priority":1}
+  ],
+  "topics": {
+    "Authority": ["permission", "authorization", "authority", "consent", "access control"],
+    "Evaluation": ["evaluation", "benchmark", "reliability", "risk management", "testing"],
+    "Human review": ["human review", "human oversight", "human-in-the-loop", "accountability"],
+    "Interoperability": ["protocol", "interoperability", "model context", "mcp"],
+    "Public evidence": ["transparency", "provenance", "citation", "evidence", "audit"]
+  }
+}

@@ -1,6 +1,10 @@
 const origin = process.env.ARCTURA_ORIGIN || "https://arctura.network";
 const checks = [
-  ["/", "Define the work."],
+  ["/", "The agentic world."],
+  ["/briefings/", "The briefing desk"],
+  ["/guides/", "The practical library"],
+  ["/resources/index.json", "resources"],
+  ["/feed.json", "https://jsonfeed.org/version/1.1"],
   ["/work-standard/", "One standard. Four movements."],
   ["/work-standard/before-an-agent-acts/", "Published methodology, version 0.1"],
   ["/faq/", "Questions deserve"],

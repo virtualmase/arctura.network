@@ -36,6 +36,14 @@ if (menuButton && mobileNav) {
     menuButton.querySelector('.sr-only').textContent = open ? 'Open menu' : 'Close menu';
     mobileNav.hidden = open;
   });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !mobileNav.hidden) {
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.querySelector('.sr-only').textContent = 'Open menu';
+      mobileNav.hidden = true;
+      menuButton.focus();
+    }
+  });
   mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
     menuButton.setAttribute('aria-expanded', 'false');
     menuButton.querySelector('.sr-only').textContent = 'Open menu';

@@ -18,7 +18,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run build
+      - run: python3 -m unittest discover -s test -p 'test_*.py'
       - run: npm run validate:publishing
+      - run: npm run validate:seo
       - run: npm run validate:edge
       - run: npm run validate:work-order -- examples/work-orders/support-response-review.json
       - run: npm test

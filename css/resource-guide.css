@@ -1,0 +1,4 @@
+.resource-guide h1 { font-size: clamp(2.2rem, 5vw, 4.5rem); overflow-wrap: anywhere; }
+.resource-guide .principle { min-width: 0; }
+.resource-guide code { overflow-wrap: anywhere; }
+.resource-guide li { margin-block: 0.75rem; max-width: 75ch; }

@@ -44,3 +44,20 @@
 
 /which-tier/*
   X-Robots-Tag: noindex, noarchive
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/feed.json
+  Content-Type: application/feed+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/resources/index.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/content/search-index.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
